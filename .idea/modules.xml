@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HRMS.iml" filepath="$PROJECT_DIR$/HRMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HRMS-App/HRMS-App.iml" filepath="$PROJECT_DIR$/HRMS-App/HRMS-App.iml" />
+      <module fileurl="file://C:\Users\ganesaka\AndroidStudioProjects\HRMS\HRMS-App\app.iml" filepath="C:\Users\ganesaka\AndroidStudioProjects\HRMS\HRMS-App\app.iml" />
+    </modules>
+  </component>
+</project>
