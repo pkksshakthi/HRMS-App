@@ -6,434 +6,456 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-
-        android:background="#6CB8F6"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="PaySlip"
-            android:textColor="#ffffff"
-            android:textSize="10pt"
-            android:textStyle="bold" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0">
-
-        <Spinner
-            android:id="@+id/spinner4"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+
+
+            android:background="#6CB8F6"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="PaySlip"
+                android:textColor="#ffffff"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintVertical_bias="0.0">
 
             <Spinner
-                android:id="@+id/spinner5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:id="@+id/spinner4"
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#274979"
-                android:text="Display"
-                android:textColor="#ffffff" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="6dp"
-            android:background="#D8D8D7">
-
-        </View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
+                android:orientation="horizontal">
 
-                android:background="@drawable/roundconerpayments"
-                android:orientation="vertical">
-
-                <TextView
+                <Spinner
+                    android:id="@+id/spinner5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="Payments"
-                    android:textColor="#5EA521"
-                    android:textSize="8pt" />
+                    android:layout_weight="1" />
 
-                <TextView
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:gravity="top"
-                    android:padding="3dp"
-                    android:text=" ₹31,000"
-                    android:textColor="#5EA521"
-                    android:textSize="8pt"
-                    android:textStyle="bold" />
+                    android:background="#274979"
+                    android:text="Display"
+                    android:textColor="#ffffff" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="6dp"
+                android:background="#D8D8D7">
+
+            </View>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/roundcorderdeduction"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="Deducations"
-                    android:textColor="#EB2928"
-                    android:textSize="8pt" />
 
-                <TextView
+                    android:background="@drawable/roundconerpayments"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="3dp"
+                        android:text="Payments"
+                        android:textColor="#5EA521"
+                        android:textSize="8pt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="top"
+                        android:padding="3dp"
+                        android:text=" ₹31,000"
+                        android:textColor="#5EA521"
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:padding="3dp"
-                    android:text=" ₹31,000"
-                    android:textColor="#EB2928"
-                    android:textSize="8pt"
-                    android:textStyle="bold" />
+                    android:background="@drawable/roundcorderdeduction"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="3dp"
+                        android:text="Deducations"
+                        android:textColor="#EB2928"
+                        android:textSize="8pt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:padding="3dp"
+                        android:text=" ₹31,000"
+                        android:textColor="#EB2928"
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/roundcornernetpay"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="3dp"
+                        android:text="NetPay"
+                        android:textColor="#596C81"
+                        android:textSize="8pt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:padding="3dp"
+                        android:text=" ₹31,000"
+                        android:textColor="#596C81"
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/roundcornernetpay"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="NetPay"
-                    android:textColor="#596C81"
-                    android:textSize="8pt" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:padding="3dp"
-                    android:text=" ₹31,000"
-                    android:textColor="#596C81"
-                    android:textSize="8pt"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="3dp"
-            android:text="Payments"
-            android:textColor="#5EA521"
-            android:textSize="8pt"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="6dp"
-            android:background="#D8D8D7">
-
-        </View>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
-        app:layout_constraintVertical_bias="0.006">
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="245dp">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:text="Expence(Tax free)"
-                android:textColor="#313131" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="2.25"
-                android:textColor="#313131" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="3dp"
-            android:background="#D8D8D7">
-
-        </View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="245dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:text="Expence VAT"
-                android:textColor="#313131" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="2.25"
-                android:textColor="#313131" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="3dp"
-            android:background="#D8D8D7">
-
-        </View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="245dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:text="Mileage"
-                android:textColor="#313131" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="2.25"
-                android:textColor="#313131" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="3dp"
-            android:background="#D8D8D7">
-
-        </View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="245dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:text="Mileage VAT"
-                android:textColor="#313131" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="2.25"
-                android:textColor="#313131" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="3dp"
-            android:background="#D8D8D7">
-
-        </View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="245dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:text="Salary"
-                android:textColor="#313131" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="2.25"
-                android:textColor="#313131" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="3dp"
-            android:background="#D8D8D7">
-
-        </View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="245dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:text="Total"
-                android:textColor="#5C9210"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:text="Payments"
+                android:textColor="#5EA521"
+                android:textSize="8pt"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="2.25"
-                android:textColor="#5C9210"
-                android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="6dp"
+                android:background="#D8D8D7">
+
+            </View>
         </LinearLayout>
 
-        <View
+        <LinearLayout
+            android:id="@+id/linearLayout8"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_margin="3dp"
-            android:background="#D8D8D7">
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
 
-        </View>
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="245dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start||center"
+                    android:text="Expence(Tax free)"
+                    android:textColor="#313131" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right||center"
+
+                    android:text="2.25"
+                    android:textColor="#313131" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="3dp"
+                android:background="#D8D8D7">
+
+            </View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="245dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start||center"
+                    android:text="Expence VAT"
+                    android:textColor="#313131" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right||center"
+
+                    android:text="2.25"
+                    android:textColor="#313131" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="3dp"
+                android:background="#D8D8D7">
+
+            </View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="245dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start||center"
+                    android:text="Mileage"
+                    android:textColor="#313131" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right||center"
+
+                    android:text="2.25"
+                    android:textColor="#313131" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="3dp"
+                android:background="#D8D8D7">
+
+            </View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="245dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start||center"
+                    android:text="Mileage VAT"
+                    android:textColor="#313131" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right||center"
+
+                    android:text="2.25"
+                    android:textColor="#313131" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="3dp"
+                android:background="#D8D8D7">
+
+            </View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="245dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start||center"
+                    android:text="Salary"
+                    android:textColor="#313131" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right||center"
+
+                    android:text="2.25"
+                    android:textColor="#313131" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="3dp"
+                android:background="#D8D8D7">
+
+            </View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="245dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start||center"
+                    android:text="Total"
+                    android:textColor="#5C9210"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right||center"
+
+                    android:text="2.25"
+                    android:textColor="#5C9210"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="3dp"
+                android:background="#D8D8D7">
+
+            </View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+
+                >
+
+                <Button
+                    android:id="@+id/button8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="2dp"
+                    android:background="#274979"
+
+                    android:gravity="center"
+                    android:text="Download"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="8dp"
-        android:background="#274979"
-        android:text="Download"
-        android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
-        app:layout_constraintVertical_bias="0.029" />
 
 
 </android.support.constraint.ConstraintLayout>
