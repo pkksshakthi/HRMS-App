@@ -2,6 +2,7 @@ package com.sphinax.hrms.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter<Ajax> {
             View.inflate(context, android.R.layout.simple_spinner_item, null);
         } else {
             textView = (TextView) View.inflate(context, viewResourceId, null);
+            textView.setTextColor(Color.BLACK);
         }
         if (data != null) {
             assert textView != null;
@@ -61,6 +63,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter<Ajax> {
         }
         TextView textView = ((TextView) convertView);
         textView.setText(data.get(position).getCompName());
+        textView.setTextColor(Color.BLACK);
 
         return convertView;
     }
