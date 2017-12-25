@@ -2,7 +2,7 @@
     <string name="app_name">HRMS</string>
 
     <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="dummy_content">HRMS</string>
     <string name="title_activity_admin_menu">AdminMenuActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -23,4 +23,6 @@
     <string name="powered_by_sphinax_infosystem">Powered by Sphinax Infosystem</string>
     <string name="username">UserName</string>
     <string name="welcome_to">Welcome To</string>
+
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
 </resources>

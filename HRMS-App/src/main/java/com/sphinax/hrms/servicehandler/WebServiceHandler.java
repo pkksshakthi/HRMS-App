@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
+import java.util.HashMap;
 
 /**
  * Created by ganesaka on 12/24/2017.
@@ -26,19 +27,15 @@ public class WebServiceHandler {
     private Activity serviceActivity = null;
     private ServiceRequest serviceRequestValue = null;
 
-    public void getCompanyList(Activity activity, final Context context, ServiceRequest serviceRequest,ServiceCallback callback) throws MalformedURLException {
+    public void getCompanyList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
         try {
             delegate = callback;
             serviceContext = context;
             serviceActivity = activity;
-            serviceRequestValue = new ServiceRequest();
-            serviceRequestValue = serviceRequest;
-
-
 
             String url = Constants.COMPANY_LIST_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequestValue , new AsyncResponse() {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
                 @Override
                 public void processFinish(Context responseContext, JSONObject output) throws JSONException {
                     Gson gson = new Gson();
@@ -77,7 +74,7 @@ public class WebServiceHandler {
     }
 
 
-    public void getBranchList(Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+    public void getBranchList(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) throws MalformedURLException {
         try {
             delegate = callback;
             serviceContext = context;
@@ -85,7 +82,7 @@ public class WebServiceHandler {
 
             String url = Constants.BRANCH_LIST_REQUEST_URL;
 
-            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
                 @Override
                 public void processFinish(Context responseContext, JSONObject output) throws JSONException {
                     Gson gson = new Gson();
@@ -122,7 +119,7 @@ public class WebServiceHandler {
             delegate.onNetworkError();
         }
     }
-
+/*
     public void getDepartmentList(Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
         try {
             delegate = callback;
@@ -591,4 +588,5 @@ public class WebServiceHandler {
             delegate.onNetworkError();
         }
     }*/
+
 }

@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     android:background="#D7D8D3"
     android:elevation="10dp"
-    android:orientation="vertical"
-     >
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -77,7 +76,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/sp_company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -87,20 +86,19 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
-            android:id="@+id/button"
-
+            android:id="@+id/bt_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:layout_marginTop="25dp"
             android:background="#8FA1D4"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="NEXT"
             android:textColor="#ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/sp_company" />
     </LinearLayout>
 
 
@@ -130,9 +128,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome"
         app:srcCompat="@drawable/elite" />
-
 
 
 </android.support.constraint.ConstraintLayout>

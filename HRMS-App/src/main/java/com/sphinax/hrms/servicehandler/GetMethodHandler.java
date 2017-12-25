@@ -15,6 +15,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -32,19 +35,18 @@ public class GetMethodHandler extends AsyncTask<Void, Void, JSONObject> {
     private Activity activity = null;
     private Boolean isData;
     private String jsonString;
-    private ServiceRequest serviceRequest;
+    private HashMap<String, String>  requestMap;
 
     public GetMethodHandler() {
     }
 
-    public GetMethodHandler(Activity activity, Context context, String url, boolean isData, ServiceRequest  serviceRequest, AsyncResponse response) throws MalformedURLException {
+    public GetMethodHandler(Activity activity, Context context, String url, boolean isData, HashMap<String, String> requestMap, AsyncResponse response) throws MalformedURLException {
         this.context = context;
         this.url = new URL(url);
-        this.serviceRequest = new ServiceRequest();
         this.delegate = response;
         this.isData = isData;
         this.activity = activity;
-        this.serviceRequest = serviceRequest;
+        this.requestMap = requestMap;
         Log.d(TAG + "URL-", url);
 
     }
@@ -71,140 +73,15 @@ public class GetMethodHandler extends AsyncTask<Void, Void, JSONObject> {
             conn.setConnectTimeout(6000); //set timeout to 60 seconds
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            if(serviceRequest.getUserId() != null) {
-                conn.setRequestProperty("userId", serviceRequest.getUserId());
-            }
-            if(serviceRequest.getUserpwd() != null){
-            conn.setRequestProperty("userpwd", serviceRequest.getUserpwd());
-            }
-            if(serviceRequest.getCompId() != null){
-            conn.setRequestProperty("compId", serviceRequest.getCompId());
-            }
-            if(serviceRequest.getUrl() != null){
-            conn.setRequestProperty("url", serviceRequest.getUrl());
-            }
-            if(serviceRequest.getCompanyId() != null){
-            conn.setRequestProperty("companyId", serviceRequest.getCompanyId());
-            }
-            if(serviceRequest.getEmployeeId() != null){
-            conn.setRequestProperty("employeeId", serviceRequest.getEmployeeId());
-            }
-            if(serviceRequest.getMonth() != null){
-            conn.setRequestProperty("month", serviceRequest.getMonth());
-            }
-            if(serviceRequest.getYear() != null){
-            conn.setRequestProperty("year", serviceRequest.getYear());
-            }
-            if(serviceRequest.getBranch() != null){
-            conn.setRequestProperty("branch", serviceRequest.getBranch());
-            }
-            if(serviceRequest.getEmpId() != null){
-            conn.setRequestProperty("empId", serviceRequest.getEmpId());
-            }
-            if(serviceRequest.getDeptId() != null){
-            conn.setRequestProperty("deptId", serviceRequest.getDeptId());
-            }
-            if(serviceRequest.getRefId() != null){
-            conn.setRequestProperty("refId", serviceRequest.getRefId());
-            }
-            if(serviceRequest.getLocationId() != null){
-            conn.setRequestProperty("locationId", serviceRequest.getLocationId());
-            }
-            if(serviceRequest.getEmpimageDesc() != null){
-            conn.setRequestProperty("empimageDesc", serviceRequest.getEmpimageDesc());
-            }
-            if(serviceRequest.getClkInTime() != null){
-            conn.setRequestProperty("clkInTime", serviceRequest.getClkInTime());
-            }
-            if(serviceRequest.getInDate() != null){
-            conn.setRequestProperty("InDate", serviceRequest.getInDate());
-            }
-            if(serviceRequest.getDate1() != null){
-            conn.setRequestProperty("date1", serviceRequest.getDate1());
-            }
-            if(serviceRequest.getLeavestatus() != null){
-            conn.setRequestProperty("leavestatus", serviceRequest.getLeavestatus());
-            }
-            if(serviceRequest.getRequestTo() != null){
-            conn.setRequestProperty("requestTo", serviceRequest.getRequestTo());
-            }
-            if(serviceRequest.getRequestType() != null){
-            conn.setRequestProperty("requestType", serviceRequest.getRequestType());
-            }
-            if(serviceRequest.getDescription() != null){
-            conn.setRequestProperty("description", serviceRequest.getDescription());
-            }
-            if(serviceRequest.getCompanyId() != null){
-            conn.setRequestProperty("companyID", serviceRequest.getCompanyId());
-            }
-            if(serviceRequest.getEmpID() != null){
-            conn.setRequestProperty("empID", serviceRequest.getEmpID());
-            }
-            if(serviceRequest.getActivityDate() != null){
-            conn.setRequestProperty("activityDate", serviceRequest.getActivityDate());
-            }
-            if(serviceRequest.getActivityDesc() != null){
-            conn.setRequestProperty("activityDesc", serviceRequest.getActivityDesc());
-            }
-            if(serviceRequest.getActivityTypeId() != null){
-            conn.setRequestProperty("activityTypeId", serviceRequest.getActivityTypeId());
-            }
-            if(serviceRequest.getAnnTitle() != null){
-            conn.setRequestProperty("annTitle", serviceRequest.getAnnTitle());
-            }
-            if(serviceRequest.getDeptId() != null){
-            conn.setRequestProperty("DeptId", serviceRequest.getDeptId());
-            }
-            if(serviceRequest.getBranchId() != null){
-            conn.setRequestProperty("branchId", serviceRequest.getBranchId());
-            }
-            if(serviceRequest.getReqStatus() != null){
-            conn.setRequestProperty("reqStatus", serviceRequest.getReqStatus());
-            }
-            if(serviceRequest.getReqSeqId() != null){
-            conn.setRequestProperty("reqSeqId", serviceRequest.getReqSeqId());
-            }
-            if(serviceRequest.getHrmsg() != null){
-            conn.setRequestProperty("hrmsg", serviceRequest.getHrmsg());
-            }
-            if(serviceRequest.getHrStatus() != null){
-            conn.setRequestProperty("hrStatus", serviceRequest.getHrStatus());
-            }
-            if(serviceRequest.getGlobEmpId() != null){
-            conn.setRequestProperty("globEmpId", serviceRequest.getGlobEmpId());
-            }
-            if(serviceRequest.getLeaveTypeId() != null){
-            conn.setRequestProperty("leaveTypeId", serviceRequest.getLeaveTypeId());
-            }
-            if(serviceRequest.getFromDate() != null){
-            conn.setRequestProperty("fromDate", serviceRequest.getFromDate());
-            }
-            if(serviceRequest.getToDate() != null){
-            conn.setRequestProperty("toDate", serviceRequest.getToDate());
-            }
-            if(serviceRequest.getLeaveId() != null){
-            conn.setRequestProperty("leaveId", serviceRequest.getLeaveId());
-            }
-            if(serviceRequest.getLeaveStatusNew() != null){
-            conn.setRequestProperty("leaveStatusNew", serviceRequest.getLeaveStatusNew());
-            }
-            if(serviceRequest.getLeaveStatusOld() != null){
-            conn.setRequestProperty("leaveStatusOld", serviceRequest.getLeaveStatusOld());
-            }
-            if(serviceRequest.getLeaveMonth() != null){
-            conn.setRequestProperty("leaveMonth", serviceRequest.getLeaveMonth());
-            }
-            if(serviceRequest.getLeaveYear() != null){
-            conn.setRequestProperty("leaveYear", serviceRequest.getLeaveYear());
-            }
-            if(serviceRequest.getReason() != null){
-            conn.setRequestProperty("reason", serviceRequest.getReason());
-            }
-            if(serviceRequest.getSession() != null){
-            conn.setRequestProperty("session", serviceRequest.getSession());
-            }
-            if(serviceRequest.getNoofdays() != null){
-            conn.setRequestProperty("noofdays", serviceRequest.getNoofdays());
+
+            if (requestMap.size() != 0) {
+                Iterator it = requestMap.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
+                    Log.d(TAG, " " + pair.getKey() + " = " + pair.getValue());
+                    conn.setRequestProperty(pair.getKey().toString(), pair.getValue().toString());
+                    it.remove();
+                }
             }
 
             conn.connect();
