@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sphinax.hrms.R;
 import com.sphinax.hrms.sample.ItemFragment.OnListFragmentInteractionListener;
 import com.sphinax.hrms.sample.dummy.DummyContent.DummyItem;
 

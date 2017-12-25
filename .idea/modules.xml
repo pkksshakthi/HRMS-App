@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HRMS-App.iml" filepath="$PROJECT_DIR$/HRMS-App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HRMS-App/HRMS-App-HRMS-App.iml" filepath="$PROJECT_DIR$/HRMS-App/HRMS-App-HRMS-App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HRMS.iml" filepath="$PROJECT_DIR$/HRMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HRMS-App/HRMS-App.iml" filepath="$PROJECT_DIR$/HRMS-App/HRMS-App.iml" />
     </modules>
   </component>
 </project>

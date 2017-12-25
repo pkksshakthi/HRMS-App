@@ -1,14 +1,25 @@
 package com.sphinax.hrms.common.activity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.model.Ajax;
+import com.sphinax.hrms.model.CompanyData;
+import com.sphinax.hrms.servicehandler.ServiceCallback;
+import com.sphinax.hrms.servicehandler.WebServiceHandler;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.Utility;
+
+import java.util.ArrayList;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -34,6 +45,12 @@ public class SelectCompanyActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
+    private ProgressDialog pdia;
+    private Context context;
+    private Ajax ajax;
+   // private static ArrayList<Ajax> ajaxList;
+    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -90,7 +107,7 @@ public class SelectCompanyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_selectcompany);
-
+        context = this.getApplicationContext();
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
@@ -108,6 +125,14 @@ public class SelectCompanyActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+        if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
+            Utility.showToastMessage(this, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+       fetchCompanyList();
+       // fetchBranchList();
+
     }
 
     @Override
@@ -162,4 +187,127 @@ public class SelectCompanyActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
+    /***Method used to get Company List from the OPS Service **/
+
+    private void fetchCompanyList() {
+        if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
+            Utility.showToastMessage(this, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(this);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            webServiceHandler.getCompanyList(this, context, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                   CompanyData companyData = (CompanyData) obj;
+                    ArrayList<Ajax> ajaxList  = new ArrayList<>();
+                    ajaxList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> "  + ajaxList.size());
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                  //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                  //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /***Method used to get Branch List from the OPS Service **/
+
+    private void fetchBranchList() {
+        if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
+            Utility.showToastMessage(this, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(this);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            webServiceHandler.getBranchList(this, context,1000, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    CompanyData companyData = (CompanyData) obj;
+                    ArrayList<Ajax>  ajaxList = new ArrayList<>();
+                    ajaxList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> "  + ajaxList.size());
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
