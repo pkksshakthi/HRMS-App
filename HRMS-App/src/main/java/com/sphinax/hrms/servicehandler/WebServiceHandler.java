@@ -7,6 +7,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.CompanyData;
+import com.sphinax.hrms.model.ServiceRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,125 +24,21 @@ public class WebServiceHandler {
     private ServiceCallback delegate = null;
     private Context serviceContext = null;
     private Activity serviceActivity = null;
+    private ServiceRequest serviceRequestValue = null;
 
-//    public void checkCity(Activity activity, Context context, String date, ServiceCallback callback) throws MalformedURLException {
-//        try {
-//            delegate = callback;
-//            serviceContext = context;
-//            serviceActivity = activity;
-//            String url = Constants.CITY_REQUEST_DATA_CHANGE_URL;
-//
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.accumulate("lastFetchedDate", date);
-//
-//            String json = jsonObject.toString();
-//
-//            Log.d(TAG + "currentDateTime -", json);
-//            PostMethodHandler cityHandler = new PostMethodHandler(activity, serviceContext, url, json, new AsyncResponse() {
-//                @Override
-//                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-//
-//                    try {
-//                        if (output != null) {
-//                            if (CheckUnAuthorised(output)) {
-//                                delegate.unAuthorized();
-//                            } else {
-//                                try {
-//                                    if (output.has("cityDataChanged")) {
-//                                        if (output.getBoolean("cityDataChanged")) {
-//                                            delegate.onSuccess(true);
-//                                        } else {
-//                                            delegate.onSuccess(false);
-//                                        }
-//                                    } else {
-//                                        delegate.onDataNotAvailable();
-//                                    }
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                    delegate.onParseError();
-//                                }
-//                            }
-//                        } else {
-//                            delegate.onNetworkError();
-//                        }
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                        delegate.onNetworkError();
-//                    }
-//                }
-//            });
-//            cityHandler.execute();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            delegate.onNetworkError();
-//        }
-//    }
-
-
-//    public void getBookingDetails(Activity activity, final Context context, String bookingId, ServiceCallback callback) throws MalformedURLException {
-//        try {
-//            delegate = callback;
-//            serviceContext = context;
-//            serviceActivity = activity;
-//
-//            String url = Constants.BOOKING_ORDER_DETAIL_URL;
-//            url = url.replace("{BOOKINGNO}", String.valueOf(bookingId));
-//
-//
-//            GetMethodHandler bookingDetailsHandler = new GetMethodHandler(activity, serviceContext, url, true, true, new AsyncResponse() {
-//                @Override
-//                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-//                    Gson gson = new Gson();
-//                    try {
-//                        if (output != null) {
-//                            if (CheckUnAuthorised(output)) {
-//                                delegate.unAuthorized();
-//                            } else {
-//                                try {
-//                                    if (output.getJSONObject("bookingDetails") != null) {
-//
-//                                        BookingDetails bookingDtailsObject = gson.fromJson(output.getJSONObject("bookingDetails").toString(), BookingDetails.class);
-//
-//                                        Utility.setCatchData(serviceContext, bookingDtailsObject, Constants.chacheBookingDetails);
-//                                        delegate.onSuccess(true);
-//                                    }
-//
-//
-//                                } catch (Exception e) {
-//                                    delegate.onParseError();
-//                                }
-//                            }
-//                        } else {
-//
-//                            delegate.onNetworkError();
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//
-//                        delegate.onNetworkError();
-//                    }
-//                }
-//            });
-//            bookingDetailsHandler.execute();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//
-//            delegate.onNetworkError();
-//        }
-//    }
-
-
-    public void getCompanyList(Activity activity, final Context context, ServiceCallback callback) throws MalformedURLException {
+    public void getCompanyList(Activity activity, final Context context, ServiceRequest serviceRequest,ServiceCallback callback) throws MalformedURLException {
         try {
             delegate = callback;
             serviceContext = context;
             serviceActivity = activity;
-            String json = "";
+            serviceRequestValue = new ServiceRequest();
+            serviceRequestValue = serviceRequest;
+
+
 
             String url = Constants.COMPANY_LIST_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,json , new AsyncResponse() {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequestValue , new AsyncResponse() {
                 @Override
                 public void processFinish(Context responseContext, JSONObject output) throws JSONException {
                     Gson gson = new Gson();
@@ -180,18 +77,15 @@ public class WebServiceHandler {
     }
 
 
-    public void getBranchList(Activity activity, final Context context, int branchId,ServiceCallback callback) throws MalformedURLException {
+    public void getBranchList(Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
         try {
             delegate = callback;
             serviceContext = context;
             serviceActivity = activity;
 
             String url = Constants.BRANCH_LIST_REQUEST_URL;
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("compId", 1000);
-            String json = jsonObject.toString();
 
-            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,json , new AsyncResponse() {
+            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
                 @Override
                 public void processFinish(Context responseContext, JSONObject output) throws JSONException {
                     Gson gson = new Gson();
@@ -229,5 +123,472 @@ public class WebServiceHandler {
         }
     }
 
+    public void getDepartmentList(Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
 
+            String url = Constants.DEPARTMENT_LIST_REQUEST_URL;
+
+            GetMethodHandler departmentListHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            departmentListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+   // ANNOUNCEMENT_SAVE_URL Pending
+
+    public void getEmployeeList (Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.EMPLOYEE_LIST_REQUEST_URL;
+
+            GetMethodHandler employeeListHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            employeeListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+
+// ATTENDANCE_REPORT_EMPLOYEE_URL pending
+
+    public void getHrHelpDeskCount(Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.HR_HELPDESK_COUNT_URL;
+
+            GetMethodHandler hrHelpDeskCountHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            hrHelpDeskCountHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+
+
+
+
+    public void getHrHelpDeskReportList(Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.HR_HELPDESK_LIST_REQUEST_URL;
+
+            GetMethodHandler hrHelpDeskReportListHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            hrHelpDeskReportListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+    public void getHrHelpDeskStatus(Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.HR_HELPDESK_STATUS_LIST_REQUEST_URL;
+
+            GetMethodHandler hrHelpDeskStatusHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            hrHelpDeskStatusHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+    public void getHrHelpDeskOpenQuery (Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.HR_HELPDESK_OPEN_QUERY_URL;
+
+            GetMethodHandler hrHelpDeskOpenQueryHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            hrHelpDeskOpenQueryHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+    public void saveHrHelpdesk (Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.HR_HELPDESK_SAVE_URL;
+
+            GetMethodHandler saveHrHelpdeskHandler  = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            saveHrHelpdeskHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+    public void getLeaveCount (Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.LEAVE_COUNT_REQUEST_URL;
+
+            GetMethodHandler leaveCountHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            leaveCountHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+    public void getLeaveListAdmin (Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.LEAVE_LIST_REQUEST_URL;
+
+            GetMethodHandler leaveListAdminHandler = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            leaveListAdminHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+/*
+    public void (Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.;
+
+            GetMethodHandler  = new GetMethodHandler(activity, serviceContext, url, true,serviceRequest , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            .execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }*/
 }
