@@ -5,4 +5,17 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="colorBackground">#d7d8d3</color>
+    <color name="colorHRMSFont">#013d62</color>
+    <color name="colorWelcomeFont">#091fa8</color>
+    <color name="colorForgetFont">#1f6d93</color>
+    <color name="colorPoweredByFont">#020e40</color>
+    <color name="colorHeading">#6cb8f6</color>
+    <color name="colorMennuBackground">#1152b8</color>
+    <color name="colorrecoverPassword">#014a6d</color>
+    <color name="colorrecoverOK">#fe0000</color>
+
+    <color name="colorNoteandcontent">#014b70</color>
+    <color name="colorenterotp">#354a5f</color>
 </resources>

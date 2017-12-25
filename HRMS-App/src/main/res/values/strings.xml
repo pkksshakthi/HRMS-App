@@ -15,4 +15,12 @@
 
     <string name="invalidInternetConnection">Sorry! there is no internet connectivity.</string>
 
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="powered_by_sphinax_infosystem">Powered by Sphinax Infosystem</string>
+    <string name="username">UserName</string>
+    <string name="welcome_to">Welcome To</string>
 </resources>
