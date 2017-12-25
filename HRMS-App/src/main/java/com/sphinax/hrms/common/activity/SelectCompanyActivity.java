@@ -2,6 +2,7 @@ package com.sphinax.hrms.common.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -173,6 +174,10 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
             editor.putString(Constants.PREFS_COMPANY_NAME,ajax.getCompName());
             editor.commit();
         }
+
+        Intent intent=new Intent(SelectCompanyActivity.this,LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 

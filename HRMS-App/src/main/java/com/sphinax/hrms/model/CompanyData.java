@@ -11,12 +11,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class CompanyData {
 
-    @SerializedName("resCode")
-    @Expose
-    private Integer resCode;
-    @SerializedName("resType")
-    @Expose
-    private String resType;
+
     @SerializedName("ajax")
     @Expose
     private List<Ajax> ajax = null;
@@ -81,6 +76,46 @@ public class CompanyData {
     @SerializedName("companyName")
     @Expose
     private String companyName;
+    @SerializedName("resCode")
+    @Expose
+    private Integer resCode;
+    @SerializedName("resType")
+    @Expose
+    private String resType;
+    @SerializedName("userId")
+    @Expose
+    private String userId;
+    @SerializedName("compId")
+    @Expose
+    private String compId;
+    @SerializedName("compShortName")
+    @Expose
+    private String compShortName;
+
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getCompId() {
+        return compId;
+    }
+
+    public void setCompId(String compId) {
+        this.compId = compId;
+    }
+
+    public String getCompShortName() {
+        return compShortName;
+    }
+
+    public void setCompShortName(String compShortName) {
+        this.compShortName = compShortName;
+    }
 
     public String getEmpId() {
         return empId;
