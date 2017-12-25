@@ -231,7 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="start||center"
+                    android:gravity="start|center"
                     android:text="Expence(Tax free)"
                     android:textColor="#313131" />
 
@@ -239,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right||center"
+                    android:gravity="right|center"
 
                     android:text="2.25"
                     android:textColor="#313131" />
@@ -266,7 +266,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="start||center"
+                    android:gravity="start|center"
                     android:text="Expence VAT"
                     android:textColor="#313131" />
 
@@ -274,7 +274,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right||center"
+                    android:gravity="right|center"
 
                     android:text="2.25"
                     android:textColor="#313131" />
@@ -301,7 +301,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="start||center"
+                    android:gravity="start|center"
                     android:text="Mileage"
                     android:textColor="#313131" />
 
@@ -309,7 +309,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right||center"
+                    android:gravity="right|center"
 
                     android:text="2.25"
                     android:textColor="#313131" />
@@ -336,7 +336,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="start||center"
+                    android:gravity="start|center"
                     android:text="Mileage VAT"
                     android:textColor="#313131" />
 
@@ -344,7 +344,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right||center"
+                    android:gravity="right|center"
 
                     android:text="2.25"
                     android:textColor="#313131" />
@@ -371,7 +371,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="start||center"
+                    android:gravity="start|center"
                     android:text="Salary"
                     android:textColor="#313131" />
 
@@ -379,7 +379,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right||center"
+                    android:gravity="right|center"
 
                     android:text="2.25"
                     android:textColor="#313131" />
@@ -406,7 +406,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="start||center"
+                    android:gravity="start|center"
                     android:text="Total"
                     android:textColor="#5C9210"
                     android:textStyle="bold" />
@@ -415,7 +415,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right||center"
+                    android:gravity="right|center"
 
                     android:text="2.25"
                     android:textColor="#5C9210"
