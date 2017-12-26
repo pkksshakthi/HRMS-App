@@ -6,20 +6,42 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:icon="@drawable/attendance_icon"
+
+            android:title="Mark Attendance" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:icon="@drawable/attendance"
+            android:title="Attendance Report" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+
+            android:icon="@drawable/leave_application_icon"
+            android:title="Leave Application" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            
+            android:icon="@drawable/leave_application_icon"
+            android:title="Leave Management" />
+        <item
+            
+            android:icon="@drawable/myinfo_icon"
+            android:title="My Info" />
+        <item
+            
+            android:icon="@drawable/announcement_icon"
+            android:title="Announcements" />
+        <item
+            
+            android:icon="@drawable/payslip_icon_white"
+            android:title="PaySlip" />
+        <item
+            
+            android:icon="@drawable/helpdesk_icon"
+            android:title="HelpDesk" />
+        <item
+            
+            android:icon="@drawable/logout_icon"
+            android:title="Logout" />
     </group>
 
     <item android:title="Communicate">
