@@ -38,7 +38,9 @@
             android:name=".admin.activity.AdminMenuActivity"
             android:label="@string/title_activity_admin_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".employee.activity.UserMenuActivity" />
+        <activity android:name=".employee.activity.UserMenuActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".common.activity.LoginActivity" />
         <activity android:name=".common.activity.OTPActivity" />
         <activity android:name=".common.activity.PasswordChangeActivity" />

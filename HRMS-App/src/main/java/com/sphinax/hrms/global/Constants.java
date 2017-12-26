@@ -54,4 +54,5 @@ public class Constants {
     public static final String PREFS_NAME = "hrms";
     public static final String PREFS_COMPANY_ID = "company_id";
     public static final String PREFS_COMPANY_NAME = "company_name";
+    public static final String PREFS_USER_ID = "user_id";
 }

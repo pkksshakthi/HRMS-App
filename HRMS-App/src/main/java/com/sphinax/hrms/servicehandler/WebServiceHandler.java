@@ -2,12 +2,14 @@ package com.sphinax.hrms.servicehandler;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.model.ServiceRequest;
+import com.sphinax.hrms.utils.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,7 +123,7 @@ public class WebServiceHandler {
     }
 
 
-    public void validateUser (Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) throws MalformedURLException {
+    public void validateUser (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
         try {
             delegate = callback;
             serviceContext = context;
@@ -141,6 +143,9 @@ public class WebServiceHandler {
                             try {
 
                                 if (output.getInt("resCode") == 1) {
+                                    SharedPreferences.Editor editor = Utility.getPreference(activity).edit();
+                                    editor.putString(Constants.PREFS_USER_ID,output.getString("userId") );
+                                    editor.commit();
                                     CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
                                     delegate.onSuccess(true);
                                     delegate.onReturnObject(companyDataObject);

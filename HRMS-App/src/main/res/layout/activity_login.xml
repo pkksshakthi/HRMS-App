@@ -85,6 +85,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edittextstyle"
                     android:hint="@string/username"
+                    android:text="ET10001"
                     android:padding="4dp" />
             </TableRow>
 
@@ -97,7 +98,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-
                     android:src="@drawable/password" />
 
                 <EditText
@@ -105,8 +105,10 @@
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
+                    android:text="rS500"
                     android:layout_weight="1"
                     android:background="@drawable/edittextstyle"
+                    android:inputType="textPassword"
                     android:hint="@string/password"
                     android:padding="4dp" />
             </TableRow>

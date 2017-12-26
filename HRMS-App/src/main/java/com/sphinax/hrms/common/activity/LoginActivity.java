@@ -2,6 +2,7 @@ package com.sphinax.hrms.common.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.admin.activity.AdminMenuActivity;
+import com.sphinax.hrms.employee.activity.UserMenuActivity;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
@@ -101,8 +104,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.showToastMessage(context, getResources().getString(R.string.invalidUser));
-
+                    if(flag == true){
+                        startMenuActivity("user");
+                    }else {
+                        Utility.showToastMessage(context, getResources().getString(R.string.invalidUser));
+                    }
                 }
 
                 @Override
@@ -141,6 +147,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             });
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    private void startMenuActivity(String user){
+        if(user.equalsIgnoreCase("user")){
+            Intent intent=new Intent(LoginActivity.this,UserMenuActivity.class);
+            startActivity(intent);
+            finish();
+        }else if(user.equalsIgnoreCase("admin")){
+            Intent intent=new Intent(LoginActivity.this,AdminMenuActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

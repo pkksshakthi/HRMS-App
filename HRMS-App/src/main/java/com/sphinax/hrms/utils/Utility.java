@@ -2,10 +2,13 @@ package com.sphinax.hrms.utils;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.widget.Toast;
 
+import com.sphinax.hrms.R;
 import com.sphinax.hrms.global.Constants;
 
 /**
@@ -47,6 +50,26 @@ public class Utility {
     public static void showToastMessage(Context context, String message) {
         try {
             Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addFragment(Activity activity, int containerId, Fragment fragment, boolean needBackstack, Bundle bundle) {
+        try {
+            FragmentTransaction ftNavigation = activity.getFragmentManager().beginTransaction();
+            if (bundle != null) {
+                fragment.setArguments(bundle);
+            }
+            ftNavigation.replace(containerId, fragment);
+//            ftNavigation.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            if (needBackstack) {
+                ftNavigation.addToBackStack(null);
+            }
+            ftNavigation.commit();
+            if (containerId == R.id.content_frame) {
+                currentFragment = fragment;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
