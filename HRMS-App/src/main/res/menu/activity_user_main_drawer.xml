@@ -6,39 +6,39 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_mark_attendance"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/icon_mark_attendance"
             android:title="Mark Attendance" />
         <item
             android:id="@+id/nav_attendance_report"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/icon_attendancereport"
             android:title="Attendance Report" />
         <item
             android:id="@+id/nav_leave_application"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/icon_leaveapplicationn"
             android:title="Leave Application" />
         <item
             android:id="@+id/nav_leave_management"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/icon_leavemanagement"
             android:title="Leave Management" />
         <item
             android:id="@+id/nav_my_info"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/icon_myinfo"
             android:title="MyInfo" />
         <item
             android:id="@+id/nav_announcement"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/icon_announcement"
             android:title="Announcements" />
         <item
             android:id="@+id/nav_payslip"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/icon_payslip"
             android:title="PaySlip" />
         <item
             android:id="@+id/nav_help_desk"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/icon_helpdesk"
             android:title="Help desk" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/icon_logout"
             android:title="Logout" />
     </group>
 
