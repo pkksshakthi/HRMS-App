@@ -100,7 +100,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         ll_mark_attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
+                Utility.addFragment((Activity) context, R.id.content_frame, new AttendanceEnterFragment(), true, null);
 
             }
         });

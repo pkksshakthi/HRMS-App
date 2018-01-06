@@ -148,6 +148,39 @@ public class Ajax {
     @Expose
     private String empImage;
 
+    @SerializedName("time")
+    @Expose
+    private String time;
+    @SerializedName("bioId")
+    @Expose
+    private String bioId;
+    @SerializedName("location")
+    @Expose
+    private String location;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getBioId() {
+        return bioId;
+    }
+
+    public void setBioId(String bioId) {
+        this.bioId = bioId;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getFirstName() {
         return firstName;

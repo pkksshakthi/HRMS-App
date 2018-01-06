@@ -1,14 +1,34 @@
 package com.sphinax.hrms.employee.fragment;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
+import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
+import com.sphinax.hrms.model.Ajax;
+import com.sphinax.hrms.model.CompanyData;
+import com.sphinax.hrms.servicehandler.ServiceCallback;
+import com.sphinax.hrms.servicehandler.WebServiceHandler;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.Utility;
+import com.sphinax.hrms.view.CustomSpinnerAdapter;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +49,13 @@ public class AttendanceEnterFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private static Context context;
+    private View mView;
+    private Button bt_In_att,bt_out_att;
+    private TextView tv_att_details;
+    private ProgressDialog pdia;
+    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+    private ArrayList<Ajax> ajaxList;
 
     public AttendanceEnterFragment() {
         // Required empty public constructor
@@ -67,7 +94,37 @@ public class AttendanceEnterFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_attendance_enter, container, false);
     }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        // super.onViewCreated(view, savedInstanceState);
+        mView = view;
+        context = view.getContext();
 
+        bt_In_att = (Button) mView.findViewById(R.id.bt_mark_in_att);
+        bt_out_att = (Button) mView.findViewById(R.id.bt_mark_out_att);
+        tv_att_details  = (TextView) mView.findViewById(R.id.tv_att_details);
+
+
+
+
+
+        fetchDailyUserAttendance();
+
+        if(Global.isMarkAttendance()){
+            bt_In_att.setEnabled(false);
+            bt_In_att.setClickable(false);
+
+        }
+        bt_In_att.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterUserAttendance();
+            }
+        });
+
+       // Check-In Time 9:00PM
+
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -106,4 +163,190 @@ public class AttendanceEnterFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    /***Method used to get Company List from the OPS Service **/
+
+    private void fetchDailyUserAttendance() {
+        if (!HRMSNetworkCheck.checkInternetConnection(context)) {
+            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(context);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            Calendar c = Calendar.getInstance();
+            //SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
+            SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
+            String datetime = dateformat.format(c.getTime());
+            Log.d("mnb", "onViewCreated: " + datetime);
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("refId", "5019");
+            requestMap.put("InDate", datetime);
+
+            webServiceHandler.getDailyUserAttendance((Activity) context, context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                    if (flag){
+                        //enterUserAttendance();
+                        Global.setMarkAttendance(flag);
+                        bt_In_att.setEnabled(false);
+                        bt_In_att.setClickable(false);
+                    }else {
+                        Global.setMarkAttendance(false);
+                        bt_In_att.setText("Check-In Time");
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    CompanyData companyData = (CompanyData) obj;
+                    ajaxList = new ArrayList<>();
+                    ajaxList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> " + ajaxList.size());
+
+                    checkAttendanceMarked();
+
+
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void enterUserAttendance() {
+        if (!HRMSNetworkCheck.checkInternetConnection(context)) {
+            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        final String datetime;
+        pdia = new ProgressDialog(context);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            Calendar c = Calendar.getInstance();
+            //SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
+            SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+             datetime = dateformat.format(c.getTime());
+            Log.d("mnb", "onViewCreated: " + datetime);
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("refId", "5019");
+            requestMap.put("locationId", "Chennai");
+            requestMap.put("empimageDesc", "");
+            requestMap.put("clkInTime", datetime);
+
+            webServiceHandler.markDailyUserAttendance((Activity) context, context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                    if (!flag){
+                        bt_In_att.setText("Check-In Time");
+                        tv_att_details.setText("");
+                    }else if(flag){
+                        //fetchDailyUserAttendance();
+                        bt_In_att.setText("Check-In Time \n "+datetime);
+                        bt_In_att.setEnabled(false);
+                        bt_In_att.setClickable(false);
+                        Global.setMarkAttendance(flag);
+
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+        private void checkAttendanceMarked(){
+
+        if(ajaxList != null){
+            if (ajaxList.get(0).getTime()!=null && !ajaxList.get(0).getTime().equalsIgnoreCase("")){
+                bt_In_att.setText(ajaxList.get(0).getTime());
+                tv_att_details.setText(ajaxList.get(0).getLocation());
+            }
+        }
+
+
+
+        }
+
 }

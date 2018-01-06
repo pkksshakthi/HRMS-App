@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.activity.LoginActivity;
 import com.sphinax.hrms.employee.fragment.ApplyLeaveFragment;
+import com.sphinax.hrms.employee.fragment.AttendanceEnterFragment;
 import com.sphinax.hrms.employee.fragment.EmployeeAttendanceFragment;
 import com.sphinax.hrms.employee.fragment.EnterHRHelpdeskFragment;
 import com.sphinax.hrms.employee.fragment.PaySlipFragment;
@@ -119,7 +120,7 @@ public class UserMenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
          if (id == R.id.nav_mark_attendance) {
-             Utility.addFragment( this, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame, new AttendanceEnterFragment(), true, null);
 
         } else if (id == R.id.nav_attendance_report) {
 

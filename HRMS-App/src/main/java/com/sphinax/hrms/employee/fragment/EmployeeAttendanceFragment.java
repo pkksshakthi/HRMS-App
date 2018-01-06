@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 
@@ -29,6 +32,9 @@ public class EmployeeAttendanceFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private static Context context;
+    private View mView;
+
 
     public EmployeeAttendanceFragment() {
         // Required empty public constructor
@@ -73,6 +79,15 @@ public class EmployeeAttendanceFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_employee_attendance, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        // super.onViewCreated(view, savedInstanceState);
+        mView = view;
+        context = view.getContext();
+
+
+
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
