@@ -39,7 +39,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
     public UserMainMenuFragment() {
         // Required empty public constructor
     }
-    private LinearLayout ll1,ll2,ll3,ll4,ll5,ll6,ll7,ll8,ll9;
+    private LinearLayout ll_mark_attendance,ll_attendance_report,ll_leave_app,ll_leave_mana,ll_info,ll_announcement,ll_payslip,ll_helpdesk;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -85,68 +85,68 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         mView = view;
         context = view.getContext();
 
-        ll1 = mView.findViewById(R.id.ll_mark_attendance);
-        ll2 = mView.findViewById(R.id.ll_attendance_report);
-        ll3 = mView.findViewById(R.id.ll_leave_app);
-        ll4 = mView.findViewById(R.id.ll_leave_mana);
-        ll5 = mView.findViewById(R.id.ll_info);
-        ll6 = mView.findViewById(R.id.ll_announcement);
-        ll7 = mView.findViewById(R.id.ll_payslip);
-        ll8 = mView.findViewById(R.id.ll_helpdesk);
+        ll_mark_attendance = mView.findViewById(R.id.ll_mark_attendance);
+        ll_attendance_report = mView.findViewById(R.id.ll_attendance_report);
+        ll_leave_app = mView.findViewById(R.id.ll_leave_app);
+        ll_leave_mana = mView.findViewById(R.id.ll_leave_mana);
+        ll_info = mView.findViewById(R.id.ll_info);
+        ll_announcement = mView.findViewById(R.id.ll_announcement);
+        ll_payslip = mView.findViewById(R.id.ll_payslip);
+        ll_helpdesk = mView.findViewById(R.id.ll_helpdesk);
 
 
 
 
-        ll1.setOnClickListener(new View.OnClickListener() {
+        ll_mark_attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
 
             }
         });
-        ll2.setOnClickListener(new View.OnClickListener() {
+        ll_attendance_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
+               // Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
 
             }
         });
-        ll3.setOnClickListener(new View.OnClickListener() {
+        ll_leave_app.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utility.addFragment((Activity) context, R.id.content_frame, new ApplyLeaveFragment(), true, null);
 
             }
         });
-        ll4.setOnClickListener(new View.OnClickListener() {
+        ll_leave_mana.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
+              //  Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
 
             }
         });
-        ll5.setOnClickListener(new View.OnClickListener() {
+        ll_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utility.addFragment((Activity) context, R.id.content_frame, new UserProfileFragment(), true, null);
 
             }
         });
-        ll6.setOnClickListener(new View.OnClickListener() {
+        ll_announcement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
+                //Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
 
             }
         });
-        ll7.setOnClickListener(new View.OnClickListener() {
+        ll_payslip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utility.addFragment((Activity) context, R.id.content_frame, new PaySlipFragment(), true, null);
 
             }
         });
-        ll8.setOnClickListener(new View.OnClickListener() {
+        ll_helpdesk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utility.addFragment((Activity) context, R.id.content_frame, new EnterHRHelpdeskFragment(), true, null);

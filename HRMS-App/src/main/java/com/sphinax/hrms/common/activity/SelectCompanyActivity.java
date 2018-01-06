@@ -172,6 +172,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
     SharedPreferences.Editor editor = Utility.getPreference(this).edit();
             editor.putString(Constants.PREFS_COMPANY_ID, String.valueOf(ajax.getCompId()));
             editor.putString(Constants.PREFS_COMPANY_NAME,ajax.getCompName());
+            editor.putString(Constants.PREFS_COMPANY_SHORT_NAME,ajax.getShortName());
             editor.commit();
         }
 

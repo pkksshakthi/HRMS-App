@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sphinax.hrms">
 
-    <uses-sdk android:minSdkVersion="15" />
+    <uses-sdk android:minSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".common.activity.SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -30,17 +30,10 @@
         </activity>
         <activity
             android:name=".common.activity.SelectCompanyActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
+            android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>
-        <activity
-            android:name=".admin.activity.AdminMenuActivity"
-            android:label="@string/title_activity_admin_menu"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".employee.activity.UserMenuActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity android:name=".admin.activity.AdminMenuActivity" />
+        <activity android:name=".employee.activity.UserMenuActivity"/>
         <activity android:name=".common.activity.LoginActivity" />
         <activity android:name=".common.activity.OTPActivity" />
         <activity android:name=".common.activity.PasswordChangeActivity" />

@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.CompanyData;
+import com.sphinax.hrms.model.LoginData;
 import com.sphinax.hrms.model.ServiceRequest;
 import com.sphinax.hrms.utils.Utility;
 
@@ -130,6 +131,7 @@ public class WebServiceHandler {
             serviceActivity = activity;
 
             String url = Constants.LOGIN_REQUEST_URL;
+            url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
 
             GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
                 @Override
@@ -145,10 +147,12 @@ public class WebServiceHandler {
                                 if (output.getInt("resCode") == 1) {
                                     SharedPreferences.Editor editor = Utility.getPreference(activity).edit();
                                     editor.putString(Constants.PREFS_USER_ID,output.getString("userId") );
+                                    editor.putString(Constants.PREFS_USER_NAME,output.getString("empName") );
+                                    editor.putString(Constants.PREFS_USER_TYPE,output.getString("adminOremp") );
                                     editor.commit();
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
                                     delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
+                                    delegate.onReturnObject(loginDataObject);
                                 }else {
                                     delegate.onSuccess(false);
                                 }

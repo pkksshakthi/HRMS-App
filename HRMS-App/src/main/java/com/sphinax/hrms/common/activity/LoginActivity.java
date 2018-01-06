@@ -16,6 +16,7 @@ import com.sphinax.hrms.employee.activity.UserMenuActivity;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
+import com.sphinax.hrms.model.LoginData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
@@ -91,11 +92,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             pdia.show();
         }
         try {
+
+            String url = Constants.LOGIN_REQUEST_URL;
+            url = url.replace("{COMPANYID}", Utility.getPreference(this).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
+
+
+
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("userId",userNameValue  );
             requestMap.put("userpwd",userPasswordValue );
             requestMap.put("compId",Utility.getPreference(this).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("url", "http://e-lite.in:8080/ezhrRest/marketing/validateLogin");
+            requestMap.put("url", url);
 
             webServiceHandler.validateUser(this, context, requestMap, new ServiceCallback() {
 
@@ -105,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         pdia.dismiss();
                     }
                     if(flag == true){
-                        startMenuActivity("user");
+                      //  startMenuActivity("user");
                     }else {
                         Utility.showToastMessage(context, getResources().getString(R.string.invalidUser));
                     }
@@ -116,8 +123,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    CompanyData companyData = (CompanyData) obj;
+                    LoginData companyData = (LoginData) obj;
                     Log.d("ajaxList", "size --> " + companyData.getUserId());
+
+                    if(companyData != null && companyData.getResCode() == 1 ){
+                        startMenuActivity(companyData.getAdminOremp());
+                    }
 
                 }
 
@@ -150,11 +161,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     private void startMenuActivity(String user){
-        if(user.equalsIgnoreCase("user")){
+        if(user.equalsIgnoreCase("E")){
             Intent intent=new Intent(LoginActivity.this,UserMenuActivity.class);
             startActivity(intent);
             finish();
-        }else if(user.equalsIgnoreCase("admin")){
+        }else if(user.equalsIgnoreCase("A")){
             Intent intent=new Intent(LoginActivity.this,AdminMenuActivity.class);
             startActivity(intent);
             finish();

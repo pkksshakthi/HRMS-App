@@ -18,6 +18,9 @@ public class Ajax {
     @SerializedName("compName")
     @Expose
     private String compName;
+    @SerializedName("compImg")
+    @Expose
+    private String compImg;
     @SerializedName("branchId")
     @Expose
     private Integer branchId;
@@ -135,7 +138,15 @@ public class Ajax {
     @SerializedName("companyName")
     @Expose
     private String companyName;
-
+    @SerializedName("compShortName")
+    @Expose
+    private String compShortName;
+    @SerializedName("adminOremp")
+    @Expose
+    private String adminOremp;
+    @SerializedName("empImage")
+    @Expose
+    private String empImage;
 
 
     public String getFirstName() {
@@ -153,7 +164,13 @@ public class Ajax {
     public void setDesignationDesc(String designationDesc) {
         this.designationDesc = designationDesc;
     }
+    public String getCompImg() {
+        return compImg;
+    }
 
+    public void setCompImg(String compImg) {
+        this.compImg = compImg;
+    }
     public String getDeptDesc() {
         return deptDesc;
     }
@@ -474,5 +491,29 @@ public class Ajax {
 
     public void setBranchName(String branchName) {
         this.branchName = branchName;
+    }
+
+    public String getCompShortName() {
+        return compShortName;
+    }
+
+    public void setCompShortName(String compShortName) {
+        this.compShortName = compShortName;
+    }
+
+    public String getAdminOremp() {
+        return adminOremp;
+    }
+
+    public void setAdminOremp(String adminOremp) {
+        this.adminOremp = adminOremp;
+    }
+
+    public String getEmpImage() {
+        return empImage;
+    }
+
+    public void setEmpImage(String empImage) {
+        this.empImage = empImage;
     }
 }

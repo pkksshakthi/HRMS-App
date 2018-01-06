@@ -8,10 +8,12 @@ package com.sphinax.hrms.global;
 public class Constants {
 
     //Live
-    private static final String domain = "http://e-lite.in:8080/";
-    private static final String client = "ezhrRest/user/";
-    private static final String marketing = "ezhrRest/marketing/";
+    private static final String domain = "http://e-lite.in:8080/ezhrRest/";
+    private static final String client = "user/";
+    //private static final String marketing = "ezhrRest/marketing/";
 
+
+    public static final String COMPANY_NAME_URL_PARAMETER = "{COMPANYID}";
     //ADMIN
 
     public static final String COMPANY_LIST_REQUEST_URL = domain + client +"Comp";
@@ -32,7 +34,7 @@ public class Constants {
 
     // EMPLOYEE
 
-    public static final String LOGIN_REQUEST_URL = domain + marketing +"validateLogin";
+    public static final String LOGIN_REQUEST_URL = domain + COMPANY_NAME_URL_PARAMETER +"/validateLogin";
     public static final String PROFILE_INFO_REQUEST_URL = domain + client +"EmpInfList";
     public static final String ANNOUNCEMENT_LIST_REQUEST_URL = domain + client + "AnnouncementList";
     public static final String ATTENDANCE_ENTER_URL = domain + client + "markYourAttendance";
@@ -54,5 +56,8 @@ public class Constants {
     public static final String PREFS_NAME = "hrms";
     public static final String PREFS_COMPANY_ID = "company_id";
     public static final String PREFS_COMPANY_NAME = "company_name";
+    public static final String PREFS_COMPANY_SHORT_NAME = "company_short_name";
     public static final String PREFS_USER_ID = "user_id";
+    public static final String PREFS_USER_NAME = "user_name";
+    public static final String PREFS_USER_TYPE = "user_type";
 }

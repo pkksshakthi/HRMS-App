@@ -1,5 +1,6 @@
 package com.sphinax.hrms.employee.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -13,14 +14,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.activity.LoginActivity;
+import com.sphinax.hrms.employee.fragment.ApplyLeaveFragment;
+import com.sphinax.hrms.employee.fragment.EmployeeAttendanceFragment;
+import com.sphinax.hrms.employee.fragment.EnterHRHelpdeskFragment;
+import com.sphinax.hrms.employee.fragment.PaySlipFragment;
 import com.sphinax.hrms.employee.fragment.UserMainMenuFragment;
+import com.sphinax.hrms.employee.fragment.UserProfileFragment;
+import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.utils.Utility;
 
 public class UserMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +46,7 @@ public class UserMenuActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -43,6 +54,21 @@ public class UserMenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+
+        ImageView iv_drawer_open = (ImageView)findViewById(R.id.iv_drawer_open);
+        iv_drawer_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    drawer.openDrawer(GravityCompat.START);
+            }
+        });
+
+        TextView tv_username = (TextView) headerView.findViewById(R.id.tv_username);
+        TextView tv_companyname = (TextView) headerView.findViewById(R.id.tv_company_name);
+
+        tv_username.setText(Utility.getPreference(this).getString(Constants.PREFS_USER_NAME, ""));
+        tv_companyname.setText(Utility.getPreference(this).getString(Constants.PREFS_COMPANY_NAME, ""));
 
 
 
@@ -56,7 +82,7 @@ public class UserMenuActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -92,19 +118,34 @@ public class UserMenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+         if (id == R.id.nav_mark_attendance) {
+             Utility.addFragment( this, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_attendance_report) {
 
-        }  else if (id == R.id.nav_share) {
+        }  else if (id == R.id.nav_leave_application) {
+             Utility.addFragment( this, R.id.content_frame, new ApplyLeaveFragment(), true, null);
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_leave_management) {
 
+        } else if (id == R.id.nav_my_info) {
+             Utility.addFragment( this, R.id.content_frame, new UserProfileFragment(), true, null);
+
+        } else if (id == R.id.nav_announcement) {
+
+        } else if (id == R.id.nav_payslip) {
+             Utility.addFragment( this, R.id.content_frame, new PaySlipFragment(), true, null);
+
+        } else if (id == R.id.nav_help_desk) {
+             Utility.addFragment( this, R.id.content_frame, new EnterHRHelpdeskFragment(), true, null);
+
+        } else if (id == R.id.nav_logout) {
+             Intent intent=new Intent(UserMenuActivity.this,LoginActivity.class);
+             startActivity(intent);
+             finish();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
