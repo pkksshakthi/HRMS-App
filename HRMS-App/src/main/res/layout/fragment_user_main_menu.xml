@@ -138,7 +138,7 @@
 
 
                             <LinearLayout
-
+                                android:id="@+id/ll_leave_app"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -180,7 +180,7 @@
 
 
                             <LinearLayout
-
+                                android:id="@+id/ll_leave_mana"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -230,6 +230,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/ll_info"
 
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -272,6 +273,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/ll_announcement"
 
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -323,6 +325,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/ll_payslip"
 
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -365,6 +368,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/ll_helpdesk"
 
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
