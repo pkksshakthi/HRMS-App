@@ -23,7 +23,6 @@ import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
-import com.sphinax.hrms.view.CustomSpinnerAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

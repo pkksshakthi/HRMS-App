@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,12 +16,11 @@ import com.sphinax.hrms.R;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
-import com.sphinax.hrms.model.ServiceRequest;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
-import com.sphinax.hrms.view.CustomSpinnerAdapter;
+import com.sphinax.hrms.view.CompanySpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +37,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private Spinner spCompany;
     private Button btNext;
-    private CustomSpinnerAdapter companyDataAdapter;
+    private CompanySpinnerAdapter companyDataAdapter;
     private int spinnerPosition = 0;
 
     @Override
@@ -101,7 +99,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
                     ajaxList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d("ajaxList", "size --> " + ajaxList.size());
 
-                    companyDataAdapter = new CustomSpinnerAdapter(context,
+                    companyDataAdapter = new CompanySpinnerAdapter(context,
                             android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, ajaxList);
                     companyDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

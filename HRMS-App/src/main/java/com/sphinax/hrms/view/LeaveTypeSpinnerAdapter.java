@@ -12,18 +12,17 @@ import android.widget.TextView;
 import com.sphinax.hrms.model.Ajax;
 
 import java.util.ArrayList;
-
 /**
- * Created by ganesaka on 12/25/2017.
+ * Created by ganesaka on 1/6/2018.
  */
 
-public class CustomSpinnerAdapter extends ArrayAdapter<Ajax> {
+public class LeaveTypeSpinnerAdapter extends ArrayAdapter<Ajax> {
     private final Context context;
     private final ArrayList<Ajax> data;
     private final int viewResourceId;
     private final int listViewResourceId;
 
-    public CustomSpinnerAdapter(Context context, int textViewResourceId, int listTextViewResourceId, ArrayList<Ajax> objects) {
+    public LeaveTypeSpinnerAdapter(Context context, int textViewResourceId, int listTextViewResourceId, ArrayList<Ajax> objects) {
         super(context, listTextViewResourceId, objects);
         // TODO Auto-generated constructor stub
         this.data = objects;

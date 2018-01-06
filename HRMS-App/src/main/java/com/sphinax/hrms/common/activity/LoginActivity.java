@@ -15,13 +15,11 @@ import com.sphinax.hrms.admin.activity.AdminMenuActivity;
 import com.sphinax.hrms.employee.activity.UserMenuActivity;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.Ajax;
-import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.model.LoginData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
-import com.sphinax.hrms.view.CustomSpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

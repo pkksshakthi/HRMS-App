@@ -35,104 +35,17 @@
 
 
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout4"
+        <ListView
+            android:id="@+id/lv_leave_data"
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
-
-
-            android:gravity="center"
-            android:orientation="vertical"
             android:padding="5dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            tools:ignore="MissingConstraints">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/leavemanagementbutton"
-                    android:text="8 of 12" />
-
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="3dp"
-                    android:layout_gravity="center"
-
-                    android:background="#1052A2" />
-
-                <Button
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/leavemanagementroundbutton"
-                    android:text="    Casual Leave      "
-                    android:textColor="#ffffff" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/leavemanagementbutton"
-                    android:text="8 of 12" />
-
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="3dp"
-                    android:layout_gravity="center"
-
-                    android:background="#1052A2" />
-
-                <Button
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/leavemanagementroundbutton"
-                    android:text="    Casual Leave      "
-                    android:textColor="#ffffff" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/leavemanagementbutton"
-                    android:text="8 of 12" />
-
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="3dp"
-                    android:layout_gravity="center"
-
-                    android:background="#1052A2" />
-
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/leavemanagementroundbutton"
-                    android:text="    Casual Leave      "
-                    android:textColor="#ffffff" />
-            </LinearLayout>
-        </LinearLayout>
+            tools:ignore="MissingConstraints"/>
 
         <LinearLayout
 
@@ -196,8 +109,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-
-                    android:text="Leave "
+                    android:id="@+id/sp_leave_type"
                     android:textSize="7pt"
                     android:textStyle="bold" />
             </TableRow>
@@ -228,7 +140,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/leavemanagementtextviewroundcorner"
                     android:gravity="center"
-                    android:text="20/12/1990"
+                    android:text=""
+                    android:id="@+id/tv_start_date"
                     android:textColor="#000000"
                     android:textSize="7pt"
                     android:textStyle="bold" />
@@ -253,14 +166,14 @@
                     android:textSize="7pt"
                     android:textStyle="bold" />
 
-                <TextView
+                <Spinner
 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/leavemanagementtextviewroundcorner"
                     android:gravity="center"
-                    android:text="Second Half"
+                    android:id="@+id/sp_leave_session_start"
                     android:textColor="#000000"
                     android:textSize="7pt"
                     android:textStyle="bold" />
@@ -292,7 +205,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/leavemanagementtextviewroundcorner"
                     android:gravity="center"
-                    android:text="20/12/1990"
+                    android:id="@+id/tv_end_date"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="7pt"
                     android:textStyle="bold" />
@@ -317,8 +231,8 @@
                     android:textSize="7pt"
                     android:textStyle="bold" />
 
-                <TextView
-
+                <Spinner
+android:id="@+id/sp_leave_session_end"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -357,6 +271,7 @@
                     android:background="@drawable/leavemanagementtextviewroundcorner"
                     android:gravity="center"
                     android:text="3.5"
+                    android:id="@+id/tv_count"
                     android:textColor="#000000"
                     android:textSize="7pt"
                     android:textStyle="bold" />
@@ -390,6 +305,7 @@
                     android:background="@drawable/leavemanagementtextviewroundcorner"
                     android:gravity="center"
                     android:text="Leave "
+                    android:id="@+id/ed_reason"
                     android:textSize="7pt"
                     android:textStyle="bold" />
 
@@ -404,6 +320,7 @@
                 android:padding="2dp">
 
                 <Button
+                    android:id="@+id/bt_submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#1251A0"
