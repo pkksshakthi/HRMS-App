@@ -15,7 +15,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -26,7 +29,6 @@ import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
-import com.sphinax.hrms.view.CompanySpinnerAdapter;
 import com.sphinax.hrms.view.LeaveTypeListAdapter;
 import com.sphinax.hrms.view.LeaveTypeSpinnerAdapter;
 
@@ -44,7 +46,7 @@ import java.util.HashMap;
  * Use the {@link ApplyLeaveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSelectedListener,View.OnClickListener{
+public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -58,8 +60,8 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     private static Context context;
     private View mView;
     private Button bt_submit;
-    private TextView tv_start_date,tv_end_date,tv_count;
-    private Spinner  sp_session_start,sp_session_end,sp_leave_type;
+    private TextView tv_start_date, tv_end_date, tv_count;
+    private Spinner sp_session_start, sp_session_end, sp_leave_type;
     private ListView lv_leave_type;
     private ProgressDialog pdia;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
@@ -68,9 +70,12 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     private LeaveTypeListAdapter leaveTypeListAdapter;
     private int leaveTypePosition = 0;
     private int startsession = 0;
-    private int endsession =0;
-    String[] leaveSession = { "First Half", "Second Half" };
+    private int endsession = 0;
+    String[] leaveSession = {"First Half", "Second Half"};
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private ImageView img_leave_application;
+    private ImageView img_leave_management;
+    private ScrollView scroll_leaveapplication;
 
 
     public ApplyLeaveFragment() {
@@ -118,22 +123,21 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         context = view.getContext();
 
         bt_submit = (Button) mView.findViewById(R.id.bt_submit);
-        tv_count  = (TextView) mView.findViewById(R.id.tv_count);
-        tv_start_date= (TextView) mView.findViewById(R.id.tv_start_date);
-        tv_end_date= (TextView) mView.findViewById(R.id.tv_end_date);
-        sp_session_start   = (Spinner) mView.findViewById(R.id.sp_leave_session_start);
-        sp_session_end  = (Spinner) mView.findViewById(R.id.sp_leave_session_end);
-        sp_leave_type    = (Spinner) mView.findViewById(R.id.sp_leave_type);
-        lv_leave_type   = (ListView) mView.findViewById(R.id.lv_leave_data);
-
-
-
+        tv_count = (TextView) mView.findViewById(R.id.tv_count);
+        tv_start_date = (TextView) mView.findViewById(R.id.tv_start_date);
+        tv_end_date = (TextView) mView.findViewById(R.id.tv_end_date);
+        sp_session_start = (Spinner) mView.findViewById(R.id.sp_leave_session_start);
+        sp_session_end = (Spinner) mView.findViewById(R.id.sp_leave_session_end);
+        sp_leave_type = (Spinner) mView.findViewById(R.id.sp_leave_type);
+        lv_leave_type = (ListView) mView.findViewById(R.id.lv_leave_data);
+        img_leave_application = (ImageView) mView.findViewById(R.id.img_leave_application);
+        img_leave_management = (ImageView) mView.findViewById(R.id.img_leave_management);
+        scroll_leaveapplication = (ScrollView) mView.findViewById(R.id.scroll_leave_Applicatoion);
         setListeners();
 
 
-
         //Creating the ArrayAdapter instance having the country list
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,leaveSession);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, leaveSession);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         sp_session_start.setAdapter(arrayAdapter);
@@ -149,9 +153,12 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         sp_session_end.setOnItemSelectedListener(this);
         tv_start_date.setOnClickListener(this);
         tv_end_date.setOnClickListener(this);
+        img_leave_application.setOnClickListener(this);
+        img_leave_management.setOnClickListener(this);
 
         //btNext.setOnClickListener(this);
     }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -186,6 +193,21 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
             case R.id.tv_end_date:
                 getDate("end");
                 break;
+            case R.id.img_leave_application:
+                if (scroll_leaveapplication.getVisibility()== View.VISIBLE){
+                    scroll_leaveapplication.setVisibility(View.GONE);
+                }else {
+                    scroll_leaveapplication.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.img_leave_management:
+
+                if (lv_leave_type.getVisibility()== View.VISIBLE){
+                    lv_leave_type.setVisibility(View.GONE);
+                }else {
+                    lv_leave_type.setVisibility(View.VISIBLE);
+                }
+                break;
         }
     }
 
@@ -210,7 +232,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
 
     }
 
-    private void getDate(final String txtValue){
+    private void getDate(final String txtValue) {
 
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -225,10 +247,10 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
 
-                        if(txtValue.equalsIgnoreCase("start")){
+                        if (txtValue.equalsIgnoreCase("start")) {
                             tv_start_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             datediffernet();
-                        }else if(txtValue.equalsIgnoreCase("end")){
+                        } else if (txtValue.equalsIgnoreCase("end")) {
                             tv_end_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             datediffernet();
                         }
@@ -238,59 +260,58 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     }
 
 
-    private void datediffernet(){
+    private void datediffernet() {
 
 
         String dateStart = tv_start_date.getText().toString();
         String dateStop = tv_end_date.getText().toString();
-if(dateStart != null && !dateStart.equalsIgnoreCase("") && dateStop != null && !dateStop.equalsIgnoreCase("")) {
-    //HH converts hour in 24 hours format (0-23), day calculation
-    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        if (dateStart != null && !dateStart.equalsIgnoreCase("") && dateStop != null && !dateStop.equalsIgnoreCase("")) {
+            //HH converts hour in 24 hours format (0-23), day calculation
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
-    Date d1 = null;
-    Date d2 = null;
+            Date d1 = null;
+            Date d2 = null;
 
-    try {
-        d1 = format.parse(dateStart);
-        d2 = format.parse(dateStop);
+            try {
+                d1 = format.parse(dateStart);
+                d2 = format.parse(dateStop);
 
-        //in milliseconds
-        long diff = d2.getTime() - d1.getTime();
+                //in milliseconds
+                long diff = d2.getTime() - d1.getTime();
 
 //            long diffSeconds = diff / 1000 % 60;
 //            long diffMinutes = diff / (60 * 1000) % 60;
 //            long diffHours = diff / (60 * 60 * 1000) % 24;
-        long diffDays = diff / (24 * 60 * 60 * 1000);
-        Long l = new Long(diffDays);
-        double dateValue = l.doubleValue();
-        Log.d("Data", " days, " + diffDays);
+                long diffDays = diff / (24 * 60 * 60 * 1000);
+                Long l = new Long(diffDays);
+                double dateValue = l.doubleValue();
+                Log.d("Data", " days, " + diffDays);
 
-        //int dateValue= Integer.parseInt(String.valueOf(diffDays));
-        dateValue = dateValue + 1 ;
-        if(startsession == 1){
-            dateValue = dateValue - .5;
+                //int dateValue= Integer.parseInt(String.valueOf(diffDays));
+                dateValue = dateValue + 1;
+                if (startsession == 1) {
+                    dateValue = dateValue - .5;
 
-        }
-        if(endsession == 0){
-            dateValue = dateValue - .5;
-        }
-
-
+                }
+                if (endsession == 0) {
+                    dateValue = dateValue - .5;
+                }
 
 
-        tv_count.setText(String.valueOf(dateValue));
+                tv_count.setText(String.valueOf(dateValue));
 
 
-        System.out.print(diffDays + " days, ");
+                System.out.print(diffDays + " days, ");
 //            System.out.print(diffHours + " hours, ");
 //            System.out.print(diffMinutes + " minutes, ");
 //            System.out.print(diffSeconds + " seconds.");
 
-    } catch (Exception e) {
-        e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
-}
-    }
+
     /**
      * Its works on Company Spinner Click Action
      **/

@@ -6,101 +6,110 @@
     android:layout_height="match_parent">
 
 
-<LinearLayout
-    android:id="@+id/lv_leave_data"
-    android:layout_width="match_parent"
-
-    android:layout_height="wrap_content"
-
-
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="5dp"
-    app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-    tools:ignore="MissingConstraints">
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/lv_leave_data"
+        android:layout_width="match_parent"
 
-        android:layout_height="wrap_content">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/leavemanagementbutton"
-            android:text="8 of 12" />
-
-        <View
-            android:layout_width="50dp"
-            android:layout_height="3dp"
-            android:layout_gravity="center"
-
-            android:background="#1052A2" />
-
-        <Button
-android:id="@+id/bt_leave_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/leavemanagementroundbutton"
-            android:text="    Casual Leave      "
-            android:textColor="#ffffff" />
-    </LinearLayout>
-
-<!--    <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp">
 
-        <Button
-            android:layout_width="wrap_content"
+
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/leavemanagementbutton"
-            android:text="8 of 12" />
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp">
 
-        <View
-            android:layout_width="50dp"
-            android:layout_height="3dp"
-            android:layout_gravity="center"
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:background="@drawable/leavemanagementbutton"
+                android:text="8 of 12" />
 
-            android:background="#1052A2" />
+            <View
+                android:layout_width="50dp"
+                android:layout_height="3dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#1052A2" />
 
-        <Button
+            <Button
+                android:id="@+id/bt_leave_type"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/leavemanagementroundbutton"
+                android:text="    Casual Leave      "
+                android:textColor="#ffffff" />
+        </LinearLayout>
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/leavemanagementroundbutton"
-            android:text="    Casual Leave      "
-            android:textColor="#ffffff" />
+        <!--    <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/leavemanagementbutton"
+                    android:text="8 of 12" />
+
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center"
+
+                    android:background="#1052A2" />
+
+                <Button
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/leavemanagementroundbutton"
+                    android:text="    Casual Leave      "
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/leavemanagementbutton"
+                    android:text="8 of 12" />
+
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center"
+
+                    android:background="#1052A2" />
+
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/leavemanagementroundbutton"
+                    android:text="    Casual Leave      "
+                    android:textColor="#ffffff" />
+            </LinearLayout>-->
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/leavemanagementbutton"
-            android:text="8 of 12" />
-
-        <View
-            android:layout_width="50dp"
-            android:layout_height="3dp"
-            android:layout_gravity="center"
-
-            android:background="#1052A2" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/leavemanagementroundbutton"
-            android:text="    Casual Leave      "
-            android:textColor="#ffffff" />
-    </LinearLayout>-->
-</LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -161,6 +161,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             @Override
             public void onClick(View v) {
                 enterUserAttendance();
+                loadMap();
                 tv_att_details.setText(""+currentAddress);
             }
         });

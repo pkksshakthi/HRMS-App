@@ -18,8 +18,8 @@
 
             android:background="#6CB8F6"
             android:gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp"
+            android:orientation="horizontal"
+
 
             tools:ignore="MissingConstraints">
 
@@ -27,38 +27,44 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="Leave Management"
                 android:textColor="#ffffff"
                 android:textSize="7pt"
                 android:textStyle="bold" />
 
-
+            <ImageView
+                android:id="@+id/img_leave_management"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/btn_plus" />
         </LinearLayout>
+
         <ListView
             android:id="@+id/lv_leave_data"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:padding="5dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            tools:ignore="MissingConstraints"/>
+            tools:ignore="MissingConstraints" />
 
         <LinearLayout
 
-            android:id="@+id/linearLayout5"
+
             android:layout_width="match_parent"
 
 
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
 
             android:background="#0A74CC"
 
 
-            android:orientation="vertical"
+            android:orientation="horizontal"
 
 
             tools:ignore="MissingConstraints">
@@ -66,268 +72,341 @@
             <TextView
 
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="Leave Application"
                 android:textColor="#ffffff"
                 android:textSize="7pt"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/img_leave_application"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/btn_plus" />
+
 
         </LinearLayout>
 
-        <TableLayout
-            android:id="@+id/tableLayout2"
+        <ScrollView
+            android:id="@+id/scroll_leave_Applicatoion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
             android:layout_marginTop="10dp">
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="2dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Appliction Type"
-                    android:textColor="#183FB9"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
 
-                <Spinner
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="Appliction Type"
+                        android:textColor="#183FB9"
 
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+
+                    <Spinner
+
+                        android:id="@+id/sp_leave_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/sp_leave_type"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
-            </TableRow>
+                    android:layout_height="2dp"
+                    android:background="#dddde1">
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="2dp">
+                </View>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Start Date"
-                    android:textColor="#183FB9"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="Start Date"
+                        android:textColor="#183FB9"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
 
+                    <TextView
+
+                        android:id="@+id/tv_start_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="-Select Date-"
+                        android:textColor="#000000"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/leavemanagementtextviewroundcorner"
-                    android:gravity="center"
-                    android:text=""
-                    android:id="@+id/tv_start_date"
-                    android:textColor="#000000"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
-            </TableRow>
+                    android:layout_height="2dp"
+                    android:background="#dddde1">
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="2dp">
+                </View>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Start Session"
-                    android:textColor="#183FB9"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                <Spinner
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_weight="1"
 
+                        android:text="Start Session"
+                        android:textColor="#183FB9"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+
+                    <Spinner
+
+                        android:id="@+id/sp_leave_session_start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+                    <!-- <Spinner
+
+                         android:id="@+id/sp_leave_session_start"
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:layout_marginLeft="10dp"
+                         android:layout_weight="1"
+                         android:background="@drawable/leavemanagementtextviewroundcorner"
+                         android:gravity="center"
+                         android:textColor="#000000"
+                         android:textSize="7pt"
+                         android:textStyle="bold" />-->
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/leavemanagementtextviewroundcorner"
-                    android:gravity="center"
-                    android:id="@+id/sp_leave_session_start"
-                    android:textColor="#000000"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
-            </TableRow>
+                    android:layout_height="2dp"
+                    android:background="#dddde1">
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="2dp">
+                </View>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="End Date"
-                    android:textColor="#183FB9"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="End Date"
+                        android:textColor="#183FB9"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
 
+                    <TextView
+
+                        android:id="@+id/tv_end_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner"
+                        android:gravity="center"
+                        android:padding="10dp"
+
+                        android:text="-Select Date-"
+                        android:textColor="#000000"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/leavemanagementtextviewroundcorner"
-                    android:gravity="center"
-                    android:id="@+id/tv_end_date"
-                    android:text=""
-                    android:textColor="#000000"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
-            </TableRow>
+                    android:layout_height="2dp"
+                    android:background="#dddde1">
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="2dp">
+                </View>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="End Session"
-                    android:textColor="#183FB9"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                <Spinner
-android:id="@+id/sp_leave_session_end"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="End Session"
+                        android:textColor="#183FB9"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/sp_leave_session_end"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="First half"
+                        android:textColor="#000000"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/leavemanagementtextviewroundcorner"
-                    android:gravity="center"
-                    android:text="First half"
-                    android:textColor="#000000"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
-            </TableRow>
+                    android:layout_height="2dp"
+                    android:background="#dddde1">
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="2dp">
+                </View>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Total No of Days"
-                    android:textColor="#183FB9"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="Total No of Days"
+                        android:textColor="#183FB9"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
 
+                    <TextView
+
+                        android:id="@+id/tv_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="0.0"
+                        android:textColor="#000000"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/leavemanagementtextviewroundcorner"
-                    android:gravity="center"
-                    android:text="3.5"
-                    android:id="@+id/tv_count"
-                    android:textColor="#000000"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+                    android:layout_height="2dp"
+                    android:background="#dddde1">
 
-            </TableRow>
+                </View>
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="2dp">
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Reason"
-                    android:textColor="#183FB9"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                <EditText
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:text="Reason"
+                        android:textColor="#183FB9"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
 
+                    <EditText
+
+                        android:id="@+id/ed_reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Leave "
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/leavemanagementtextviewroundcorner"
-                    android:gravity="center"
-                    android:text="Leave "
-                    android:id="@+id/ed_reason"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+                    android:layout_height="2dp"
+                    android:background="#dddde1">
 
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="2dp">
-
+                </View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
                 <Button
                     android:id="@+id/bt_submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#1251A0"
+                    android:layout_gravity="center"
                     android:text="Submit"
                     android:textColor="#ffffff" />
-            </TableRow>
-        </TableLayout>
+            </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
 
 
     </LinearLayout>
