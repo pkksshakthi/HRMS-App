@@ -72,6 +72,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private ProgressDialog pdia;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private ArrayList<Ajax> ajaxList;
+    private String currentAddress;
 
     public AttendanceEnterFragment() {
         // Required empty public constructor
@@ -160,6 +161,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             @Override
             public void onClick(View v) {
                 enterUserAttendance();
+                tv_att_details.setText(""+currentAddress);
             }
         });
 
@@ -205,6 +207,9 @@ loadMap();
                 Log.d(" " + "longitude-", "-" + location.getLongitude());
 
                 Address address = GeoLocationFinder.getMyLocationAddress(context,location);
+
+                  currentAddress=""+address.getAddressLine(0)+"-"+address.getPostalCode();
+
               //  Log.d(" " + "fetchedAddress-", "" + address.ge);
 
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());

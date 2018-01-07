@@ -114,9 +114,7 @@
                     android:id="@+id/tv_att_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sphinax Info Systems No. 57,
-2nd floor, Mc Nichols Road, Chetpet,
-Chennai - 600031"
+
                     android:textColor="#000000"
                     android:textStyle="bold" />
             </LinearLayout>
