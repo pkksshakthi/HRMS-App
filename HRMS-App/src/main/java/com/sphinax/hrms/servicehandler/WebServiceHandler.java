@@ -380,12 +380,150 @@ public class WebServiceHandler {
     }
 
 
+    public void getQueryTypeList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.HR_HELPDESK_STATUS_LIST_REQUEST_URL;
+
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }else {
+                                    delegate.onSuccess(false);
+
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            companyListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+    public void getEMPQueryList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.HR_HELPDESK_OPEN_QUERY_URL;
+
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }else {
+                                    delegate.onSuccess(false);
+
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            companyListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
 
 
+    public void saveUserQuery(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
 
+            String url = Constants.HR_HELPDESK_EMPLOYEE_SAVE_URL;
 
+            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                if(output.getInt("resCode") == 1){
+                                    delegate.onSuccess(true);
+                                }else {
+                                    delegate.onSuccess(false);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
 
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            branchListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
 
+            delegate.onNetworkError();
+        }
+    }
 
 
 

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
+import com.sphinax.hrms.utils.GeoLocationFinder;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.CompanySpinnerAdapter;
@@ -49,7 +51,19 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
         loadComponent();
         setListeners();
         fetchCompanyList();
+        if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
+            Address fetchedAddress = GeoLocationFinder.getLocation(context);
+
+            try {
+                Log.d(" " + "fetchedAddress-", "" + fetchedAddress);
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+
+        }
 
     }
 
