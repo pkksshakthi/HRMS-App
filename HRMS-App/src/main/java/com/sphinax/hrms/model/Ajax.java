@@ -199,6 +199,116 @@ public class Ajax implements Serializable {
     @Expose
     private String announcementList;
 
+    @SerializedName("year")
+    @Expose
+    private Long year;
+    @SerializedName("month")
+    @Expose
+    private String month;
+    @SerializedName("monthValue")
+    @Expose
+    private Integer monthValue;
+
+    @SerializedName("earnings")
+    @Expose
+    private Long earnings;
+    @SerializedName("netpay")
+    @Expose
+    private Long netpay;
+    @SerializedName("deductions")
+    @Expose
+    private Long deductions;
+
+    @SerializedName("earningDesc")
+    @Expose
+    private String earningDesc;
+    @SerializedName("earningAmt")
+    @Expose
+    private Long earningAmt;
+
+    public String getEarningDesc() {
+        return earningDesc;
+    }
+
+    public void setEarningDesc(String earningDesc) {
+        this.earningDesc = earningDesc;
+    }
+
+    public Long getEarningAmt() {
+        return earningAmt;
+    }
+
+    public void setEarningAmt(Long earningAmt) {
+        this.earningAmt = earningAmt;
+    }
+    public Long getEarnings() {
+        return earnings;
+    }
+
+    public void setEarnings(Long earnings) {
+        this.earnings = earnings;
+    }
+
+    public Long getNetpay() {
+        return netpay;
+    }
+
+    public void setNetpay(Long netpay) {
+        this.netpay = netpay;
+    }
+
+    public Long getDeductions() {
+        return deductions;
+    }
+
+    @SerializedName("deductionDesc")
+    @Expose
+    private String deductionDesc;
+    @SerializedName("deductionAmt")
+    @Expose
+    private Long deductionAmt;
+
+    public String getDeductionDesc() {
+        return deductionDesc;
+    }
+
+    public void setDeductionDesc(String deductionDesc) {
+        this.deductionDesc = deductionDesc;
+    }
+
+    public Long getDeductionAmt() {
+        return deductionAmt;
+    }
+
+    public void setDeductionAmt(Long deductionAmt) {
+        this.deductionAmt = deductionAmt;
+    }
+    public void setDeductions(Long deductions) {
+        this.deductions = deductions;
+    }
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public Integer getMonthValue() {
+        return monthValue;
+    }
+
+    public void setMonthValue(Integer monthValue) {
+        this.monthValue = monthValue;
+    }
+
+    public Long getYear() {
+        return year;
+    }
+
+    public void setYear(Long year) {
+        this.year = year;
+    }
     public String getActivityDate() {
         return activityDate;
     }
