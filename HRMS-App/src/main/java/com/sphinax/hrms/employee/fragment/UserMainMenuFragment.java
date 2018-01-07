@@ -108,7 +108,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         ll_attendance_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
+             //   Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null);
 
             }
         });
@@ -136,7 +136,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         ll_announcement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Utility.addFragment((Activity) context, R.id.content_frame, fragmentManager,new EmployeeAttendanceFragment(), true, null);
+                Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null);
 
             }
         });

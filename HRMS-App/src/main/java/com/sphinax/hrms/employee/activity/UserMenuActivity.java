@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.activity.LoginActivity;
+import com.sphinax.hrms.employee.fragment.AnnouncementListFragment;
 import com.sphinax.hrms.employee.fragment.ApplyLeaveFragment;
 import com.sphinax.hrms.employee.fragment.AttendanceEnterFragment;
 import com.sphinax.hrms.employee.fragment.EmployeeAttendanceFragment;
@@ -127,6 +128,7 @@ public class UserMenuActivity extends FragmentActivity
              Utility.addFragment( this, R.id.content_frame,fragmentManager, new AttendanceEnterFragment(), true, null);
 
         } else if (id == R.id.nav_attendance_report) {
+          //   Utility.addFragment( this, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null);
 
         }  else if (id == R.id.nav_leave_application) {
              Utility.addFragment( this, R.id.content_frame,fragmentManager, new ApplyLeaveFragment(), true, null);
@@ -137,6 +139,7 @@ public class UserMenuActivity extends FragmentActivity
              Utility.addFragment( this, R.id.content_frame,fragmentManager, new UserProfileFragment(), true, null);
 
         } else if (id == R.id.nav_announcement) {
+             Utility.addFragment(  this, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null);
 
         } else if (id == R.id.nav_payslip) {
              Utility.addFragment( this, R.id.content_frame, fragmentManager,new PaySlipFragment(), true, null);

@@ -189,6 +189,39 @@ public class Ajax implements Serializable {
     @Expose
     private String location;
 
+    @SerializedName("activityDate")
+    @Expose
+    private String activityDate;
+    @SerializedName("activityDesc")
+    @Expose
+    private String activityDesc;
+    @SerializedName("announcementList")
+    @Expose
+    private String announcementList;
+
+    public String getActivityDate() {
+        return activityDate;
+    }
+
+    public void setActivityDate(String activityDate) {
+        this.activityDate = activityDate;
+    }
+
+    public String getActivityDesc() {
+        return activityDesc;
+    }
+
+    public void setActivityDesc(String activityDesc) {
+        this.activityDesc = activityDesc;
+    }
+
+    public String getAnnouncementList() {
+        return announcementList;
+    }
+
+    public void setAnnouncementList(String announcementList) {
+        this.announcementList = announcementList;
+    }
 
     public Integer getEmpCompId() {
         return empCompId;
