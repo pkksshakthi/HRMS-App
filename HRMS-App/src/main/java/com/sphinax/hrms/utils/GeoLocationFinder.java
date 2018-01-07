@@ -40,6 +40,45 @@ public class GeoLocationFinder {
             return instance;
         }
 
+
+    /***This method retuns the Address Object by the location **/
+    public static Location getLocationOnly(Context context) {
+
+        //Address fetchedAddress = null;
+        Location location = null;
+        LocationManager locationManager;
+
+
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        // getting GPS status
+        boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        // getting network status
+        boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if (!isGPSEnabled && !isNetworkEnabled) {
+            Log.d(TAG + "LocaitonManager-", "Network Provider is disabled.");
+            // Toast.makeText(context, "Please Enable the GPS Connection.", Toast.LENGTH_SHORT).show();
+            // Utility.showToastMessage(context, context.getResources().getString(R.string.networkProviderMessage));
+        } else {
+            List<String> providers = locationManager.getProviders(true);
+            for (String provider : providers) {
+                location = locationManager.getLastKnownLocation(provider);
+                if (location == null) {
+                    Log.d(TAG + " -", "NO VAL");
+                } else {
+                   // fetchedAddress = getMyLocationAddress(context, location);
+                    return location;
+                }
+            }
+            //fetchedAddress = getMyLocationAddress(context, location);
+            return location;
+        }
+
+        return location;
+
+    }
+
+
         /***This method retuns the Address Object by the location **/
         public static Address getLocation(Context context) {
 
@@ -79,7 +118,7 @@ public class GeoLocationFinder {
 
         /***This method retuns the Address Object by the location **/
 
-        private static Address getMyLocationAddress(Context context, Location location) {
+        public static Address getMyLocationAddress(Context context, Location location) {
             Address fetchedAddress1 = null;
             List<Address> addresses = null;
             try {

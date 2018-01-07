@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,10 +54,14 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
         fetchCompanyList();
         if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
-            Address fetchedAddress = GeoLocationFinder.getLocation(context);
+            Location location = GeoLocationFinder.getLocationOnly(context);
 
             try {
-                Log.d(" " + "fetchedAddress-", "" + fetchedAddress);
+                Log.d(" " + "latitude-", "-" + location.getLatitude());
+                Log.d(" " + "longitude-", "-" + location.getLongitude());
+
+                Address address = GeoLocationFinder.getMyLocationAddress(context,location);
+                Log.d(" " + "fetchedAddress-", "" + address);
 
             } catch (Exception e) {
 
