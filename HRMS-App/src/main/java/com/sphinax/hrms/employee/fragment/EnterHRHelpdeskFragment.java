@@ -119,7 +119,7 @@ public class EnterHRHelpdeskFragment extends Fragment implements AdapterView.OnI
 
         setListeners();
         fetchQueryTypeList();
-        fetchQueryList();
+
     }
 
     private void setListeners() {
@@ -251,6 +251,7 @@ public class EnterHRHelpdeskFragment extends Fragment implements AdapterView.OnI
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     sp_query_type.setAdapter(querySpinnerAdapter);
 
+                    fetchQueryList();
 
                 }
 
@@ -296,7 +297,9 @@ public class EnterHRHelpdeskFragment extends Fragment implements AdapterView.OnI
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+          //  requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("empId","10002" );
+            requestMap.put("reqSeqId","20");
 
             webServiceHandler.getEMPQueryList(getActivity(), context, requestMap, new ServiceCallback() {
 
