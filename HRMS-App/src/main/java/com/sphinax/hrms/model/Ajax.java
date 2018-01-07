@@ -3,12 +3,43 @@ package com.sphinax.hrms.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by ganesaka on 12/24/2017.
  */
 
-public class Ajax {
+public class Ajax implements Serializable {
 
+
+
+    @SerializedName("empImg")
+    @Expose
+    private String empImg;
+    @SerializedName("empCompId")
+    @Expose
+    private Integer empCompId;
+    @SerializedName("empcompName")
+    @Expose
+    private String empcompName;
+    @SerializedName("empBranchName")
+    @Expose
+    private String empBranchName;
+    @SerializedName("empDept")
+    @Expose
+    private String empDept;
+    @SerializedName("empDesignId")
+    @Expose
+    private Integer empDesignId;
+    @SerializedName("empDesign")
+    @Expose
+    private String empDesign;
+    @SerializedName("empMobile")
+    @Expose
+    private Long empMobile;
+    @SerializedName("empDeptId")
+    @Expose
+    private Integer empDeptId;
     @SerializedName("compId")
     @Expose
     private Integer compId;
@@ -158,6 +189,79 @@ public class Ajax {
     @Expose
     private String location;
 
+
+    public Integer getEmpCompId() {
+        return empCompId;
+    }
+
+    public void setEmpCompId(Integer empCompId) {
+        this.empCompId = empCompId;
+    }
+
+    public String getEmpcompName() {
+        return empcompName;
+    }
+
+    public void setEmpcompName(String empcompName) {
+        this.empcompName = empcompName;
+    }
+
+    public String getEmpBranchName() {
+        return empBranchName;
+    }
+
+    public void setEmpBranchName(String empBranchName) {
+        this.empBranchName = empBranchName;
+    }
+
+    public String getEmpImg() {
+        return empImg;
+    }
+
+    public void setEmpImg(String empImg) {
+        this.empImg = empImg;
+    }
+
+    public Integer getEmpDeptId() {
+        return empDeptId;
+    }
+
+    public void setEmpDeptId(Integer empDeptId) {
+        this.empDeptId = empDeptId;
+    }
+
+
+    public Integer getEmpDesignId() {
+        return empDesignId;
+    }
+
+    public void setEmpDesignId(Integer empDesignId) {
+        this.empDesignId = empDesignId;
+    }
+
+    public String getEmpDesign() {
+        return empDesign;
+    }
+
+    public void setEmpDesign(String empDesign) {
+        this.empDesign = empDesign;
+    }
+
+    public Long getEmpMobile() {
+        return empMobile;
+    }
+
+    public void setEmpMobile(Long empMobile) {
+        this.empMobile = empMobile;
+    }
+
+    public String getEmpDept() {
+        return empDept;
+    }
+
+    public void setEmpDept(String empDept) {
+        this.empDept = empDept;
+    }
     public String getTime() {
         return time;
     }

@@ -1,5 +1,6 @@
 package com.sphinax.hrms.model;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,12 +10,12 @@ import com.google.gson.annotations.SerializedName;
  * Created by ganesaka on 12/24/2017.
  */
 
-public class CompanyData {
+public class CompanyData implements Serializable {
 
 
     @SerializedName("ajax")
     @Expose
-    private List<Ajax> ajax = null;
+    private List<Ajax> ajax;
     @SerializedName("status")
     @Expose
     private String status;

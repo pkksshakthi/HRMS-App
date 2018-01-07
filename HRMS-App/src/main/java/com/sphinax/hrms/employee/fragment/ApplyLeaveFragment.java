@@ -352,8 +352,8 @@ if(dateStart != null && !dateStart.equalsIgnoreCase("") && dateStop != null && !
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     sp_leave_type.setAdapter(leaveTypeSpinnerAdapter);
 
-//                    leaveTypeListAdapter = new LeaveTypeListAdapter(getActivity(), leaveTypeList);
-//                    lv_leave_type.setAdapter(leaveTypeListAdapter);
+                    leaveTypeListAdapter = new LeaveTypeListAdapter(getActivity(), leaveTypeList);
+                    lv_leave_type.setAdapter(leaveTypeListAdapter);
 
                 }
 
