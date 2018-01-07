@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 
 import com.sphinax.hrms.R;
@@ -20,7 +21,7 @@ public class Utility {
     private static final String TAG = "Utility";
     private static Utility instance;
     private static int whichFragment = 0;
-    private static Fragment currentFragment;
+    private static android.support.v4.app.Fragment currentFragment;
 
     private Utility() {
     }
@@ -55,9 +56,9 @@ public class Utility {
         }
     }
 
-    public static void addFragment(Activity activity, int containerId, Fragment fragment, boolean needBackstack, Bundle bundle) {
+    public static void addFragment(Activity activity, int containerId, FragmentManager fragmentManager, android.support.v4.app.Fragment fragment, boolean needBackstack, Bundle bundle) {
         try {
-            FragmentTransaction ftNavigation = activity.getFragmentManager().beginTransaction();
+            android.support.v4.app.FragmentTransaction ftNavigation = fragmentManager.beginTransaction();
             if (bundle != null) {
                 fragment.setArguments(bundle);
             }

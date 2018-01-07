@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
     private static Context context;
     private View mView;
     private OnFragmentInteractionListener mListener;
-
+    private  FragmentManager fragmentManager;
     public UserMainMenuFragment() {
         // Required empty public constructor
     }
@@ -95,12 +96,12 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         ll_helpdesk = mView.findViewById(R.id.ll_helpdesk);
 
 
-
+         fragmentManager = getActivity().getSupportFragmentManager();
 
         ll_mark_attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, new AttendanceEnterFragment(), true, null);
+                Utility.addFragment((Activity) context, R.id.content_frame,fragmentManager, new AttendanceEnterFragment(), true, null);
 
             }
         });
@@ -114,7 +115,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         ll_leave_app.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, new ApplyLeaveFragment(), true, null);
+                Utility.addFragment((Activity) context, R.id.content_frame, fragmentManager,new ApplyLeaveFragment(), true, null);
 
             }
         });
@@ -128,28 +129,28 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         ll_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, new UserProfileFragment(), true, null);
+                Utility.addFragment((Activity) context, R.id.content_frame,fragmentManager, new UserProfileFragment(), true, null);
 
             }
         });
         ll_announcement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Utility.addFragment((Activity) context, R.id.content_frame, new EmployeeAttendanceFragment(), true, null);
+                //Utility.addFragment((Activity) context, R.id.content_frame, fragmentManager,new EmployeeAttendanceFragment(), true, null);
 
             }
         });
         ll_payslip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, new PaySlipFragment(), true, null);
+                Utility.addFragment((Activity) context, R.id.content_frame, fragmentManager,new PaySlipFragment(), true, null);
 
             }
         });
         ll_helpdesk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, new EnterHRHelpdeskFragment(), true, null);
+                Utility.addFragment((Activity) context, R.id.content_frame,fragmentManager, new EnterHRHelpdeskFragment(), true, null);
 
             }
         });
@@ -169,12 +170,12 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
     }
 
     @Override

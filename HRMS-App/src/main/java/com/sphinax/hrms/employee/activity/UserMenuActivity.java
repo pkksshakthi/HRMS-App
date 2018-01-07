@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,10 +31,11 @@ import com.sphinax.hrms.employee.fragment.UserProfileFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.utils.Utility;
 
-public class UserMenuActivity extends AppCompatActivity
+public class UserMenuActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
+    private FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +47,7 @@ public class UserMenuActivity extends AppCompatActivity
             return;
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //this.setSupportActionBar(toolbar);
 
 
          drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,9 +75,10 @@ public class UserMenuActivity extends AppCompatActivity
         tv_companyname.setText(Utility.getPreference(this).getString(Constants.PREFS_COMPANY_NAME, ""));
 
 
+        fragmentManager = getSupportFragmentManager();//Get Fragment Manager
 
 
-        Utility.addFragment(this, R.id.content_frame, new UserMainMenuFragment(), true, null);
+        Utility.addFragment(this, R.id.content_frame,fragmentManager,new UserMainMenuFragment(), true, null);
 
 
 
@@ -120,25 +124,25 @@ public class UserMenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
          if (id == R.id.nav_mark_attendance) {
-             Utility.addFragment( this, R.id.content_frame, new AttendanceEnterFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame,fragmentManager, new AttendanceEnterFragment(), true, null);
 
         } else if (id == R.id.nav_attendance_report) {
 
         }  else if (id == R.id.nav_leave_application) {
-             Utility.addFragment( this, R.id.content_frame, new ApplyLeaveFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame,fragmentManager, new ApplyLeaveFragment(), true, null);
 
         } else if (id == R.id.nav_leave_management) {
 
         } else if (id == R.id.nav_my_info) {
-             Utility.addFragment( this, R.id.content_frame, new UserProfileFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame,fragmentManager, new UserProfileFragment(), true, null);
 
         } else if (id == R.id.nav_announcement) {
 
         } else if (id == R.id.nav_payslip) {
-             Utility.addFragment( this, R.id.content_frame, new PaySlipFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame, fragmentManager,new PaySlipFragment(), true, null);
 
         } else if (id == R.id.nav_help_desk) {
-             Utility.addFragment( this, R.id.content_frame, new EnterHRHelpdeskFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame, fragmentManager,new EnterHRHelpdeskFragment(), true, null);
 
         } else if (id == R.id.nav_logout) {
              Intent intent=new Intent(UserMenuActivity.this,LoginActivity.class);
