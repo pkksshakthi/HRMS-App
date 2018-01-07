@@ -1,14 +1,35 @@
 package com.sphinax.hrms.employee.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.model.Ajax;
+import com.sphinax.hrms.model.CompanyData;
+import com.sphinax.hrms.servicehandler.ServiceCallback;
+import com.sphinax.hrms.servicehandler.WebServiceHandler;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.Utility;
+import com.sphinax.hrms.view.LeaveTypeListAdapter;
+import com.sphinax.hrms.view.LeaveTypeSpinnerAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +39,7 @@ import com.sphinax.hrms.R;
  * Use the {@link PaySlipFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PaySlipFragment extends Fragment {
+public class PaySlipFragment extends Fragment  implements AdapterView.OnItemSelectedListener, View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +50,16 @@ public class PaySlipFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
+    private static Context context;
+    private View mView;
+    private Spinner sp_year,sp_month;
+    private Button bt_display,bt_download;
+    private TextView tv_payment,tv_netpay,tv_deduction,tv_toatal;
+    ListView lv_amt;
+    private ProgressDialog pdia;
+    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+    private ArrayList<Ajax> ajaxList;
+    HashMap<Integer,String>  spinnerMonthMap  = new HashMap<Integer, String>();;
     public PaySlipFragment() {
         // Required empty public constructor
     }
@@ -68,6 +98,30 @@ public class PaySlipFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_pay_slip, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        // super.onViewCreated(view, savedInstanceState);
+        mView = view;
+        context = view.getContext();
+
+        bt_display = (Button) mView.findViewById(R.id.bt_display);
+        bt_download = (Button) mView.findViewById(R.id.bt_download_payslip);
+         tv_payment= (TextView) mView.findViewById(R.id.tv_payment_amt);
+       tv_deduction  = (TextView) mView.findViewById(R.id.tv_deduction_amt);
+      tv_netpay    = (TextView) mView.findViewById(R.id.tv_netpay);
+      tv_toatal   = (TextView) mView.findViewById(R.id.tv_total_amt);
+        sp_year  = (Spinner) mView.findViewById(R.id.sp_year);
+        sp_month = (Spinner) mView.findViewById(R.id.sp_month);
+       lv_amt  = (ListView) mView.findViewById(R.id.lv_detail_amt);
+        setListeners();
+        fetchYearList();
+    }
+
+    private void setListeners() {
+        sp_month.setOnItemSelectedListener(this);
+        sp_year.setOnItemSelectedListener(this);
+       // bt_display.setOnClickListener(this);
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -92,6 +146,38 @@ public class PaySlipFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.sp_year:
+                String yearValue = sp_year.getSelectedItem().toString();
+                Log.d("Year" ,yearValue );
+                fetchMonthList(yearValue);
+
+                break;
+            case R.id.sp_month:
+                //month = position;
+                String monthValue = sp_month.getSelectedItem().toString();
+                Log.d("month" ,monthValue );
+                String monthid = spinnerMonthMap.get(position);
+                Log.d("month" , "monthValue" + monthid  );
+
+                break;
+
+
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -106,4 +192,179 @@ public class PaySlipFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    private void fetchYearList() {
+        if (!HRMSNetworkCheck.checkInternetConnection(context)) {
+            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(context);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+
+            webServiceHandler.getYearList(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    CompanyData companyData = (CompanyData) obj;
+                     ArrayList<Ajax>  yearList = new ArrayList<>();
+                    yearList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> " + yearList.size());
+
+
+                    loadyearSpinner(yearList);
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+private void loadyearSpinner(ArrayList<Ajax>  yearList){
+
+    String[] spinnerArray = new String[yearList.size()];
+    HashMap<Integer,String>  spinnerMap = new HashMap<Integer, String>();
+    for (int i = 0; i < yearList.size(); i++)
+    {
+        spinnerMap.put(i,String.valueOf(yearList.get(i).getYear()));
+        spinnerArray[i] = String.valueOf(yearList.get(i).getYear());
+    }
+
+
+    ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,spinnerArray);
+    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    //Setting the ArrayAdapter data on the Spinner
+    sp_year.setAdapter(arrayAdapter);
+
+}
+
+
+    private void fetchMonthList(String year) {
+        if (!HRMSNetworkCheck.checkInternetConnection(context)) {
+            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(context);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("year",year );
+
+            webServiceHandler.getMonthList(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    CompanyData companyData = (CompanyData) obj;
+                    ArrayList<Ajax>  yearList = new ArrayList<>();
+                    yearList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> " + yearList.size());
+
+
+                    loadmonthSpinner(yearList);
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void loadmonthSpinner(ArrayList<Ajax>  monthList){
+
+        String[] spinnerArray = new String[monthList.size()];
+       spinnerMonthMap = new HashMap<Integer, String>();
+        for (int i = 0; i < monthList.size(); i++)
+        {
+            spinnerMonthMap.put(monthList.get(i).getMonthValue(),monthList.get(i).getMonth());
+            spinnerArray[i] = monthList.get(i).getMonth();
+        }
+
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,spinnerArray);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        sp_month.setAdapter(arrayAdapter);
+
+    }
+
 }

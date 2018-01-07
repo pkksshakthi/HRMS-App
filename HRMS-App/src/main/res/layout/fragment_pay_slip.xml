@@ -53,7 +53,7 @@
             app:layout_constraintVertical_bias="0.0">
 
             <Spinner
-                android:id="@+id/spinner4"
+                android:id="@+id/sp_year"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -64,12 +64,13 @@
                 android:orientation="horizontal">
 
                 <Spinner
-                    android:id="@+id/spinner5"
+                    android:id="@+id/sp_month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <Button
+                    android:id="@+id/bt_display"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -113,6 +114,7 @@
                         android:textSize="8pt" />
 
                     <TextView
+                        android:id="@+id/tv_payment_amt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -145,6 +147,7 @@
                         android:textSize="8pt" />
 
                     <TextView
+                        android:id="@+id/tv_deduction_amt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -176,6 +179,7 @@
                         android:textSize="8pt" />
 
                     <TextView
+                        android:id="@+id/tv_netpay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -208,190 +212,14 @@
 
             </View>
         </LinearLayout>
+<ListView
 
-        <LinearLayout
-            android:id="@+id/linearLayout8"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
+    android:id="@+id/lv_detail_amt"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-            android:orientation="vertical">
+</ListView>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:orientation="horizontal"
-                tools:layout_editor_absoluteX="5dp"
-                tools:layout_editor_absoluteY="245dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:text="Expence(Tax free)"
-                    android:textColor="#313131" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="right|center"
-
-                    android:text="2.25"
-                    android:textColor="#313131" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="#D8D8D7">
-
-            </View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:orientation="horizontal"
-                tools:layout_editor_absoluteX="5dp"
-                tools:layout_editor_absoluteY="245dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:text="Expence VAT"
-                    android:textColor="#313131" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="right|center"
-
-                    android:text="2.25"
-                    android:textColor="#313131" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="#D8D8D7">
-
-            </View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:orientation="horizontal"
-                tools:layout_editor_absoluteX="5dp"
-                tools:layout_editor_absoluteY="245dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:text="Mileage"
-                    android:textColor="#313131" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="right|center"
-
-                    android:text="2.25"
-                    android:textColor="#313131" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="#D8D8D7">
-
-            </View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:orientation="horizontal"
-                tools:layout_editor_absoluteX="5dp"
-                tools:layout_editor_absoluteY="245dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:text="Mileage VAT"
-                    android:textColor="#313131" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="right|center"
-
-                    android:text="2.25"
-                    android:textColor="#313131" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="#D8D8D7">
-
-            </View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:orientation="horizontal"
-                tools:layout_editor_absoluteX="5dp"
-                tools:layout_editor_absoluteY="245dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="start|center"
-                    android:text="Salary"
-                    android:textColor="#313131" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="right|center"
-
-                    android:text="2.25"
-                    android:textColor="#313131" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="#D8D8D7">
-
-            </View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -412,11 +240,12 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_total_amt"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right|center"
 
+                    android:gravity="right|center"
                     android:text="2.25"
                     android:textColor="#5C9210"
                     android:textStyle="bold" />
@@ -438,7 +267,7 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/button8"
+                    android:id="@+id/bt_download_payslip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -451,9 +280,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
-    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>
