@@ -52,23 +52,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
         loadComponent();
         setListeners();
         fetchCompanyList();
-        if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
-            Location location = GeoLocationFinder.getLocationOnly(context);
-
-            try {
-                Log.d(" " + "latitude-", "-" + location.getLatitude());
-                Log.d(" " + "longitude-", "-" + location.getLongitude());
-
-                Address address = GeoLocationFinder.getMyLocationAddress(context,location);
-                Log.d(" " + "fetchedAddress-", "" + address);
-
-            } catch (Exception e) {
-
-                e.printStackTrace();
-            }
-
-        }
 
     }
 

@@ -38,7 +38,9 @@
         <activity android:name=".common.activity.LoginActivity" />
         <activity android:name=".common.activity.OTPActivity" />
         <activity android:name=".common.activity.PasswordChangeActivity" />
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAbkqQ2t-ZzBVERt3huLEum9fs-Do3mHNw" />
     </application>
 
 </manifest>

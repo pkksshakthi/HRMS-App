@@ -3,8 +3,11 @@ package com.sphinax.hrms.employee.fragment;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.location.Address;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,6 +17,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
@@ -21,6 +33,7 @@ import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
+import com.sphinax.hrms.utils.GeoLocationFinder;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 
@@ -37,7 +50,7 @@ import java.util.HashMap;
  * Use the {@link AttendanceEnterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AttendanceEnterFragment extends Fragment {
+public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -46,7 +59,11 @@ public class AttendanceEnterFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private GoogleMap mMap;
 
+    private GoogleApiClient googleApiClient;
+
+    private static final int LOCATION_REQUEST_CODE = 101;
     private OnFragmentInteractionListener mListener;
     private static Context context;
     private View mView;
@@ -90,8 +107,29 @@ public class AttendanceEnterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_attendance_enter, container, false);
+//        // Inflate the layout for this fragment
+//        SupportMapFragment mapFragment = (SupportMapFragment)getActivity(). getSupportFragmentManager().findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
+//        View v= inflater.inflate(R.layout.fragment_attendance_enter, container, false);
+//        return v;
+
+        View view = inflater.inflate(R.layout.fragment_attendance_enter, null, false);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        return view;
+    }
+    public void onStart() {
+        super.onStart();
+        googleApiClient.connect();
+    }
+
+    public void onStop() {
+        super.onStop();
+        googleApiClient.disconnect();
+
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -103,7 +141,11 @@ public class AttendanceEnterFragment extends Fragment {
         bt_out_att = (Button) mView.findViewById(R.id.bt_mark_out_att);
         tv_att_details  = (TextView) mView.findViewById(R.id.tv_att_details);
 
-
+        googleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
 
 
 
@@ -146,6 +188,56 @@ public class AttendanceEnterFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+loadMap();
+    }
+
+    private void loadMap() {
+        if (HRMSNetworkCheck.checkInternetConnection(context)) {
+
+            Location location = GeoLocationFinder.getLocationOnly(context);
+
+            try {
+                Log.d(" " + "latitude-", "-" + location.getLatitude());
+                Log.d(" " + "longitude-", "-" + location.getLongitude());
+
+                Address address = GeoLocationFinder.getMyLocationAddress(context,location);
+              //  Log.d(" " + "fetchedAddress-", "" + address.ge);
+
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                //MarkerOptions are used to create a new Marker.You can specify location, title etc with MarkerOptions
+                MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("You are Here");
+
+//Adding the created the marker on the map
+                mMap.addMarker(markerOptions);
+                //mMap.title("my position");
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
     }
 
     /**
