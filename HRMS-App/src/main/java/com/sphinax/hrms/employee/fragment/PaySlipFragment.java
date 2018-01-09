@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.LeaveTypeListAdapter;
 import com.sphinax.hrms.view.LeaveTypeSpinnerAdapter;
+import com.sphinax.hrms.view.PaySlipListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,12 +56,22 @@ public class PaySlipFragment extends Fragment  implements AdapterView.OnItemSele
     private View mView;
     private Spinner sp_year,sp_month;
     private Button bt_display,bt_download;
-    private TextView tv_payment,tv_netpay,tv_deduction,tv_toatal;
+    private TextView tv_payment,tv_netpay,tv_deduction,tv_toatal,tv_heading;
     ListView lv_amt;
     private ProgressDialog pdia;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
-    private ArrayList<Ajax> ajaxList;
-    HashMap<Integer,String>  spinnerMonthMap  = new HashMap<Integer, String>();;
+    private ArrayList<Ajax> ajaxPaySlipList;
+    private ArrayList<Ajax> ajaxEarningList;
+    private ArrayList<Ajax> ajaxDeductionList;
+    private HashMap<Integer,String>  spinnerMonthMap  = new HashMap<Integer, String>();
+    private String payslipYear;
+    private String payslipMonth;
+    private PaySlipListAdapter paySlipListAdapter;
+    private LinearLayout ll_payment,ll_deduction;
+
+
+
+
     public PaySlipFragment() {
         // Required empty public constructor
     }
@@ -106,13 +118,16 @@ public class PaySlipFragment extends Fragment  implements AdapterView.OnItemSele
 
         bt_display = (Button) mView.findViewById(R.id.bt_display);
         bt_download = (Button) mView.findViewById(R.id.bt_download_payslip);
-         tv_payment= (TextView) mView.findViewById(R.id.tv_payment_amt);
+        tv_heading= (TextView) mView.findViewById(R.id.tv_heading);
+        tv_payment= (TextView) mView.findViewById(R.id.tv_payment_amt);
        tv_deduction  = (TextView) mView.findViewById(R.id.tv_deduction_amt);
       tv_netpay    = (TextView) mView.findViewById(R.id.tv_netpay);
       tv_toatal   = (TextView) mView.findViewById(R.id.tv_total_amt);
         sp_year  = (Spinner) mView.findViewById(R.id.sp_year);
         sp_month = (Spinner) mView.findViewById(R.id.sp_month);
        lv_amt  = (ListView) mView.findViewById(R.id.lv_detail_amt);
+        ll_payment = (LinearLayout)mView.findViewById(R.id.ll_payment);
+        ll_deduction = (LinearLayout)mView.findViewById(R.id.ll_deduction);
         setListeners();
         fetchYearList();
     }
@@ -120,7 +135,13 @@ public class PaySlipFragment extends Fragment  implements AdapterView.OnItemSele
     private void setListeners() {
         sp_month.setOnItemSelectedListener(this);
         sp_year.setOnItemSelectedListener(this);
-       // bt_display.setOnClickListener(this);
+        bt_display.setOnClickListener(this);
+        ll_deduction.setOnClickListener(this);
+        ll_payment.setOnClickListener(this);
+        tv_payment.setOnClickListener(this);
+        tv_deduction.setOnClickListener(this);
+        bt_download.setOnClickListener(this);
+
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -148,24 +169,48 @@ public class PaySlipFragment extends Fragment  implements AdapterView.OnItemSele
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_display:
+                fetchPaymentDeatail();
+                break;
 
+            case R.id.bt_download_payslip:
+                fetchPaySlipDownload();
+                break;
+
+            case R.id.ll_payment:
+                loadListPaySlip(0);
+                break;
+
+            case R.id.ll_deduction:
+                loadListPaySlip(1);
+                break;
+            case R.id.tv_payment_amt:
+                loadListPaySlip(0);
+                break;
+
+            case R.id.tv_deduction_amt:
+                loadListPaySlip(1);
+                break;
+        }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
             case R.id.sp_year:
-                String yearValue = sp_year.getSelectedItem().toString();
-                Log.d("Year" ,yearValue );
-                fetchMonthList(yearValue);
+                payslipYear = sp_year.getSelectedItem().toString();
+                Log.d("Year" ,payslipYear );
+                fetchMonthList();
 
                 break;
             case R.id.sp_month:
                 //month = position;
                 String monthValue = sp_month.getSelectedItem().toString();
                 Log.d("month" ,monthValue );
-                String monthid = spinnerMonthMap.get(position);
-                Log.d("month" , "monthValue" + monthid  );
+                payslipMonth = spinnerMonthMap.get(position);
+                Log.d("month" , " " + payslipMonth  );
+                fetchPaymentDeatail();
 
                 break;
 
@@ -280,7 +325,7 @@ private void loadyearSpinner(ArrayList<Ajax>  yearList){
 }
 
 
-    private void fetchMonthList(String year) {
+    private void fetchMonthList() {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
             Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
             return;
@@ -293,7 +338,7 @@ private void loadyearSpinner(ArrayList<Ajax>  yearList){
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("year",year );
+            requestMap.put("year",payslipYear );
 
             webServiceHandler.getMonthList(getActivity(), context, requestMap, new ServiceCallback() {
 
@@ -355,7 +400,7 @@ private void loadyearSpinner(ArrayList<Ajax>  yearList){
        spinnerMonthMap = new HashMap<Integer, String>();
         for (int i = 0; i < monthList.size(); i++)
         {
-            spinnerMonthMap.put(monthList.get(i).getMonthValue(),monthList.get(i).getMonth());
+            spinnerMonthMap.put(i,monthList.get(i).getMonthValue().toString());
             spinnerArray[i] = monthList.get(i).getMonth();
         }
 
@@ -366,5 +411,280 @@ private void loadyearSpinner(ArrayList<Ajax>  yearList){
         sp_month.setAdapter(arrayAdapter);
 
     }
+
+    private void fetchPaymentDeatail() {
+        if (!HRMSNetworkCheck.checkInternetConnection(context)) {
+            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(context);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("year",payslipYear );
+            requestMap.put("month",payslipMonth);
+
+            webServiceHandler.getDisplayPaySlip(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    CompanyData companyData = (CompanyData) obj;
+                   // ajaxPaySlipList = new ArrayList<>();
+                    ajaxPaySlipList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d("ajaxList", "size aaa --> " + ajaxPaySlipList.size());
+                    Log.d("ajaxList", "earning --> " + ajaxPaySlipList.get(0).getEarnings());
+                    tv_payment.setText(String.valueOf(ajaxPaySlipList.get(0).getEarnings()));
+                    tv_deduction.setText(String.valueOf(ajaxPaySlipList.get(0).getDeductions()));
+                    tv_netpay.setText(String.valueOf(ajaxPaySlipList.get(0).getNetpay()));
+
+                    fetchEarningDeatail();
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fetchEarningDeatail() {
+        if (!HRMSNetworkCheck.checkInternetConnection(context)) {
+            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(context);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("year",payslipYear );
+            requestMap.put("month",payslipMonth);
+
+            webServiceHandler.getPaySlipEarnings(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    CompanyData companyData = (CompanyData) obj;
+                    ajaxEarningList= new ArrayList<>();
+                    ajaxEarningList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> " + ajaxEarningList.size());
+
+
+                    fetchDeductionDetail();
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void fetchDeductionDetail() {
+        if (!HRMSNetworkCheck.checkInternetConnection(context)) {
+            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(context);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("year",payslipYear );
+            requestMap.put("month",payslipMonth);
+
+            webServiceHandler.getPaySlipDeductions(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    CompanyData companyData = (CompanyData) obj;
+                    ajaxDeductionList= new ArrayList<>();
+                    ajaxDeductionList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> " + ajaxDeductionList.size());
+                    loadListPaySlip(0);
+
+
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+private void loadListPaySlip(int i){
+
+        if(i == 0){
+            tv_heading.setText("Payments");
+            tv_toatal.setText(String.valueOf(ajaxPaySlipList.get(0).getEarnings()));
+            paySlipListAdapter = new PaySlipListAdapter(getActivity(), ajaxEarningList,0);
+            lv_amt.setAdapter(paySlipListAdapter);
+        }else if(i==1){
+            tv_heading.setText("Deductions");
+            tv_toatal.setText(String.valueOf(ajaxPaySlipList.get(0).getDeductions()));
+            paySlipListAdapter = new PaySlipListAdapter(getActivity(), ajaxDeductionList,1);
+            lv_amt.setAdapter(paySlipListAdapter);
+        }
+
+}
+
+    private void fetchPaySlipDownload() {
+        if (!HRMSNetworkCheck.checkInternetConnection(context)) {
+            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("year",payslipYear );
+            requestMap.put("month",payslipMonth);
+
+            webServiceHandler.getPaySlipDownload(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {  }
+
+                @Override
+                public void onReturnObject(Object obj) {}
+
+                @Override
+                public void onParseError() { }
+
+                @Override
+                public void onNetworkError() {}
+
+                @Override
+                public void unAuthorized() { }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

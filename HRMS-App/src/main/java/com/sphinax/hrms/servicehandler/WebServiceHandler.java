@@ -697,7 +697,10 @@ public class WebServiceHandler {
 //                            } else {
                             try {
                                 if (output.getJSONArray("ajax") != null) {
+                                    Log.d("ajaxList", "earning --> " + output.getJSONArray("ajax"));
                                     CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    Log.d("ajaxList", "earning --> " + companyDataObject.getAjax().get(0).getNetpay());
+
                                     delegate.onSuccess(true);
                                     delegate.onReturnObject(companyDataObject);
                                 }else {
@@ -825,6 +828,40 @@ public class WebServiceHandler {
         }
     }
 
+    public void getPaySlipDownload(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.PAYSLIP_DOWNLOAD_REQUEST_URL;
+
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+                            try {
+
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            companyListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
 
 
 /*

@@ -226,6 +226,15 @@ public class Ajax implements Serializable {
     @Expose
     private Long earningAmt;
 
+    @SerializedName("deductionDesc")
+    @Expose
+    private String deductionDesc;
+    @SerializedName("deductionAmt")
+    @Expose
+    private Long deductionAmt;
+
+
+
     public String getEarningDesc() {
         return earningDesc;
     }
@@ -261,12 +270,6 @@ public class Ajax implements Serializable {
         return deductions;
     }
 
-    @SerializedName("deductionDesc")
-    @Expose
-    private String deductionDesc;
-    @SerializedName("deductionAmt")
-    @Expose
-    private Long deductionAmt;
 
     public String getDeductionDesc() {
         return deductionDesc;
