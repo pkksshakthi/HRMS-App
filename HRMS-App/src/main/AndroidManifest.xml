@@ -33,6 +33,7 @@
             android:name=".common.activity.SelectCompanyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>
+        <activity android:name=".employee.activity.CalendarActivity" />
         <activity android:name=".admin.activity.AdminMenuActivity" />
         <activity android:name=".employee.activity.UserMenuActivity"/>
         <activity android:name=".common.activity.LoginActivity" />

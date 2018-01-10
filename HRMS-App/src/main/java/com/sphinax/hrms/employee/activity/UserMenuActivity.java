@@ -125,7 +125,8 @@ public class UserMenuActivity extends FragmentActivity
         int id = item.getItemId();
 
          if (id == R.id.nav_mark_attendance) {
-             Utility.addFragment( this, R.id.content_frame,fragmentManager, new AttendanceEnterFragment(), true, null);
+             startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
+            Utility.addFragment( this, R.id.content_frame,fragmentManager, new AttendanceEnterFragment(), true, null);
 
         } else if (id == R.id.nav_attendance_report) {
           //   Utility.addFragment( this, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null);
