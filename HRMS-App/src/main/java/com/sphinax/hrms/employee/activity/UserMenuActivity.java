@@ -25,6 +25,7 @@ import com.sphinax.hrms.employee.fragment.AnnouncementListFragment;
 import com.sphinax.hrms.employee.fragment.ApplyLeaveFragment;
 import com.sphinax.hrms.employee.fragment.AttendanceEnterFragment;
 import com.sphinax.hrms.employee.fragment.EmployeeAttendanceFragment;
+import com.sphinax.hrms.employee.fragment.EmployeeLeaveManagementFragment;
 import com.sphinax.hrms.employee.fragment.EnterHRHelpdeskFragment;
 import com.sphinax.hrms.employee.fragment.PaySlipFragment;
 import com.sphinax.hrms.employee.fragment.UserMainMenuFragment;
@@ -136,7 +137,9 @@ public class UserMenuActivity extends FragmentActivity
 
         } else if (id == R.id.nav_leave_management) {
 
-        } else if (id == R.id.nav_my_info) {
+             Utility.addFragment( this, R.id.content_frame,fragmentManager, new EmployeeLeaveManagementFragment(), true, null);
+
+         } else if (id == R.id.nav_my_info) {
              Utility.addFragment( this, R.id.content_frame,fragmentManager, new UserProfileFragment(), true, null);
 
         } else if (id == R.id.nav_announcement) {

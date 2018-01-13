@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sphinax.hrms.employee.fragment.EmployeeLeaveListFragment">
+    tools:context="com.sphinax.hrms.employee.fragment.LeavePendingListFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

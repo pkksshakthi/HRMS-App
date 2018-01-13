@@ -32,10 +32,10 @@ public class ToDate {
     private Integer seconds;
     @SerializedName("time")
     @Expose
-    private Integer time;
+    private Long time;
     @SerializedName("timezoneOffset")
     @Expose
-    private Integer timezoneOffset;
+    private Long timezoneOffset;
     @SerializedName("year")
     @Expose
     private Integer year;
@@ -96,19 +96,19 @@ public class ToDate {
         this.seconds = seconds;
     }
 
-    public Integer getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 
-    public Integer getTimezoneOffset() {
+    public Long getTimezoneOffset() {
         return timezoneOffset;
     }
 
-    public void setTimezoneOffset(Integer timezoneOffset) {
+    public void setTimezoneOffset(Long timezoneOffset) {
         this.timezoneOffset = timezoneOffset;
     }
 
