@@ -1,6 +1,7 @@
 package com.sphinax.hrms.view;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class EmployeeLeaveListAdapter extends RecyclerView.Adapter<EmployeeLeave
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Ajax ajax = ajaxList.get(position);
+
         holder.tv_name.setText(ajax.getDescription());
         holder.tv_status.setText(ajax.getLeaveStatusDesc());
         holder.tv_date.setText(String.valueOf(ajax.getFromDate().getDate()) + "/" + String.valueOf(ajax.getFromDate().getMonth())

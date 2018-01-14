@@ -158,7 +158,7 @@ public class LeaveApproveListFragment extends Fragment {
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("leavestatus","All" );
+            requestMap.put("leavestatus","1" );
             requestMap.put("empId","10000");
 
             webServiceHandler.getAllLeaveList(getActivity(), context, requestMap, new ServiceCallback() {
@@ -180,7 +180,10 @@ public class LeaveApproveListFragment extends Fragment {
                     approveList = new ArrayList<>();
                     approveList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d("ajaxList", "size --> " + approveList.size());
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter = new EmployeeLeaveListAdapter(approveList);
+                    recyclerView.setAdapter(mAdapter);
+
+                    //mAdapter.notifyDataSetChanged();
                     onItemsLoadComplete();
 
 

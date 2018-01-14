@@ -12,7 +12,8 @@
         android:layout_height="103dp"
         app:srcCompat="@drawable/announcement"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="51dp" />
+        tools:layout_editor_absoluteY="51dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_leave_type"
@@ -20,7 +21,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="51dp" />
+        tools:layout_editor_absoluteY="51dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_emp_name"
@@ -28,7 +30,8 @@
         android:layout_height="15dp"
         android:text="TextView"
         tools:layout_editor_absoluteX="244dp"
-        tools:layout_editor_absoluteY="51dp" />
+        tools:layout_editor_absoluteY="51dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_status"
@@ -36,7 +39,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="115dp" />
+        tools:layout_editor_absoluteY="115dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_date"
@@ -44,5 +48,6 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         tools:layout_editor_absoluteX="244dp"
-        tools:layout_editor_absoluteY="115dp" />
+        tools:layout_editor_absoluteY="115dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
