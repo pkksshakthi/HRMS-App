@@ -46,24 +46,28 @@
             android:padding="20dp">
 
             <Spinner
+                android:id="@+id/sp_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1" />
 
             <Spinner
+                android:id="@+id/sp_branch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1" />
 
             <Spinner
+                android:id="@+id/sp_department"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1" />
 
             <Button
+                android:id="@+id/bt_date_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -74,6 +78,7 @@
 
 
             <EditText
+                android:id="@+id/ed_message_box"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
@@ -85,11 +90,11 @@
                 android:text="I would like to express my interest in [SOME POSITION] at [COMPANY]. Although I've explored many options in my job search," />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/bt_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:background="#1052A0"
                 android:text="Submit"
                 android:textColor="#ffffff" />

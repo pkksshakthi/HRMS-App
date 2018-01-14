@@ -22,8 +22,9 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
     private final ArrayList<Ajax> data;
     private final int viewResourceId;
     private final int listViewResourceId;
+    private final int spinnerType;
 
-    public CompanySpinnerAdapter(Context context, int textViewResourceId, int listTextViewResourceId, ArrayList<Ajax> objects) {
+    public CompanySpinnerAdapter(Context context, int textViewResourceId, int listTextViewResourceId, ArrayList<Ajax> objects,int spinnerType) {
         super(context, listTextViewResourceId, objects);
         // TODO Auto-generated constructor stub
         this.data = objects;
@@ -31,6 +32,7 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
         this.context = context;
         this.viewResourceId = textViewResourceId;
         this.listViewResourceId = listTextViewResourceId;
+        this.spinnerType = spinnerType;
     }
 
 
@@ -45,7 +47,14 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
         }
         if (data != null) {
             assert textView != null;
-            textView.setText(data.get(position).getCompName());
+            if(spinnerType == 1){
+                textView.setText(data.get(position).getCompName());
+            }else if(spinnerType == 2){
+                textView.setText(data.get(position).getBranchName());
+            } else if(spinnerType == 3 ){
+                textView.setText(data.get(position).getDeptName());
+            }
+
         }
 
         return textView;

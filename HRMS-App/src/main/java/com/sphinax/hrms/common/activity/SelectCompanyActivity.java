@@ -103,7 +103,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
                     Log.d("ajaxList", "size --> " + ajaxList.size());
 
                     companyDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, ajaxList);
+                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, ajaxList,1);
                     companyDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spCompany.setAdapter(companyDataAdapter);
