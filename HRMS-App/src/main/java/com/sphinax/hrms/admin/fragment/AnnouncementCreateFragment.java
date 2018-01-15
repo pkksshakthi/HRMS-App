@@ -1,5 +1,6 @@
 package com.sphinax.hrms.admin.fragment;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -29,8 +31,11 @@ import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.CompanySpinnerAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,7 +64,8 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
     private ArrayList<Ajax> departmentList;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private Spinner spCompany,spBranch,spDepartment;
-    private Button btSubmit,btDate;
+    private Button btSubmit;
+    private EditText btDate;
     private EditText ed_mess;
     private CompanySpinnerAdapter companyDataAdapter;
     private CompanySpinnerAdapter branchDataAdapter;
@@ -67,7 +73,8 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
     private int companyPosition = 0;
     private int branchPosition = 0;
     private int departmentPosition = 0;
-
+    private Calendar myCalendar;
+    private DatePickerDialog.OnDateSetListener dater;
 
 
     public AnnouncementCreateFragment() {
@@ -116,6 +123,21 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
         loadComponent();
         setListeners();
         fetchCompanyList();
+         myCalendar = Calendar.getInstance();
+        dater = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updatedateLabel();
+            }
+
+        };
+
 
     }
 
@@ -222,14 +244,34 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
 //            if (ajaxList != null) {
 //               // ajax = ajaxList.get(spinnerPosition);
 //            }
+            if(btDate.getText()!=null && !btDate.getText().toString().equalsIgnoreCase("") && ed_mess.getText()!=null && !ed_mess.getText().toString().equalsIgnoreCase("")){
+                saveAnnouncement(ed_mess.getText().toString(),btDate.getText().toString());
+            }else {
+                if(btDate.getText()!=null && !btDate.getText().toString().equalsIgnoreCase("")){
+                    Utility.showToastMessage(getActivity(),"Please Enter the Date");
+
+                }
+                if(ed_mess.getText()!=null && !ed_mess.getText().toString().equalsIgnoreCase("")){
+                    Utility.showToastMessage(getActivity(),"Please Enter the Message");
+
+                }
+
+            }
 
         }else   if (v.getId() == btDate.getId()) {
-
+            new DatePickerDialog(getActivity(), dater, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
         }
 
     }
+    private void updatedateLabel() {
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
+        btDate.setText(sdf.format(myCalendar.getTime()));
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -427,6 +469,84 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
                     departmentDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spDepartment.setAdapter(departmentDataAdapter);
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void saveAnnouncement(String valueText,String dateValue) {
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(getActivity());
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("companyId",String.valueOf(companyPosition) );
+            requestMap.put("empID",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, ""));
+            requestMap.put("activityDate",dateValue );
+            requestMap.put("activityDesc",valueText );
+            requestMap.put("activityTypeId",String.valueOf(1) );
+            requestMap.put("deptId",String.valueOf(departmentPosition) );
+            requestMap.put("branch",String.valueOf(branchPosition) );
+            requestMap.put("annTitle","Announcement" );
+
+
+
+            webServiceHandler.saveAnnouncement(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                    if (flag){
+                        ed_mess.setText("");
+                    }else {
+                        Utility.showToastMessage(getActivity(), "Announcement not send kindly try again");
+
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
 
                 }
 

@@ -14,6 +14,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -32,17 +35,19 @@ public class PostMethodHandler extends AsyncTask<Void, Void, JSONObject> {
     private Activity activity;
 
     private String jsonString;
+    private HashMap<String, String>  requestMap;
 
     public PostMethodHandler() {
     }
 
-    public PostMethodHandler(Activity activity, Context context, String url, String jsonString, AsyncResponse response) throws MalformedURLException {
+    public PostMethodHandler(Activity activity, Context context, String url, HashMap<String, String> requestMap, AsyncResponse response) throws MalformedURLException {
         this.context = context;
         Log.d(TAG + "URL-", url);
         this.url = new URL(url);
         this.activity = activity;
         this.delegate = response;
         this.jsonString = jsonString;
+        this.requestMap = requestMap;
     }
 
 
@@ -71,12 +76,22 @@ public class PostMethodHandler extends AsyncTask<Void, Void, JSONObject> {
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
-            String input = jsonString;
+           // String input = jsonString;
 
-            Log.d(TAG + "Request-", input);
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.close();
+          //  Log.d(TAG + "Request-", input);
+//            OutputStream os = conn.getOutputStream();
+//            os.write(input.getBytes());
+//            os.close();
+
+            if (requestMap.size() != 0) {
+                Iterator it = requestMap.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
+                    Log.d(TAG, " " + pair.getKey() + " = " + pair.getValue());
+                    conn.setRequestProperty(pair.getKey().toString(), pair.getValue().toString());
+                    it.remove();
+                }
+            }
             conn.connect();
             //os.flush();
             String response = "";
@@ -100,16 +115,28 @@ public class PostMethodHandler extends AsyncTask<Void, Void, JSONObject> {
             }
             conn.disconnect();
             Log.d(TAG + "Response-", response);
+//            if (status == HttpsURLConnection.HTTP_UNAUTHORIZED) {
+//                if (!response.isEmpty()) {
+//                    JSONObject json = new JSONObject(response);
+//                    jsonObject = json.getJSONObject("meta");
+//                }
+//            } else {
+//                if (!response.isEmpty()) {
+//                    JSONObject json = new JSONObject(response);
+//                    jsonObject = json.getJSONObject("data");
+//                    Log.d(TAG + "currentDateTime -", response);
+//                }
+//            }
+
             if (status == HttpsURLConnection.HTTP_UNAUTHORIZED) {
                 if (!response.isEmpty()) {
+                    Log.d(TAG + "SC_UNAUTHORIZED-", response);
                     JSONObject json = new JSONObject(response);
                     jsonObject = json.getJSONObject("meta");
                 }
             } else {
                 if (!response.isEmpty()) {
-                    JSONObject json = new JSONObject(response);
-                    jsonObject = json.getJSONObject("data");
-                    Log.d(TAG + "currentDateTime -", response);
+                    jsonObject = new JSONObject(response);
                 }
             }
 
