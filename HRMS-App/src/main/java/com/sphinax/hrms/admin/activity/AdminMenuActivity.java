@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.admin.fragment.AdminMainMenuFragment;
 import com.sphinax.hrms.admin.fragment.AnnouncementCreateFragment;
+import com.sphinax.hrms.admin.fragment.LeaveManagementFragment;
 import com.sphinax.hrms.common.activity.LoginActivity;
 import com.sphinax.hrms.employee.activity.CalendarActivity;
 import com.sphinax.hrms.employee.activity.UserMenuActivity;
@@ -131,7 +132,7 @@ public class AdminMenuActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_leave_management) {
 
-           // Utility.addFragment( this, R.id.content_frame,fragmentManager, new EmployeeLeaveManagementFragment(), true, null);
+           Utility.addFragment( this, R.id.content_frame,fragmentManager, new LeaveManagementFragment(), true, null);
 
         } else if (id == R.id.nav_announcement) {
           Utility.addFragment(  this, R.id.content_frame,fragmentManager, new AnnouncementCreateFragment(), true, null);

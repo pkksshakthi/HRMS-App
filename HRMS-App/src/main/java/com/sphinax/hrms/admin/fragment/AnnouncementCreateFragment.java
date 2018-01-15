@@ -392,7 +392,10 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
                     branchList = new ArrayList<>();
                     branchList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d("ajaxList", "size --> " + branchList.size());
-
+                    Ajax tempObj = new Ajax();
+                    tempObj.setBranchId(0);
+                    tempObj.setBranchName("Select Branch");
+                    branchList.add(0,tempObj);
                     branchDataAdapter = new CompanySpinnerAdapter(context,
                             android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, branchList,2);
                     branchDataAdapter
@@ -463,7 +466,10 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
                     departmentList = new ArrayList<>();
                     departmentList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d("ajaxList", "size --> " + departmentList.size());
-
+                    Ajax tempObj = new Ajax();
+                    tempObj.setDeptId(0);
+                    tempObj.setDeptName("Select Department");
+                    departmentList.add(0,tempObj);
                     departmentDataAdapter = new CompanySpinnerAdapter(context,
                             android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, departmentList,3);
                     departmentDataAdapter
