@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.admin.fragment.AdminMainMenuFragment;
+import com.sphinax.hrms.admin.fragment.AnnouncementCreateFragment;
 import com.sphinax.hrms.common.activity.LoginActivity;
 import com.sphinax.hrms.employee.activity.CalendarActivity;
 import com.sphinax.hrms.employee.activity.UserMenuActivity;
@@ -133,7 +134,7 @@ public class AdminMenuActivity extends AppCompatActivity
            // Utility.addFragment( this, R.id.content_frame,fragmentManager, new EmployeeLeaveManagementFragment(), true, null);
 
         } else if (id == R.id.nav_announcement) {
-           // Utility.addFragment(  this, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null);
+          Utility.addFragment(  this, R.id.content_frame,fragmentManager, new AnnouncementCreateFragment(), true, null);
 
         } else if (id == R.id.nav_help_desk) {
            // Utility.addFragment( this, R.id.content_frame, fragmentManager,new EnterHRHelpdeskFragment(), true, null);

@@ -71,7 +71,14 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
             }
         }
         TextView textView = ((TextView) convertView);
-        textView.setText(data.get(position).getCompName());
+       // textView.setText(data.get(position).getCompName());
+        if(spinnerType == 1){
+            textView.setText(data.get(position).getCompName());
+        }else if(spinnerType == 2){
+            textView.setText(data.get(position).getBranchName());
+        } else if(spinnerType == 3 ){
+            textView.setText(data.get(position).getDeptName());
+        }
         textView.setTextColor(Color.BLACK);
 
         return convertView;

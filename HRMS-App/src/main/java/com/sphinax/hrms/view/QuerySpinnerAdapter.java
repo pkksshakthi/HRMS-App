@@ -45,7 +45,7 @@ public class QuerySpinnerAdapter extends ArrayAdapter<Ajax> {
         }
         if (data != null) {
             assert textView != null;
-            textView.setText(data.get(position).getCompName());
+            textView.setText(data.get(position).getReqStatusDesc());
         }
 
         return textView;

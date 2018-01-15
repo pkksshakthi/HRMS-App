@@ -190,7 +190,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
         //spinnerPosition = position;
         Ajax ajax = new Ajax();
         if (companyList != null) {
-            ajax = companyList.get(companyPosition);
+            ajax = companyList.get(position);
         }
         companyPosition = ajax.getCompId();
         fetchBranchList(ajax.getCompId());
@@ -400,7 +400,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
         }
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
-            requestMap.put("compId",String.valueOf(companyPosition) );
+            requestMap.put("companyId",String.valueOf(companyPosition) );
 
             webServiceHandler.getDepartmentList(getActivity(), context, requestMap, new ServiceCallback() {
 
@@ -423,7 +423,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
                     Log.d("ajaxList", "size --> " + departmentList.size());
 
                     departmentDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, departmentList,2);
+                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, departmentList,3);
                     departmentDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spDepartment.setAdapter(departmentDataAdapter);
