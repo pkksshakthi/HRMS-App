@@ -3,6 +3,8 @@ package com.sphinax.hrms.common.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,8 @@ import com.sphinax.hrms.employee.activity.UserMenuActivity;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.LoginData;
+import com.sphinax.hrms.sample.dummy.Login_Fragment;
+import com.sphinax.hrms.sample.dummy.Utils;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
@@ -32,15 +36,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private EditText ed_UserName,ed_Password;
     private Button bt_Login;
-
+    private static FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_main);
+        fragmentManager = getSupportFragmentManager();
+
+        // If savedinstnacestate is null then replace login fragment
+        if (savedInstanceState == null) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frameContainer, new Login_Fragment(),
+                            Utils.Login_Fragment).commit();
+        }
+        findViewById(R.id.close_activity).setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View arg0) {
+                        finish();
+
+                    }
+                });
+
+
         context = this.getApplicationContext();
 
-        loadComponent();
-        setListeners();
+       // loadComponent();
+//        setListeners();
     }
 
     private void loadComponent() {
@@ -64,7 +88,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+    public void replaceLoginFragment() {
+        fragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                .replace(R.id.frameContainer, new Login_Fragment(),
+                        Utils.Login_Fragment).commit();
+    }
 
+    @Override
+    public void onBackPressed() {
+
+        // Find the tag of signup and forgot password fragment
+        Fragment SignUp_Fragment = fragmentManager
+                .findFragmentByTag(Utils.SignUp_Fragment);
+        Fragment ForgotPassword_Fragment = fragmentManager
+                .findFragmentByTag(Utils.ForgotPassword_Fragment);
+
+        // Check if both are null or not
+        // If both are not null then replace login fragment else do backpressed
+        // task
+
+        if (SignUp_Fragment != null)
+            replaceLoginFragment();
+        else if (ForgotPassword_Fragment != null)
+            replaceLoginFragment();
+        else
+            super.onBackPressed();
+    }
     private void getEditTextValue(){
         String userNameValue     = ed_UserName.getText().toString().trim();
         String userPasswordValue = ed_Password.getText().toString().trim();
@@ -79,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     /***Method used to Login validation from the OPS Service **/
 
-    private void loginValidation(String userNameValue , String userPasswordValue) {
+    private void loginValidation(String userNameValue, String userPasswordValue) {
         if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
             Utility.showToastMessage(this, getResources().getString(R.string.invalidInternetConnection));
             return;

@@ -54,7 +54,7 @@ public class GeoLocationFinder {
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         // getting network status
-        boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!isGPSEnabled && !isNetworkEnabled) {
             Log.d(TAG + "LocaitonManager-", "Network Provider is disabled.");
             // Toast.makeText(context, "Please Enable the GPS Connection.", Toast.LENGTH_SHORT).show();

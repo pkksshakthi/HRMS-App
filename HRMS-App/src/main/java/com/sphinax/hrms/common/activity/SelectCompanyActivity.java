@@ -4,10 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Location;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,7 +19,6 @@ import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
-import com.sphinax.hrms.utils.GeoLocationFinder;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.CompanySpinnerAdapter;
@@ -32,7 +30,7 @@ import java.util.HashMap;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class SelectCompanyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener  {
+public class SelectCompanyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private ProgressDialog pdia;
     private Context context;
@@ -42,11 +40,15 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
     private Button btNext;
     private CompanySpinnerAdapter companyDataAdapter;
     private int spinnerPosition = 0;
+    private View img_close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         setContentView(R.layout.activity_selectcompany);
         context = this.getApplicationContext();
         loadComponent();
@@ -103,7 +105,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
                     Log.d("ajaxList", "size --> " + ajaxList.size());
 
                     companyDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, ajaxList,1);
+                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, ajaxList, 1);
                     companyDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spCompany.setAdapter(companyDataAdapter);
@@ -160,7 +162,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
      * Its works on Company Spinner Click Action
      **/
     private void actionCompanySelector(int position) {
-       spinnerPosition = position;
+        spinnerPosition = position;
     }
 
     @Override
@@ -168,20 +170,19 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
         if (v.getId() == btNext.getId()) {
             Ajax ajax = new Ajax();
             if (ajaxList != null) {
-                 ajax = ajaxList.get(spinnerPosition);
+                ajax = ajaxList.get(spinnerPosition);
             }
-    SharedPreferences.Editor editor = Utility.getPreference(this).edit();
+            SharedPreferences.Editor editor = Utility.getPreference(this).edit();
             editor.putString(Constants.PREFS_COMPANY_ID, String.valueOf(ajax.getCompId()));
-            editor.putString(Constants.PREFS_COMPANY_NAME,ajax.getCompName());
-            editor.putString(Constants.PREFS_COMPANY_SHORT_NAME,ajax.getShortName());
+            editor.putString(Constants.PREFS_COMPANY_NAME, ajax.getCompName());
+            editor.putString(Constants.PREFS_COMPANY_SHORT_NAME, ajax.getShortName());
             editor.commit();
         }
 
-        Intent intent=new Intent(SelectCompanyActivity.this,LoginActivity.class);
+        Intent intent = new Intent(SelectCompanyActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
-
 
 
 }

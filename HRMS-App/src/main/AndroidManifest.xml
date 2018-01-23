@@ -31,7 +31,8 @@
         </activity>
         <activity
             android:name=".common.activity.SelectCompanyActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/FullscreenTheme">
         </activity>
         <activity android:name=".employee.activity.CalendarActivity" />
         <activity android:name=".admin.activity.AdminMenuActivity" />

@@ -3,15 +3,18 @@ package com.sphinax.hrms.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.sphinax.hrms.R;
 import com.sphinax.hrms.model.Ajax;
 
 import java.util.ArrayList;
+import java.util.zip.CheckedOutputStream;
 
 /**
  * Created by ganesaka on 12/25/2017.
@@ -57,6 +60,7 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
 
         }
 
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         return textView;
     }
 
@@ -71,7 +75,7 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
             }
         }
         TextView textView = ((TextView) convertView);
-       // textView.setText(data.get(position).getCompName());
+
         if(spinnerType == 1){
             textView.setText(data.get(position).getCompName());
         }else if(spinnerType == 2){
@@ -80,7 +84,7 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
             textView.setText(data.get(position).getDeptName());
         }
         textView.setTextColor(Color.BLACK);
-
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         return convertView;
     }
 
