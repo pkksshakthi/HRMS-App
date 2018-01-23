@@ -34,7 +34,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme">
         </activity>
-        <activity android:name=".employee.activity.CalendarActivity" />
         <activity android:name=".admin.activity.AdminMenuActivity" />
         <activity android:name=".employee.activity.UserMenuActivity"/>
         <activity android:name=".common.activity.LoginActivity" />

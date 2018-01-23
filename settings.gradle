@@ -1,1 +1,1 @@
-include ':HRMS-App', ':library'
+include ':HRMS-App'

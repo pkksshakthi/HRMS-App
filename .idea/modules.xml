@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HRMS.iml" filepath="$PROJECT_DIR$/HRMS.iml" />
       <module fileurl="file://$PROJECT_DIR$/HRMS-App/HRMS-App.iml" filepath="$PROJECT_DIR$/HRMS-App/HRMS-App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>
   </component>
 </project>

@@ -2,8 +2,6 @@ package com.sphinax.hrms.admin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,16 +20,6 @@ import com.sphinax.hrms.admin.fragment.AdminMainMenuFragment;
 import com.sphinax.hrms.admin.fragment.AnnouncementCreateFragment;
 import com.sphinax.hrms.admin.fragment.LeaveManagementFragment;
 import com.sphinax.hrms.common.activity.LoginActivity;
-import com.sphinax.hrms.employee.activity.CalendarActivity;
-import com.sphinax.hrms.employee.activity.UserMenuActivity;
-import com.sphinax.hrms.employee.fragment.AnnouncementListFragment;
-import com.sphinax.hrms.employee.fragment.ApplyLeaveFragment;
-import com.sphinax.hrms.employee.fragment.AttendanceEnterFragment;
-import com.sphinax.hrms.employee.fragment.EmployeeLeaveManagementFragment;
-import com.sphinax.hrms.employee.fragment.EnterHRHelpdeskFragment;
-import com.sphinax.hrms.employee.fragment.PaySlipFragment;
-import com.sphinax.hrms.employee.fragment.UserMainMenuFragment;
-import com.sphinax.hrms.employee.fragment.UserProfileFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.utils.Utility;
 
