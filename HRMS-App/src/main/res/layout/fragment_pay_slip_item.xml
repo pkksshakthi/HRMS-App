@@ -1,37 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+
+    android:padding="10dp"
+    tools:layout_editor_absoluteX="5dp"
+    tools:layout_editor_absoluteY="245dp">
+
+    <TextView
+        android:id="@+id/tv_list_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="245dp">
+        android:gravity="start|center"
+        android:text="Expence(Tax free)"
+        android:textColor="#313131" />
 
-        <TextView
-            android:id="@+id/tv_list_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="start|center"
-            android:text="Expence(Tax free)"
-            android:textColor="#313131" />
+    <TextView
+        android:id="@+id/tv_list_amt"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="right|center"
+        android:text="2.25"
+        android:textColor="#000000" />
 
-        <TextView
-            android:id="@+id/tv_list_amt"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="right|center"
-            android:text="2.25"
-            android:textColor="#313131" />
- <!---->
 
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:layout_margin="3dp"-->
-        <!--android:background="#D8D8D7">-->
-
-    <!--</View>-->
 </LinearLayout>
