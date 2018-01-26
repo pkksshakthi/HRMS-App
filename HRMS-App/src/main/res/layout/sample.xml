@@ -196,10 +196,10 @@
                             android:textSize="15dp" />
 
                         <Spinner
-                          
+
+                            android:id="@+id/sp_leave_type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:layout_alignStart="@+id/linearLayout4"
                             card_view:layout_editor_absoluteX="71dp"
                             card_view:layout_editor_absoluteY="32dp" />
@@ -265,8 +265,8 @@
                             android:textColor="#575757"
                             android:textSize="15dp" />
 
-                        <EditText
-
+                        <TextView
+                            android:id="@+id/tv_start_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignStart="@+id/linearLayout4"
@@ -336,7 +336,7 @@
                             android:textSize="15dp" />
 
                         <Spinner
-                          
+                            android:id="@+id/sp_leave_session_start"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
 
@@ -405,8 +405,8 @@
                             android:textColor="#575757"
                             android:textSize="15dp" />
 
-                        <EditText
-
+                        <TextView
+                            android:id="@+id/tv_end_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignStart="@+id/linearLayout4"
@@ -476,7 +476,7 @@
                             android:textSize="15dp" />
 
                         <Spinner
-                          
+                            android:id="@+id/sp_leave_session_end"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
 
@@ -546,6 +546,7 @@
                             android:textSize="15dp" />
 
                         <TextView
+                            android:id="@+id/tv_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignStart="@+id/linearLayout4"
@@ -615,8 +616,8 @@
                             android:textColor="#575757"
                             android:textSize="15dp" />
 
-                        <Spinner
-
+                        <EditText
+                            android:id="@+id/ed_reason"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
 
@@ -645,6 +646,7 @@
                 android:padding="5dp">
 
                 <Button
+                    android:id="@+id/bt_submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 

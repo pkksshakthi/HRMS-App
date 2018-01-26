@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         context = this.getApplicationContext();
 
-       // loadComponent();
-//        setListeners();
+      // loadComponent();
+       // setListeners();
     }
 
     private void loadComponent() {
@@ -164,6 +164,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                       //  startMenuActivity("user");
                     }else {
                         Utility.showToastMessage(context, getResources().getString(R.string.invalidUser));
+
                     }
                 }
 
@@ -212,6 +213,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void startMenuActivity(String user){
         if(user.equalsIgnoreCase("E")){
             Intent intent=new Intent(LoginActivity.this,UserMenuActivity.class);
+
             startActivity(intent);
             finish();
         }else if(user.equalsIgnoreCase("A")){

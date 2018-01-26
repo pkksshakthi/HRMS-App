@@ -185,7 +185,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     "Enter both credentials.");
 
         } else {
-            loginValidation(emailid, password);
+            loginValidation(getEmailId, getPassword);
         }
 //		// Check if email id is valid or not
 //		else if (!m.find())
@@ -199,7 +199,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
     }
 
-    private void loginValidation(EditText userNameValue, EditText password) {
+    private void loginValidation(String userNameValue, String password) {
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
             Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
             return;

@@ -1,334 +1,755 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#FFFFFF"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F0F0F0">
 
-    <LinearLayout
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#6CB8F6"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="My Profile - DXN"
-                android:textColor="#ffffff"
-                android:textSize="10pt"
-                android:textStyle="bold" />
+        android:layout_gravity="center"
 
 
-        </LinearLayout>
+        card_view:cardCornerRadius="4dp"
+        card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:background="#f7f6f6"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_user_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/icon_userinfo" />
-
-            <TableLayout
-                android:id="@+id/tableLayout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="#9594A6"
-                android:padding="1dp"
+                android:background="#043F5F"
+
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_user_image">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+
+                    android:src="@drawable/myinfo_icon"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="2dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#D8DFF2"
-                    android:orientation="vertical"
-                    android:paddingBottom="1dp"
-                    tools:layout_editor_absoluteX="192dp"
-                    tools:layout_editor_absoluteY="219dp">
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="SAKTHIVEL P"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                    <TextView
+                <TextView
+                    android:id="@+id/tv_designation"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="Software Engineer"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp" />
+
+                <android.support.v7.widget.CardView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_marginTop="5dp"
+                    card_view:cardCornerRadius="4dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="#ffffff"
                         android:gravity="center"
-                        android:text="User Information"
-                        android:textColor="#03186A"
+                        android:orientation="horizontal">
 
-                        android:textSize="10pt"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
 
-                <TableRow
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Employee ID"
+                                android:textColor="#194E6E"
+                                android:textSize="17sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_empid"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1338036"
+                                android:textColor="#6B6B6B"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:background="#C9C9C9" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Branch"
+                                android:textColor="#194E6E"
+                                android:textSize="17sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_branch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Chennai"
+                                android:textColor="#6B6B6B"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:background="#C9C9C9" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Department"
+                                android:textColor="#194E6E"
+                                android:textSize="17sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_department"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Software"
+
+                                android:textColor="#6B6B6B"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="1dp"
+                    android:layout_height="1dp"
+                    android:background="#C9C9C9" />
 
-                    android:background="#D8DFF2"
-                    android:padding="5dp">
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                        android:gravity="left"
-                        android:text="Name : "
-                        android:textColor="#0F1316" />
-
-                    <TextView
-                        android:id="@+id/tv_username"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Sakthivel.p"
-                        android:textColor="#0F1316" />
-                </TableRow>
-
-
-                <TableRow
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FAFAFA"
+                    android:orientation="vertical">
 
-                    android:background="#D8DFF2"
-                    android:padding="5dp">
+                    <android.support.v7.widget.CardView
 
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="EmployeeID : "
-
-                        android:textColor="#0F1316" />
-
-                    <TextView
-                        android:id="@+id/tv_empid"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="10481"
-                        android:textColor="#0F1316" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="#D8DFF2"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:paddingRight="10dp"
-                        android:text="Company Name : "
-                        android:textColor="#0F1316" />
-
-                    <TextView
-                        android:id="@+id/tv_company_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Spinax info system"
-                        android:textColor="#0F1316" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="#D8DFF2"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Branch : "
-
-                        android:textColor="#0F1316" />
-
-                    <TextView
-                        android:id="@+id/tv_branch"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Software Development"
-                        android:textColor="#0F1316" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="#D8DFF2"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Department : "
-
-                        android:textColor="#0F1316" />
-
-                    <TextView
-                        android:id="@+id/tv_department"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Software"
-                        android:textColor="#0F1316" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="#D8DFF2"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Designation : "
-                        android:textColor="#0F1316" />
-
-                    <TextView
-                        android:id="@+id/tv_designation"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Software Engineer"
-                        android:textColor="#0F1316" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="#D8DFF2"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Mobile Number : "
-                        android:textColor="#0F1316" />
-
-                    <TextView
-                        android:id="@+id/tv_mobile_no"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="+91 8012349993"
-                        android:textColor="#0F1316" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="#D8DFF2"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Email : "
-                        android:textColor="#0F1316" />
-
-                    <TextView
-                        android:id="@+id/tv_email_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="pkksshakthi@gmail.com"
-                        android:textColor="#0F1316" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="#D8DFF2"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:gravity="left"
-                        android:text="Address : "
-                        android:textColor="#0F1316" />
-
-                    <TextView
-                        android:id="@+id/tv_address"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:inputType="textMultiLine"
-                        android:maxLines="4"
-                        android:lines="4"
-                        android:singleLine="false"
-                        android:text="Sphinax Info Systems No. 57,2nd floor, Mc Nichols Road, Chetpet,Chennai - 600031"
-                        android:textColor="#0F1316" />
-                </TableRow>
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="15dp"
+                        card_view:cardCornerRadius="4dp">
 
-            </TableLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/txt_companyname"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Company"
+                                android:textColor="#194E6E"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_company_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/txt_companyname"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="9dp"
+                                android:text="Sphinax Info System pvt lts" />
+
+                            <ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="8dp"
+                                app:srcCompat="@android:drawable/ic_dialog_email" />
+
+
+                        </RelativeLayout>
+
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="15dp"
+                        card_view:cardCornerRadius="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Mobile Number"
+                                android:textColor="#194E6E"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_mobile_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/textView8"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="9dp"
+                                android:text="+91 8012349993" />
+
+                            <ImageView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="8dp"
+                                app:srcCompat="@android:drawable/stat_sys_vp_phone_call" />
+
+
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="15dp"
+                        card_view:cardCornerRadius="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/txt_emailname"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Email"
+                                android:textColor="#194E6E"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_email_id"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/txt_emailname"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="9dp"
+                                android:text="pkksshakthi@gnail.com" />
+
+                            <ImageView
+                                android:id="@+id/img_email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="8dp"
+                                app:srcCompat="@android:drawable/ic_dialog_email" />
+
+
+                        </RelativeLayout>
+
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="15dp"
+                        card_view:cardCornerRadius="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:id="@+id/txt_addressname"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Address"
+                                android:textColor="#194E6E"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/txt_addressname"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="9dp"
+                                android:text="pkksshakthi@gnail.com" />
+
+                            <ImageView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="8dp"
+                                app:srcCompat="@android:drawable/ic_dialog_email" />
+
+
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
-    </LinearLayout>
 
+
+    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
+
+    <!--
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:background="#FFFFFF"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#6CB8F6"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="My Profile - DXN"
+                    android:textColor="#ffffff"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_user_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:srcCompat="@drawable/icon_userinfo" />
+
+                <TableLayout
+                    android:id="@+id/tableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:background="#9594A6"
+                    android:padding="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_user_image">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#D8DFF2"
+                        android:orientation="vertical"
+                        android:paddingBottom="1dp"
+                        tools:layout_editor_absoluteX="192dp"
+                        tools:layout_editor_absoluteY="219dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="User Information"
+                            android:textColor="#03186A"
+
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="1dp"
+
+                        android:background="#D8DFF2"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Name : "
+                            android:textColor="#0F1316" />
+
+                        <TextView
+                            android:id="@+id/tv_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Sakthivel.p"
+                            android:textColor="#0F1316" />
+                    </TableRow>
+
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:background="#D8DFF2"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="EmployeeID : "
+
+                            android:textColor="#0F1316" />
+
+                        <TextView
+                            android:id="@+id/tv_empid"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="10481"
+                            android:textColor="#0F1316" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:background="#D8DFF2"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:paddingRight="10dp"
+                            android:text="Company Name : "
+                            android:textColor="#0F1316" />
+
+                        <TextView
+                            android:id="@+id/tv_company_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Spinax info system"
+                            android:textColor="#0F1316" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:background="#D8DFF2"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Branch : "
+
+                            android:textColor="#0F1316" />
+
+                        <TextView
+                            android:id="@+id/tv_branch"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Software Development"
+                            android:textColor="#0F1316" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:background="#D8DFF2"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Department : "
+
+                            android:textColor="#0F1316" />
+
+                        <TextView
+                            android:id="@+id/tv_department"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Software"
+                            android:textColor="#0F1316" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:background="#D8DFF2"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Designation : "
+                            android:textColor="#0F1316" />
+
+                        <TextView
+                            android:id="@+id/tv_designation"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Software Engineer"
+                            android:textColor="#0F1316" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:background="#D8DFF2"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Mobile Number : "
+                            android:textColor="#0F1316" />
+
+                        <TextView
+                            android:id="@+id/tv_mobile_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="+91 8012349993"
+                            android:textColor="#0F1316" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:background="#D8DFF2"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Email : "
+                            android:textColor="#0F1316" />
+
+                        <TextView
+                            android:id="@+id/tv_email_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="pkksshakthi@gmail.com"
+                            android:textColor="#0F1316" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:background="#D8DFF2"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="Address : "
+                            android:textColor="#0F1316" />
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:inputType="textMultiLine"
+                            android:maxLines="4"
+                            android:lines="4"
+                            android:singleLine="false"
+                            android:text="Sphinax Info Systems No. 57,2nd floor, Mc Nichols Road, Chetpet,Chennai - 600031"
+                            android:textColor="#0F1316" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+    -->
