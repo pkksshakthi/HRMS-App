@@ -1,5 +1,6 @@
 package com.sphinax.hrms.sample.dummy;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -46,7 +47,7 @@ public class ForgotPassword_Fragment extends Fragment implements
 		back = (TextView) view.findViewById(R.id.backToLoginBtn);
 
 		// Setting text selector over textviews
-		XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
+		@SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
 		try {
 			ColorStateList csl = ColorStateList.createFromXml(getResources(),
 					xrp);
@@ -71,7 +72,7 @@ public class ForgotPassword_Fragment extends Fragment implements
 		case R.id.backToLoginBtn:
 
 			// Replace Login Fragment on Back Presses
-			new LoginActivity().replaceLoginFragment();
+			//new LoginActivity().replaceLoginFragment();
 			break;
 
 		case R.id.forgot_button:

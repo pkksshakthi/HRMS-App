@@ -54,15 +54,15 @@ public class OTP_Fragment extends Fragment implements OnClickListener {
         terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
 
         // Setting text selector over textviews
-        XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
-        try {
-            ColorStateList csl = ColorStateList.createFromXml(getResources(),
-                    xrp);
-
-            login.setTextColor(csl);
-            terms_conditions.setTextColor(csl);
-        } catch (Exception e) {
-        }
+//        XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
+//        try {
+//            ColorStateList csl = ColorStateList.createFromXml(getResources(),
+//                    xrp);
+//
+//            login.setTextColor(csl);
+//            terms_conditions.setTextColor(csl);
+//        } catch (Exception e) {
+//        }
     }
 
     // Set Listeners
@@ -83,7 +83,7 @@ public class OTP_Fragment extends Fragment implements OnClickListener {
             case R.id.already_user:
 
                 // Replace login fragment
-                new LoginActivity().replaceLoginFragment();
+               // new LoginActivity().replaceLoginFragment();
                 break;
         }
 

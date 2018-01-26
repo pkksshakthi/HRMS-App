@@ -1,4 +1,4 @@
-package com.sphinax.hrms.sample.dummy;
+package com.sphinax.hrms.common.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -31,6 +31,10 @@ import com.sphinax.hrms.admin.activity.AdminMenuActivity;
 import com.sphinax.hrms.employee.activity.UserMenuActivity;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.LoginData;
+import com.sphinax.hrms.sample.dummy.CustomToast;
+import com.sphinax.hrms.sample.dummy.ForgotPassword_Fragment;
+import com.sphinax.hrms.sample.dummy.OTP_Fragment;
+import com.sphinax.hrms.sample.dummy.Utils;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
@@ -59,7 +63,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_login, container, false);
+        view = inflater.inflate(R.layout.fragment_login, container, false);
         initViews();
         setListeners();
         return view;

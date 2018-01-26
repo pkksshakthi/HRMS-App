@@ -64,7 +64,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             if (actionBar != null) {
                 actionBar.show();
             }
-          //  mControlsView.setVisibility(View.VISIBLE);
+            //  mControlsView.setVisibility(View.VISIBLE);
         }
     };
     private boolean mVisible;
@@ -92,11 +92,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         setContentView(R.layout.activity_splash_screen);
 
         mVisible = true;
-       // mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
 
@@ -111,28 +113,26 @@ public class SplashScreenActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
 
-
-        handler=new Handler();
+        handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
-        String compyNameVal = Utility.getPreference(SplashScreenActivity.this).getString(Constants.PREFS_COMPANY_NAME, "");
-        if(!compyNameVal.equalsIgnoreCase("")){
-            Intent intent=new Intent(SplashScreenActivity.this,SelectCompanyActivity.class);
-            startActivity(intent);
-            finish();
-        }else{
-            Intent intent=new Intent(SplashScreenActivity.this,SelectCompanyActivity.class);
-            startActivity(intent);
-            finish();
-        }
+                String compyNameVal = Utility.getPreference(SplashScreenActivity.this).getString(Constants.PREFS_COMPANY_NAME, "");
+                if (!compyNameVal.equalsIgnoreCase("")) {
+                    Intent intent = new Intent(SplashScreenActivity.this, SelectCompanyActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(SplashScreenActivity.this, SelectCompanyActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 
             }
-        },100);
+        }, 100);
 
 
     }
@@ -161,7 +161,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-       // mControlsView.setVisibility(View.GONE);
+        // mControlsView.setVisibility(View.GONE);
         mVisible = false;
 
         // Schedule a runnable to remove the status and navigation bar after a delay

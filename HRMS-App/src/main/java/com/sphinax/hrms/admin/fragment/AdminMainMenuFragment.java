@@ -113,7 +113,7 @@ public class AdminMainMenuFragment extends Fragment implements View.OnClickListe
         ll_leave_mana.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new LeaveManagementFragment(), true, null);
+                Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new LeaveManagementFragment(), true, null,"");
 
             }
         });
@@ -121,7 +121,7 @@ public class AdminMainMenuFragment extends Fragment implements View.OnClickListe
         ll_announcement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new AnnouncementCreateFragment(), true, null);
+                Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new AnnouncementCreateFragment(), true, null,"");
 
             }
         });

@@ -57,7 +57,17 @@ public class Constants {
     public static final String PREFS_COMPANY_ID = "company_id";
     public static final String PREFS_COMPANY_NAME = "company_name";
     public static final String PREFS_COMPANY_SHORT_NAME = "company_short_name";
+    public static final String PREFS_COMPANY_IMAGE = "company_image";
+
     public static final String PREFS_USER_ID = "user_id";
     public static final String PREFS_USER_NAME = "user_name";
     public static final String PREFS_USER_TYPE = "user_type";
+
+
+
+
+    /*Fragment Name*/
+
+    public static final String FRAMENT_lOGIN = "LOGIN USER SCREEN";
+
 }

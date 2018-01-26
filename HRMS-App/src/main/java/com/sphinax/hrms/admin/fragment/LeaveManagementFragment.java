@@ -265,6 +265,9 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
     public void onClick(View v) {
         if (v.getId() == btSubmit.getId()) {
 
+
+            Log.d("cc","" + companyPosition + " " + branchPosition + " " + departmentPosition + " " + statusPosition + " " + empPosition);
+
 //            if(btDate.getText()!=null && !btDate.getText().toString().equalsIgnoreCase("") && ed_mess.getText()!=null && !ed_mess.getText().toString().equalsIgnoreCase("")){
 //                saveAnnouncement(ed_mess.getText().toString(),btDate.getText().toString());
 //            }

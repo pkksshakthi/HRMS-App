@@ -32,15 +32,16 @@ import java.util.HashMap;
  */
 public class SelectCompanyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    private ProgressDialog pdia;
     private Context context;
-    private ArrayList<Ajax> ajaxList;
+    private static View view;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+    private ArrayList<Ajax> companyajaxList;
+    private ProgressDialog pdia;
     private Spinner spCompany;
     private Button btNext;
     private CompanySpinnerAdapter companyDataAdapter;
     private int spinnerPosition = 0;
-    private View img_close;
+    private static final String TAG = "SelectCompanyActivity-";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
         }
         setContentView(R.layout.activity_selectcompany);
         context = this.getApplicationContext();
+        view = getWindow().getDecorView().getRootView();
         loadComponent();
         setListeners();
         fetchCompanyList();
@@ -67,78 +69,6 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
     private void setListeners() {
         spCompany.setOnItemSelectedListener(this);
         btNext.setOnClickListener(this);
-    }
-
-    /***Method used to get Company List from the OPS Service **/
-
-    private void fetchCompanyList() {
-        if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
-            Utility.showToastMessage(this, getResources().getString(R.string.invalidInternetConnection));
-            return;
-        }
-        pdia = new ProgressDialog(this);
-        if (pdia != null) {
-            pdia.setMessage("Loading...");
-            pdia.show();
-        }
-        try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
-
-            webServiceHandler.getCompanyList(this, context, requestMap, new ServiceCallback() {
-
-                @Override
-                public void onSuccess(boolean flag) {
-
-                    if (pdia != null) {
-                        pdia.dismiss();
-                    }
-                }
-
-                @Override
-                public void onReturnObject(Object obj) {
-                    if (pdia != null) {
-                        pdia.dismiss();
-                    }
-                    CompanyData companyData = (CompanyData) obj;
-                    ajaxList = new ArrayList<>();
-                    ajaxList = (ArrayList<Ajax>) companyData.getAjax();
-                    Log.d("ajaxList", "size --> " + ajaxList.size());
-
-                    companyDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, ajaxList, 1);
-                    companyDataAdapter
-                            .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spCompany.setAdapter(companyDataAdapter);
-
-                }
-
-                @Override
-                public void onParseError() {
-                    if (pdia != null) {
-                        pdia.dismiss();
-                    }
-                }
-
-                @Override
-                public void onNetworkError() {
-                    if (pdia != null) {
-                        pdia.dismiss();
-                    }
-                    //  Utility.callServerNotResponding(context);
-                }
-
-                @Override
-                public void unAuthorized() {
-                    if (pdia != null) {
-                        pdia.dismiss();
-                    }
-                    //  Utility.callMobileVerification(activity, context);
-                }
-
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -169,13 +99,14 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
     public void onClick(View v) {
         if (v.getId() == btNext.getId()) {
             Ajax ajax = new Ajax();
-            if (ajaxList != null) {
-                ajax = ajaxList.get(spinnerPosition);
+            if (companyajaxList != null) {
+                ajax = companyajaxList.get(spinnerPosition);
             }
             SharedPreferences.Editor editor = Utility.getPreference(this).edit();
             editor.putString(Constants.PREFS_COMPANY_ID, String.valueOf(ajax.getCompId()));
             editor.putString(Constants.PREFS_COMPANY_NAME, ajax.getCompName());
             editor.putString(Constants.PREFS_COMPANY_SHORT_NAME, ajax.getShortName());
+            editor.putString(Constants.PREFS_COMPANY_IMAGE, ajax.getCompImg());
             editor.commit();
         }
 
@@ -184,5 +115,75 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
         finish();
     }
 
+
+    /***Method used to get Company List from the OPS Service **/
+
+    private void fetchCompanyList() {
+        if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
+            Utility.showCustomToast(this, view, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(this);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+
+            webServiceHandler.getCompanyList(this, context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    CompanyData companyData = (CompanyData) obj;
+                    companyajaxList = new ArrayList<>();
+                    companyajaxList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d(TAG, "size --> " + companyajaxList.size());
+
+                    companyDataAdapter = new CompanySpinnerAdapter(context,
+                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, companyajaxList, 1);
+                    companyDataAdapter
+                            .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spCompany.setAdapter(companyDataAdapter);
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -80,7 +80,7 @@ public class UserMenuActivity extends FragmentActivity
         fragmentManager = getSupportFragmentManager();//Get Fragment Manager
 
 
-        Utility.addFragment(this, R.id.content_frame,fragmentManager,new UserMainMenuFragment(), true, null);
+        Utility.addFragment(this, R.id.content_frame,fragmentManager,new UserMainMenuFragment(), true, null,"");
 
 
 
@@ -127,29 +127,29 @@ public class UserMenuActivity extends FragmentActivity
 
          if (id == R.id.nav_mark_attendance) {
            //  startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
-            Utility.addFragment( this, R.id.content_frame,fragmentManager, new AttendanceEnterFragment(), true, null);
+            Utility.addFragment( this, R.id.content_frame,fragmentManager, new AttendanceEnterFragment(), true, null,"");
 
         } else if (id == R.id.nav_attendance_report) {
           //   Utility.addFragment( this, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null);
 
         }  else if (id == R.id.nav_leave_application) {
-             Utility.addFragment( this, R.id.content_frame,fragmentManager, new ApplyLeaveFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame,fragmentManager, new ApplyLeaveFragment(), true, null,"");
 
         } else if (id == R.id.nav_leave_management) {
 
-             Utility.addFragment( this, R.id.content_frame,fragmentManager, new EmployeeLeaveManagementFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame,fragmentManager, new EmployeeLeaveManagementFragment(), true, null,"");
 
          } else if (id == R.id.nav_my_info) {
-             Utility.addFragment( this, R.id.content_frame,fragmentManager, new UserProfileFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame,fragmentManager, new UserProfileFragment(), true, null,"");
 
         } else if (id == R.id.nav_announcement) {
-             Utility.addFragment(  this, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null);
+             Utility.addFragment(  this, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null,"");
 
         } else if (id == R.id.nav_payslip) {
-             Utility.addFragment( this, R.id.content_frame, fragmentManager,new PaySlipFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame, fragmentManager,new PaySlipFragment(), true, null,"");
 
         } else if (id == R.id.nav_help_desk) {
-             Utility.addFragment( this, R.id.content_frame, fragmentManager,new EnterHRHelpdeskFragment(), true, null);
+             Utility.addFragment( this, R.id.content_frame, fragmentManager,new EnterHRHelpdeskFragment(), true, null,"");
 
         } else if (id == R.id.nav_logout) {
              Intent intent=new Intent(UserMenuActivity.this,LoginActivity.class);

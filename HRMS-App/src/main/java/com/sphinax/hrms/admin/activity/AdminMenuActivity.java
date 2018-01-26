@@ -70,7 +70,7 @@ public class AdminMenuActivity extends AppCompatActivity
         fragmentManager = getSupportFragmentManager();//Get Fragment Manager
 
 
-        Utility.addFragment(this, R.id.content_frame,fragmentManager,new AdminMainMenuFragment(), true, null);
+        Utility.addFragment(this, R.id.content_frame,fragmentManager,new AdminMainMenuFragment(), true, null,"");
 
 
 
@@ -120,10 +120,10 @@ public class AdminMenuActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_leave_management) {
 
-           Utility.addFragment( this, R.id.content_frame,fragmentManager, new LeaveManagementFragment(), true, null);
+           Utility.addFragment( this, R.id.content_frame,fragmentManager, new LeaveManagementFragment(), true, null,"");
 
         } else if (id == R.id.nav_announcement) {
-          Utility.addFragment(  this, R.id.content_frame,fragmentManager, new AnnouncementCreateFragment(), true, null);
+          Utility.addFragment(  this, R.id.content_frame,fragmentManager, new AnnouncementCreateFragment(), true, null,"");
 
         } else if (id == R.id.nav_help_desk) {
            // Utility.addFragment( this, R.id.content_frame, fragmentManager,new EnterHRHelpdeskFragment(), true, null);
