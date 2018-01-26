@@ -62,7 +62,7 @@ public class LeaveTypeListAdapter extends BaseAdapter {
             row = inflater.inflate(R.layout.fragment_apply_leave_item, parent, false);
             holder = new OrderDetailHolder();
 
-            holder.bt_leavetype = (Button) row.findViewById(R.id.bt_leave_type);
+            holder.bt_leavetype = (TextView) row.findViewById(R.id.bt_leave_type);
 
 
             row.setTag(holder);
@@ -80,6 +80,6 @@ public class LeaveTypeListAdapter extends BaseAdapter {
     }
 
     static class OrderDetailHolder {
-        Button bt_leavetype;
+        TextView bt_leavetype;
     }
 }
