@@ -43,7 +43,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
 
-                    android:src="@drawable/myinfo_icon"
+                    android:src="@drawable/icon_profile_image"
                     app:civ_border_color="#ffffff"
                     app:civ_border_width="2dp" />
 
