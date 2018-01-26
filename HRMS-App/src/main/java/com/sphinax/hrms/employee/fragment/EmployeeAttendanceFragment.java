@@ -1,17 +1,28 @@
 package com.sphinax.hrms.employee.fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.sphinax.hrms.R;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,8 +95,48 @@ public class EmployeeAttendanceFragment extends Fragment {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        List<EventDay> events = new ArrayList<>();
+  /* Calendar calendar = Calendar.getInstance();
+        events.add(new EventDay(calendar, R.drawable.sample_icon_1));
 
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.add(Calendar.DAY_OF_MONTH, 6);
+        events.add(new EventDay(calendar1, R.drawable.sample_icon_2));*/
 
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.add(Calendar.DAY_OF_MONTH, -5);
+        events.add(new EventDay(calendar2, R.drawable.icon_red_box, Color.WHITE));
+
+        CalendarView calendarView = (CalendarView) mView.findViewById(R.id.calendarView);
+
+        Calendar min = Calendar.getInstance();
+        min.add(Calendar.MONTH, -4);
+
+        Calendar max = Calendar.getInstance();
+        max.add(Calendar.MONTH, 60);
+
+        calendarView.setMinimumDate(min);
+        calendarView.setMaximumDate(max);
+
+        calendarView.setEvents(events);
+
+        calendarView.setOnDayClickListener(eventDay ->
+                Toast.makeText(getActivity(),
+                        eventDay.getCalendar().getTime().toString(),
+                        Toast.LENGTH_SHORT).show());
+
+        Button setDateButton = (Button) mView.findViewById(R.id.setDateButton);
+        setDateButton.setOnClickListener(v -> {
+            try {
+                calendarView.setDate(getRandomCalendar());
+            } catch (OutOfDateRangeException exception) {
+                exception.printStackTrace();
+
+                Toast.makeText(getActivity(),
+                        "Date is out of range",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
     // TODO: Rename method, update argument and hook method into UI event
@@ -98,14 +149,21 @@ public class EmployeeAttendanceFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
     }
+    private Calendar getRandomCalendar() {
+        Random random = new Random();
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, random.nextInt(99));
+
+        return calendar;
+    }
     @Override
     public void onDetach() {
         super.onDetach();

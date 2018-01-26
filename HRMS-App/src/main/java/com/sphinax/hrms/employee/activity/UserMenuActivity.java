@@ -20,6 +20,7 @@ import com.sphinax.hrms.common.activity.LoginActivity;
 import com.sphinax.hrms.employee.fragment.AnnouncementListFragment;
 import com.sphinax.hrms.employee.fragment.ApplyLeaveFragment;
 import com.sphinax.hrms.employee.fragment.AttendanceEnterFragment;
+import com.sphinax.hrms.employee.fragment.EmployeeAttendanceFragment;
 import com.sphinax.hrms.employee.fragment.EmployeeLeaveManagementFragment;
 import com.sphinax.hrms.employee.fragment.EnterHRHelpdeskFragment;
 import com.sphinax.hrms.employee.fragment.PaySlipFragment;
@@ -135,6 +136,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
         if (id == R.id.nav_mark_attendance) {
             Utility.addFragment(this, R.id.content_frame, fragmentManager, new AttendanceEnterFragment(), true, null, Constants.FRAMENT_ANTTENDANCE_ENTER);
         } else if (id == R.id.nav_attendance_report) {
+            Utility.addFragment(this, R.id.content_frame, fragmentManager, new EmployeeAttendanceFragment(), true, null, Constants.FRAMENT_ANNOUNCEMENT_LIST);
 
         } else if (id == R.id.nav_leave_application) {
             Utility.addFragment(this, R.id.content_frame, fragmentManager, new ApplyLeaveFragment(), true, null, Constants.FRAMENT_LEAVE_APPLY);

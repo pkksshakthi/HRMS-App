@@ -103,6 +103,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
                 Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AttendanceEnterFragment(), true, null, Constants.FRAMENT_ANTTENDANCE_ENTER);
                 break;
             case R.id.ll_attendance_report:
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeAttendanceFragment(), true, null, Constants.FRAMENT_ANNOUNCEMENT_LIST);
                 break;
             case R.id.ll_leave_app:
                 Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new ApplyLeaveFragment(), true, null, Constants.FRAMENT_LEAVE_APPLY);
