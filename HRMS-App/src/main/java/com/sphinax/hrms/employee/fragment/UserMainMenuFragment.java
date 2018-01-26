@@ -1,8 +1,6 @@
 package com.sphinax.hrms.employee.fragment;
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,66 +8,42 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.utils.Utility;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link UserMainMenuFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link UserMainMenuFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class UserMainMenuFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private static Context context;
+    private static UserMainMenuFragment instance;
     private View mView;
-    private OnFragmentInteractionListener mListener;
-    private  FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
+    private LinearLayout ll_mark_attendance, ll_attendance_report, ll_leave_app, ll_leave_mana, ll_info, ll_announcement, ll_payslip, ll_helpdesk;
+
     public UserMainMenuFragment() {
         // Required empty public constructor
     }
-    private LinearLayout ll_mark_attendance,ll_attendance_report,ll_leave_app,ll_leave_mana,ll_info,ll_announcement,ll_payslip,ll_helpdesk;
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserMainMenuFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static UserMainMenuFragment newInstance(String param1, String param2) {
         UserMainMenuFragment fragment = new UserMainMenuFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
-    private static UserMainMenuFragment instance;
+
     public static UserMainMenuFragment getInstance() {
         if (instance == null)
             instance = new UserMainMenuFragment();
         return instance;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -82,10 +56,25 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-       // super.onViewCreated(view, savedInstanceState);
+        // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
+        loadComponent();
+        setListeners();
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    private void loadComponent() {
         ll_mark_attendance = mView.findViewById(R.id.ll_mark_attendance);
         ll_attendance_report = mView.findViewById(R.id.ll_attendance_report);
         ll_leave_app = mView.findViewById(R.id.ll_leave_app);
@@ -94,113 +83,46 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         ll_announcement = mView.findViewById(R.id.ll_announcement);
         ll_payslip = mView.findViewById(R.id.ll_payslip);
         ll_helpdesk = mView.findViewById(R.id.ll_helpdesk);
-
-
-         fragmentManager = getActivity().getSupportFragmentManager();
-
-        ll_mark_attendance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame,fragmentManager, new AttendanceEnterFragment(), true, null,"");
-
-            }
-        });
-        ll_attendance_report.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-             //   Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null);
-
-            }
-        });
-        ll_leave_app.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, fragmentManager,new ApplyLeaveFragment(), true, null,"");
-
-            }
-        });
-        ll_leave_mana.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new EmployeeLeaveManagementFragment(), true, null,"");
-
-            }
-        });
-        ll_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame,fragmentManager, new UserProfileFragment(), true, null,"");
-
-            }
-        });
-        ll_announcement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new AnnouncementListFragment(), true, null,"");
-
-            }
-        });
-        ll_payslip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame, fragmentManager,new PaySlipFragment(), true, null,"");
-
-            }
-        });
-        ll_helpdesk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.addFragment((Activity) context, R.id.content_frame,fragmentManager, new EnterHRHelpdeskFragment(), true, null,"");
-
-            }
-        });
-
-
-
-
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    private void setListeners() {
+        ll_mark_attendance.setOnClickListener(this);
+        ll_attendance_report.setOnClickListener(this);
+        ll_leave_app.setOnClickListener(this);
+        ll_leave_mana.setOnClickListener(this);
+        ll_info.setOnClickListener(this);
+        ll_announcement.setOnClickListener(this);
+        ll_payslip.setOnClickListener(this);
+        ll_helpdesk.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.ll_mark_attendance:
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AttendanceEnterFragment(), true, null, Constants.FRAMENT_ANTTENDANCE_ENTER);
+                break;
+            case R.id.ll_attendance_report:
+                break;
+            case R.id.ll_leave_app:
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new ApplyLeaveFragment(), true, null, Constants.FRAMENT_LEAVE_APPLY);
+                break;
+            case R.id.ll_leave_mana:
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeLeaveManagementFragment(), true, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+                break;
+            case R.id.ll_info:
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserProfileFragment(), true, null, Constants.FRAMENT_USER_INFO);
+                break;
+            case R.id.ll_announcement:
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AnnouncementListFragment(), true, null, Constants.FRAMENT_ANNOUNCEMENT_LIST);
+                break;
+            case R.id.ll_payslip:
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new PaySlipFragment(), true, null, Constants.FRAMENT_PAYSLIP);
+                break;
+            case R.id.ll_helpdesk:
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EnterHRHelpdeskFragment(), true, null, Constants.FRAMENT_HR_HELPDESK_ENTER);
+                break;
+        }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

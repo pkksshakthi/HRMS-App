@@ -70,5 +70,22 @@ public class Constants {
 
     public static final String FRAMENT_LOGIN = "LOGIN USER SCREEN";
     public static final String FRAMENT_FORGOT_PASSWORD = "FORGOT PASSWORD SCREEN";
+    public static final String FRAMENT_USER_MENU = "DASHBOARD SCREEN";
+    public static final String FRAMENT_ANTTENDANCE_ENTER = "ANTTENDANCE ENTER SCREEN";
+    public static final String FRAMENT_ANTTENDANCE_LIST = "ANTTENDANCE REPORT SCREEN";
+    public static final String FRAMENT_LEAVE_APPLY = "LEAVE APPLY SCREEN";
+    public static final String FRAMENT_LEAVE_MANAGEMENT = "LEAVE MANAGEMENT SCREEN";
+    public static final String FRAMENT_USER_INFO = "USER PROFILE SCREEN";
+    public static final String FRAMENT_ANNOUNCEMENT_LIST = "ANNOUNCEMENT LIST SCREEN";
+    public static final String FRAMENT_PAYSLIP = "PAYSLIP DETAIL SCREEN";
+    public static final String FRAMENT_HR_HELPDESK_ENTER = "HR HELPDESK ENTER SCREEN";
+//    public static final String FRAMENT_ = "";
+//    public static final String FRAMENT_ = "";
+//    public static final String FRAMENT_ = "";
+//    public static final String FRAMENT_ = "";
+//    public static final String FRAMENT_ = "";
+//    public static final String FRAMENT_ = "";
+
+
 
 }

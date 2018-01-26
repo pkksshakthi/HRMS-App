@@ -42,7 +42,7 @@ public class AdminMainMenuFragment extends Fragment implements View.OnClickListe
     private String mParam2;
     private static Context context;
     private View mView;
-    private UserMainMenuFragment.OnFragmentInteractionListener mListener;
+   // private UserMainMenuFragment.OnFragmentInteractionListener mListener;
     private FragmentManager fragmentManager;
     public AdminMainMenuFragment() {
         // Required empty public constructor
@@ -141,9 +141,9 @@ public class AdminMainMenuFragment extends Fragment implements View.OnClickListe
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
     }
 
     @Override
@@ -160,7 +160,7 @@ public class AdminMainMenuFragment extends Fragment implements View.OnClickListe
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        //mListener = null;
     }
 
     @Override
