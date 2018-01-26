@@ -29,7 +29,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         fragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
-            Utility.addFragment(this, R.id.frameContainer, fragmentManager, new Login_Fragment(), true, null, Constants.FRAMENT_lOGIN);
+            Utility.addFragment(this, R.id.frameContainer, fragmentManager, new Login_Fragment(), true, null, Constants.FRAMENT_LOGIN);
         }
 
         loadComponent();

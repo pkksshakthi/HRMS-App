@@ -68,6 +68,7 @@ public class Constants {
 
     /*Fragment Name*/
 
-    public static final String FRAMENT_lOGIN = "LOGIN USER SCREEN";
+    public static final String FRAMENT_LOGIN = "LOGIN USER SCREEN";
+    public static final String FRAMENT_FORGOT_PASSWORD = "FORGOT PASSWORD SCREEN";
 
 }

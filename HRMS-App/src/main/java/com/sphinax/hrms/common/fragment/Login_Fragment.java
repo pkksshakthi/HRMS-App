@@ -1,11 +1,10 @@
 package com.sphinax.hrms.common.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.InputType;
@@ -31,30 +30,29 @@ import com.sphinax.hrms.admin.activity.AdminMenuActivity;
 import com.sphinax.hrms.employee.activity.UserMenuActivity;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.LoginData;
-import com.sphinax.hrms.sample.dummy.CustomToast;
 import com.sphinax.hrms.sample.dummy.ForgotPassword_Fragment;
-import com.sphinax.hrms.sample.dummy.OTP_Fragment;
-import com.sphinax.hrms.sample.dummy.Utils;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Login_Fragment extends Fragment implements OnClickListener {
-    private static View view;
-    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+
+    private static final String TAG = "Login_Fragment-";
+    private static View mView;
+    private static Context context;
     private static EditText emailid, password;
     private static Button loginButton;
-    private static TextView forgotPassword, signUp;
+    private static TextView forgotPassword;
     private static CheckBox show_hide_password;
     private static LinearLayout loginLayout;
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
+    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private ProgressDialog pdia;
+
 
     public Login_Fragment() {
 
@@ -63,47 +61,19 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_login, container, false);
-        initViews();
-        setListeners();
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+
         return view;
     }
 
-    // Initiate Views
-    private void initViews() {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        // super.onViewCreated(view, savedInstanceState);
+        mView = view;
+        context = view.getContext();
         fragmentManager = getActivity().getSupportFragmentManager();
-
-        emailid = (EditText) view.findViewById(R.id.ed_username);
-        password = (EditText) view.findViewById(R.id.ed_password);
-        loginButton = (Button) view.findViewById(R.id.bt_login);
-        forgotPassword = (TextView) view.findViewById(R.id.forgot_password);
-        signUp = (TextView) view.findViewById(R.id.createAccount);
-        show_hide_password = (CheckBox) view
-                .findViewById(R.id.show_hide_password);
-        loginLayout = (LinearLayout) view.findViewById(R.id.login_layout);
-
-        // Load ShakeAnimation
-        shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
-                R.anim.shake);
-
-        // Setting text selector over textviews
-        @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
-        try {
-            ColorStateList csl = ColorStateList.createFromXml(getResources(),
-                    xrp);
-
-            forgotPassword.setTextColor(csl);
-            show_hide_password.setTextColor(csl);
-            signUp.setTextColor(csl);
-        } catch (Exception e) {
-        }
-    }
-
-    // Set Listeners
-    private void setListeners() {
-        loginButton.setOnClickListener(this);
-        forgotPassword.setOnClickListener(this);
-        signUp.setOnClickListener(this);
+        initViews();
+        setListeners();
 
         // Set check listener over checkbox for showing and hiding password
         show_hide_password
@@ -140,6 +110,25 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 });
     }
 
+
+    // Initiate Views
+    private void initViews() {
+        emailid = mView.findViewById(R.id.ed_username);
+        password = mView.findViewById(R.id.ed_password);
+        loginButton = mView.findViewById(R.id.bt_login);
+        forgotPassword = mView.findViewById(R.id.forgot_password);
+        show_hide_password = mView.findViewById(R.id.show_hide_password);
+        loginLayout = mView.findViewById(R.id.login_layout);
+        // Load ShakeAnimation
+        shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+    }
+
+    // Set Listeners
+    private void setListeners() {
+        loginButton.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -148,23 +137,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 break;
 
             case R.id.forgot_password:
-
-                // Replace forgot password fragment with animation
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer,
-                                new ForgotPassword_Fragment(),
-                                Utils.ForgotPassword_Fragment).commit();
-                break;
-            case R.id.createAccount:
-
-                // Replace signup frgament with animation
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer, new OTP_Fragment(),
-                                Utils.SignUp_Fragment).commit();
+                Utility.addFragment(getActivity(), R.id.frameContainer, fragmentManager, new ForgotPassword_Fragment(), true, null, Constants.FRAMENT_FORGOT_PASSWORD);
                 break;
         }
 
@@ -175,37 +148,32 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         // Get email id and password
         String getEmailId = emailid.getText().toString();
         String getPassword = password.getText().toString();
-
-        // Check patter for email id
-        Pattern p = Pattern.compile(Utils.regEx);
-
-        Matcher m = p.matcher(getEmailId);
-
         // Check for both field is empty or not
-        if (getEmailId.equals("") || getEmailId.length() == 0
-                || getPassword.equals("") || getPassword.length() == 0) {
+        if (getEmailId.equals("") || getEmailId.length() == 0 || getPassword.equals("") || getPassword.length() == 0) {
             loginLayout.startAnimation(shakeAnimation);
-            new CustomToast().Show_Toast(getActivity(), view,
-                    "Enter both credentials.");
-
+            Utility.showCustomToast(getActivity(), mView, getResources().getString(R.string.enterUser));
         } else {
             loginValidation(getEmailId, getPassword);
         }
-//		// Check if email id is valid or not
-//		else if (!m.find())
-//			new CustomToast().Show_Toast(getActivity(), view,
-//					"Your Email Id is Invalid.");
-//		// Else do login and do your stuff
-//		else
-//			loginValidation(emailid,password);
-////			Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
-////					.show();
-
     }
+
+
+    private void startMenuActivity(String user) {
+        if (user.equalsIgnoreCase("E")) {
+            Intent intent = new Intent(getActivity(), UserMenuActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        } else if (user.equalsIgnoreCase("A")) {
+            Intent intent = new Intent(getActivity(), AdminMenuActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
+    }
+
 
     private void loginValidation(String userNameValue, String password) {
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(getActivity(), mView, getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         pdia = new ProgressDialog(getActivity());
@@ -217,8 +185,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
             String url = Constants.LOGIN_REQUEST_URL;
             url = url.replace("{COMPANYID}", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
-
-
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("userId", userNameValue.toString());
             requestMap.put("userpwd", password.toString());
@@ -235,9 +201,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     if (flag == true) {
                         //  startMenuActivity("user");
                     } else {
-                        new CustomToast().Show_Toast(getActivity(), view,
-                                getResources().getString(R.string.invalidUser));
-                      //  Utility.showToastMessage(getContext(), getResources().getString(R.string.invalidUser));
+                        Utility.showCustomToast(getActivity(), mView, getResources().getString(R.string.invalidUser));
                     }
                 }
 
@@ -247,26 +211,13 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                         pdia.dismiss();
                     }
                     LoginData companyData = (LoginData) obj;
-                    Log.d("ajaxList", "size --> " + companyData.getUserId());
+                    Log.d(TAG, "size --> " + companyData.getUserId());
 
                     if (companyData != null && companyData.getResCode() == 1) {
                         startMenuActivity(companyData.getAdminOremp());
                     }
 
                 }
-
-                private void startMenuActivity(String user) {
-                    if (user.equalsIgnoreCase("E")) {
-                        Intent intent = new Intent(getActivity(), UserMenuActivity.class);
-                        startActivity(intent);
-                        getActivity().finish();
-                    } else if (user.equalsIgnoreCase("A")) {
-                        Intent intent = new Intent(getActivity(), AdminMenuActivity.class);
-                        startActivity(intent);
-                        getActivity().finish();
-                    }
-                }
-
 
                 @Override
                 public void onParseError() {
@@ -280,7 +231,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    //  Utility.callServerNotResponding(context);
                 }
 
                 @Override
@@ -288,7 +238,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    //  Utility.callMobileVerification(activity, context);
                 }
 
             });
