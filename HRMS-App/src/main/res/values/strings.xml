@@ -43,5 +43,32 @@
     <string name="username">UserName</string>
     <string name="welcome_to">Welcome To</string>
 
+
+    <string name="material_calendar_monday">MO</string>
+    <string name="material_calendar_tuesday">TU</string>
+    <string name="material_calendar_wednesday">WE</string>
+    <string name="material_calendar_thursday">TH</string>
+    <string name="material_calendar_friday">FR</string>
+    <string name="material_calendar_saturday">SA</string>
+    <string name="material_calendar_sunday">SU</string>
+
+    <array name="material_calendar_months_array">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May </item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </array>
+
+    <string name="material_calendar_today_button">Dzisiaj</string>
+    <string name="material_calendar_positive_button">Wybierz</string>
+    <string name="material_calendar_negative_button">Anuluj</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
 </resources>

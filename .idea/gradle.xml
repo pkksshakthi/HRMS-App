@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/HRMS-App" />
+            <option value="$PROJECT_DIR$/librarynew" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
