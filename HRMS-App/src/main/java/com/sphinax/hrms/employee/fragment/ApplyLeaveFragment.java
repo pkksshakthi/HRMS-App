@@ -3,10 +3,10 @@ package com.sphinax.hrms.employee.fragment;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,9 +17,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,67 +43,40 @@ import java.util.HashMap;
 
 
 public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private static final String TAG = "ApplyLeaveFragment-";
     private static Context context;
+    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+    String[] leaveSession = {"First Half", "Second Half"};
     private View mView;
-    private Button bt_submit;
+    private Button bt_submit, bt_cancel;
     private TextView tv_start_date, tv_end_date, tv_count;
     private Spinner sp_session_start, sp_session_end, sp_leave_type;
-  //  private ListView lv_leave_type;
+    private EditText ed_reason;
     private ProgressDialog pdia;
-    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private ArrayList<Ajax> leaveTypeList;
     private LeaveTypeSpinnerAdapter leaveTypeSpinnerAdapter;
     private LeaveTypeListAdapter leaveTypeListAdapter;
     private int leaveTypePosition = 0;
     private int startsession = 0;
     private int endsession = 0;
-    String[] leaveSession = {"First Half", "Second Half"};
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private int aYear, aMonth;
     private ImageView img_leave_application;
     private ImageView img_leave_management;
     private ScrollView scroll_leaveapplication;
     private RecyclerView lv_leave_type;
+    private String leaveReason;
 
 
     public ApplyLeaveFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ApplyLeaveFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ApplyLeaveFragment newInstance(String param1, String param2) {
-        ApplyLeaveFragment fragment = new ApplyLeaveFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -120,38 +92,36 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         mView = view;
         context = view.getContext();
 
-        bt_submit = (Button) mView.findViewById(R.id.bt_submit);
-        tv_count = (TextView) mView.findViewById(R.id.tv_count);
-        tv_start_date = (TextView) mView.findViewById(R.id.tv_start_date);
-        tv_end_date = (TextView) mView.findViewById(R.id.tv_end_date);
-        sp_session_start = (Spinner) mView.findViewById(R.id.sp_leave_session_start);
-        sp_session_end = (Spinner) mView.findViewById(R.id.sp_leave_session_end);
-        sp_leave_type = (Spinner) mView.findViewById(R.id.sp_leave_type);
-     //   lv_leave_type = (ListView) mView.findViewById(R.id.lv_leave_data);
-
-        lv_leave_type = (RecyclerView)mView.findViewById(R.id.lv_leave_data);
-
-        lv_leave_type.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mView.getContext(),LinearLayoutManager.HORIZONTAL, false);
-        lv_leave_type.setLayoutManager(layoutManager);
-
-
-        img_leave_application = (ImageView) mView.findViewById(R.id.img_leave_application);
-        img_leave_management = (ImageView) mView.findViewById(R.id.img_leave_management);
-        scroll_leaveapplication = (ScrollView) mView.findViewById(R.id.scroll_leave_Applicatoion);
+        loadComponent();
         setListeners();
 
+        lv_leave_type.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mView.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        lv_leave_type.setLayoutManager(layoutManager);
 
-        //Creating the ArrayAdapter instance having the country list
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, leaveSession);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
         sp_session_start.setAdapter(arrayAdapter);
         sp_session_end.setAdapter(arrayAdapter);
 
         fetchLeaveList();
     }
 
+    private void loadComponent() {
+        bt_submit = mView.findViewById(R.id.bt_submit);
+        bt_cancel = mView.findViewById(R.id.bt_cancel);
+        tv_count = mView.findViewById(R.id.tv_count);
+        tv_start_date = mView.findViewById(R.id.tv_start_date);
+        tv_end_date = mView.findViewById(R.id.tv_end_date);
+        sp_session_start = mView.findViewById(R.id.sp_leave_session_start);
+        sp_session_end = mView.findViewById(R.id.sp_leave_session_end);
+        sp_leave_type = mView.findViewById(R.id.sp_leave_type);
+        lv_leave_type = mView.findViewById(R.id.lv_leave_data);
+        img_leave_application = mView.findViewById(R.id.img_leave_application);
+        img_leave_management = mView.findViewById(R.id.img_leave_management);
+        scroll_leaveapplication = mView.findViewById(R.id.scroll_leave_Applicatoion);
+        ed_reason = mView.findViewById(R.id.ed_reason);
+    }
 
     private void setListeners() {
         sp_leave_type.setOnItemSelectedListener(this);
@@ -161,32 +131,8 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         tv_end_date.setOnClickListener(this);
         img_leave_application.setOnClickListener(this);
         img_leave_management.setOnClickListener(this);
-
-        //btNext.setOnClickListener(this);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        bt_submit.setOnClickListener(this);
+        bt_cancel.setOnClickListener(this);
     }
 
     @Override
@@ -200,19 +146,26 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                 getDate("end");
                 break;
             case R.id.img_leave_application:
-                if (scroll_leaveapplication.getVisibility()== View.VISIBLE){
+                if (scroll_leaveapplication.getVisibility() == View.VISIBLE) {
                     scroll_leaveapplication.setVisibility(View.GONE);
-                }else {
+                } else {
                     scroll_leaveapplication.setVisibility(View.VISIBLE);
                 }
                 break;
             case R.id.img_leave_management:
 
-                if (lv_leave_type.getVisibility()== View.VISIBLE){
+                if (lv_leave_type.getVisibility() == View.VISIBLE) {
                     lv_leave_type.setVisibility(View.GONE);
-                }else {
+                } else {
                     lv_leave_type.setVisibility(View.VISIBLE);
                 }
+                break;
+
+            case R.id.bt_submit:
+                checkAllDataEnter();
+                break;
+            case R.id.bt_cancel:
+                getFragmentManager().beginTransaction().detach(this).attach(this).commit();
                 break;
         }
     }
@@ -224,10 +177,12 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                 actionCompanySelector(position);
                 break;
             case R.id.sp_leave_session_start:
-                startsession = position;
+                startsession = position + 1;
+                datediffernet();
                 break;
             case R.id.sp_leave_session_end:
-                endsession = position;
+                endsession = position + 1;
+                datediffernet();
                 break;
 
         }
@@ -254,10 +209,12 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                                           int monthOfYear, int dayOfMonth) {
 
                         if (txtValue.equalsIgnoreCase("start")) {
-                            tv_start_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            tv_start_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            aYear = year;
+                            aMonth = monthOfYear + 1;
                             datediffernet();
                         } else if (txtValue.equalsIgnoreCase("end")) {
-                            tv_end_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            tv_end_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             datediffernet();
                         }
                     }
@@ -273,7 +230,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         String dateStop = tv_end_date.getText().toString();
         if (dateStart != null && !dateStart.equalsIgnoreCase("") && dateStop != null && !dateStop.equalsIgnoreCase("")) {
             //HH converts hour in 24 hours format (0-23), day calculation
-            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
             Date d1 = null;
             Date d2 = null;
@@ -281,36 +238,19 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
             try {
                 d1 = format.parse(dateStart);
                 d2 = format.parse(dateStop);
-
-                //in milliseconds
                 long diff = d2.getTime() - d1.getTime();
-
-//            long diffSeconds = diff / 1000 % 60;
-//            long diffMinutes = diff / (60 * 1000) % 60;
-//            long diffHours = diff / (60 * 60 * 1000) % 24;
                 long diffDays = diff / (24 * 60 * 60 * 1000);
                 Long l = new Long(diffDays);
                 double dateValue = l.doubleValue();
-                Log.d("Data", " days, " + diffDays);
-
-                //int dateValue= Integer.parseInt(String.valueOf(diffDays));
+                Log.d(TAG, " days, " + diffDays);
                 dateValue = dateValue + 1;
                 if (startsession == 1) {
                     dateValue = dateValue - .5;
-
                 }
                 if (endsession == 0) {
                     dateValue = dateValue - .5;
                 }
-
-
                 tv_count.setText(String.valueOf(dateValue));
-
-
-                System.out.print(diffDays + " days, ");
-//            System.out.print(diffHours + " hours, ");
-//            System.out.print(diffMinutes + " minutes, ");
-//            System.out.print(diffSeconds + " seconds.");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -319,30 +259,37 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     }
 
     /**
-     * Its works on Company Spinner Click Action
+     * Its works on LeaveType Spinner Click Action
      **/
     private void actionCompanySelector(int position) {
-        leaveTypePosition = position;
+        Ajax leavetype = new Ajax();
+        if (leaveTypeList != null) {
+            leavetype = leaveTypeList.get(position);
+            //  leaveTypePosition = leavetype.getLeaveTypeId();
+            leaveTypePosition = position;
+        }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    private void checkAllDataEnter() {
+
+        if (Double.valueOf(tv_count.getText().toString()) > 0) {
+            if (ed_reason.getText().toString() != null && !ed_reason.getText().toString().equalsIgnoreCase("")) {
+                leaveReason = ed_reason.getText().toString();
+                applyLeave();
+            } else {
+                Utility.showCustomToast(context, mView, "Kindly Enter the Leave Reason");
+            }
+        } else {
+            Utility.showCustomToast(context, mView, "Kindly Select the Date");
+        }
+
+
     }
+
 
     private void fetchLeaveList() {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
-            Utility.showCustomToast(context, mView,getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(context, mView, getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         pdia = new ProgressDialog(context);
@@ -352,7 +299,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         }
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
-            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empId", Global.getLoginInfoData().getUserId().toString());
 
             webServiceHandler.getLeaveTypeList(getActivity(), context, requestMap, new ServiceCallback() {
@@ -373,7 +320,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     CompanyData companyData = (CompanyData) obj;
                     leaveTypeList = new ArrayList<>();
                     leaveTypeList = (ArrayList<Ajax>) companyData.getAjax();
-                    Log.d("ajaxList", "size --> " + leaveTypeList.size());
+                    Log.d(TAG, "size --> " + leaveTypeList.size());
 
                     leaveTypeSpinnerAdapter = new LeaveTypeSpinnerAdapter(context,
                             android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, leaveTypeList);
@@ -398,7 +345,6 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    //  Utility.callServerNotResponding(context);
                 }
 
                 @Override
@@ -406,7 +352,87 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void applyLeave() {
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.showCustomToast(getActivity(), mView, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(getActivity());
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
+            requestMap.put("empID", Global.getLoginInfoData().getUserId());
+            requestMap.put("toWhom", Global.getLoginInfoData().getReportsTo());
+            requestMap.put("leaveType", String.valueOf(leaveTypePosition));
+            requestMap.put("reaSon", leaveReason);
+            requestMap.put("Fromdate", tv_start_date.getText().toString());
+            requestMap.put("FromSession", String.valueOf(startsession));
+            requestMap.put("Todate", tv_end_date.getText().toString());
+            requestMap.put("ToSession", String.valueOf(endsession));
+            requestMap.put("appliedDays", tv_count.getText().toString());
+            requestMap.put("leaveMonth", String.valueOf(aMonth));
+            requestMap.put("leaveYear", String.valueOf(aYear));
+
+            webServiceHandler.applyLeaveRequest(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                    if (flag) {
+                        Utility.showToastMessage(getActivity(), "Leave Applyed");
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                        Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new ApplyLeaveFragment(), false, null, Constants.FRAMENT_LEAVE_APPLY);
+                    } else {
+                        Utility.showToastMessage(getActivity(), "Leave not applyed kindly try again");
+
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
                 }
 
             });
