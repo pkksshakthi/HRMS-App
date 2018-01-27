@@ -11,8 +11,12 @@ import java.io.Serializable;
 
 public class Ajax implements Serializable {
 
-
-
+    @SerializedName("empBranchId")
+    @Expose
+    private Integer empBranchId;
+    @SerializedName("address")
+    @Expose
+    private String address;
     @SerializedName("empImg")
     @Expose
     private String empImg;
@@ -247,6 +251,21 @@ public class Ajax implements Serializable {
     @Expose
     private Integer leaveTotal;
 
+
+    public Integer getEmpBranchId() {
+        return empBranchId;
+    }
+
+    public void setEmpBranchId(Integer empBranchId) {
+        this.empBranchId = empBranchId;
+    }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     public String getLeaveType() {
         return leaveType;
     }
