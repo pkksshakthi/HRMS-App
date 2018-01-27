@@ -234,6 +234,51 @@ public class Ajax implements Serializable {
     private Long deductionAmt;
 
 
+    @SerializedName("Leave Type")
+    @Expose
+    private String leaveType;
+    @SerializedName("Leave Apply")
+    @Expose
+    private Integer leaveApply;
+    @SerializedName("Leave Balance")
+    @Expose
+    private Integer leaveBalance;
+    @SerializedName("Leave Total")
+    @Expose
+    private Integer leaveTotal;
+
+    public String getLeaveType() {
+        return leaveType;
+    }
+
+    public void setLeaveType(String leaveType) {
+        this.leaveType = leaveType;
+    }
+
+    public Integer getLeaveApply() {
+        return leaveApply;
+    }
+
+    public void setLeaveApply(Integer leaveApply) {
+        this.leaveApply = leaveApply;
+    }
+
+    public Integer getLeaveBalance() {
+        return leaveBalance;
+    }
+
+    public void setLeaveBalance(Integer leaveBalance) {
+        this.leaveBalance = leaveBalance;
+    }
+
+    public Integer getLeaveTotal() {
+        return leaveTotal;
+    }
+
+    public void setLeaveTotal(Integer leaveTotal) {
+        this.leaveTotal = leaveTotal;
+    }
+
 
     public String getEarningDesc() {
         return earningDesc;

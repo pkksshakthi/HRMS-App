@@ -39,7 +39,7 @@ public class Constants {
     public static final String ANNOUNCEMENT_LIST_REQUEST_URL = domain + client + "AnnouncementList";
     public static final String ATTENDANCE_ENTER_URL = domain + client + "markYourAttendance";
     public static final String ATTENDANCE_ALREADY_ENTER_URL = domain + client + "showAttendance";
-    public static final String LEAVE_COUNT_AND_TYPE_URL = domain + client + "getEmployeeLeaveCheckingTable";
+    public static final String LEAVE_COUNT_AND_TYPE_URL = domain + client + "getEmployeeLeaveCheckingTableNew";
     public static final String LEAVE_LIST_EMPLOYEE_REQUEST_URL = domain + client + "list";
     public static final String HR_HELPDESK_EMPLOYEE_SAVE_URL = domain + client + "saveHrhelpdesk";
     public static final String PAYSLIP_YEAR_LIST_REQUEST_URL = domain + client + "Year";

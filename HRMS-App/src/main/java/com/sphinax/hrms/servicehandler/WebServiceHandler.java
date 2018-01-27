@@ -379,7 +379,7 @@ public class WebServiceHandler {
             serviceContext = context;
             serviceActivity = activity;
 
-            String url = Constants.COMPANY_LIST_REQUEST_URL;
+            String url = Constants.LEAVE_COUNT_AND_TYPE_URL;
 
             GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
                 @Override
@@ -402,6 +402,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else{
+                            delegate.onParseError();
                         }
 //                        } else {
 //

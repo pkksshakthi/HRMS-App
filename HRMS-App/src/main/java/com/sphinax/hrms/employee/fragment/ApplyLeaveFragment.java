@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
@@ -38,14 +42,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ApplyLeaveFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ApplyLeaveFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,7 +59,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     private Button bt_submit;
     private TextView tv_start_date, tv_end_date, tv_count;
     private Spinner sp_session_start, sp_session_end, sp_leave_type;
-    private ListView lv_leave_type;
+  //  private ListView lv_leave_type;
     private ProgressDialog pdia;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private ArrayList<Ajax> leaveTypeList;
@@ -76,6 +73,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     private ImageView img_leave_application;
     private ImageView img_leave_management;
     private ScrollView scroll_leaveapplication;
+    private RecyclerView lv_leave_type;
 
 
     public ApplyLeaveFragment() {
@@ -129,7 +127,15 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         sp_session_start = (Spinner) mView.findViewById(R.id.sp_leave_session_start);
         sp_session_end = (Spinner) mView.findViewById(R.id.sp_leave_session_end);
         sp_leave_type = (Spinner) mView.findViewById(R.id.sp_leave_type);
-        lv_leave_type = (ListView) mView.findViewById(R.id.lv_leave_data);
+     //   lv_leave_type = (ListView) mView.findViewById(R.id.lv_leave_data);
+
+        lv_leave_type = (RecyclerView)mView.findViewById(R.id.lv_leave_data);
+
+        lv_leave_type.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mView.getContext(),LinearLayoutManager.HORIZONTAL, false);
+        lv_leave_type.setLayoutManager(layoutManager);
+
+
         img_leave_application = (ImageView) mView.findViewById(R.id.img_leave_application);
         img_leave_management = (ImageView) mView.findViewById(R.id.img_leave_management);
         scroll_leaveapplication = (ScrollView) mView.findViewById(R.id.scroll_leave_Applicatoion);
@@ -143,7 +149,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         sp_session_start.setAdapter(arrayAdapter);
         sp_session_end.setAdapter(arrayAdapter);
 
-        fetchCompanyList();
+        fetchLeaveList();
     }
 
 
@@ -334,9 +340,9 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         void onFragmentInteraction(Uri uri);
     }
 
-    private void fetchCompanyList() {
+    private void fetchLeaveList() {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
-            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(context, mView,getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         pdia = new ProgressDialog(context);
@@ -346,8 +352,10 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         }
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("empId", Global.getLoginInfoData().getUserId().toString());
 
-            webServiceHandler.getCompanyList(getActivity(), context, requestMap, new ServiceCallback() {
+            webServiceHandler.getLeaveTypeList(getActivity(), context, requestMap, new ServiceCallback() {
 
                 @Override
                 public void onSuccess(boolean flag) {

@@ -9,6 +9,7 @@ import android.util.Log;
 import com.sphinax.hrms.model.ServiceRequest;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.OutputStream;
@@ -119,6 +120,11 @@ public class GetMethodHandler extends AsyncTask<Void, Void, JSONObject> {
 
 
         } catch (Exception e) {
+            try {
+                delegate.processFinish(this.context, jsonObject);
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
             e.printStackTrace();
         }
         return jsonObject;
