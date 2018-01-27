@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,74 +17,42 @@ import android.view.ViewGroup;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
-import com.sphinax.hrms.view.AnnouncementListAdapter;
 import com.sphinax.hrms.view.EmployeeLeaveListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LeaveApproveListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class LeaveApproveListFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private static final String TAG = "LeaveApproveListFragment-";
     private static Context context;
+    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private View mView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<Ajax> approveList = new ArrayList<>();
     private RecyclerView recyclerView;
     private EmployeeLeaveListAdapter mAdapter;
     private ProgressDialog pdia;
-    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
-    private ArrayList<Ajax> leaveList;
 
 
     public LeaveApproveListFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LeaveApproveListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LeaveApproveListFragment newInstance(String param1, String param2) {
-        LeaveApproveListFragment fragment = new LeaveApproveListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -100,9 +67,8 @@ public class LeaveApproveListFragment extends Fragment {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        loadComponent();
 
-
-         mSwipeRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.swipeRefreshLayout);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -113,8 +79,6 @@ public class LeaveApproveListFragment extends Fragment {
         });
 
 
-        recyclerView = (RecyclerView) mView.findViewById(R.id.itemsRecyclerView);
-
         mAdapter = new EmployeeLeaveListAdapter(approveList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -123,6 +87,12 @@ public class LeaveApproveListFragment extends Fragment {
 
         fetchLeaveList();
 
+
+    }
+
+    private void loadComponent() {
+        recyclerView = mView.findViewById(R.id.itemsRecyclerView);
+        mSwipeRefreshLayout = mView.findViewById(R.id.swipeRefreshLayout);
 
     }
 
@@ -136,8 +106,6 @@ public class LeaveApproveListFragment extends Fragment {
 
     void onItemsLoadComplete() {
         // Update the adapter and notify data set changed
-        // ...
-
         // Stop refresh animation
         mSwipeRefreshLayout.setRefreshing(false);
         //mSwipeRefreshLayout.setEnabled(false);
@@ -147,7 +115,7 @@ public class LeaveApproveListFragment extends Fragment {
 
     private void fetchLeaveList() {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
-            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(context, mView, getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         pdia = new ProgressDialog(context);
@@ -157,9 +125,10 @@ public class LeaveApproveListFragment extends Fragment {
         }
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
-            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("leavestatus","1" );
-            requestMap.put("empId","10000");
+            requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
+            //requestMap.put("leavestatus", "1");
+            requestMap.put("leavestatus", "All");
+            requestMap.put("empId", Global.getLoginInfoData().getUserId());
 
             webServiceHandler.getAllLeaveList(getActivity(), context, requestMap, new ServiceCallback() {
 
@@ -179,13 +148,11 @@ public class LeaveApproveListFragment extends Fragment {
                     CompanyData companyData = (CompanyData) obj;
                     approveList = new ArrayList<>();
                     approveList = (ArrayList<Ajax>) companyData.getAjax();
-                    Log.d("ajaxList", "size --> " + approveList.size());
+                    Log.d(TAG, "size --> " + approveList.size());
                     mAdapter = new EmployeeLeaveListAdapter(approveList);
                     recyclerView.setAdapter(mAdapter);
 
-                    //mAdapter.notifyDataSetChanged();
                     onItemsLoadComplete();
-
 
                 }
 
@@ -201,7 +168,6 @@ public class LeaveApproveListFragment extends Fragment {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    //  Utility.callServerNotResponding(context);
                 }
 
                 @Override
@@ -209,7 +175,6 @@ public class LeaveApproveListFragment extends Fragment {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    //  Utility.callMobileVerification(activity, context);
                 }
 
             });
@@ -217,6 +182,5 @@ public class LeaveApproveListFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
 
 }

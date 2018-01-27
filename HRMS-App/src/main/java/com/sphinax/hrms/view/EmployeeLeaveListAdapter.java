@@ -20,14 +20,15 @@ public class EmployeeLeaveListAdapter extends RecyclerView.Adapter<EmployeeLeave
     private List<Ajax> ajaxList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_status, tv_date, tv_leave_type;
+        public TextView tv_name, tv_status, tv_date, tv_leave_type,tv_days;
 
         public MyViewHolder(View view) {
             super(view);
-            tv_name = (TextView) view.findViewById(R.id.tv_emp_name);
-            tv_status = (TextView) view.findViewById(R.id.tv_status);
-            tv_date = (TextView) view.findViewById(R.id.tv_date);
-            tv_leave_type = (TextView) view.findViewById(R.id.tv_leave_type);
+            tv_name = view.findViewById(R.id.tv_emp_name);
+            tv_status =  view.findViewById(R.id.tv_status);
+            tv_date =  view.findViewById(R.id.tv_date);
+            tv_leave_type =  view.findViewById(R.id.tv_leave_type);
+            tv_days =  view.findViewById(R.id.tv_days);
         }
     }
 
@@ -49,10 +50,10 @@ public class EmployeeLeaveListAdapter extends RecyclerView.Adapter<EmployeeLeave
         Ajax ajax = ajaxList.get(position);
 
         holder.tv_name.setText(ajax.getDescription());
-        holder.tv_status.setText(ajax.getLeaveStatusDesc());
+        holder.tv_leave_type.setText(ajax.getLeaveTypeDesc());
         holder.tv_date.setText(String.valueOf(ajax.getFromDate().getDate()) + "/" + String.valueOf(ajax.getFromDate().getMonth())
                 + "/" + String.valueOf(ajax.getFromDate().getYear()));
-        holder.tv_leave_type.setText(ajax.getLeaveTypeDesc());
+      holder.tv_status.setText(ajax.getLeaveStatusDesc());
 
     }
 
