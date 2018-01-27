@@ -16,8 +16,8 @@
     <string name="invalidInternetConnection">Sorry! there is no internet connectivity.</string>
     <string name="invalidUser">Please Enter Valid Username and Password</string>
     <string name="enterUser">Please Enter Username and Password</string>
-
-
+    <string name="toast_bzzz">Sorry, but we cannot do this, because you did not give us permission!</string>
+    <string name="toast_location">No matter where you go, there you are</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="email">UserID</string>
     <string name="passowrd">Password</string>
@@ -57,7 +57,7 @@
         <item>February</item>
         <item>March</item>
         <item>April</item>
-        <item>May </item>
+        <item>May</item>
         <item>June</item>
         <item>July</item>
         <item>August</item>
