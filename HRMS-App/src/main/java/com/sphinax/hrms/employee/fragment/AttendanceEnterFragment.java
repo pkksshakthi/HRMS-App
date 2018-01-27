@@ -38,9 +38,13 @@ import com.sphinax.hrms.utils.GeoLocationFinder;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -163,12 +167,28 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
 
         if(ajaxList != null){
             if (ajaxList.get(0).getTime()!=null && !ajaxList.get(0).getTime().equalsIgnoreCase("")){
-                bt_In_att.setText(ajaxList.get(0).getTime());
+                bt_In_att.setText(covertDate(ajaxList.get(0).getTime()));
                 tv_att_details.setText(ajaxList.get(0).getLocation());
             }
         }
     }
 
+
+    @SuppressLint("LongLogTag")
+    private String covertDate(String dtStart){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
+        try {
+            Date date = format.parse(dtStart);
+
+            DateFormat anthorformat = new SimpleDateFormat("hh:mm:ss aa");
+            String timeValue = anthorformat.format(date);
+            System.out.println("Converted date is : " + anthorformat.format(date));
+            return "Check-In Time \n "+ timeValue ;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -223,7 +243,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             Log.d(TAG, "onViewCreated: " + datetime);
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("refId", "5019");
+            requestMap.put("refId", Global.getLoginInfoData().getBiometricId().toString());
             requestMap.put("InDate", datetime);
 
             webServiceHandler.getDailyUserAttendance((Activity) context, context, requestMap, new ServiceCallback() {
@@ -310,8 +330,8 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
             requestMap.put("empId",Global.getLoginInfoData().getUserId() );
-            requestMap.put("refId", "5019");
-            requestMap.put("locationId", "Chennai");
+            requestMap.put("refId", Global.getLoginInfoData().getBiometricId().toString());
+            requestMap.put("locationId", currentAddress);
             requestMap.put("empimageDesc", "");
             requestMap.put("clkInTime", datetime);
 
@@ -328,8 +348,8 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                         bt_In_att.setText("Check-In Time");
                         tv_att_details.setText("");
                     }else if(flag){
-                        //fetchDailyUserAttendance();
-                        bt_In_att.setText("Check-In Time \n "+datetime);
+                        fetchDailyUserAttendance();
+                        //bt_In_att.setText("Check-In Time \n "+datetime);
                         bt_In_att.setEnabled(false);
                         bt_In_att.setClickable(false);
                         Global.setMarkAttendance(flag);
