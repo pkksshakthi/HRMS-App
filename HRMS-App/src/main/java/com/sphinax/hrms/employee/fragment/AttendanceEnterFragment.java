@@ -1,5 +1,6 @@
 package com.sphinax.hrms.employee.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -42,29 +43,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AttendanceEnterFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AttendanceEnterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,View.OnClickListener {
+
+
     private GoogleMap mMap;
-
     private GoogleApiClient googleApiClient;
-
     private static final int LOCATION_REQUEST_CODE = 101;
-    private OnFragmentInteractionListener mListener;
     private static Context context;
     private View mView;
     private Button bt_In_att,bt_out_att;
@@ -73,52 +58,24 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private ArrayList<Ajax> ajaxList;
     private String currentAddress;
+    private static final String TAG = "AttendanceEnterFragment-";
 
     public AttendanceEnterFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AttendanceEnterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AttendanceEnterFragment newInstance(String param1, String param2) {
-        AttendanceEnterFragment fragment = new AttendanceEnterFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+          }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        SupportMapFragment mapFragment = (SupportMapFragment)getActivity(). getSupportFragmentManager().findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
-//        View v= inflater.inflate(R.layout.fragment_attendance_enter, container, false);
-//        return v;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_attendance_enter, null, false);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
         return view;
     }
@@ -138,17 +95,9 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
         mView = view;
         context = view.getContext();
 
-        bt_In_att = (Button) mView.findViewById(R.id.bt_mark_in_att);
-        bt_out_att = (Button) mView.findViewById(R.id.bt_mark_out_att);
-        tv_att_details  = (TextView) mView.findViewById(R.id.tv_att_details);
-
-        googleApiClient = new GoogleApiClient.Builder(getActivity())
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
-
-
+        loadMapView();
+        loadComponent();
+        setListeners();
 
         fetchDailyUserAttendance();
 
@@ -157,67 +106,46 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             bt_In_att.setClickable(false);
 
         }
-        bt_In_att.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                enterUserAttendance();
-                loadMap();
-                tv_att_details.setText(""+currentAddress);
-            }
-        });
-
        // Check-In Time 9:00PM
 
     }
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void loadComponent() {
+        bt_In_att =  mView.findViewById(R.id.bt_mark_in_att);
+        bt_out_att = mView.findViewById(R.id.bt_mark_out_att);
+        tv_att_details  = mView.findViewById(R.id.tv_att_details);
+    }
+    private void setListeners() {
+        bt_In_att.setOnClickListener(this);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+    private void loadMapView(){
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+        googleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-loadMap();
-    }
-
+    @SuppressLint("LongLogTag")
     private void loadMap() {
         if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
             Location location = GeoLocationFinder.getLocationOnly(context);
 
             try {
-                Log.d(" " + "latitude-", "-" + location.getLatitude());
-                Log.d(" " + "longitude-", "-" + location.getLongitude());
+                Log.d(TAG + "latitude-", "-" + location.getLatitude());
+                Log.d(TAG + "longitude-", "-" + location.getLongitude());
 
                 Address address = GeoLocationFinder.getMyLocationAddress(context,location);
-
-                  currentAddress=""+address.getAddressLine(0)+"-"+address.getPostalCode();
-
-              //  Log.d(" " + "fetchedAddress-", "" + address.ge);
-
+                currentAddress=""+address.getAddressLine(0)+"-"+address.getPostalCode();
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                 //MarkerOptions are used to create a new Marker.You can specify location, title etc with MarkerOptions
                 MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("You are Here");
 
-//Adding the created the marker on the map
+               //Adding the created the marker on the map
                 mMap.addMarker(markerOptions);
                 //mMap.title("my position");
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -229,6 +157,22 @@ loadMap();
             }
 
         }
+    }
+
+    private void checkAttendanceMarked(){
+
+        if(ajaxList != null){
+            if (ajaxList.get(0).getTime()!=null && !ajaxList.get(0).getTime().equalsIgnoreCase("")){
+                bt_In_att.setText(ajaxList.get(0).getTime());
+                tv_att_details.setText(ajaxList.get(0).getLocation());
+            }
+        }
+    }
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        loadMap();
     }
 
     @Override
@@ -246,27 +190,24 @@ loadMap();
         mMap = googleMap;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_mark_in_att:
+                enterUserAttendance();
+                loadMap();
+                tv_att_details.setText(""+currentAddress);
+                break;
+        }
     }
 
 
-    /***Method used to get Company List from the OPS Service **/
+    /***Method used to get already enter checkIn from the OPS Service **/
 
+    @SuppressLint("LongLogTag")
     private void fetchDailyUserAttendance() {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
-            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(context, mView,getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         pdia = new ProgressDialog(context);
@@ -279,7 +220,7 @@ loadMap();
             //SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
             SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
             String datetime = dateformat.format(c.getTime());
-            Log.d("mnb", "onViewCreated: " + datetime);
+            Log.d(TAG, "onViewCreated: " + datetime);
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
             requestMap.put("refId", "5019");
@@ -351,7 +292,7 @@ loadMap();
 
     private void enterUserAttendance() {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
-            Utility.showToastMessage(context, getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(context,mView, getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         final String datetime;
@@ -368,7 +309,7 @@ loadMap();
             Log.d("mnb", "onViewCreated: " + datetime);
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("empId",Global.getLoginInfoData().getUserId() );
             requestMap.put("refId", "5019");
             requestMap.put("locationId", "Chennai");
             requestMap.put("empimageDesc", "");
@@ -433,17 +374,6 @@ loadMap();
 
 
 
-        private void checkAttendanceMarked(){
 
-        if(ajaxList != null){
-            if (ajaxList.get(0).getTime()!=null && !ajaxList.get(0).getTime().equalsIgnoreCase("")){
-                bt_In_att.setText(ajaxList.get(0).getTime());
-                tv_att_details.setText(ajaxList.get(0).getLocation());
-            }
-        }
-
-
-
-        }
 
 }

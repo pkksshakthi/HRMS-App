@@ -1,10 +1,12 @@
 package com.sphinax.hrms.employee.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +14,30 @@ import android.widget.LinearLayout;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
+import com.sphinax.hrms.model.Ajax;
+import com.sphinax.hrms.model.CompanyData;
+import com.sphinax.hrms.servicehandler.ServiceCallback;
+import com.sphinax.hrms.servicehandler.WebServiceHandler;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class UserMainMenuFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
 
     private static Context context;
+    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+    private ArrayList<Ajax> userInfoList;
     private static UserMainMenuFragment instance;
+    private ProgressDialog pdia;
     private View mView;
     private FragmentManager fragmentManager;
     private LinearLayout ll_mark_attendance, ll_attendance_report, ll_leave_app, ll_leave_mana, ll_info, ll_announcement, ll_payslip, ll_helpdesk;
+    private static final String TAG = "UserMainMenuFragment-";
 
     public UserMainMenuFragment() {
         // Required empty public constructor
@@ -62,6 +77,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         fragmentManager = getActivity().getSupportFragmentManager();
         loadComponent();
         setListeners();
+        fetchUserInfo();
     }
 
     @Override
@@ -125,5 +141,74 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
                 break;
         }
     }
+
+
+    private void fetchUserInfo() {
+        if (!HRMSNetworkCheck.checkInternetConnection(context)) {
+            Utility.showCustomToast(context,mView, getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(context);
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<String, String>();
+            requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
+            requestMap.put("empId",Global.getLoginInfoData().getUserId());
+
+            webServiceHandler.getUserInfo(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    Log.d(TAG , " "+ flag);
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    CompanyData companyData = (CompanyData) obj;
+                    userInfoList = new ArrayList<>();
+                    userInfoList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d(TAG, "userInfoList --> " + userInfoList.size());
+                    Global.setUserInfoData(userInfoList.get(0));
+
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

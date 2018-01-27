@@ -249,11 +249,6 @@ public class WebServiceHandler {
                             try {
 
                                 if (output.getInt("resCode") == 1) {
-                                    SharedPreferences.Editor editor = Utility.getPreference(activity).edit();
-                                    editor.putString(Constants.PREFS_USER_ID,output.getString("userId") );
-                                    editor.putString(Constants.PREFS_USER_NAME,output.getString("empName") );
-                                    editor.putString(Constants.PREFS_USER_TYPE,output.getString("adminOremp") );
-                                    editor.commit();
                                     LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
                                     delegate.onSuccess(true);
                                     delegate.onReturnObject(loginDataObject);

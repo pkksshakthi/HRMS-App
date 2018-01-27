@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/HRMS.iml" filepath="$PROJECT_DIR$/HRMS.iml" />
       <module fileurl="file://$PROJECT_DIR$/HRMS-App/HRMS-App.iml" filepath="$PROJECT_DIR$/HRMS-App/HRMS-App.iml" />
       <module fileurl="file://$PROJECT_DIR$/librarynew/librarynew.iml" filepath="$PROJECT_DIR$/librarynew/librarynew.iml" />
-      <module fileurl="file://C:\Users\ganesaka\AndroidStudioProjects\HRMS\librarynew\librarynew.iml" filepath="C:\Users\ganesaka\AndroidStudioProjects\HRMS\librarynew\librarynew.iml" />
     </modules>
   </component>
 </project>

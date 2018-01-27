@@ -1,6 +1,7 @@
 package com.sphinax.hrms.global;
 
 import com.sphinax.hrms.model.Ajax;
+import com.sphinax.hrms.model.LoginData;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,24 @@ public class Global {
 
     private static boolean markAttendance;
     private static ArrayList<Ajax> leaveList;
+    private static Ajax userInfoData;
+    private static LoginData loginInfoData;
+
+    public static LoginData getLoginInfoData() {
+        return loginInfoData;
+    }
+
+    public static void setLoginInfoData(LoginData loginInfoData) {
+        Global.loginInfoData = loginInfoData;
+    }
+
+    public static Ajax getUserInfoData() {
+        return userInfoData;
+    }
+
+    public static void setUserInfoData(Ajax userInfoData) {
+        Global.userInfoData = userInfoData;
+    }
 
     public static boolean isMarkAttendance() {
         return markAttendance;

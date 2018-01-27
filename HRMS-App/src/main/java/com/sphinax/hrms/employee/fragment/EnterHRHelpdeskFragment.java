@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
@@ -370,7 +371,7 @@ public class EnterHRHelpdeskFragment extends Fragment implements AdapterView.OnI
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("companyId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("empId", Global.getLoginInfoData().getUserId() );
             requestMap.put("requestTo","10000");
             requestMap.put("requestType",String.valueOf(queryTypePosition) );
             requestMap.put("description", ed_query.getText().toString());

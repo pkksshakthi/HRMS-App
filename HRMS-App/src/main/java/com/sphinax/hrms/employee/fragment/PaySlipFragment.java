@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
@@ -425,7 +426,7 @@ private void loadyearSpinner(ArrayList<Ajax>  yearList){
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("empId", Global.getLoginInfoData().getUserId() );
             requestMap.put("year",payslipYear );
             requestMap.put("month",payslipMonth);
 
@@ -501,7 +502,7 @@ private void loadyearSpinner(ArrayList<Ajax>  yearList){
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("empId",Global.getLoginInfoData().getUserId() );
             requestMap.put("year",payslipYear );
             requestMap.put("month",payslipMonth);
 
@@ -573,7 +574,7 @@ private void loadyearSpinner(ArrayList<Ajax>  yearList){
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("empId",Global.getLoginInfoData().getUserId() );
             requestMap.put("year",payslipYear );
             requestMap.put("month",payslipMonth);
 
@@ -658,7 +659,7 @@ private void loadListPaySlip(int i){
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
-            requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
+            requestMap.put("empId",Global.getLoginInfoData().getUserId() );
             requestMap.put("year",payslipYear );
             requestMap.put("month",payslipMonth);
 

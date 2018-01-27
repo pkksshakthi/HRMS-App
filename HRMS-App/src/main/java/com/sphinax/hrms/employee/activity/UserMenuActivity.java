@@ -27,6 +27,7 @@ import com.sphinax.hrms.employee.fragment.PaySlipFragment;
 import com.sphinax.hrms.employee.fragment.UserMainMenuFragment;
 import com.sphinax.hrms.employee.fragment.UserProfileFragment;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.utils.Utility;
 
 public class UserMenuActivity extends FragmentActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -91,7 +92,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
     }
 
     private void setData() {
-        tv_username.setText(Utility.getPreference(this).getString(Constants.PREFS_USER_NAME, ""));
+        tv_username.setText(Global.getLoginInfoData().getEmpName());
         tv_companyname.setText(Utility.getPreference(this).getString(Constants.PREFS_COMPANY_NAME, ""));
     }
 

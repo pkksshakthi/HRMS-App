@@ -21,6 +21,7 @@ import com.sphinax.hrms.admin.fragment.AnnouncementCreateFragment;
 import com.sphinax.hrms.admin.fragment.LeaveManagementFragment;
 import com.sphinax.hrms.common.activity.LoginActivity;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.utils.Utility;
 
 public class AdminMenuActivity extends AppCompatActivity
@@ -63,7 +64,7 @@ public class AdminMenuActivity extends AppCompatActivity
         TextView tv_username = (TextView) headerView.findViewById(R.id.tv_username);
         TextView tv_companyname = (TextView) headerView.findViewById(R.id.tv_company_name);
 
-        tv_username.setText(Utility.getPreference(this).getString(Constants.PREFS_USER_NAME, ""));
+        tv_username.setText(Global.getLoginInfoData().getEmpName());
         tv_companyname.setText(Utility.getPreference(this).getString(Constants.PREFS_COMPANY_NAME, ""));
 
 

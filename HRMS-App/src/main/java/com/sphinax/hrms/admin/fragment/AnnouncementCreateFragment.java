@@ -23,6 +23,7 @@ import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.activity.LoginActivity;
 import com.sphinax.hrms.common.activity.SelectCompanyActivity;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
@@ -521,7 +522,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("companyId",String.valueOf(companyPosition) );
-            requestMap.put("empID",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, ""));
+            requestMap.put("empID", Global.getLoginInfoData().getUserId());
             requestMap.put("activityDate",dateValue );
             requestMap.put("activityDesc",valueText );
             requestMap.put("activityTypeId",String.valueOf(1) );

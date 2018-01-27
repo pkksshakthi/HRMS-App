@@ -9,6 +9,25 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginData {
 
+    @SerializedName("deptId")
+    @Expose
+    private Integer deptId;
+    @SerializedName("deptName")
+    @Expose
+    private String deptName;
+    @SerializedName("biometricId")
+    @Expose
+    private Integer biometricId;
+    @SerializedName("BranchName")
+    @Expose
+    private String branchName;
+    @SerializedName("BranchId")
+    @Expose
+    private Integer branchId;
+    @SerializedName("reportsTo")
+    @Expose
+    private String reportsTo;
+
     @SerializedName("resCode")
     @Expose
     private Integer resCode;
@@ -96,5 +115,53 @@ public class LoginData {
 
     public void setEmpImage(String empImage) {
         this.empImage = empImage;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public Integer getBiometricId() {
+        return biometricId;
+    }
+
+    public void setBiometricId(Integer biometricId) {
+        this.biometricId = biometricId;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public Integer getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Integer branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getReportsTo() {
+        return reportsTo;
+    }
+
+    public void setReportsTo(String reportsTo) {
+        this.reportsTo = reportsTo;
     }
 }

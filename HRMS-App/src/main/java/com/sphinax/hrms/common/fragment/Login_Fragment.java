@@ -29,6 +29,7 @@ import com.sphinax.hrms.R;
 import com.sphinax.hrms.admin.activity.AdminMenuActivity;
 import com.sphinax.hrms.employee.activity.UserMenuActivity;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.LoginData;
 import com.sphinax.hrms.sample.dummy.ForgotPassword_Fragment;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
@@ -210,11 +211,12 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    LoginData companyData = (LoginData) obj;
-                    Log.d(TAG, "size --> " + companyData.getUserId());
+                    LoginData loginData = (LoginData) obj;
+                    Log.d(TAG, "size --> " + loginData.getUserId());
 
-                    if (companyData != null && companyData.getResCode() == 1) {
-                        startMenuActivity(companyData.getAdminOremp());
+                    if (loginData != null && loginData.getResCode() == 1) {
+                        Global.setLoginInfoData(loginData);
+                        startMenuActivity(loginData.getAdminOremp());
                     }
 
                 }
