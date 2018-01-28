@@ -35,6 +35,9 @@ public class Constants {
     // EMPLOYEE
 
     public static final String LOGIN_REQUEST_URL = domain + COMPANY_NAME_URL_PARAMETER +"/validateLogin";
+    public static final String GENRATE_OTP_URL = domain + COMPANY_NAME_URL_PARAMETER +"/generateOTP";
+    public static final String CHECK_OTP_URL = domain + COMPANY_NAME_URL_PARAMETER +"/CheckOTP";
+    public static final String PASSWORD_CHANGE_URL = domain + COMPANY_NAME_URL_PARAMETER +"/ChangePassByOTP";
     public static final String PROFILE_INFO_REQUEST_URL = domain + client +"EmpInfList";
     public static final String ANNOUNCEMENT_LIST_REQUEST_URL = domain + client + "AnnouncementList";
     public static final String ATTENDANCE_ENTER_URL = domain + client + "markYourAttendance";

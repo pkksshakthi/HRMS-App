@@ -117,7 +117,12 @@ public class GetMethodHandler extends AsyncTask<Void, Void, JSONObject> {
                 }
             } else {
                 if (!response.isEmpty()) {
-                     jsonObject = new JSONObject(response);
+                    try {
+                        jsonObject = new JSONObject(response);
+                    }catch (Exception e){
+                        delegate.processFinish(this.context, jsonObject);
+
+                    }
                 }
             }
 

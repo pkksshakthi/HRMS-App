@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.activity.LoginActivity;
+import com.sphinax.hrms.sample.dummy.CustomToast;
+import com.sphinax.hrms.sample.dummy.Utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

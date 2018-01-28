@@ -30,6 +30,156 @@ public class WebServiceHandler {
     private Activity serviceActivity = null;
     private ServiceRequest serviceRequestValue = null;
 
+    public void genrateOTP (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.GENRATE_OTP_URL;
+            url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
+
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                delegate.onSuccess(true);
+//                                if (output.getInt("resCode") == 1) {
+//                                    LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
+//                                    delegate.onSuccess(true);
+//                                    delegate.onReturnObject(loginDataObject);
+//                                }else {
+//                                    delegate.onSuccess(false);
+//                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }else {
+                            delegate.onSuccess(false);
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            validateUserHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+    public void checkOTP (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.CHECK_OTP_URL;
+            url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
+
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+
+                                if (output.getInt("resCode") == 1) {
+
+                                    delegate.onSuccess(true);
+                                }else {
+                                    delegate.onSuccess(false);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            validateUserHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+    public void changePassword (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.PASSWORD_CHANGE_URL;
+            url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
+
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+
+                                if (output.getInt("resCode") == 1) {
+
+                                    delegate.onSuccess(true);
+                                }else {
+                                    delegate.onSuccess(false);
+                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            validateUserHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
     public void getCompanyList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
         try {
             delegate = callback;
