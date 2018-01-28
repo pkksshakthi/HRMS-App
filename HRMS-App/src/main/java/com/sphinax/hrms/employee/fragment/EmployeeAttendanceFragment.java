@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
+import com.applandeo.materialcalendarview.listeners.OnNavigationButtonClickListener;
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
@@ -30,6 +31,7 @@ import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.AnnouncementListAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -83,82 +85,30 @@ public class EmployeeAttendanceFragment extends Fragment {
         context = view.getContext();
 
         loadComponent();
-        fetchAttendanceReport();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar c = Calendar.getInstance();
+        String dateValue =  sdf.format(c.getTime()).toString();
+        fetchAttendanceReport(dateValue);
 
+        calendarView.setOnPreviousButtonClickListener(new OnNavigationButtonClickListener() {
+            @Override
+            public void onClick() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         events = new ArrayList<>();
-  /* Calendar calendar = Calendar.getInstance();
-        events.add(new EventDay(calendar, R.drawable.sample_icon_1));
-
-        Calendar calendar1 = Calendar.getInstance();
-        calendar1.add(Calendar.DAY_OF_MONTH, 6);
-        events.add(new EventDay(calendar1, R.drawable.sample_icon_2));*/
-
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.add(Calendar.DAY_OF_MONTH, -5);
-        events.add(new EventDay(calendar2, R.drawable.icon_red_box, Color.WHITE));
-
-        //CalendarView calendarView = (CalendarView) mView.findViewById(R.id.calendarView);
-
-        Calendar min = Calendar.getInstance();
-        min.add(Calendar.MONTH, -4);
-
-        Calendar max = Calendar.getInstance();
-        max.add(Calendar.MONTH, 60);
-
-        calendarView.setMinimumDate(min);
-        calendarView.setMaximumDate(max);
-
-        calendarView.setEvents(events);
-
-        calendarView.setOnDayClickListener(eventDay ->
-                Toast.makeText(getActivity(),
-                        eventDay.getCalendar().getTime().toString(),
-                        Toast.LENGTH_SHORT).show());
-
-        Button setDateButton = (Button) mView.findViewById(R.id.setDateButton);
-        setDateButton.setOnClickListener(v -> {
-            try {
-                calendarView.setDate(getRandomCalendar());
-            } catch (OutOfDateRangeException exception) {
-                exception.printStackTrace();
-
-                Toast.makeText(getActivity(),
-                        "Date is out of range",
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), calendarView.getCurrentPageDate().getTime().toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        calendarView.setOnForwardButtonClickListener(new OnNavigationButtonClickListener() {
+            @Override
+            public void onClick() {
+
+                Toast.makeText(getActivity(), calendarView.getCurrentPageDate().getTime().toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
 
     }
 
@@ -169,28 +119,54 @@ public class EmployeeAttendanceFragment extends Fragment {
          txt_applyLeave =  mView.findViewById(R.id.txt_applyleave);
     }
 
-    private Calendar getRandomCalendar() {
-        Random random = new Random();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, random.nextInt(99));
-
-        return calendar;
-    }
 
     private void loaddatainview(){
 
-        txt_present.setText(attendanceData.getPresentCount().toString());
-        txt_applyLeave.setText(attendanceData.getLeaveApplied().toString());
-        txt_absent.setText(attendanceData.getAbsentCount().toString());
+        txt_present.setText(String.valueOf(attendanceData.getPresentCount()));
+        txt_applyLeave.setText(String.valueOf(attendanceData.getLeaveApplied()));
+        txt_absent.setText(String.valueOf(attendanceData.getAbsentCount()));
 
         attendanceList = (ArrayList<Ajax>) attendanceData.getAjax();
-
+       loadCalendarData();
 
     }
+private void loadCalendarData(){
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar c = Calendar.getInstance();
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), 01);
+    try {
+        calendarView.setDate(calendar);
+    } catch (OutOfDateRangeException e) {
+        e.printStackTrace();
+    }
 
+    events = new ArrayList<>();
+    if(attendanceList !=null && attendanceList.size() >0){
+        for (int counter = 0; counter < attendanceList.size(); counter++) {
+            Ajax ajax = new Ajax();
+            ajax = attendanceList.get(counter);
 
-    private void fetchAttendanceReport() {
+            Calendar mCal = (Calendar)calendar.clone();
+
+            mCal.add(calendar.DAY_OF_MONTH, counter);
+
+            if(ajax.getMorning().equalsIgnoreCase("H") &&ajax.getEvening().equalsIgnoreCase("H")){
+                events.add(new EventDay(mCal, R.drawable.icon_red_box, Color.WHITE));
+            }else if (ajax.getMorning().equalsIgnoreCase("A") &&ajax.getEvening().equalsIgnoreCase("A")){
+
+                events.add(new EventDay(mCal, R.drawable.sample_icon_2, Color.WHITE));
+            }else {
+                events.add(new EventDay(mCal, R.drawable.sample_icon_3, Color.WHITE));
+            }
+
+        }
+        calendarView.setEvents(events);
+    }
+
+}
+
+    private void fetchAttendanceReport(String dateValue) {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
             Utility.showCustomToast(context, mView, getResources().getString(R.string.invalidInternetConnection));
             return;
@@ -206,7 +182,7 @@ public class EmployeeAttendanceFragment extends Fragment {
             requestMap.put("branchId", String.valueOf(Global.getUserInfoData().getEmpBranchId()));
             requestMap.put("deptId", String.valueOf(Global.getLoginInfoData().getDeptId()));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
-            requestMap.put("datChs", "01/11/2017");
+            requestMap.put("datChs", dateValue);
 
             webServiceHandler.getAttendanceReport(getActivity(), context, requestMap, new ServiceCallback() {
 
@@ -226,15 +202,9 @@ public class EmployeeAttendanceFragment extends Fragment {
                     CompanyData companyData = (CompanyData) obj;
                     attendanceData = new CompanyData();
                     attendanceData = companyData;
+                    Log.d(TAG, "size --> " + attendanceData.getAjax().size());
 
                     loaddatainview();
-
-//                    announmentList = new ArrayList<>();
-//                    announmentList = (ArrayList<Ajax>) companyData.getAjax();
-//                    Log.d(TAG, "size --> " + announmentList.size());
-//
-//                    announcementListAdapter = new AnnouncementListAdapter(getActivity(), announmentList);
-//                    lv_announcement.setAdapter(announcementListAdapter);
 
                 }
 

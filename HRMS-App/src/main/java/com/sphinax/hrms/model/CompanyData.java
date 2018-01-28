@@ -14,16 +14,16 @@ public class CompanyData implements Serializable {
 
     @SerializedName("Holiday Count")
     @Expose
-    private Integer holidayCount;
+    private Double holidayCount;
     @SerializedName("Present Count")
     @Expose
-    private Integer presentCount;
+    private Double presentCount;
     @SerializedName("Absent Count")
     @Expose
-    private Integer absentCount;
+    private Double absentCount;
     @SerializedName("Leave Applied")
     @Expose
-    private Integer leaveApplied;
+    private Double leaveApplied;
     @SerializedName("ajax")
     @Expose
     private List<Ajax> ajax;
@@ -111,35 +111,35 @@ public class CompanyData implements Serializable {
     private List<Deduction> deductions = null;
 
 
-    public Integer getHolidayCount() {
+    public Double getHolidayCount() {
         return holidayCount;
     }
 
-    public void setHolidayCount(Integer holidayCount) {
+    public void setHolidayCount(Double holidayCount) {
         this.holidayCount = holidayCount;
     }
 
-    public Integer getPresentCount() {
+    public Double getPresentCount() {
         return presentCount;
     }
 
-    public void setPresentCount(Integer presentCount) {
+    public void setPresentCount(Double presentCount) {
         this.presentCount = presentCount;
     }
 
-    public Integer getAbsentCount() {
+    public Double getAbsentCount() {
         return absentCount;
     }
 
-    public void setAbsentCount(Integer absentCount) {
+    public void setAbsentCount(Double absentCount) {
         this.absentCount = absentCount;
     }
 
-    public Integer getLeaveApplied() {
+    public Double getLeaveApplied() {
         return leaveApplied;
     }
 
-    public void setLeaveApplied(Integer leaveApplied) {
+    public void setLeaveApplied(Double leaveApplied) {
         this.leaveApplied = leaveApplied;
     }
     public List<Earning> getEarnings() {

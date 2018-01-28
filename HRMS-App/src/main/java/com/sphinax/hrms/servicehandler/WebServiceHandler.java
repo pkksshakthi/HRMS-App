@@ -997,8 +997,8 @@ public class WebServiceHandler {
 //                            } else {
                             try {
                                 if (output.getJSONArray("ajax") != null) {
-                                    Log.d("ajaxList", "earning --> " + output.getJSONArray("ajax"));
                                     CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    Log.d("ajaxList 1", "earning --> " + output.getJSONArray("ajax"));
 
                                     delegate.onSuccess(true);
                                     delegate.onReturnObject(companyDataObject);
