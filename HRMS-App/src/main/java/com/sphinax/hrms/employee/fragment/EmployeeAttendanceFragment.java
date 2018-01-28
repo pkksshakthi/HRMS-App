@@ -3,18 +3,14 @@ package com.sphinax.hrms.employee.fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
@@ -29,36 +25,34 @@ import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
-import com.sphinax.hrms.view.AnnouncementListAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 
 public class EmployeeAttendanceFragment extends Fragment {
 
+    private static final String TAG = "EmployeeAttendanceFragment-";
     private static Context context;
+    private static EmployeeAttendanceFragment instance;
+    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private View mView;
     private CalendarView calendarView;
-    private List<EventDay> events ;
-    private TextView txt_present,txt_absent,txt_applyLeave;
-    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+    private List<EventDay> events;
+    private TextView txt_present, txt_absent, txt_applyLeave;
     private ProgressDialog pdia;
-    private static final String TAG = "EmployeeAttendanceFragment-";
     private CompanyData attendanceData;
     private ArrayList<Ajax> attendanceList;
-
-
-
+    private String dateValue;
+    private int Year, Month;
 
     public EmployeeAttendanceFragment() {
         // Required empty public constructor
     }
-    private static EmployeeAttendanceFragment instance;
+
     public static EmployeeAttendanceFragment getInstance() {
         if (instance == null)
             instance = new EmployeeAttendanceFragment();
@@ -88,14 +82,21 @@ public class EmployeeAttendanceFragment extends Fragment {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
-        String dateValue =  sdf.format(c.getTime()).toString();
+        dateValue = sdf.format(c.getTime()).toString();
+        Year = c.get(Calendar.YEAR);
+        Month = c.get(Calendar.MONTH);
         fetchAttendanceReport(dateValue);
 
         calendarView.setOnPreviousButtonClickListener(new OnNavigationButtonClickListener() {
             @Override
             public void onClick() {
 
-                Toast.makeText(getActivity(), calendarView.getCurrentPageDate().getTime().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), calendarView.getCurrentPageDate().getTime().toString(), Toast.LENGTH_SHORT).show();
+                Year = calendarView.getCurrentPageDate().get(Calendar.YEAR);
+                Month = calendarView.getCurrentPageDate().get(Calendar.MONTH);
+                dateValue = "01" + "/" + (Month + 1) + "/" + Year;
+                fetchAttendanceReport(dateValue);
+
             }
         });
 
@@ -103,68 +104,72 @@ public class EmployeeAttendanceFragment extends Fragment {
             @Override
             public void onClick() {
 
-                Toast.makeText(getActivity(), calendarView.getCurrentPageDate().getTime().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), calendarView.getCurrentPageDate().getTime().toString(), Toast.LENGTH_SHORT).show();
+                Year = calendarView.getCurrentPageDate().get(Calendar.YEAR);
+                Month = calendarView.getCurrentPageDate().get(Calendar.MONTH);
+                dateValue = "01" + "/" + (Month + 1) + "/" + Year;
+                fetchAttendanceReport(dateValue);
 
             }
         });
 
 
-
     }
 
-    private void loadComponent(){
-         calendarView =  mView.findViewById(R.id.calendarView);
-         txt_present =  mView.findViewById(R.id.txt_present);
-         txt_absent =  mView.findViewById(R.id.txt_absert);
-         txt_applyLeave =  mView.findViewById(R.id.txt_applyleave);
+    private void loadComponent() {
+        calendarView = mView.findViewById(R.id.calendarView);
+        txt_present = mView.findViewById(R.id.txt_present);
+        txt_absent = mView.findViewById(R.id.txt_absert);
+        txt_applyLeave = mView.findViewById(R.id.txt_applyleave);
     }
 
 
-    private void loaddatainview(){
+    private void loaddatainview() {
 
         txt_present.setText(String.valueOf(attendanceData.getPresentCount()));
         txt_applyLeave.setText(String.valueOf(attendanceData.getLeaveApplied()));
         txt_absent.setText(String.valueOf(attendanceData.getAbsentCount()));
 
         attendanceList = (ArrayList<Ajax>) attendanceData.getAjax();
-       loadCalendarData();
+        loadCalendarData(Year, Month);
 
     }
-private void loadCalendarData(){
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    Calendar c = Calendar.getInstance();
-    Calendar calendar = Calendar.getInstance();
-    calendar.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), 01);
-    try {
-        calendarView.setDate(calendar);
-    } catch (OutOfDateRangeException e) {
-        e.printStackTrace();
-    }
 
-    events = new ArrayList<>();
-    if(attendanceList !=null && attendanceList.size() >0){
-        for (int counter = 0; counter < attendanceList.size(); counter++) {
-            Ajax ajax = new Ajax();
-            ajax = attendanceList.get(counter);
-
-            Calendar mCal = (Calendar)calendar.clone();
-
-            mCal.add(calendar.DAY_OF_MONTH, counter);
-
-            if(ajax.getMorning().equalsIgnoreCase("H") &&ajax.getEvening().equalsIgnoreCase("H")){
-                events.add(new EventDay(mCal, R.drawable.icon_red_box, Color.WHITE));
-            }else if (ajax.getMorning().equalsIgnoreCase("A") &&ajax.getEvening().equalsIgnoreCase("A")){
-
-                events.add(new EventDay(mCal, R.drawable.sample_icon_2, Color.WHITE));
-            }else {
-                events.add(new EventDay(mCal, R.drawable.sample_icon_3, Color.WHITE));
-            }
-
+    private void loadCalendarData(int year, int month) {
+        Log.d(TAG, "loadCalendarData: " + year);
+        Log.d(TAG, "loadCalendarData: " + Month);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, 01);
+        try {
+            calendarView.setDate(calendar);
+        } catch (OutOfDateRangeException e) {
+            e.printStackTrace();
         }
-        calendarView.setEvents(events);
-    }
 
-}
+        events = new ArrayList<>();
+        if (attendanceList != null && attendanceList.size() > 0) {
+            for (int counter = 0; counter < attendanceList.size(); counter++) {
+                Ajax ajax = new Ajax();
+                ajax = attendanceList.get(counter);
+
+                Calendar mCal = (Calendar) calendar.clone();
+
+                mCal.add(calendar.DAY_OF_MONTH, counter);
+
+                if (ajax.getMorning().equalsIgnoreCase("H") && ajax.getEvening().equalsIgnoreCase("H")) {
+                    events.add(new EventDay(mCal, R.drawable.icon_red_box, Color.WHITE));
+                } else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("A")) {
+
+                    events.add(new EventDay(mCal, R.drawable.sample_icon_2, Color.WHITE));
+                } else {
+                    events.add(new EventDay(mCal, R.drawable.sample_icon_3, Color.WHITE));
+                }
+
+            }
+            calendarView.setEvents(events);
+        }
+
+    }
 
     private void fetchAttendanceReport(String dateValue) {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {

@@ -213,21 +213,26 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                 Location location = GeoLocationFinder.getLocationOnly(context);
 
                 try {
-                    Log.d(TAG + "latitude-", "-" + location.getLatitude());
-                    Log.d(TAG + "longitude-", "-" + location.getLongitude());
+                    if(location != null) {
+                        Log.d(TAG + "latitude-", "-" + location.getLatitude());
+                        Log.d(TAG + "longitude-", "-" + location.getLongitude());
 
-                    Address address = GeoLocationFinder.getMyLocationAddress(context, location);
-                    currentAddress = "" + address.getAddressLine(0) + "-" + address.getPostalCode();
-                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    //MarkerOptions are used to create a new Marker.You can specify location, title etc with MarkerOptions
-                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("You are Here");
+                        Address address = GeoLocationFinder.getMyLocationAddress(context, location);
+                        currentAddress = "" + address.getAddressLine(0) + "-" + address.getPostalCode();
+                        //Log.d(TAG, "loadMap: "+currentAddress);
+                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                        //MarkerOptions are used to create a new Marker.You can specify location, title etc with MarkerOptions
+                        MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("You are Here");
 
-                    //Adding the created the marker on the map
-                    mMap.addMarker(markerOptions);
-                    //mMap.title("my position");
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                        //Adding the created the marker on the map
+                        mMap.addMarker(markerOptions);
+                        //mMap.title("my position");
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                    }else {
+                        Log.d(TAG + " -", "NO VAL");
 
+                    }
                 } catch (Exception e) {
 
                     e.printStackTrace();
@@ -467,7 +472,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
             requestMap.put("refId", Global.getLoginInfoData().getBiometricId().toString());
             requestMap.put("locationId", currentAddress);
-            requestMap.put("empimageDesc", "");
+            requestMap.put("empimageDesc", "123456789.JPG");
             requestMap.put("clkInTime", datetime);
 
             webServiceHandler.markDailyUserAttendance((Activity) context, context, requestMap, new ServiceCallback() {
