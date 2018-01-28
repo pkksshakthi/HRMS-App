@@ -11,6 +11,18 @@ import java.io.Serializable;
 
 public class Ajax implements Serializable {
 
+    @SerializedName("user")
+    @Expose
+    private String user;
+    @SerializedName("date")
+    @Expose
+    private String date;
+    @SerializedName("morning")
+    @Expose
+    private String morning;
+    @SerializedName("evening")
+    @Expose
+    private String evening;
     @SerializedName("empBranchId")
     @Expose
     private Integer empBranchId;
@@ -251,6 +263,38 @@ public class Ajax implements Serializable {
     @Expose
     private Integer leaveTotal;
 
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getMorning() {
+        return morning;
+    }
+
+    public void setMorning(String morning) {
+        this.morning = morning;
+    }
+
+    public String getEvening() {
+        return evening;
+    }
+
+    public void setEvening(String evening) {
+        this.evening = evening;
+    }
 
     public Integer getEmpBranchId() {
         return empBranchId;

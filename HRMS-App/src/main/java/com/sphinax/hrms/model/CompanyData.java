@@ -12,7 +12,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class CompanyData implements Serializable {
 
-
+    @SerializedName("Holiday Count")
+    @Expose
+    private Integer holidayCount;
+    @SerializedName("Present Count")
+    @Expose
+    private Integer presentCount;
+    @SerializedName("Absent Count")
+    @Expose
+    private Integer absentCount;
+    @SerializedName("Leave Applied")
+    @Expose
+    private Integer leaveApplied;
     @SerializedName("ajax")
     @Expose
     private List<Ajax> ajax;
@@ -99,6 +110,38 @@ public class CompanyData implements Serializable {
     @Expose
     private List<Deduction> deductions = null;
 
+
+    public Integer getHolidayCount() {
+        return holidayCount;
+    }
+
+    public void setHolidayCount(Integer holidayCount) {
+        this.holidayCount = holidayCount;
+    }
+
+    public Integer getPresentCount() {
+        return presentCount;
+    }
+
+    public void setPresentCount(Integer presentCount) {
+        this.presentCount = presentCount;
+    }
+
+    public Integer getAbsentCount() {
+        return absentCount;
+    }
+
+    public void setAbsentCount(Integer absentCount) {
+        this.absentCount = absentCount;
+    }
+
+    public Integer getLeaveApplied() {
+        return leaveApplied;
+    }
+
+    public void setLeaveApplied(Integer leaveApplied) {
+        this.leaveApplied = leaveApplied;
+    }
     public List<Earning> getEarnings() {
         return earnings;
     }
