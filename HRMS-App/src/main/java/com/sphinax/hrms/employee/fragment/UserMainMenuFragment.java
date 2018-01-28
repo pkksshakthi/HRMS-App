@@ -77,7 +77,10 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         fragmentManager = getActivity().getSupportFragmentManager();
         loadComponent();
         setListeners();
-        fetchUserInfo();
+
+        if(!Global.isUserDataTaken()){
+            fetchUserInfo();
+        }
     }
 
     @Override
@@ -167,6 +170,9 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
                         pdia.dismiss();
                     }
                     Log.d(TAG , " "+ flag);
+                    if(flag){
+                        Global.setUserDataTaken(flag);
+                    }
                 }
 
                 @Override

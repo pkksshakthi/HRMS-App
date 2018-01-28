@@ -15,6 +15,15 @@ public class Global {
     private static ArrayList<Ajax> leaveList;
     private static Ajax userInfoData;
     private static LoginData loginInfoData;
+    private static boolean userDataTaken = false;
+
+    public static boolean isUserDataTaken() {
+        return userDataTaken;
+    }
+
+    public static void setUserDataTaken(boolean userDataTaken) {
+        Global.userDataTaken = userDataTaken;
+    }
 
     public static LoginData getLoginInfoData() {
         return loginInfoData;
