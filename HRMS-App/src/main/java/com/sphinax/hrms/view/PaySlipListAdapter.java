@@ -9,9 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
-import com.sphinax.hrms.model.Ajax;
-
-import java.util.List;
+import com.sphinax.hrms.model.CompanyData;
+import com.sphinax.hrms.model.Deduction;
+import com.sphinax.hrms.model.Earning;
 
 /**
  * Created by ganesaka on 1/10/2018.
@@ -20,13 +20,13 @@ import java.util.List;
 public class PaySlipListAdapter extends BaseAdapter {
 
     private static final String TAG = "PaySlipListAdapter-";
-    private final List<Ajax> detailsArrayList;
-    private final Context context;
+    private CompanyData detailsList;
+    private Context context;
     private int listType;
 
-    public PaySlipListAdapter(Context context, List<Ajax> list,int listType) {
+    public PaySlipListAdapter(Context context, CompanyData list, int listType) {
         this.context = context;
-        detailsArrayList = list;
+        detailsList = list;
         this.listType = listType;
 
     }
@@ -34,13 +34,28 @@ public class PaySlipListAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return detailsArrayList.size();
+
+        if (listType == 0) {
+            return detailsList.getEarnings().size();
+
+        } else if (listType == 1) {
+            return detailsList.getDeductions().size();
+
+        }
+        return 0;
     }
 
     @Override
     public Object getItem(int position) {
         // TODO Auto-generated method stub
-        return detailsArrayList.get(position);
+
+        if (listType == 0) {
+            return detailsList.getEarnings().get(position);
+
+        } else if (listType == 1) {
+            return detailsList.getDeductions().get(position);
+        }
+        return detailsList;
     }
 
     @Override
@@ -52,7 +67,14 @@ public class PaySlipListAdapter extends BaseAdapter {
     @SuppressLint("ViewHolder")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Ajax bookingTaskDetails = (Ajax) getItem(position);
+        Earning earningDetails = null;
+        Deduction deductionetails = null;
+        if (listType == 0) {
+            earningDetails = (Earning) getItem(position);
+        } else if (listType == 1) {
+            deductionetails = (Deduction) getItem(position);
+        }
+
         View row = convertView;
         PaySlipListAdapter.OrderDetailHolder holder;
         //holder = null;
@@ -62,33 +84,26 @@ public class PaySlipListAdapter extends BaseAdapter {
             row = inflater.inflate(R.layout.fragment_pay_slip_item, parent, false);
             holder = new PaySlipListAdapter.OrderDetailHolder();
 
-            holder.tv_list_text = (TextView) row.findViewById(R.id.tv_list_text);
-            holder.tv_list_amt = (TextView) row.findViewById(R.id.tv_list_amt);
+            holder.tv_list_text = row.findViewById(R.id.tv_list_text);
+            holder.tv_list_amt = row.findViewById(R.id.tv_list_amt);
 
             row.setTag(holder);
         } else {
             holder = (PaySlipListAdapter.OrderDetailHolder) row.getTag();
         }
-        //     Log.d(TAG + "ID-", bookingTaskDetails.getCategoryId() + "");
 
-
-        if(listType == 0 ){
-            holder.tv_list_text.setText(bookingTaskDetails.getEarningDesc());
-            holder.tv_list_amt.setText(String.valueOf(bookingTaskDetails.getEarningAmt()));
-        }else if( listType == 1){
-            holder.tv_list_text.setText(bookingTaskDetails.getDeductionDesc());
-            holder.tv_list_amt.setText(String.valueOf( bookingTaskDetails.getDeductionAmt()));
+        if (listType == 0) {
+            holder.tv_list_text.setText(earningDetails.getName());
+            holder.tv_list_amt.setText(String.valueOf(earningDetails.getAmount()));
+        } else if (listType == 1) {
+            holder.tv_list_text.setText(deductionetails.getName());
+            holder.tv_list_amt.setText(String.valueOf(deductionetails.getAmount()));
         }
-
-
-
-
-
         return row;
     }
 
     static class OrderDetailHolder {
-        TextView tv_list_text,tv_list_amt,tv_Announcement_3;
+        TextView tv_list_text, tv_list_amt;
     }
 }
 

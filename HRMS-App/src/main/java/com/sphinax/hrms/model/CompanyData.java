@@ -92,8 +92,28 @@ public class CompanyData implements Serializable {
     @SerializedName("compShortName")
     @Expose
     private String compShortName;
+    @SerializedName("Earnings")
+    @Expose
+    private List<Earning> earnings = null;
+    @SerializedName("deductions")
+    @Expose
+    private List<Deduction> deductions = null;
 
+    public List<Earning> getEarnings() {
+        return earnings;
+    }
 
+    public void setEarnings(List<Earning> earnings) {
+        this.earnings = earnings;
+    }
+
+    public List<Deduction> getDeductions() {
+        return deductions;
+    }
+
+    public void setDeductions(List<Deduction> deductions) {
+        this.deductions = deductions;
+    }
     public String getUserId() {
         return userId;
     }
