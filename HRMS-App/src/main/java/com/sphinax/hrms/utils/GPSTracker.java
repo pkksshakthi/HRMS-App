@@ -1,4 +1,4 @@
-package com.sphinax.hrms.employee.fragment;
+package com.sphinax.hrms.utils;
 
 /**
  * Created by psak on 1/7/2018.

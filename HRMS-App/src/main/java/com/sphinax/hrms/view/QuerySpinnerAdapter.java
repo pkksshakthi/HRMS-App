@@ -45,7 +45,7 @@ public class QuerySpinnerAdapter extends ArrayAdapter<Ajax> {
         }
         if (data != null) {
             assert textView != null;
-            textView.setText(data.get(position).getReqStatusDesc());
+            textView.setText(data.get(position).getReqTypeDesc());
         }
 
         return textView;
@@ -62,7 +62,7 @@ public class QuerySpinnerAdapter extends ArrayAdapter<Ajax> {
             }
         }
         TextView textView = ((TextView) convertView);
-        textView.setText(data.get(position).getReqStatusDesc());
+        textView.setText(data.get(position).getReqTypeDesc());
         textView.setTextColor(Color.BLACK);
 
         return convertView;

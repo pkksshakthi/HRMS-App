@@ -481,7 +481,7 @@ public class WebServiceHandler {
             serviceContext = context;
             serviceActivity = activity;
 
-            String url = Constants.HR_HELPDESK_STATUS_LIST_REQUEST_URL;
+            String url = Constants.HR_HELPDESK_QUERY_LIST_REQUEST_URL;
 
             GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
                 @Override
@@ -504,6 +504,9 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onSuccess(false);
+
                         }
 //                        } else {
 //

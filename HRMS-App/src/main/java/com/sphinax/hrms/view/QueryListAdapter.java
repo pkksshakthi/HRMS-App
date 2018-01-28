@@ -21,7 +21,7 @@ import java.util.List;
 
 public class QueryListAdapter extends BaseAdapter {
 
-    private static final String TAG = "LeaveTypeListAdapter-";
+    private static final String TAG = "QueryListAdapter-";
     private final List<Ajax> detailsArrayList;
     private final Context context;
 
@@ -62,29 +62,22 @@ public class QueryListAdapter extends BaseAdapter {
             row = inflater.inflate(R.layout.fragment_enter_hrhelpdesk_item, parent, false);
             holder = new QueryListAdapter.OrderDetailHolder();
 
-            holder.bt_refid = (Button) row.findViewById(R.id.bt_refid);
-            holder.bt_message = (Button) row.findViewById(R.id.bt_message);
-            holder.tv_date = (TextView) row.findViewById(R.id.tv_date);
-            holder.tv_query_type = (TextView) row.findViewById(R.id.tv_query_type);
-            holder.iv_user_image = (ImageView) row.findViewById(R.id.iv_user_image);
+            holder.bt_refid = row.findViewById(R.id.bt_refid);
+            holder.bt_message = row.findViewById(R.id.bt_message);
+            holder.tv_date = row.findViewById(R.id.tv_date);
+            holder.tv_query_type = row.findViewById(R.id.tv_query_type);
+            holder.iv_user_image =  row.findViewById(R.id.iv_user_image);
 
 
             row.setTag(holder);
         } else {
             holder = (QueryListAdapter.OrderDetailHolder) row.getTag();
         }
-        //     Log.d(TAG + "ID-", bookingTaskDetails.getCategoryId() + "");
-
-
 
         holder.bt_refid.setText(String.valueOf(bookingTaskDetails.getReqId()));
         holder.bt_message.setText(bookingTaskDetails.getEmpMsg());
        // holder.tv_date.setText(bookingTaskDetails.get);
         holder.tv_query_type.setText(bookingTaskDetails.getReqtypedesc());
-
-
-
-
 
         return row;
     }
