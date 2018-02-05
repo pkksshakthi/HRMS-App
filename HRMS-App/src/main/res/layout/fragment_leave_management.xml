@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,86 +9,168 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-
-            android:background="#6CB8F6"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/lv_leave_data"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="0dp">
-
-            <TextView
-                android:id="@+id/textView6"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Leave Management"
-                android:textColor="#ffffff"
-                android:textSize="10pt"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingBottom="5dp"
+                    android:text="Select Company" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
+                    card_view:contentPadding="5dp">
 
 
-        </LinearLayout>
+                    <Spinner
+                        android:id="@+id/sp_company"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="20dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Select Branch" />
 
-            <Spinner
-                android:id="@+id/sp_company"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
 
-            <Spinner
-                android:id="@+id/sp_branch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1" />
+                    card_view:contentPadding="5dp">
 
-            <Spinner
-                android:id="@+id/sp_department"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1" />
-            <Spinner
-                android:id="@+id/sp_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1" />
+                    <Spinner
+                        android:id="@+id/sp_branch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Select Department" />
 
-            <Spinner
-                android:id="@+id/sp_empname"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"/>
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
 
-            <Button
-                android:id="@+id/bt_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:background="#1052A0"
-                android:text="Submit"
-                android:textColor="#ffffff" />
-        </LinearLayout>
+                    card_view:contentPadding="5dp">
+
+                    <Spinner
+                        android:id="@+id/sp_department"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Select Status" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
+
+                    card_view:contentPadding="5dp">
+
+                    <Spinner
+                        android:id="@+id/sp_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Employee Name" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
+
+                    card_view:contentPadding="5dp">
+
+                    <Spinner
+                        android:id="@+id/sp_empname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/bt_submit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:background="#1052A0"
+                        android:text="Submit"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/bt_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:background="#E33A3F"
+                        android:text="Cancel"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
 

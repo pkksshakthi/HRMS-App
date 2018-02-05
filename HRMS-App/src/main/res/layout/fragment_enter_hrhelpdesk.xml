@@ -75,7 +75,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="1dp"
                 android:background="#efdddd" />
 
             <TextView
@@ -101,14 +101,15 @@ android:layout_marginRight="10dp"
                 android:text="" />
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
                 android:background="#efdddd" />
             <Button
                 android:id="@+id/bt_submit"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_margin="2dp"
+                android:layout_margin="10dp"
                 android:background="#0B73CC"
                 android:text="Submit"
                 android:textColor="#ffffff" />
@@ -116,8 +117,8 @@ android:layout_marginRight="10dp"
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#000000">
+            android:layout_height="1dp"
+            android:background="#ebddff">
 
         </View>
 
