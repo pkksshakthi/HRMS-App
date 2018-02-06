@@ -12,6 +12,7 @@ import com.sphinax.hrms.R;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.model.Deduction;
 import com.sphinax.hrms.model.Earning;
+import com.sphinax.hrms.model.PaymentData;
 
 /**
  * Created by ganesaka on 1/10/2018.
@@ -20,11 +21,11 @@ import com.sphinax.hrms.model.Earning;
 public class PaySlipListAdapter extends BaseAdapter {
 
     private static final String TAG = "PaySlipListAdapter-";
-    private CompanyData detailsList;
+    private PaymentData detailsList;
     private Context context;
     private int listType;
 
-    public PaySlipListAdapter(Context context, CompanyData list, int listType) {
+    public PaySlipListAdapter(Context context, PaymentData list, int listType) {
         this.context = context;
         detailsList = list;
         this.listType = listType;
@@ -36,10 +37,10 @@ public class PaySlipListAdapter extends BaseAdapter {
         // TODO Auto-generated method stub
 
         if (listType == 0) {
-            return detailsList.getEarnings().size();
+            return detailsList.getAjax().getEarnings().size();
 
         } else if (listType == 1) {
-            return detailsList.getDeductions().size();
+            return detailsList.getAjax().getDeductions().size();
 
         }
         return 0;
@@ -50,10 +51,10 @@ public class PaySlipListAdapter extends BaseAdapter {
         // TODO Auto-generated method stub
 
         if (listType == 0) {
-            return detailsList.getEarnings().get(position);
+            return detailsList.getAjax().getEarnings().get(position);
 
         } else if (listType == 1) {
-            return detailsList.getDeductions().get(position);
+            return detailsList.getAjax().getDeductions().get(position);
         }
         return detailsList;
     }

@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by ganesaka on 12/24/2017.
@@ -224,16 +225,16 @@ public class Ajax implements Serializable {
     @SerializedName("monthValue")
     @Expose
     private Integer monthValue;
-
-    @SerializedName("earnings")
-    @Expose
-    private Long earnings;
-    @SerializedName("netpay")
-    @Expose
-    private Long netpay;
-    @SerializedName("deductions")
-    @Expose
-    private Long deductions;
+//
+//    @SerializedName("earnings")
+//    @Expose
+//    private Long earnings;
+//    @SerializedName("netpay")
+//    @Expose
+//    private Long netpay;
+//    @SerializedName("deductions")
+//    @Expose
+//    private Long deductions;
 
     @SerializedName("earningDesc")
     @Expose
@@ -263,6 +264,40 @@ public class Ajax implements Serializable {
     @Expose
     private Integer leaveTotal;
 
+    @SerializedName("Earnings")
+    @Expose
+    private List<Earning> earnings = null;
+    @SerializedName("deductions")
+    @Expose
+    private List<Deduction> deductions = null;
+    @SerializedName("total")
+    @Expose
+    private List<Total> total = null;
+
+
+    public List<Earning> getEarnings() {
+        return earnings;
+    }
+
+    public void setEarnings(List<Earning> earnings) {
+        this.earnings = earnings;
+    }
+
+    public List<Deduction> getDeductions() {
+        return deductions;
+    }
+
+    public void setDeductions(List<Deduction> deductions) {
+        this.deductions = deductions;
+    }
+
+    public List<Total> getTotal() {
+        return total;
+    }
+
+    public void setTotal(List<Total> total) {
+        this.total = total;
+    }
 
     public String getUser() {
         return user;
@@ -358,25 +393,25 @@ public class Ajax implements Serializable {
     public void setEarningAmt(Long earningAmt) {
         this.earningAmt = earningAmt;
     }
-    public Long getEarnings() {
-        return earnings;
-    }
-
-    public void setEarnings(Long earnings) {
-        this.earnings = earnings;
-    }
-
-    public Long getNetpay() {
-        return netpay;
-    }
-
-    public void setNetpay(Long netpay) {
-        this.netpay = netpay;
-    }
-
-    public Long getDeductions() {
-        return deductions;
-    }
+//    public Long getEarnings() {
+//        return earnings;
+//    }
+//
+//    public void setEarnings(Long earnings) {
+//        this.earnings = earnings;
+//    }
+//
+//    public Long getNetpay() {
+//        return netpay;
+//    }
+//
+//    public void setNetpay(Long netpay) {
+//        this.netpay = netpay;
+//    }
+//
+//    public Long getDeductions() {
+//        return deductions;
+//    }
 
 
     public String getDeductionDesc() {
@@ -394,9 +429,9 @@ public class Ajax implements Serializable {
     public void setDeductionAmt(Long deductionAmt) {
         this.deductionAmt = deductionAmt;
     }
-    public void setDeductions(Long deductions) {
-        this.deductions = deductions;
-    }
+//    public void setDeductions(Long deductions) {
+//        this.deductions = deductions;
+//    }
     public String getMonth() {
         return month;
     }

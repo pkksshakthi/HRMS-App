@@ -22,6 +22,7 @@ import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
+import com.sphinax.hrms.model.PaymentData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
@@ -43,7 +44,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     private TextView tv_payment, tv_netpay, tv_deduction, tv_toatal, tv_heading;
     private ListView lv_amt;
     private ProgressDialog pdia;
-    private CompanyData paySlipData = new CompanyData();
+    private PaymentData paySlipData = new PaymentData();
     private HashMap<Integer, String> spinnerMonthMap = new HashMap<Integer, String>();
     private String payslipYear;
     private String payslipMonth;
@@ -197,9 +198,9 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     private void loadDatainView() {
-        tv_payment.setText(String.valueOf(paySlipData.getAjax().get(0).getEarnings()));
-        tv_deduction.setText(String.valueOf(paySlipData.getAjax().get(0).getDeductions()));
-        tv_netpay.setText(String.valueOf(paySlipData.getAjax().get(0).getNetpay()));
+        tv_payment.setText(String.valueOf(paySlipData.getAjax().getTotal().get(0).getEarnings()));
+        tv_deduction.setText(String.valueOf(paySlipData.getAjax().getTotal().get(0).getDeductions()));
+        tv_netpay.setText(String.valueOf(paySlipData.getAjax().getTotal().get(0).getNetpay()));
         loadListPaySlip(0);
     }
 
@@ -207,12 +208,12 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
 
         if (i == 0) {
             tv_heading.setText("Payments");
-            tv_toatal.setText(String.valueOf(paySlipData.getAjax().get(0).getEarnings()));
+            tv_toatal.setText(String.valueOf(paySlipData.getAjax().getTotal().get(0).getEarnings()));
             paySlipListAdapter = new PaySlipListAdapter(getActivity(), paySlipData, 0);
             lv_amt.setAdapter(paySlipListAdapter);
         } else if (i == 1) {
             tv_heading.setText("Deductions");
-            tv_toatal.setText(String.valueOf(paySlipData.getAjax().get(0).getDeductions()));
+            tv_toatal.setText(String.valueOf(paySlipData.getAjax().getTotal().get(0).getDeductions()));
             paySlipListAdapter = new PaySlipListAdapter(getActivity(), paySlipData, 1);
             lv_amt.setAdapter(paySlipListAdapter);
         }
@@ -382,7 +383,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    CompanyData companyData = (CompanyData) obj;
+                    PaymentData companyData = (PaymentData) obj;
                     paySlipData = companyData;
                     loadDatainView();
                 }

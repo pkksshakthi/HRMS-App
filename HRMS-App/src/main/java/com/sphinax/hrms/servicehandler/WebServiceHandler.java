@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.model.LoginData;
+import com.sphinax.hrms.model.PaymentData;
 import com.sphinax.hrms.model.ServiceRequest;
 import com.sphinax.hrms.utils.Utility;
 
@@ -944,10 +945,10 @@ public class WebServiceHandler {
 //                                delegate.unAuthorized();
 //                            } else {
                             try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    Log.d("ajaxList", "earning --> " + output.getJSONArray("ajax"));
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    Log.d("ajaxList", "earning --> " + companyDataObject.getAjax().get(0).getNetpay());
+                                if (output.getJSONObject("ajax") != null) {
+                                    Log.d("ajaxList", "earning --> " + output.getJSONObject("ajax"));
+                                    PaymentData companyDataObject = gson.fromJson(output.toString(), PaymentData.class);
+                                    Log.d("ajaxList", "earning --> " + companyDataObject.getAjax());
 
                                     delegate.onSuccess(true);
                                     delegate.onReturnObject(companyDataObject);
