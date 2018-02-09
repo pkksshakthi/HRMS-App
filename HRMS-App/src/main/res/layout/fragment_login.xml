@@ -51,7 +51,10 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
                     android:textSize="16sp" />
-
+<!--
+                android:text="10000"
+                android:text="ET10001"
+-->
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1px"
@@ -73,6 +76,10 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
                     android:textSize="16sp" />
+<!--
+                android:text="msgroup"
+                android:text="rS500"
+-->
 
                 <View
                     android:layout_width="fill_parent"

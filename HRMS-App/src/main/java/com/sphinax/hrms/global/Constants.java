@@ -53,6 +53,7 @@ public class Constants {
     public static final String PAYSLIP_DEDUCTION_DETAIL_REQUEST_URL = domain + client + "Deductions";
     public static final String PAYSLIP_DOWNLOAD_REQUEST_URL = domain + client + "DownloadPayslip";
     public static final String HR_HELPDESK_QUERY_LIST_REQUEST_URL = domain + client + "QryTypeList";
+    public static final String EMP_LEAVE_LIST_REQUEST_URL = domain + client + "empleaveList";
 
 
 

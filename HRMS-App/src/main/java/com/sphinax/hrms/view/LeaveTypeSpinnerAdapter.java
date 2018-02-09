@@ -44,7 +44,7 @@ public class LeaveTypeSpinnerAdapter extends ArrayAdapter<Ajax> {
         }
         if (data != null) {
             assert textView != null;
-            textView.setText(data.get(position).getLeaveType());
+            textView.setText(data.get(position).getLeaveTypeDescs());
         }
 
         return textView;
@@ -61,7 +61,7 @@ public class LeaveTypeSpinnerAdapter extends ArrayAdapter<Ajax> {
             }
         }
         TextView textView = ((TextView) convertView);
-        textView.setText(data.get(position).getLeaveType());
+        textView.setText(data.get(position).getLeaveTypeDescs());
         textView.setTextColor(Color.BLACK);
 
         return convertView;

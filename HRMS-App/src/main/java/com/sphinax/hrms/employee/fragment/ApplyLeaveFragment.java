@@ -265,8 +265,9 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         Ajax leavetype = new Ajax();
         if (leaveTypeList != null) {
             leavetype = leaveTypeList.get(position);
-            //  leaveTypePosition = leavetype.getLeaveTypeId();
-            leaveTypePosition = position;
+            leaveTypePosition = leavetype.getLeaveTypeIds();
+            Log.d(TAG, "actionCompanySelector: " +leaveTypePosition);
+           // leaveTypePosition = position;
         }
     }
 
@@ -396,12 +397,12 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     }
 
                     if (flag) {
-                        Utility.showToastMessage(getActivity(), "Leave Applyed");
+                        Utility.showCustomToast(getActivity(),mView, "Leave Applyed");
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
                         Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new ApplyLeaveFragment(), false, null, Constants.FRAMENT_LEAVE_APPLY);
                     } else {
-                        Utility.showToastMessage(getActivity(), "Leave not applyed kindly try again");
+                        Utility.showCustomToast(getActivity(), mView,"Leave not applyed kindly try again");
 
                     }
                 }

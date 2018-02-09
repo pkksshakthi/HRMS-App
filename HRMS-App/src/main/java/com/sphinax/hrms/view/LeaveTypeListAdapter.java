@@ -56,7 +56,7 @@ public class LeaveTypeListAdapter extends RecyclerView.Adapter<LeaveTypeListAdap
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Ajax ajax = detailsArrayList.get(position);
 
-        holder.bt_leavetype.setText(ajax.getLeaveType());
+        holder.bt_leavetype.setText(ajax.getLeaveTypeDescs());
         holder.tv_bal.setText(String.valueOf(ajax.getLeaveBalance()) +  " / " + String.valueOf(ajax.getLeaveTotal()));
         }
 

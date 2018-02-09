@@ -273,8 +273,28 @@ public class Ajax implements Serializable {
     @SerializedName("total")
     @Expose
     private List<Total> total = null;
+    @SerializedName("Leave Type Id")
+    @Expose
+    private Integer leaveTypeIds;
+    @SerializedName("Leave Type Desc")
+    @Expose
+    private String leaveTypeDescs;
 
+    public Integer getLeaveTypeIds() {
+        return leaveTypeIds;
+    }
 
+    public void setLeaveTypeIds(Integer leaveTypeIds) {
+        this.leaveTypeIds = leaveTypeIds;
+    }
+
+    public String getLeaveTypeDescs() {
+        return leaveTypeDescs;
+    }
+
+    public void setLeaveTypeDescs(String leaveTypeDescs) {
+        this.leaveTypeDescs = leaveTypeDescs;
+    }
     public List<Earning> getEarnings() {
         return earnings;
     }

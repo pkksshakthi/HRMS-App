@@ -121,11 +121,11 @@ public class LeavePendingListFragment extends Fragment {
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
-            //requestMap.put("leavestatus", "3");
-            requestMap.put("leavestatus", "All");
+            requestMap.put("leavestatus", "3");
+            //requestMap.put("leavestatus", "All");
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
 
-            webServiceHandler.getAllLeaveList(getActivity(), context, requestMap, new ServiceCallback() {
+            webServiceHandler.getEmpLeaveList(getActivity(), context, requestMap, new ServiceCallback() {
 
                 @Override
                 public void onSuccess(boolean flag) {
