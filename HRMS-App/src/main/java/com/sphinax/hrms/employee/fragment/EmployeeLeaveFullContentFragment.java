@@ -1,7 +1,6 @@
 package com.sphinax.hrms.employee.fragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,16 +16,16 @@ import com.sphinax.hrms.model.Ajax;
 
 public class EmployeeLeaveFullContentFragment extends Fragment {
 
-    private static final String TAG = "ApplyLeaveFragment-";
+    private static final String TAG = "EmployeeLeaveFullContentFragment-";
     private static Context context;
     private View mView;
-    private EditText ed_AppliedOn,ed_AppliedFor,ed_leaveTye,ed_EmpMess,ed_AdminMess;
-    private TextView tv_fromDate,tv_toDate,tv_startSession,tv_endSession,tv_leaveStatus;
+    private EditText ed_AppliedOn, ed_AppliedFor, ed_leaveTye, ed_EmpMess, ed_AdminMess;
+    private TextView tv_fromDate, tv_toDate, tv_startSession, tv_endSession, tv_leaveStatus;
+    private Ajax ajax;
 
     public EmployeeLeaveFullContentFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -48,10 +47,27 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
         context = view.getContext();
 
         loadComponent();
-            Ajax ajax=(Ajax)getArguments().getSerializable("UserValidateObject");
-      if(ajax != null){
+        ajax = (Ajax) getArguments().getSerializable("UserValidateObject");
+        loadData();
+    }
 
-        tv_leaveStatus.setText(ajax.getLeaveStatusDesc());
+    private void loadComponent() {
+        tv_fromDate = mView.findViewById(R.id.tv_fromdate);
+        tv_startSession = mView.findViewById(R.id.tv_session_start);
+        tv_toDate = mView.findViewById(R.id.tv_toDate);
+        tv_endSession = mView.findViewById(R.id.tv_session_end);
+        ed_AppliedOn = mView.findViewById(R.id.ed_applied_on);
+        ed_AppliedFor = mView.findViewById(R.id.ed_applied_for);
+        ed_leaveTye = mView.findViewById(R.id.ed_leave_type);
+        ed_EmpMess = mView.findViewById(R.id.ed_emp_mess);
+        ed_AdminMess = mView.findViewById(R.id.ed_admin_mess);
+        tv_leaveStatus = mView.findViewById(R.id.tv_leaetype);
+    }
+
+    private void loadData() {
+        if (ajax != null) {
+
+            tv_leaveStatus.setText(ajax.getLeaveStatusDesc());
             tv_fromDate.setText(ajax.getFromDate());
             tv_startSession.setText(ajax.getFromsessionDesc());
             tv_toDate.setText(ajax.getToDate());
@@ -64,20 +80,4 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
 
         }
     }
-
-    private void loadComponent() {
-        tv_fromDate = mView.findViewById(R.id.tv_fromdate);
-        tv_startSession= mView.findViewById(R.id.tv_session_start);
-        tv_toDate = mView.findViewById(R.id.tv_toDate);
-        tv_endSession  = mView.findViewById(R.id.tv_session_end);
-        ed_AppliedOn = mView.findViewById(R.id.ed_applied_on);
-        ed_AppliedFor= mView.findViewById(R.id.ed_applied_for);
-        ed_leaveTye = mView.findViewById(R.id.ed_leave_type);
-         ed_EmpMess= mView.findViewById(R.id.ed_emp_mess);
-        ed_AdminMess = mView.findViewById(R.id.ed_admin_mess);
-        tv_leaveStatus = mView.findViewById(R.id.tv_leaetype);
-    }
-
-
-
 }

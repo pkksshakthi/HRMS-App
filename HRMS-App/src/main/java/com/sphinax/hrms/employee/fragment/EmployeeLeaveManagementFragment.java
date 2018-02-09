@@ -54,6 +54,7 @@ public class EmployeeLeaveManagementFragment extends Fragment {
         adapter.addFragment(new LeavePendingListFragment(), "Pending");
         adapter.addFragment(new LeaveRejectedListFragment(), "Rejected");
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
 
 
         tabLayout.setupWithViewPager(viewPager);
