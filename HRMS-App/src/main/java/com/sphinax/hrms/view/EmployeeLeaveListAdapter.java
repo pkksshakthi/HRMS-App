@@ -49,11 +49,13 @@ public class EmployeeLeaveListAdapter extends RecyclerView.Adapter<EmployeeLeave
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Ajax ajax = ajaxList.get(position);
 
-        holder.tv_name.setText(ajax.getDescription());
+        holder.tv_name.setText(ajax.getEmployeeDescription());
         holder.tv_leave_type.setText(ajax.getLeaveTypeDesc());
-        holder.tv_date.setText(String.valueOf(ajax.getFromDate().getDate()) + "/" + String.valueOf(ajax.getFromDate().getMonth())
-                + "/" + String.valueOf(ajax.getFromDate().getYear()));
+        holder.tv_date.setText(ajax.getFromDate());
+//        holder.tv_date.setText(String.valueOf(ajax.getFromDate().getDate()) + "/" + String.valueOf(ajax.getFromDate().getMonth())
+//                + "/" + String.valueOf(ajax.getFromDate().getYear()));
       holder.tv_status.setText(ajax.getLeaveStatusDesc());
+      holder.tv_days.setText(String.valueOf(ajax.getNoofdays()));
 
     }
 

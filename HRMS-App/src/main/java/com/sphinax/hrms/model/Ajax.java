@@ -152,10 +152,10 @@ public class Ajax implements Serializable {
     private String deptDesc;
     @SerializedName("fromDate")
     @Expose
-    private FromDate fromDate;
+    private String fromDate;
     @SerializedName("toDate")
     @Expose
-    private ToDate toDate;
+    private String toDate;
     @SerializedName("leaveTypeDesc")
     @Expose
     private String leaveTypeDesc;
@@ -279,6 +279,47 @@ public class Ajax implements Serializable {
     @SerializedName("Leave Type Desc")
     @Expose
     private String leaveTypeDescs;
+
+    @SerializedName("EmployeeDescription")
+    @Expose
+    private String employeeDescription;
+
+    @SerializedName("noofdays")
+    @Expose
+    private Double noofdays;
+
+
+    public String getEmployeeDescription() {
+        return employeeDescription;
+    }
+
+    public void setEmployeeDescription(String employeeDescription) {
+        this.employeeDescription = employeeDescription;
+    }
+
+    public String getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public String getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
+    }
+
+    public Double getNoofdays() {
+        return noofdays;
+    }
+
+    public void setNoofdays(Double noofdays) {
+        this.noofdays = noofdays;
+    }
 
     public Integer getLeaveTypeIds() {
         return leaveTypeIds;
@@ -625,21 +666,7 @@ public class Ajax implements Serializable {
         this.deptDesc = deptDesc;
     }
 
-    public FromDate getFromDate() {
-        return fromDate;
-    }
 
-    public void setFromDate(FromDate fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public ToDate getToDate() {
-        return toDate;
-    }
-
-    public void setToDate(ToDate toDate) {
-        this.toDate = toDate;
-    }
 
     public String getLeaveTypeDesc() {
         return leaveTypeDesc;
