@@ -287,7 +287,51 @@ public class Ajax implements Serializable {
     @SerializedName("noofdays")
     @Expose
     private Double noofdays;
+    @SerializedName("FromsessionDesc")
+    @Expose
+    private String fromsessionDesc;
+    @SerializedName("ToSessionDesc")
+    @Expose
+    private String toSessionDesc;
+    @SerializedName("AppliedOn")
+    @Expose
+    private String appliedOn;
+    @SerializedName("Remarks")
+    @Expose
+    private String remarks;
 
+
+    public String getFromsessionDesc() {
+        return fromsessionDesc;
+    }
+
+    public void setFromsessionDesc(String fromsessionDesc) {
+        this.fromsessionDesc = fromsessionDesc;
+    }
+
+    public String getToSessionDesc() {
+        return toSessionDesc;
+    }
+
+    public void setToSessionDesc(String toSessionDesc) {
+        this.toSessionDesc = toSessionDesc;
+    }
+
+    public String getAppliedOn() {
+        return appliedOn;
+    }
+
+    public void setAppliedOn(String appliedOn) {
+        this.appliedOn = appliedOn;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     public String getEmployeeDescription() {
         return employeeDescription;

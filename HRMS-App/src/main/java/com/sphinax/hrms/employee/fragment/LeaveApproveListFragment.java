@@ -3,9 +3,11 @@ package com.sphinax.hrms.employee.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.global.Constants;
@@ -23,6 +26,7 @@ import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.RecyclerTouchListener;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.EmployeeLeaveListAdapter;
 
@@ -42,6 +46,7 @@ public class LeaveApproveListFragment extends Fragment {
     private RecyclerView recyclerView;
     private EmployeeLeaveListAdapter mAdapter;
     private ProgressDialog pdia;
+    private FragmentManager fragmentManager;
 
 
     public LeaveApproveListFragment() {
@@ -67,6 +72,8 @@ public class LeaveApproveListFragment extends Fragment {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
+
         loadComponent();
 
 
@@ -86,7 +93,22 @@ public class LeaveApproveListFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         fetchLeaveList();
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Ajax ajaxApp = approveList.get(position);
+                //Toast.makeText(getApplicationContext(), movie.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
+                Bundle b = new Bundle();
+                b.putSerializable("UserValidateObject",ajaxApp);
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeLeaveFullContentFragment(), true, b, Constants.FRAMENT_LEAVE_LIST_CONTENT);
 
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
     }
 

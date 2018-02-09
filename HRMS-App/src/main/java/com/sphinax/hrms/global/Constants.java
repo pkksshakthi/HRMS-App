@@ -85,7 +85,7 @@ public class Constants {
     public static final String FRAMENT_ANNOUNCEMENT_LIST = "ANNOUNCEMENT LIST SCREEN";
     public static final String FRAMENT_PAYSLIP = "PAYSLIP DETAIL SCREEN";
     public static final String FRAMENT_HR_HELPDESK_ENTER = "HR HELPDESK ENTER SCREEN";
-//    public static final String FRAMENT_ = "";
+   public static final String FRAMENT_LEAVE_LIST_CONTENT = "LEAVE LIST ITEM SCREEN";
 //    public static final String FRAMENT_ = "";
 //    public static final String FRAMENT_ = "";
 //    public static final String FRAMENT_ = "";
