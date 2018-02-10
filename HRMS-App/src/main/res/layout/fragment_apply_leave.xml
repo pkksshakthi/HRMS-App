@@ -320,7 +320,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_leaveapplicationn_new"
+                            android:src="@drawable/icon_leave"
                             card_view:layout_editor_absoluteX="0dp"
                             card_view:layout_editor_absoluteY="0dp" />
 
@@ -392,7 +392,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_leaveapplicationn_new"
+                            android:src="@drawable/icon_startdate"
                             card_view:layout_editor_absoluteX="0dp"
                             card_view:layout_editor_absoluteY="0dp" />
 
@@ -535,7 +535,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_leaveapplicationn_new"
+                            android:src="@drawable/icon_session"
                             card_view:layout_editor_absoluteX="0dp"
                             card_view:layout_editor_absoluteY="0dp" />
 
@@ -608,7 +608,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_leaveapplicationn_new"
+                            android:src="@drawable/icon_enddate"
                             card_view:layout_editor_absoluteX="0dp"
                             card_view:layout_editor_absoluteY="0dp" />
 
@@ -680,7 +680,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_leaveapplicationn_new"
+                            android:src="@drawable/icon_session"
                             card_view:layout_editor_absoluteX="0dp"
                             card_view:layout_editor_absoluteY="0dp" />
 
@@ -752,7 +752,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_leaveapplicationn_new"
+                            android:src="@drawable/icon_startdate"
                             card_view:layout_editor_absoluteX="0dp"
                             card_view:layout_editor_absoluteY="0dp" />
 
@@ -825,7 +825,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_leaveapplicationn_new"
+                            android:src="@drawable/icon_reason"
                             card_view:layout_editor_absoluteX="0dp"
                             card_view:layout_editor_absoluteY="0dp" />
 
