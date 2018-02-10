@@ -18,6 +18,7 @@
             android:name=".common.activity.SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,13 +29,19 @@
         <activity
             android:name=".common.activity.SelectCompanyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
         </activity>
-        <activity android:name=".admin.activity.AdminMenuActivity" />
-        <activity android:name=".employee.activity.UserMenuActivity"/>
-        <activity android:name=".common.activity.LoginActivity" />
-        <activity android:name=".common.activity.OTPActivity" />
-        <activity android:name=".common.activity.PasswordChangeActivity" />
+        <activity android:name=".admin.activity.AdminMenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".employee.activity.UserMenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".common.activity.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".common.activity.OTPActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".common.activity.PasswordChangeActivity"
+            android:screenOrientation="portrait"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAbkqQ2t-ZzBVERt3huLEum9fs-Do3mHNw" />

@@ -62,6 +62,11 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
         ed_EmpMess = mView.findViewById(R.id.ed_emp_mess);
         ed_AdminMess = mView.findViewById(R.id.ed_admin_mess);
         tv_leaveStatus = mView.findViewById(R.id.tv_leaetype);
+        ed_AppliedOn.setEnabled(false);
+        ed_AppliedFor.setEnabled(false);
+        ed_leaveTye.setEnabled(false);
+        ed_EmpMess.setEnabled(false);
+        ed_AdminMess.setEnabled(false);
     }
 
     private void loadData() {

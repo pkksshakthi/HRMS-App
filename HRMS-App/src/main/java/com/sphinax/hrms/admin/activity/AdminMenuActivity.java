@@ -3,6 +3,7 @@ package com.sphinax.hrms.admin.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +28,7 @@ import com.sphinax.hrms.utils.Utility;
 public class AdminMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "AdminMenuActivity";
     DrawerLayout drawer;
     private FragmentManager fragmentManager;
     @Override
@@ -83,7 +85,12 @@ public class AdminMenuActivity extends AppCompatActivity
         //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else if (this.getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            Log.d(TAG, "onBackPressed: " + this.getSupportFragmentManager().getBackStackEntryCount());
+            getSupportFragmentManager().popBackStack();
+        }
+        else {
             super.onBackPressed();
         }
     }
@@ -139,4 +146,6 @@ public class AdminMenuActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

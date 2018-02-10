@@ -101,7 +101,11 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        }
+        else {
             super.onBackPressed();
         }
     }
@@ -166,4 +170,5 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
