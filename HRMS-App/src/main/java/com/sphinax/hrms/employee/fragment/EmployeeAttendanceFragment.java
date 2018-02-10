@@ -1,5 +1,6 @@
 package com.sphinax.hrms.employee.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -135,6 +136,7 @@ public class EmployeeAttendanceFragment extends Fragment {
 
     }
 
+    @SuppressLint("LongLogTag")
     private void loadCalendarData(int year, int month) {
         Log.d(TAG, "loadCalendarData: " + year);
         Log.d(TAG, "loadCalendarData: " + Month);
@@ -160,9 +162,9 @@ public class EmployeeAttendanceFragment extends Fragment {
                     events.add(new EventDay(mCal, R.drawable.icon_red_box, Color.WHITE));
                 } else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("A")) {
 
-                    events.add(new EventDay(mCal, R.drawable.sample_icon_2, Color.WHITE));
+                    events.add(new EventDay(mCal, R.drawable.icon_payslip, Color.WHITE));
                 } else {
-                    events.add(new EventDay(mCal, R.drawable.sample_icon_3, Color.WHITE));
+                    events.add(new EventDay(mCal, R.drawable.icon_holiday, Color.WHITE));
                 }
 
             }
@@ -207,7 +209,7 @@ public class EmployeeAttendanceFragment extends Fragment {
                     CompanyData companyData = (CompanyData) obj;
                     attendanceData = new CompanyData();
                     attendanceData = companyData;
-                    Log.d(TAG, "size --> " + attendanceData.getAjax().size());
+                    //Log.d(TAG, "size --> " + attendanceData.getAjax().size());
 
                     loaddatainview();
 
