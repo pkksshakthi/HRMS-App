@@ -149,45 +149,60 @@
 
         </LinearLayout>
 
-        <LinearLayout
+
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:padding="10dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/icon_1_present"
-                android:paddingRight="10dp"
-                android:text=" PRESENT" />
+            <TableRow
+                android:layout_width="match_parent"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/icon_1_apply_leave"
-                android:paddingRight="10dp"
-                android:text=" APPLY LEAVE" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/icon_1_absent"
-                android:paddingRight="10dp"
-                android:text=" ABSENT" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    
+                    android:drawableLeft="@drawable/icon_1_absent"
+                    android:paddingRight="10dp"
+                    android:text=" ABSENT" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/icon_1_holiday"
-                android:paddingRight="10dp"
-                android:text=" HOLIDAY" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/icon_1_holiday"
+                    android:paddingRight="10dp"
+                    android:text=" HOLIDAY" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/icon_1_present"
+                    android:paddingRight="10dp"
+                    android:text=" PRESENT" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/icon_1_apply_leave"
+                    android:paddingRight="10dp"
+                    android:text=" APPLY LEAVE" />
+            </TableRow>
+
+        </TableLayout>
+
 
         <Button
             android:id="@+id/setDateButton"

@@ -316,6 +316,7 @@
                 android:id="@+id/bt_download_payslip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
 
                 android:background="#4c78b7"
                 android:text="DOWNLOAD"
