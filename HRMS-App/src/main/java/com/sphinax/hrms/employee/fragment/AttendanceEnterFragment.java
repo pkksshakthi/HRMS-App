@@ -3,20 +3,16 @@ package com.sphinax.hrms.employee.fragment;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,10 +49,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-import static android.content.Context.LOCATION_SERVICE;
 
-
-public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,View.OnClickListener {
 
 
     private static final String TAG = "AttendanceEnterFragment-";
@@ -76,28 +70,13 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private ProgressDialog pdia;
     private ArrayList<Ajax> ajaxList;
     private String currentAddress;
+    private SupportMapFragment mapFragment;
 
     //private  boolean allowRefresh = true;
     public AttendanceEnterFragment() {
         // Required empty public constructor
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!canAccessLocation()) {
-                requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
-            }
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -111,29 +90,16 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     public void onStart() {
         super.onStart();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!canAccessLocation()) {
-                requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
-            } else {
-                googleApiClient.connect();
-            }
-        } else {
-            googleApiClient.connect();
-        }
+
+        googleApiClient.connect();
+
     }
 
     public void onStop() {
         super.onStop();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!canAccessLocation()) {
-                requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
-            } else {
-                googleApiClient.disconnect();
-            }
-        } else {
-            googleApiClient.disconnect();
-        }
+        googleApiClient.disconnect();
+
 
     }
 
@@ -143,27 +109,18 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
         mView = view;
         context = view.getContext();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!canAccessLocation()) {
-                requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
-            } else {
-                loadMapView();
-            }
-        } else {
-            loadMapView();
-        }
+        loadMapView();
 
+        fetchDailyUserAttendance();
         loadComponent();
         setListeners();
 
-        fetchDailyUserAttendance();
 
         if (Global.isMarkAttendance()) {
             bt_In_att.setEnabled(false);
             bt_In_att.setClickable(false);
 
         }
-        // Check-In Time 9:00PM
 
     }
 
@@ -178,7 +135,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     }
 
     private void loadMapView() {
-        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         googleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API)
@@ -192,54 +149,89 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private void loadMap() {
         if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
-            LocationManager lm = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-            if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                    !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                // Build the alert dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Location Services Not Active");
-                builder.setMessage("Please enable Location Services and GPS");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // Show location settings when the user acknowledges the alert dialog
-                        startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
+            Location location = GeoLocationFinder.getLocationOnly(context);
+
+            try {
+                if (location != null) {
+                    Log.d(TAG + "latitude-", "-" + location.getLatitude());
+                    Log.d(TAG + "longitude-", "-" + location.getLongitude());
+
+                    Address address = GeoLocationFinder.getMyLocationAddress(context, location);
+                    currentAddress = "" + address.getAddressLine(0) + "-" + address.getPostalCode();
+                    //Log.d(TAG, "loadMap: "+currentAddress);
+                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    //MarkerOptions are used to create a new Marker.You can specify location, title etc with MarkerOptions
+                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("You are Here");
+
+                    //Adding the created the marker on the map
+                    mMap.addMarker(markerOptions);
+                    //mMap.title("my position");
+                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
                     }
-                });
-                Dialog alertDialog = builder.create();
-                alertDialog.setCanceledOnTouchOutside(false);
-                alertDialog.show();
-            } else {
+                    mMap.setMyLocationEnabled(true);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                } else {
+                    Log.d(TAG + " -", "NO VAL");
 
-                Location location = GeoLocationFinder.getLocationOnly(context);
-
-                try {
-                    if(location != null) {
-                        Log.d(TAG + "latitude-", "-" + location.getLatitude());
-                        Log.d(TAG + "longitude-", "-" + location.getLongitude());
-
-                        Address address = GeoLocationFinder.getMyLocationAddress(context, location);
-                        currentAddress = "" + address.getAddressLine(0) + "-" + address.getPostalCode();
-                        //Log.d(TAG, "loadMap: "+currentAddress);
-                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                        //MarkerOptions are used to create a new Marker.You can specify location, title etc with MarkerOptions
-                        MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("You are Here");
-
-                        //Adding the created the marker on the map
-                        mMap.addMarker(markerOptions);
-                        //mMap.title("my position");
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-                    }else {
-                        Log.d(TAG + " -", "NO VAL");
-
-                    }
-                } catch (Exception e) {
-
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
             }
         }
     }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+
+        loadMap();
+
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        mMap = googleMap;
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_mark_in_att:
+                enterUserAttendance();
+                loadMap();
+                tv_att_details.setText("" + currentAddress);
+                break;
+        }
+    }
+
+
+
+
 
     private void checkAttendanceMarked() {
 
@@ -250,7 +242,6 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             }
         }
     }
-
 
     @SuppressLint("LongLogTag")
     private String covertDate(String dtStart) {
@@ -265,69 +256,6 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             e.printStackTrace();
         }
         return "";
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!canAccessLocation()) {
-                requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
-            } else {
-                loadMap();
-            }
-
-        } else {
-            loadMap();
-        }
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-//        if (allowRefresh)
-//        {
-//            allowRefresh = false;
-//            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
-//        }
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!canAccessLocation()) {
-                requestPermissions(INITIAL_PERMS, INITIAL_REQUEST);
-            } else {
-                mMap = googleMap;
-            }
-
-        } else {
-            mMap = googleMap;
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bt_mark_in_att:
-                enterUserAttendance();
-                loadMap();
-                tv_att_details.setText("" + currentAddress);
-                break;
-        }
     }
 
     @Override

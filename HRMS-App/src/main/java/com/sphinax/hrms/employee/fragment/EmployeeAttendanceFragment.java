@@ -162,7 +162,7 @@ public class EmployeeAttendanceFragment extends Fragment {
                     events.add(new EventDay(mCal, R.drawable.icon_red_box, Color.WHITE));
                 } else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("A")) {
 
-                    events.add(new EventDay(mCal, R.drawable.icon_payslip, Color.WHITE));
+                    events.add(new EventDay(mCal, R.drawable.icon_absent, Color.WHITE));
                 } else {
                     events.add(new EventDay(mCal, R.drawable.icon_holiday, Color.WHITE));
                 }

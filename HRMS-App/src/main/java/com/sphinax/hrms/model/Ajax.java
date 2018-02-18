@@ -256,13 +256,13 @@ public class Ajax implements Serializable {
     private String leaveType;
     @SerializedName("Leave Apply")
     @Expose
-    private Integer leaveApply;
+    private Double leaveApply;
     @SerializedName("Leave Balance")
     @Expose
-    private Integer leaveBalance;
+    private Double leaveBalance;
     @SerializedName("Leave Total")
     @Expose
-    private Integer leaveTotal;
+    private Double leaveTotal;
 
     @SerializedName("Earnings")
     @Expose
@@ -458,27 +458,27 @@ public class Ajax implements Serializable {
         this.leaveType = leaveType;
     }
 
-    public Integer getLeaveApply() {
+    public Double getLeaveApply() {
         return leaveApply;
     }
 
-    public void setLeaveApply(Integer leaveApply) {
+    public void setLeaveApply(Double leaveApply) {
         this.leaveApply = leaveApply;
     }
 
-    public Integer getLeaveBalance() {
+    public Double getLeaveBalance() {
         return leaveBalance;
     }
 
-    public void setLeaveBalance(Integer leaveBalance) {
+    public void setLeaveBalance(Double leaveBalance) {
         this.leaveBalance = leaveBalance;
     }
 
-    public Integer getLeaveTotal() {
+    public Double getLeaveTotal() {
         return leaveTotal;
     }
 
-    public void setLeaveTotal(Integer leaveTotal) {
+    public void setLeaveTotal(Double leaveTotal) {
         this.leaveTotal = leaveTotal;
     }
 

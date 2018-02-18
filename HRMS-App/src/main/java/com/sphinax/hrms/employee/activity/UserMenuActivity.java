@@ -53,7 +53,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
             return;
         }
 
-        navigationView =  findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         drawer = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         navigationView.setNavigationItemSelectedListener(this);
@@ -65,7 +65,6 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
         loadComponent();
         setListeners();
         setData();
-
 
 
         iv_drawer_open.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +82,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
 
     private void loadComponent() {
         iv_drawer_open = findViewById(R.id.iv_drawer_open);
-        tv_username =  headerView.findViewById(R.id.tv_username);
+        tv_username = headerView.findViewById(R.id.tv_username);
         tv_companyname = headerView.findViewById(R.id.tv_company_name);
     }
 
@@ -101,11 +100,9 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+        } else if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -139,6 +136,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
         int id = item.getItemId();
 
         if (id == R.id.nav_mark_attendance) {
+
             Utility.addFragment(this, R.id.content_frame, fragmentManager, new AttendanceEnterFragment(), true, null, Constants.FRAMENT_ANTTENDANCE_ENTER);
         } else if (id == R.id.nav_attendance_report) {
             Utility.addFragment(this, R.id.content_frame, fragmentManager, new EmployeeAttendanceFragment(), true, null, Constants.FRAMENT_ANNOUNCEMENT_LIST);
