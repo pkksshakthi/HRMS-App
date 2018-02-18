@@ -23,6 +23,7 @@ import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.model.PaymentData;
+import com.sphinax.hrms.servicehandler.DownloadTask;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
@@ -427,30 +428,31 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
             requestMap.put("year", payslipYear);
             requestMap.put("month", payslipMonth);
+            new DownloadTask(getActivity(), Constants.PAYSLIP_DOWNLOAD_REQUEST_URL,requestMap,String.valueOf(payslipYear +"-" +payslipMonth + ".pdf" ));
 
-            webServiceHandler.getPaySlipDownload(getActivity(), context, requestMap, new ServiceCallback() {
-
-                @Override
-                public void onSuccess(boolean flag) {
-                }
-
-                @Override
-                public void onReturnObject(Object obj) {
-                }
-
-                @Override
-                public void onParseError() {
-                }
-
-                @Override
-                public void onNetworkError() {
-                }
-
-                @Override
-                public void unAuthorized() {
-                }
-
-            });
+//            webServiceHandler.getPaySlipDownload(getActivity(), context, requestMap, new ServiceCallback() {
+//
+//                @Override
+//                public void onSuccess(boolean flag) {
+//                }
+//
+//                @Override
+//                public void onReturnObject(Object obj) {
+//                }
+//
+//                @Override
+//                public void onParseError() {
+//                }
+//
+//                @Override
+//                public void onNetworkError() {
+//                }
+//
+//                @Override
+//                public void unAuthorized() {
+//                }
+//
+//            });
         } catch (Exception e) {
             e.printStackTrace();
         }

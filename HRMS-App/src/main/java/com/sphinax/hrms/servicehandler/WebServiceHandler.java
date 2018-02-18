@@ -16,6 +16,7 @@ import com.sphinax.hrms.utils.Utility;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
@@ -1130,40 +1131,40 @@ public class WebServiceHandler {
         }
     }
 
-    public void getPaySlipDownload(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
-        try {
-            delegate = callback;
-            serviceContext = context;
-            serviceActivity = activity;
-
-            String url = Constants.PAYSLIP_DOWNLOAD_REQUEST_URL;
-
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
-                            try {
-
-                            } catch (Exception e) {
-                                delegate.onParseError();
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                        delegate.onNetworkError();
-                    }
-                }
-            });
-            companyListHandler.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            delegate.onNetworkError();
-        }
-    }
+//    public void getPaySlipDownload(Activity activity, final Context context, HashMap<String, String> requestMap,File directory, ServiceCallback callback) throws MalformedURLException {
+//        try {
+//            delegate = callback;
+//            serviceContext = context;
+//            serviceActivity = activity;
+//
+//            String url = Constants.PAYSLIP_DOWNLOAD_REQUEST_URL;
+//
+//            FileDownloader companyListHandler = new FileDownloader(activity, serviceContext, url, true,requestMap , directory, new AsyncResponse() {
+//                @Override
+//                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+//                    Gson gson = new Gson();
+//                    try {
+//                        if (output != null) {
+//                            try {
+//
+//                            } catch (Exception e) {
+//                                delegate.onParseError();
+//                            }
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//
+//                        delegate.onNetworkError();
+//                    }
+//                }
+//            });
+//            companyListHandler.execute();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//
+//            delegate.onNetworkError();
+//        }
+//    }
 
     public void getEmpLeaveList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
         try {
