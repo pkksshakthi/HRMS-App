@@ -24,10 +24,20 @@
             android:background="#f7f6f6"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#3282C9"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="MY INFO"
+                android:textColor="#ffffff" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#716793"
+                android:background="#043F5F"
 
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -103,6 +113,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="Employee ID"
                                 android:textColor="#194E6E"
+                                android:gravity="center|top"
+                                
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
 
@@ -111,8 +123,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="1338036"
-                                android:textColor="#6B6B6B"
-                                android:textSize="15sp" />
+                                android:textColor="#6B6B6B" />
                         </LinearLayout>
 
                         <TextView
@@ -142,8 +153,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Chennai"
-                                android:textColor="#6B6B6B"
-                                android:textSize="16sp" />
+                                android:textColor="#6B6B6B" />
                         </LinearLayout>
 
                         <TextView
@@ -172,10 +182,10 @@
                                 android:id="@+id/tv_department"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Software"
-
-                                android:textColor="#6B6B6B"
-                                android:textSize="16sp" />
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="Software Software Software"
+                                android:textColor="#6B6B6B" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -203,8 +213,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:layout_marginTop="15dp"
                         card_view:cardCornerRadius="2dp">
 
@@ -256,8 +266,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:layout_marginTop="15dp"
                         card_view:cardCornerRadius="2dp">
 
@@ -307,8 +317,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:layout_marginTop="15dp"
                         card_view:cardCornerRadius="2dp">
 
@@ -362,8 +372,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginBottom="15dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:layout_marginTop="15dp"
                         card_view:cardCornerRadius="2dp">
 
@@ -391,9 +401,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:layout_below="@+id/txt_addressname"
+                                android:layout_marginBottom="10dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="9dp"
-                                android:layout_marginBottom="10dp"
                                 android:text="pkksshakthi@gnail.com" />
 
                             <ImageView

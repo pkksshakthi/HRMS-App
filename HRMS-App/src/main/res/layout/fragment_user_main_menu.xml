@@ -59,11 +59,11 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="126dp"
+                                    android:layout_height="107dp"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
-                                    android:src="@drawable/attendance_report_icon" />
+                                    android:src="@drawable/mark_attendance" />
 
 
                                 <TextView
@@ -104,11 +104,11 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="126dp"
+                                    android:layout_height="107dp"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
-                                    android:src="@drawable/attendance_report_icon" />
+                                    android:src="@drawable/attendance_report" />
 
 
                                 <TextView
@@ -159,11 +159,11 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="126dp"
+                                    android:layout_height="107dp"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
-                                    android:src="@drawable/leaveapplication" />
+                                    android:src="@drawable/leave_application" />
 
 
                                 <TextView
@@ -204,11 +204,11 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="126dp"
+                                    android:layout_height="107dp"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
-                                    android:src="@drawable/leaveapplication" />
+                                    android:src="@drawable/leave_management" />
 
 
                                 <TextView
@@ -259,8 +259,8 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="126dp"
+                                    android:layout_height="107dp"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
                                     android:src="@drawable/my_info" />
@@ -304,11 +304,11 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="126dp"
+                                    android:layout_height="107dp"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
-                                    android:src="@drawable/announcement" />
+                                    android:src="@drawable/announcement_icon" />
 
 
                                 <TextView
@@ -359,8 +359,8 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="126dp"
+                                    android:layout_height="107dp"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
                                     android:src="@drawable/payslip_last" />
@@ -404,11 +404,11 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="126dp"
+                                    android:layout_height="107dp"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
-                                    android:src="@drawable/helpdesk" />
+                                    android:src="@drawable/help_desk" />
 
 
                                 <TextView

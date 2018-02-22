@@ -59,7 +59,7 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
             }
 
         }
-
+        textView.setTextSize(13);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         return textView;
     }
@@ -83,6 +83,7 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
         } else if(spinnerType == 3 ){
             textView.setText(data.get(position).getDeptName());
         }
+
         textView.setTextColor(Color.BLACK);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         return convertView;

@@ -3,7 +3,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/blur"
+    android:background="#3282C9"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/close_activity"
         android:layout_alignTop="@+id/close_activity"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="Welcome to HRMS"
         android:textColor="@color/white"
@@ -48,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/close_activity"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/elite" />
+        android:layout_marginTop="20dp"
+        android:background="@drawable/logo_latest" />
     <View
         android:id="@+id/view"
         android:layout_width="fill_parent"
@@ -59,7 +59,7 @@
         android:layout_marginLeft="5dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
-        android:background="@color/white_greyish" />
+        android:background="#ffffff" />
 
     <TextView
         android:id="@+id/textView8"

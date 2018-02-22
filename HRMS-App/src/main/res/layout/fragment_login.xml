@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-
+android:background="#3282C9"
     android:elevation="10dp"
     android:orientation="vertical">
 
@@ -30,7 +30,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/login"
-                    android:textColor="@color/white_greyish"
+                    android:textColor="#ffffff"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
@@ -58,7 +58,7 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1px"
-                    android:background="@color/white_greyish" />
+                    android:background="#ffffff" />
 
                 <EditText
                     android:id="@+id/ed_password"
@@ -84,7 +84,7 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1px"
-                    android:background="@color/white_greyish" />
+                    android:background="#ffffff" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -122,7 +122,7 @@
                     android:background="@drawable/loginbutton_selector"
                     android:padding="3dp"
                     android:text="@string/login"
-                    android:textColor="#009688"
+                    android:textColor="#ffffff"
                     android:textSize="17sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -139,8 +139,6 @@
                 android:text="@string/newUser"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
-
-
 
 
 

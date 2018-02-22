@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blur">
+    android:background="#3282C9">
 
     <ImageView
         android:id="@+id/close_activity"
@@ -24,15 +24,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-android:textStyle="normal"
-
-        android:typeface="sans"
         android:layout_alignParentStart="true"
+
         android:layout_centerVertical="true"
         android:gravity="center"
         android:text="Select your organization"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textStyle="normal"
+        android:typeface="sans" />
 
     <View
 
@@ -43,7 +43,7 @@ android:textStyle="normal"
 
 
         android:layout_marginTop="5dp"
-        android:background="@color/white_greyish" />
+        android:background="#fcf7f7" />
 
     <Spinner
         android:id="@+id/sp_company"
@@ -61,13 +61,16 @@ android:textStyle="normal"
 
     <Button
         android:id="@+id/bt_next"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sp_company"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:text="Submit" />
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@drawable/loginbutton_selector"
+        android:text="Submit"
+        android:textColor="#ffffff" />
+
 
     <View
         android:id="@+id/view"
@@ -78,7 +81,7 @@ android:textStyle="normal"
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="@color/white_greyish" />
+        android:background="#fcf7f7" />
 
     <TextView
         android:id="@+id/textView8"
@@ -99,11 +102,20 @@ android:textStyle="normal"
         android:layout_below="@+id/close_activity"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="138dp"
+        android:layout_marginTop="168dp"
         android:text="Welcome To HRMS"
         android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="italic|bold" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/close_activity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="61dp"
+        app:srcCompat="@drawable/logo_latest" />
 </RelativeLayout>
 
 
