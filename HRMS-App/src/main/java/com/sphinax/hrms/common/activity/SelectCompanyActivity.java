@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
@@ -32,16 +34,17 @@ import java.util.HashMap;
  */
 public class SelectCompanyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    private Context context;
+    private static final String TAG = "SelectCompanyActivity-";
     private static View view;
+    private static FragmentManager fragmentManager;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+    private Context context;
     private ArrayList<Ajax> companyajaxList;
     private ProgressDialog pdia;
     private Spinner spCompany;
     private Button btNext;
     private CompanySpinnerAdapter companyDataAdapter;
     private int spinnerPosition = 0;
-    private static final String TAG = "SelectCompanyActivity-";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
         }
         setContentView(R.layout.activity_selectcompany);
         context = this.getApplicationContext();
+        fragmentManager = getSupportFragmentManager();
         view = getWindow().getDecorView().getRootView();
         loadComponent();
         setListeners();
@@ -171,6 +175,8 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(SelectCompanyActivity.this, R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -186,4 +192,12 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
+            Utility.callErrorScreen(this, R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
+    }
 }

@@ -232,6 +232,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -244,6 +246,15 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             });
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
         }
     }
 }

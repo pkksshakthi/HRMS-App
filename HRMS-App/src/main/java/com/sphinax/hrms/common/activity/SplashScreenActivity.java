@@ -2,6 +2,7 @@ package com.sphinax.hrms.common.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 
 /**
@@ -38,6 +41,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     private Handler handler;
+    private static FragmentManager fragmentManager;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -97,7 +101,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             actionBar.hide();
         }
         setContentView(R.layout.activity_splash_screen);
-
+        fragmentManager = getSupportFragmentManager();
         mVisible = true;
         mContentView = findViewById(R.id.fullscreen_content);
 
@@ -188,5 +192,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
+            Utility.callErrorScreen(this, R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
     }
 }

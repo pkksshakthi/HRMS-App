@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
@@ -23,6 +25,7 @@ import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.RecyclerTouchListener;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.EmployeeLeaveListAdapter;
 
@@ -43,7 +46,7 @@ public class LeaveRejectedListFragment extends Fragment {
     private RecyclerView recyclerView;
     private EmployeeLeaveListAdapter mAdapter;
     private ProgressDialog pdia;
-
+    private FragmentManager fragmentManager;
 
     public LeaveRejectedListFragment() {
         // Required empty public constructor
@@ -67,6 +70,7 @@ public class LeaveRejectedListFragment extends Fragment {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         loadComponent();
 
@@ -86,7 +90,22 @@ public class LeaveRejectedListFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         fetchLeaveList();
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Ajax ajaxApp = approveList.get(position);
+                //Toast.makeText(getApplicationContext(), movie.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
+                Bundle b = new Bundle();
+                b.putSerializable("UserValidateObject",ajaxApp);
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeLeaveFullContentFragment(), true, b, Constants.FRAMENT_LEAVE_LIST_CONTENT);
 
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
     }
 
@@ -168,6 +187,8 @@ public class LeaveRejectedListFragment extends Fragment {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -182,6 +203,13 @@ public class LeaveRejectedListFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
+    }
 
 }

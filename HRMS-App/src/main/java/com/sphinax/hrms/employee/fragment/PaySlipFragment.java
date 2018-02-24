@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
@@ -51,7 +53,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     private String payslipMonth;
     private PaySlipListAdapter paySlipListAdapter;
     private LinearLayout ll_payment, ll_deduction;
-
+    private FragmentManager fragmentManager;
 
     public PaySlipFragment() {
         // Required empty public constructor
@@ -75,6 +77,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         loadComponent();
         setListeners();
@@ -270,6 +273,8 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -336,6 +341,8 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -401,6 +408,8 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -458,5 +467,12 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
+    }
 }

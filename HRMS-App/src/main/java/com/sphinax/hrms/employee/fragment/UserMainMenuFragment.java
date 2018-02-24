@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
@@ -50,13 +51,12 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
     private static UserMainMenuFragment instance;
     private ProgressDialog pdia;
     private View mView;
-    private FragmentManager fragmentManager;
     private LinearLayout ll_mark_attendance, ll_attendance_report, ll_leave_app, ll_leave_mana, ll_info, ll_announcement, ll_payslip, ll_helpdesk;
     private static final String TAG = "UserMainMenuFragment-";
     private static final int PERMISSION_CALLBACK_CONSTANT = 101;
     private static final int REQUEST_PERMISSION_SETTING = 102;
     private View view;
-
+    private FragmentManager fragmentManager;
 
 
 
@@ -131,6 +131,11 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
                 proceedAfterPermission();
             }
         }
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
+
     }
     // TODO: Rename and change types and number of parameters
     public static UserMainMenuFragment newInstance(String param1, String param2) {
@@ -383,6 +388,8 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -397,6 +404,5 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
             e.printStackTrace();
         }
     }
-
 
 }

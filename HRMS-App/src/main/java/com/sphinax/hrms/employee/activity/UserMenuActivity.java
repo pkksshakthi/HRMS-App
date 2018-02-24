@@ -1,6 +1,8 @@
 package com.sphinax.hrms.employee.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.activity.LoginActivity;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.employee.fragment.AnnouncementListFragment;
 import com.sphinax.hrms.employee.fragment.ApplyLeaveFragment;
 import com.sphinax.hrms.employee.fragment.AttendanceEnterFragment;
@@ -28,7 +31,12 @@ import com.sphinax.hrms.employee.fragment.UserMainMenuFragment;
 import com.sphinax.hrms.employee.fragment.UserProfileFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
+
+import java.net.URL;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserMenuActivity extends FragmentActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,6 +48,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
     private ImageView iv_drawer_open;
     private TextView tv_username, tv_companyname;
     private View headerView;
+    private CircleImageView ivPhoto;
     private static final String TAG = "UserMenuActivity-";
 
     @Override
@@ -84,6 +93,8 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
         iv_drawer_open = findViewById(R.id.iv_drawer_open);
         tv_username = headerView.findViewById(R.id.tv_username);
         tv_companyname = headerView.findViewById(R.id.tv_company_name);
+        ivPhoto = headerView.findViewById(R.id.profile_image);
+
     }
 
     private void setListeners() {
@@ -93,9 +104,19 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
     private void setData() {
         tv_username.setText(Global.getLoginInfoData().getEmpName());
         tv_companyname.setText(Utility.getPreference(this).getString(Constants.PREFS_COMPANY_NAME, ""));
+        loadBitmap(Global.getLoginInfoData().getEmpImage());
     }
 
+    private void loadBitmap(String urlIV){
+        try {
+            URL url = new URL(Constants.IMAGE_URL +urlIV);
+            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            ivPhoto.setImageBitmap(bmp);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
+    }
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -168,5 +189,12 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
+//          //  Utility.callErrorScreen(this, R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+//            return;
+//        }
+    }
 }

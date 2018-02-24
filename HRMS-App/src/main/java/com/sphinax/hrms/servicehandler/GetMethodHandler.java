@@ -90,11 +90,13 @@ public class GetMethodHandler extends AsyncTask<Void, Void, JSONObject> {
             int status = conn.getResponseCode();
             Scanner inStream = null;
             Log.d(TAG + "Response Code-", status + "");
-            if(status == 500){
+
+            if(status != 200){
                 delegate.processFinish(this.context, jsonObject);
             }
             if (status == HttpsURLConnection.HTTP_BAD_REQUEST) {
                 inStream = new Scanner(conn.getErrorStream());
+                delegate.processFinish(this.context, jsonObject);
             }
             if (status == HttpsURLConnection.HTTP_OK) {
                 inStream = new Scanner(conn.getInputStream());

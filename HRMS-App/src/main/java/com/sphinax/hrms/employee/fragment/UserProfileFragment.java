@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
@@ -36,7 +38,7 @@ public class UserProfileFragment extends Fragment {
     private TextView tv_username, tv_empid, tv_company_name, tv_branch, tv_department, tv_designation, tv_mobile_no, tv_email_id, tv_address;
     private ProgressDialog pdia;
     private ArrayList<Ajax> userInfoList;
-
+    private FragmentManager fragmentManager;
 
     public UserProfileFragment() {
         // Required empty public constructor
@@ -60,6 +62,8 @@ public class UserProfileFragment extends Fragment {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
+
         loadComponent();
         fetchUserInfo();
     }
@@ -85,11 +89,11 @@ public class UserProfileFragment extends Fragment {
             if (userInfoList.get(0).getEmpId() != null) {
                 tv_empid.setText(userInfoList.get(0).getEmpId());
             }
-            if (userInfoList.get(0).getCompName() != null) {
-                tv_company_name.setText(userInfoList.get(0).getCompName());
+            if (userInfoList.get(0).getEmpcompName() != null) {
+                tv_company_name.setText(userInfoList.get(0).getEmpcompName());
             }
-            if (userInfoList.get(0).getBranchName() != null) {
-                tv_branch.setText(userInfoList.get(0).getBranchName());
+            if (userInfoList.get(0).getEmpBranchName() != null) {
+                tv_branch.setText(userInfoList.get(0).getEmpBranchName());
             }
             if (userInfoList.get(0).getEmpDept() != null) {
                 tv_department.setText(userInfoList.get(0).getEmpDept());
@@ -100,9 +104,9 @@ public class UserProfileFragment extends Fragment {
             if (userInfoList.get(0).getEmpMobile() != null) {
                 tv_mobile_no.setText(String.valueOf(userInfoList.get(0).getEmpMobile()));
             }
-//            if (userInfoList.get(0).get!=null){
-//                tv_email_id.setText(userInfoList.get(0).get);
-//            }
+            if (userInfoList.get(0).getEmpMail()!=null){
+                tv_email_id.setText(userInfoList.get(0).getEmpMail());
+            }
             if (userInfoList.get(0).getAddress() != null) {
                 tv_address.setText(userInfoList.get(0).getAddress());
             }
@@ -161,6 +165,8 @@ public class UserProfileFragment extends Fragment {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -173,6 +179,15 @@ public class UserProfileFragment extends Fragment {
             });
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
         }
     }
 }

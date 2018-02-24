@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
@@ -49,7 +51,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
     private int year = 0;
     private int month = 0;
     private boolean firstTime = true;
-
+    private FragmentManager fragmentManager;
 
     public AnnouncementListFragment() {
         // Required empty public constructor
@@ -72,6 +74,8 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
+
         loadComponent();
         setListeners();
         loadSpinnerData();
@@ -205,6 +209,8 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -220,5 +226,12 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+           // Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
+    }
 }

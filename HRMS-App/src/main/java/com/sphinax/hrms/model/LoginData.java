@@ -9,6 +9,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginData {
 
+    @SerializedName("markAttendacne")
+    @Expose
+    private String markAttendacne;
+
     @SerializedName("deptId")
     @Expose
     private Integer deptId;
@@ -163,5 +167,13 @@ public class LoginData {
 
     public void setReportsTo(String reportsTo) {
         this.reportsTo = reportsTo;
+    }
+
+    public String getMarkAttendacne() {
+        return markAttendacne;
+    }
+
+    public void setMarkAttendacne(String markAttendacne) {
+        this.markAttendacne = markAttendacne;
     }
 }

@@ -47,13 +47,13 @@ android:background="#3282C9"
                     android:inputType="textEmailAddress"
                     android:padding="10dp"
                     android:singleLine="true"
-                    android:text="ET10001"
+                    android:text="10002"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
                     android:textSize="16sp" />
 <!--
                 android:text="10000"
-                android:text="ET10001"
+                android:text="ET10001" 10002
 -->
                 <View
                     android:layout_width="fill_parent"
@@ -72,13 +72,13 @@ android:background="#3282C9"
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:singleLine="true"
-                    android:text="rS500"
+                    android:text="welcome"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
                     android:textSize="16sp" />
 <!--
                 android:text="msgroup"
-                android:text="rS500"
+                android:text="rS500" welcome
 -->
 
                 <View

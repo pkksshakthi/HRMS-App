@@ -106,7 +106,28 @@ public class Utility {
         }
     }
 
+public static void callErrorScreen(Activity activity, int containerId, FragmentManager fragmentManager, android.support.v4.app.Fragment fragment, boolean needBackstack, Bundle bundle,String fragmentName) {
+        try {
+        android.support.v4.app.FragmentTransaction ftNavigation = fragmentManager.beginTransaction();
+        ftNavigation.setCustomAnimations(R.anim.left_enter, R.anim.right_out);
+        ftNavigation.add(fragment,fragmentName);
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
+        ftNavigation.replace(containerId, fragment);
+        if (needBackstack) {
+            ftNavigation.addToBackStack(null);
+        }
+        ftNavigation.commit();
+        if (containerId == R.id.content_frame) {
+            currentFragment = fragment;
+            Log.d(TAG, currentFragment.getTag());
+        }
 
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
     // Custom Toast Method
     public static void  showCustomToast(Context context, View view, String error) {
 

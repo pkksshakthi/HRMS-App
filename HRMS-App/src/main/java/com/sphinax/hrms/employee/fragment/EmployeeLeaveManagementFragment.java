@@ -5,12 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
+import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.EmployeeLeaveViewPagerAdapter;
 
 
@@ -21,7 +27,7 @@ public class EmployeeLeaveManagementFragment extends Fragment {
     private View mView;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-
+    private FragmentManager fragmentManager;
     public EmployeeLeaveManagementFragment() {
         // Required empty public constructor
     }
@@ -45,6 +51,7 @@ public class EmployeeLeaveManagementFragment extends Fragment {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         loadComponent();
 
@@ -54,6 +61,7 @@ public class EmployeeLeaveManagementFragment extends Fragment {
         adapter.addFragment(new LeavePendingListFragment(), "Pending");
         adapter.addFragment(new LeaveRejectedListFragment(), "Rejected");
         viewPager.setAdapter(adapter);
+
 //        viewPager.setOffscreenPageLimit(2);
 
 
@@ -66,7 +74,8 @@ public class EmployeeLeaveManagementFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-
+                Log.d(TAG, "onPageSelected: " + position);
+                viewPager.setCurrentItem(position);
             }
 
             @Override
@@ -82,5 +91,12 @@ public class EmployeeLeaveManagementFragment extends Fragment {
         tabLayout = mView.findViewById(R.id.tabs);
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
+    }
 }

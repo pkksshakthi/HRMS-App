@@ -1,6 +1,7 @@
 package com.sphinax.hrms.employee.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Movie;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
@@ -162,6 +164,7 @@ public class LeaveApproveListFragment extends Fragment {
                     }
                 }
 
+                @SuppressLint("LongLogTag")
                 @Override
                 public void onReturnObject(Object obj) {
                     if (pdia != null) {
@@ -190,6 +193,8 @@ public class LeaveApproveListFragment extends Fragment {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -204,5 +209,12 @@ public class LeaveApproveListFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
+    }
 }

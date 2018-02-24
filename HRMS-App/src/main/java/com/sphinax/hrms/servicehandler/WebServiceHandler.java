@@ -63,7 +63,7 @@ public class WebServiceHandler {
                                 delegate.onParseError();
                             }
                         }else {
-                            delegate.onSuccess(false);
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -113,6 +113,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -162,6 +164,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -211,7 +215,9 @@ public class WebServiceHandler {
                                 } catch (Exception e) {
                                     delegate.onParseError();
                                 }
-                            }
+                            }else {
+                            delegate.onNetworkError();
+                        }
 //                        } else {
 //
 //                            delegate.onNetworkError();
@@ -261,6 +267,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -310,6 +318,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -359,6 +369,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -410,6 +422,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -459,6 +473,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -505,6 +521,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -554,8 +572,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
-                        }else{
-                            delegate.onParseError();
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -606,6 +624,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -657,6 +677,7 @@ public class WebServiceHandler {
                                 delegate.onParseError();
                             }
                         }else {
+                            delegate.onNetworkError();
                             delegate.onSuccess(false);
 
                         }
@@ -708,6 +729,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -755,6 +778,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -806,6 +831,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -857,6 +884,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -907,6 +936,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -960,6 +991,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -1011,6 +1044,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -1062,6 +1097,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -1111,6 +1148,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -1195,6 +1234,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -1244,6 +1285,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -1294,6 +1337,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //
@@ -1344,6 +1389,8 @@ public class WebServiceHandler {
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }
+                        }else {
+                            delegate.onNetworkError();
                         }
 //                        } else {
 //

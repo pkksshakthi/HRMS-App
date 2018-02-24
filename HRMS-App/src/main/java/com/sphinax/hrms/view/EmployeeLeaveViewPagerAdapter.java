@@ -3,6 +3,7 @@ package com.sphinax.hrms.view;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.sphinax.hrms.employee.fragment.LeaveApproveListFragment;
 import com.sphinax.hrms.employee.fragment.LeavePendingListFragment;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by ganesaka on 1/14/2018.
  */
 
-public class EmployeeLeaveViewPagerAdapter extends FragmentPagerAdapter {
+public class EmployeeLeaveViewPagerAdapter extends FragmentStatePagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 

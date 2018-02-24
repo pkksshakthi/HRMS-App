@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
+import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.model.Ajax;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.Utility;
 
 
 public class EmployeeLeaveFullContentFragment extends Fragment {
@@ -22,7 +27,7 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
     private EditText ed_AppliedOn, ed_AppliedFor, ed_leaveTye, ed_EmpMess, ed_AdminMess;
     private TextView tv_fromDate, tv_toDate, tv_startSession, tv_endSession, tv_leaveStatus;
     private Ajax ajax;
-
+    private FragmentManager fragmentManager;
     public EmployeeLeaveFullContentFragment() {
         // Required empty public constructor
     }
@@ -45,6 +50,7 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         loadComponent();
         ajax = (Ajax) getArguments().getSerializable("UserValidateObject");
@@ -83,6 +89,15 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
             ed_EmpMess.setText(ajax.getEmployeeDescription());
             ed_AdminMess.setText(ajax.getRemarks());
 
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
         }
     }
 }

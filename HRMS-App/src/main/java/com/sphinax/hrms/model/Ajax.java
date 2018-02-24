@@ -12,6 +12,19 @@ import java.util.List;
 
 public class Ajax implements Serializable {
 
+
+    @SerializedName("checkInTime")
+    @Expose
+    private String checkInTime;
+    @SerializedName("checkOutTime")
+    @Expose
+    private String checkOutTime;
+    @SerializedName("reportsTo")
+    @Expose
+    private String reportsTo;
+    @SerializedName("empMail")
+    @Expose
+    private String empMail;
     @SerializedName("user")
     @Expose
     private String user;
@@ -1032,5 +1045,37 @@ public class Ajax implements Serializable {
 
     public void setEmpImage(String empImage) {
         this.empImage = empImage;
+    }
+
+    public String getCheckInTime() {
+        return checkInTime;
+    }
+
+    public void setCheckInTime(String checkInTime) {
+        this.checkInTime = checkInTime;
+    }
+
+    public String getCheckOutTime() {
+        return checkOutTime;
+    }
+
+    public void setCheckOutTime(String checkOutTime) {
+        this.checkOutTime = checkOutTime;
+    }
+
+    public String getReportsTo() {
+        return reportsTo;
+    }
+
+    public void setReportsTo(String reportsTo) {
+        this.reportsTo = reportsTo;
+    }
+
+    public String getEmpMail() {
+        return empMail;
+    }
+
+    public void setEmpMail(String empMail) {
+        this.empMail = empMail;
     }
 }

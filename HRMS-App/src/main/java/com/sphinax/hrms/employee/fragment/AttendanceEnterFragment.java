@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
@@ -74,7 +76,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private SupportMapFragment mapFragment;
     private double longitude;
     private double latitude;
-
+    private FragmentManager fragmentManager;
     //private  boolean allowRefresh = true;
     public AttendanceEnterFragment() {
         // Required empty public constructor
@@ -111,6 +113,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         loadMapView();
 
@@ -265,9 +268,15 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private void checkAttendanceMarked() {
 
         if (ajaxList != null) {
-            if (ajaxList.get(0).getTime() != null && !ajaxList.get(0).getTime().equalsIgnoreCase("")) {
-                bt_In_att.setText(covertDate(ajaxList.get(0).getTime()));
+
+            if (ajaxList.get(0).getCheckInTime() != null && !ajaxList.get(0).getCheckInTime().equalsIgnoreCase("")) {
+                bt_In_att.setText(covertDate(ajaxList.get(0).getCheckInTime()));
                 tv_att_details.setText(ajaxList.get(0).getLocation());
+                if(ajaxList.get(0).getCheckOutTime().equalsIgnoreCase("")){
+                    bt_out_att.setText(" CHECK-OUT TIME ");
+                }else {
+                    bt_In_att.setText(covertDate(ajaxList.get(0).getCheckOutTime()));
+                }
             }
         }
     }
@@ -276,6 +285,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private String covertDate(String dtStart) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
         try {
+
             Date date = format.parse(dtStart);
 
             DateFormat anthorformat = new SimpleDateFormat("hh:mm:ss aa");
@@ -360,7 +370,12 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                         bt_In_att.setEnabled(false);
                         bt_In_att.setClickable(false);
                     } else {
-                        Global.setMarkAttendance(false);
+                        if(Global.getLoginInfoData().getMarkAttendacne().equalsIgnoreCase("S")){
+                            Global.setMarkAttendance(false);
+                        }else{
+                            bt_In_att.setEnabled(false);
+                            bt_In_att.setClickable(false);
+                        }
                         bt_In_att.setText("Check-In Time");
                     }
                 }
@@ -374,6 +389,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                     ajaxList = new ArrayList<>();
                     ajaxList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d(TAG, "size --> " + ajaxList.size());
+                    Log.d(TAG, "size --> " + ajaxList.get(0).getCheckInTime());
 
                     checkAttendanceMarked();
 
@@ -392,6 +408,8 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -450,7 +468,6 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                         bt_In_att.setEnabled(false);
                         bt_In_att.setClickable(false);
                         Global.setMarkAttendance(flag);
-
                     }
                 }
 
@@ -473,6 +490,8 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -488,5 +507,12 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
+    }
 }

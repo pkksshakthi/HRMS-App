@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
@@ -67,7 +68,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     private ScrollView scroll_leaveapplication;
     private RecyclerView lv_leave_type;
     private String leaveReason;
-
+    private FragmentManager fragmentManager;
 
     public ApplyLeaveFragment() {
         // Required empty public constructor
@@ -91,6 +92,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         loadComponent();
         setListeners();
@@ -346,6 +348,8 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -427,6 +431,8 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+
                 }
 
                 @Override
@@ -441,6 +447,13 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
             e.printStackTrace();
         }
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            //Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
+        }
+    }
 
 }

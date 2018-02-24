@@ -8,7 +8,9 @@ package com.sphinax.hrms.global;
 public class Constants {
 
     //Live
-    private static final String domain = "http://e-lite.in:8080/ezhrRest/";
+    private static final String httpPath = "http://e-lite.in:8080/";
+    private static final String restPath = "ezhrRest/";
+    private static final String domain = httpPath + restPath;
     private static final String client = "user/";
     //private static final String marketing = "ezhrRest/marketing/";
 
@@ -56,6 +58,8 @@ public class Constants {
     public static final String EMP_LEAVE_LIST_REQUEST_URL = domain + client + "empleaveList";
 
 
+    public static final String IMAGE_URL = httpPath + "CommonFiles/HRpayroll/";
+
 
    /* SHARED PREFERENCE PARAMETERS */
 
@@ -86,7 +90,7 @@ public class Constants {
     public static final String FRAMENT_PAYSLIP = "PAYSLIP DETAIL SCREEN";
     public static final String FRAMENT_HR_HELPDESK_ENTER = "HR HELPDESK ENTER SCREEN";
    public static final String FRAMENT_LEAVE_LIST_CONTENT = "LEAVE LIST ITEM SCREEN";
-//    public static final String FRAMENT_ = "";
+    public static final String FRAMENT_ERROR = "ERROR SCREEN";
 //    public static final String FRAMENT_ = "";
 //    public static final String FRAMENT_ = "";
 //    public static final String FRAMENT_ = "";

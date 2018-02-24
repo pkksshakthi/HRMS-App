@@ -9,16 +9,17 @@ import android.widget.ImageView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.Login_Fragment;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 
 public class LoginActivity extends FragmentActivity implements View.OnClickListener {
 
+    private static final String TAG = "LoginActivity";
+    private static FragmentManager fragmentManager;
     private Context context;
     private ImageView bt_close;
-    private static FragmentManager fragmentManager;
-    private static final String TAG = "LoginActivity";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,15 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             getSupportFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
+            Utility.callErrorScreen(this, R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            return;
         }
     }
 }
