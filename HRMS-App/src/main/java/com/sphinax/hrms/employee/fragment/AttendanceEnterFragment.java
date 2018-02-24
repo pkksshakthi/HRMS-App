@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -71,6 +72,8 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private ArrayList<Ajax> ajaxList;
     private String currentAddress;
     private SupportMapFragment mapFragment;
+    private double longitude;
+    private double latitude;
 
     //private  boolean allowRefresh = true;
     public AttendanceEnterFragment() {
@@ -149,23 +152,13 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private void loadMap() {
         if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
-            Location location = GeoLocationFinder.getLocationOnly(context);
+            // Location location = GeoLocationFinder.getLocationOnly(context);
 
             try {
-                if (location != null) {
-                    Log.d(TAG + "latitude-", "-" + location.getLatitude());
-                    Log.d(TAG + "longitude-", "-" + location.getLongitude());
+                if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
-                    Address address = GeoLocationFinder.getMyLocationAddress(context, location);
-                    currentAddress = "" + address.getAddressLine(0) + "-" + address.getPostalCode();
-                    //Log.d(TAG, "loadMap: "+currentAddress);
-                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    //MarkerOptions are used to create a new Marker.You can specify location, title etc with MarkerOptions
-                    MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("You are Here");
-
-                    //Adding the created the marker on the map
-                    mMap.addMarker(markerOptions);
-                    //mMap.title("my position");
+                    mMap.clear();
+                    //Creating a location object
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    ActivityCompat#requestPermissions
@@ -176,12 +169,16 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                         // for ActivityCompat#requestPermissions for more details.
                         return;
                     }
-                    mMap.setMyLocationEnabled(true);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-                } else {
-                    Log.d(TAG + " -", "NO VAL");
+                    Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+                    if (location != null) {
+                        //Getting longitude and latitude
+                        longitude = location.getLongitude();
+                        latitude = location.getLatitude();
+                        Address address = GeoLocationFinder.getMyLocationAddress(context, location);
+                        currentAddress = "" + address.getAddressLine(0) + "-" + address.getPostalCode();
 
+                        moveMap();
+                    }
                 }
             } catch (Exception e) {
 
@@ -190,7 +187,39 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             }
         }
     }
+    //Function to move the map
+    private void moveMap() {
+        //String to display current latitude and longitude
+        String msg = latitude + ", " + longitude;
 
+        //Creating a LatLng Object to store Coordinates
+        LatLng latLng = new LatLng(latitude, longitude);
+
+        //Adding marker to map
+        mMap.addMarker(new MarkerOptions()
+                .position(latLng) //setting position
+                .draggable(true) //Making the marker draggable
+                .title("Current Location")); //Adding a title
+
+        //Moving the camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        //Animating the camera
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+        //Displaying current coordinates in toast
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
+    }
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
