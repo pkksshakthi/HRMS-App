@@ -66,7 +66,7 @@ public class QueryListAdapter extends BaseAdapter {
             holder.bt_message = row.findViewById(R.id.bt_message);
             holder.tv_date = row.findViewById(R.id.tv_date);
             holder.tv_query_type = row.findViewById(R.id.tv_query_type);
-            holder.iv_user_image =  row.findViewById(R.id.iv_user_image);
+           // holder.iv_user_image =  row.findViewById(R.id.iv_user_image);
 
 
             row.setTag(holder);
@@ -83,7 +83,7 @@ public class QueryListAdapter extends BaseAdapter {
     }
 
     static class OrderDetailHolder {
-        Button bt_refid,bt_message;
+        TextView bt_refid,bt_message;
         TextView tv_query_type,tv_date;
         ImageView iv_user_image;
     }

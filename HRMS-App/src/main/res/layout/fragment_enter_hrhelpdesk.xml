@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
 
 
-            android:background="#6CB8F6"
+            android:background="#3282C9"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp"
@@ -110,7 +110,7 @@ android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"
 
                 android:layout_margin="10dp"
-                android:background="#0B73CC"
+                android:background="#023D65"
                 android:text="Submit"
                 android:textColor="#ffffff" />
         </LinearLayout>
@@ -121,6 +121,44 @@ android:layout_marginRight="10dp"
             android:background="#ebddff">
 
         </View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="#0A4B73"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:text="Ref.ID"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Message"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Date"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Status"
+                android:textColor="#ffffff" />
+
+
+        </LinearLayout>
 
         <ListView
             android:id="@+id/lv_hr_help_desk_data"
