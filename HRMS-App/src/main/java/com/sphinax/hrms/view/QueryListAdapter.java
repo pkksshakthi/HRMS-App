@@ -75,9 +75,9 @@ public class QueryListAdapter extends BaseAdapter {
         }
 
         holder.bt_refid.setText(String.valueOf(bookingTaskDetails.getReqId()));
-        holder.bt_message.setText(bookingTaskDetails.getEmpMsg());
-       // holder.tv_date.setText(bookingTaskDetails.get);
-        holder.tv_query_type.setText(bookingTaskDetails.getReqtypedesc());
+        holder.bt_message.setText(bookingTaskDetails.getReqDesc());
+        holder.tv_date.setText(bookingTaskDetails.getReqDate());
+        holder.tv_query_type.setText(bookingTaskDetails.getStatus());
 
         return row;
     }

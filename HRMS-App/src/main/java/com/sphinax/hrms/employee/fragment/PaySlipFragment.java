@@ -1,5 +1,6 @@
 package com.sphinax.hrms.employee.fragment;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
@@ -29,6 +31,7 @@ import com.sphinax.hrms.servicehandler.DownloadTask;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.RequestPermissionHandler;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.PaySlipListAdapter;
 
@@ -54,6 +57,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     private PaySlipListAdapter paySlipListAdapter;
     private LinearLayout ll_payment, ll_deduction;
     private FragmentManager fragmentManager;
+    private RequestPermissionHandler mRequestPermissionHandler;
 
     public PaySlipFragment() {
         // Required empty public constructor
@@ -64,7 +68,34 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
         super.onCreate(savedInstanceState);
 
     }
+    private void handleButtonClicked(){
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+                Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_EXTERNAL_STORAGE
+        }, 123, new RequestPermissionHandler.RequestPermissionListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onFailed() {
+                Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
+        }, 124, new RequestPermissionHandler.RequestPermissionListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailed() {
+                Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,6 +109,8 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
         mView = view;
         context = view.getContext();
         fragmentManager = getActivity().getSupportFragmentManager();
+        mRequestPermissionHandler = new RequestPermissionHandler();
+        handleButtonClicked();
 
         loadComponent();
         setListeners();
@@ -121,6 +154,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                 break;
 
             case R.id.bt_download_payslip:
+                handleButtonClicked();
                 fetchPaySlipDownload();
                 break;
 

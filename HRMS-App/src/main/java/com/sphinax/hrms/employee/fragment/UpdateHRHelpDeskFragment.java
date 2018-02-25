@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
+import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.LoginData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
@@ -35,6 +37,7 @@ public class UpdateHRHelpDeskFragment extends Fragment {
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private ProgressDialog pdia;
     private FragmentManager fragmentManager;
+    private Ajax ajax;
 
 
 
@@ -58,6 +61,7 @@ public class UpdateHRHelpDeskFragment extends Fragment {
         fragmentManager = getActivity().getSupportFragmentManager();
 
         loadComponent();
+        ajax = (Ajax) getArguments().getSerializable("UserValidateObject");
 
     }
 
@@ -152,6 +156,7 @@ public class UpdateHRHelpDeskFragment extends Fragment {
         }
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -159,6 +164,25 @@ public class UpdateHRHelpDeskFragment extends Fragment {
             Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
             return;
         }
+
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+                    Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EnterHRHelpdeskFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+
+                    return true;
+
+                }
+
+                return false;
+            }
+        });
 
     }
 }

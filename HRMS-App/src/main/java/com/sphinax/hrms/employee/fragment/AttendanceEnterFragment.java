@@ -42,6 +42,7 @@ import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.GeoLocationFinder;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.RequestPermissionHandler;
 import com.sphinax.hrms.utils.Utility;
 
 import java.text.DateFormat;
@@ -78,6 +79,8 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private double latitude;
     private FragmentManager fragmentManager;
     //private  boolean allowRefresh = true;
+    private RequestPermissionHandler mRequestPermissionHandler;
+
     public AttendanceEnterFragment() {
         // Required empty public constructor
     }
@@ -107,13 +110,45 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
 
 
     }
+    private void handleButtonClicked(){
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+                Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_EXTERNAL_STORAGE
+        }, 123, new RequestPermissionHandler.RequestPermissionListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onFailed() {
+                Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
+        }, 124, new RequestPermissionHandler.RequestPermissionListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+                loadMapView();
+                loadMap();
+
+            }
+
+            @Override
+            public void onFailed() {
+                Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
         fragmentManager = getActivity().getSupportFragmentManager();
+        mRequestPermissionHandler = new RequestPermissionHandler();
+        handleButtonClicked();
 
         loadMapView();
 

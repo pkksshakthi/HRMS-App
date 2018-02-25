@@ -79,6 +79,18 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
         setListeners();
         fetchQueryTypeList();
 
+        lv_query.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Ajax ajaxApp = queryList.get(position);
+                Bundle b = new Bundle();
+                b.putSerializable("UserValidateObject",ajaxApp);
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UpdateHRHelpDeskFragment(), false, b, Constants.FRAMENT_HRHELP_UPDATE_CONTENT);
+
+            }
+        });
+
     }
 
     private void loadComponent() {
@@ -312,6 +324,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
                     }
                 }
 
+                @SuppressLint("LongLogTag")
                 @Override
                 public void onReturnObject(Object obj) {
                     if (pdia != null) {

@@ -34,6 +34,7 @@ import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.RequestPermissionHandler;
 import com.sphinax.hrms.utils.Utility;
 
 import java.util.ArrayList;
@@ -57,11 +58,9 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
     private static final int REQUEST_PERMISSION_SETTING = 102;
     private View view;
     private FragmentManager fragmentManager;
+    private RequestPermissionHandler mRequestPermissionHandler;
 
 
-
-    private SharedPreferences permissionStatus;
-    private boolean sentToSettings = false;
     public UserMainMenuFragment() {
         // Required empty public constructor
     }
@@ -71,66 +70,46 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         if (requestCode == REQUEST_PERMISSION_SETTING) {
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 //Got Permission
-                proceedAfterPermission();
             }
         }
     }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == PERMISSION_CALLBACK_CONSTANT){
-            //check if all permissions are granted
-            boolean allgranted = false;
-            for(int i=0;i<grantResults.length;i++){
-                if(grantResults[i]==PackageManager.PERMISSION_GRANTED){
-                    allgranted = true;
-                } else {
-                    allgranted = false;
-                    break;
-                }
+
+
+    private void handleButtonClicked(){
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+                Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_EXTERNAL_STORAGE
+        }, 123, new RequestPermissionHandler.RequestPermissionListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
             }
 
-            if(allgranted){
-                proceedAfterPermission();
-            } else if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)){
-                //txtPermissions.setText("Permissions Required");
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Need Storage Permission");
-                builder.setMessage("This app needs phone permission.");
-                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},PERMISSION_CALLBACK_CONSTANT);
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
-            } else {
-                Toast.makeText(getActivity(),"Unable to get Permission",Toast.LENGTH_LONG).show();
+            @Override
+            public void onFailed() {
+                Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
             }
-        }
-    }
-    private boolean proceedAfterPermission() {
+        });
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
+        }, 124, new RequestPermissionHandler.RequestPermissionListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+            }
 
-        Toast.makeText(getActivity(), "We got All Permissions", Toast.LENGTH_LONG).show();
-        return true;
+            @Override
+            public void onFailed() {
+                Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
+
     @Override
     public void onResume() {
         super.onResume();
 
-        if (sentToSettings) {
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                //Got Permission
-                proceedAfterPermission();
-            }
-        }
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
             Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
             return;
@@ -169,9 +148,11 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         mView = view;
         context = view.getContext();
         fragmentManager = getActivity().getSupportFragmentManager();
+        mRequestPermissionHandler = new RequestPermissionHandler();
         loadComponent();
         setListeners();
-        permissionStatus = getActivity().getSharedPreferences("permissionStatus",getActivity().MODE_PRIVATE);
+
+        handleButtonClicked();
         if(!Global.isUserDataTaken()){
             fetchUserInfo();
         }
@@ -215,7 +196,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
             case R.id.ll_mark_attendance:
 
 
-                if (Permission()&&locationService())
+                if (locationService())
                  Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AttendanceEnterFragment(), true, null, Constants.FRAMENT_ANTTENDANCE_ENTER);
 
 
@@ -268,68 +249,14 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
 
     }
 
-    private boolean Permission() {
-        {
-            if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-                if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)){
-                    //Show Information about why you need the permission
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Need Storage Permission");
-                    builder.setMessage("This app needs phone permission.");
-                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},PERMISSION_CALLBACK_CONSTANT);
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    builder.show();
-                } else if (permissionStatus.getBoolean(Manifest.permission.ACCESS_COARSE_LOCATION,false)) {
-                    //Previously Permission Request was cancelled with 'Dont Ask Again',
-                    // Redirect to Settings after showing Information about why you need the permission
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Need Storage Permission");
-                    builder.setMessage("This app needs storage permission.");
-                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                            sentToSettings = true;
-                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                            Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
-                            intent.setData(uri);
-                            startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
-                            Toast.makeText(getActivity(), "Go to Permissions to Grant Phone", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    builder.show();
-                }  else {
-                    //just request the permission
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},PERMISSION_CALLBACK_CONSTANT);
-                }
-                //txtPermissions.setText("Permissions Required");
 
-                SharedPreferences.Editor editor = permissionStatus.edit();
-                editor.putBoolean(Manifest.permission.ACCESS_COARSE_LOCATION,true);
-                editor.commit();
-            } else {
-                //You already have the permission, just go ahead.
-                return  true;
-            }
-        }
-        return  false;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        mRequestPermissionHandler.onRequestPermissionsResult(requestCode, permissions,
+                grantResults);
     }
 
 
