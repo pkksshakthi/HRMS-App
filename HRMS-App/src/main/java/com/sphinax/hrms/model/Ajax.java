@@ -12,7 +12,9 @@ import java.util.List;
 
 public class Ajax implements Serializable {
 
-
+    @SerializedName("Status")
+    @Expose
+    private String status;
     @SerializedName("checkInTime")
     @Expose
     private String checkInTime;
@@ -1077,5 +1079,13 @@ public class Ajax implements Serializable {
 
     public void setEmpMail(String empMail) {
         this.empMail = empMail;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

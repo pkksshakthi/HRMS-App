@@ -86,7 +86,7 @@ public class LeavePendingListFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        fetchLeaveList();
+
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -124,6 +124,17 @@ public class LeavePendingListFragment extends Fragment {
         mSwipeRefreshLayout.setRefreshing(false);
         //mSwipeRefreshLayout.setEnabled(false);
 
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+
+            // load data here
+            fetchLeaveList();
+        }else{
+            // fragment is no longer visible
+        }
     }
 
 

@@ -33,6 +33,7 @@ import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
+import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 
@@ -109,9 +110,11 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
 
     private void loadBitmap(String urlIV){
         try {
-            URL url = new URL(Constants.IMAGE_URL +urlIV);
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            ivPhoto.setImageBitmap(bmp);
+           // URL url = new URL(Constants.IMAGE_URL +urlIV);
+            Picasso.with(getApplicationContext())
+                    .load(Constants.IMAGE_URL +urlIV)
+                    .resize(48,48).into(ivPhoto);
+
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -23,6 +23,7 @@ import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,7 +79,7 @@ public class UserProfileFragment extends Fragment {
         tv_mobile_no = mView.findViewById(R.id.tv_mobile_no);
         tv_email_id = mView.findViewById(R.id.tv_email_id);
         tv_address = mView.findViewById(R.id.tv_address);
-        iv_user_image = mView.findViewById(R.id.iv_user_image);
+        iv_user_image = mView.findViewById(R.id.profile_image);
     }
 
     private void setUserInfoData() {
@@ -110,10 +111,29 @@ public class UserProfileFragment extends Fragment {
             if (userInfoList.get(0).getAddress() != null) {
                 tv_address.setText(userInfoList.get(0).getAddress());
             }
+
+            if (userInfoList.get(0).getEmpImg() != null && !userInfoList.get(0).getEmpImg().equalsIgnoreCase("")) {
+               // tv_address.setText(userInfoList.get(0).getAddress());
+                Log.d(TAG, "setUserInfoData: " +  userInfoList.get(0).getEmpImg());
+                loadBitmap( userInfoList.get(0).getEmpImg());
+            }
+
         }
 
     }
 
+    private void loadBitmap(String urlIV){
+        try {
+            // URL url = new URL(Constants.IMAGE_URL +urlIV);
+            Picasso.with(context)
+                    .load(urlIV)
+                    .resize(48,48).into(iv_user_image);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
     private void fetchUserInfo() {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
             Utility.showCustomToast(context, mView, getResources().getString(R.string.invalidInternetConnection));

@@ -57,12 +57,12 @@ public class EmployeeLeaveManagementFragment extends Fragment {
 
         EmployeeLeaveViewPagerAdapter adapter = new EmployeeLeaveViewPagerAdapter(getActivity().getSupportFragmentManager());
         // Add Fragments to adapter one by one
-        adapter.addFragment(new LeaveApproveListFragment(), "Approve");
-        adapter.addFragment(new LeavePendingListFragment(), "Pending");
-        adapter.addFragment(new LeaveRejectedListFragment(), "Rejected");
+        adapter.addFragment( "Approve");
+        adapter.addFragment("Pending");
+        adapter.addFragment("Rejected");
         viewPager.setAdapter(adapter);
 
-//        viewPager.setOffscreenPageLimit(2);
+       viewPager.setOffscreenPageLimit(-1);
 
 
         tabLayout.setupWithViewPager(viewPager);
@@ -83,6 +83,8 @@ public class EmployeeLeaveManagementFragment extends Fragment {
 
             }
         });
+
+
 
     }
 

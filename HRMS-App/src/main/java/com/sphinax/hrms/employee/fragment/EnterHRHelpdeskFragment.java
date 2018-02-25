@@ -1,5 +1,6 @@
 package com.sphinax.hrms.employee.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class EnterHRHelpdeskFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private static final String TAG = "EnterHRHelpdeskFragment-";
     private static Context context;
@@ -158,6 +159,7 @@ public class EnterHRHelpdeskFragment extends Fragment implements AdapterView.OnI
                     }
                 }
 
+                @SuppressLint("LongLogTag")
                 @Override
                 public void onReturnObject(Object obj) {
                     if (pdia != null) {
@@ -298,9 +300,7 @@ public class EnterHRHelpdeskFragment extends Fragment implements AdapterView.OnI
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
-            //  requestMap.put("empId",Utility.getPreference(getActivity()).getString(Constants.PREFS_USER_ID, "") );
-            requestMap.put("empId", "10002");
-            requestMap.put("reqSeqId", "20");
+            requestMap.put("empId",Global.getLoginInfoData().getUserId() );
 
             webServiceHandler.getEMPQueryList(getActivity(), context, requestMap, new ServiceCallback() {
 

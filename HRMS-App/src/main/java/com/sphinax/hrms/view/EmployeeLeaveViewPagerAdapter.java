@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import com.sphinax.hrms.employee.fragment.LeaveApproveListFragment;
 import com.sphinax.hrms.employee.fragment.LeavePendingListFragment;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 
 public class EmployeeLeaveViewPagerAdapter extends FragmentStatePagerAdapter {
-    private final List<Fragment> mFragmentList = new ArrayList<>();
+ //   private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
     public EmployeeLeaveViewPagerAdapter(FragmentManager manager) {
@@ -26,6 +27,7 @@ public class EmployeeLeaveViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        Log.d("sdsds", "getItem: " + position);
 
         //return mFragmentList.get(position);
         switch (position) {
@@ -46,11 +48,11 @@ public class EmployeeLeaveViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return mFragmentList.size();
+        return mFragmentTitleList.size();
     }
 
-    public void addFragment(Fragment fragment, String title) {
-        mFragmentList.add(fragment);
+    public void addFragment(String title) {
+       // mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
 
@@ -58,6 +60,7 @@ public class EmployeeLeaveViewPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         return mFragmentTitleList.get(position);
     }
+
 
 
 }

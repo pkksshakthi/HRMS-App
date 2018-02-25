@@ -706,7 +706,7 @@ public class WebServiceHandler {
             serviceContext = context;
             serviceActivity = activity;
 
-            String url = Constants.HR_HELPDESK_OPEN_QUERY_URL;
+            String url = Constants.HR_HELPDESK_EMPLOYEE_LIST_URL;
 
             GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
                 @Override
