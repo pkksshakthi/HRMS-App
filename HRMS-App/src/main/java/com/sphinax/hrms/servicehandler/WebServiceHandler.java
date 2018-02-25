@@ -1411,7 +1411,57 @@ public class WebServiceHandler {
         }
     }
 
+    public void upodateHrHelp (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
 
+            String url = Constants.HR_HELPDESK_EMPLOYEE_UPDATE_URL;
+            url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
+
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
+                @Override
+                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
+                    Gson gson = new Gson();
+                    try {
+                        if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                            try {
+                                delegate.onSuccess(true);
+//                                if (output.getInt("resCode") == 1) {
+//                                    LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
+//                                    delegate.onSuccess(true);
+//                                    delegate.onReturnObject(loginDataObject);
+//                                }else {
+//                                    delegate.onSuccess(false);
+//                                }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }else {
+                            delegate.onNetworkError();
+                        }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        delegate.onNetworkError();
+                    }
+                }
+            });
+            validateUserHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
 
 
 /*

@@ -57,7 +57,7 @@ public class Constants {
     public static final String HR_HELPDESK_QUERY_LIST_REQUEST_URL = domain + client + "QryTypeList";
     public static final String EMP_LEAVE_LIST_REQUEST_URL = domain + client + "empleaveList";
     public static final String HR_HELPDESK_EMPLOYEE_LIST_URL = domain + client + "empHrHelpDeskReport";
-
+    public static final String HR_HELPDESK_EMPLOYEE_UPDATE_URL = domain + COMPANY_NAME_URL_PARAMETER + "updateHrhelpdesk";
 
     public static final String IMAGE_URL = httpPath + "CommonFiles/HRpayroll/";
 
