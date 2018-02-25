@@ -81,7 +81,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         }, 123, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -94,7 +94,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         }, 124, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -148,9 +148,9 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         mView = view;
         context = view.getContext();
         fragmentManager = getActivity().getSupportFragmentManager();
-        mRequestPermissionHandler = new RequestPermissionHandler();
         loadComponent();
         setListeners();
+        mRequestPermissionHandler = new RequestPermissionHandler();
 
         handleButtonClicked();
         if(!Global.isUserDataTaken()){

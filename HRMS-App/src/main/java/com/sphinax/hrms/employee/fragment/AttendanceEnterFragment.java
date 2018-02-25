@@ -3,8 +3,10 @@ package com.sphinax.hrms.employee.fragment;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
@@ -20,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +47,7 @@ import com.sphinax.hrms.utils.GeoLocationFinder;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.RequestPermissionHandler;
 import com.sphinax.hrms.utils.Utility;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -70,6 +74,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private GoogleApiClient googleApiClient;
     private View mView;
     private Button bt_In_att, bt_out_att;
+    private ImageView iv_userPhoto;
     private TextView tv_att_details;
     private ProgressDialog pdia;
     private ArrayList<Ajax> ajaxList;
@@ -116,7 +121,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
         }, 123, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -129,7 +134,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
         }, 124, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
                 loadMapView();
                 loadMap();
 
@@ -162,6 +167,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             bt_In_att.setClickable(false);
 
         }
+        loadBitmap(Global.getLoginInfoData().getEmpImage());
 
     }
 
@@ -169,6 +175,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
         bt_In_att = mView.findViewById(R.id.bt_mark_in_att);
         bt_out_att = mView.findViewById(R.id.bt_mark_out_att);
         tv_att_details = mView.findViewById(R.id.tv_att_details);
+        iv_userPhoto = mView.findViewById(R.id.iv_user_photo);
     }
 
     private void setListeners() {
@@ -185,7 +192,17 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                 .build();
     }
 
+    private void loadBitmap(String urlIV) {
+        try {
+            // URL url = new URL(Constants.IMAGE_URL +urlIV);
+            Picasso.with(context)
+                    .load(Constants.IMAGE_URL + urlIV)
+                    .resize(48, 48).error(R.drawable.icon_profile_image).into(iv_userPhoto);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @SuppressLint("LongLogTag")
     private void loadMap() {
         if (HRMSNetworkCheck.checkInternetConnection(context)) {
@@ -289,7 +306,8 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_mark_in_att:
-                enterUserAttendance();
+
+                confirmAtendance();
                 loadMap();
                 tv_att_details.setText("" + currentAddress);
                 break;
@@ -549,5 +567,47 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
             return;
         }
+    }
+
+    private void confirmAtendance(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+
+        builder.setTitle("CHECK-IN");
+
+
+        builder.setMessage("Hello, please to conform that ready to check in");
+
+
+        //Yes Button
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                enterUserAttendance();
+            }
+        });
+
+        //No Button
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        });
+
+
+        //Cancel Button
+        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 }

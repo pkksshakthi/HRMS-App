@@ -74,7 +74,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
         }, 123, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -87,7 +87,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
         }, 124, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
             }
 
             @Override

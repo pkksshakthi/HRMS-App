@@ -127,7 +127,7 @@ public class UserProfileFragment extends Fragment {
             // URL url = new URL(Constants.IMAGE_URL +urlIV);
             Picasso.with(context)
                     .load(urlIV)
-                    .resize(48,48).into(iv_user_image);
+                    .resize(48,48).error(R.drawable.icon_profile_image).into(iv_user_image);
 
         }catch (Exception e){
             e.printStackTrace();

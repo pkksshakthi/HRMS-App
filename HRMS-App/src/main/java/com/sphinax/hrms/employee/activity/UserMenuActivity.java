@@ -114,7 +114,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
            // URL url = new URL(Constants.IMAGE_URL +urlIV);
             Picasso.with(getApplicationContext())
                     .load(Constants.IMAGE_URL +urlIV)
-                    .resize(48,48).into(ivPhoto);
+                    .resize(48,48).error(R.drawable.icon_profile_image).into(ivPhoto);
 
         }catch (Exception e){
             e.printStackTrace();
