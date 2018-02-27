@@ -11,38 +11,38 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-<!--
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-
-            android:background="#6CB8F6"
-            android:gravity="center"
-            android:orientation="horizontal"
-
-
-            tools:ignore="MissingConstraints">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Leave Management"
-                android:textColor="#ffffff"
-                android:textSize="7pt"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/img_leave_management"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_input_add" />
-        </LinearLayout>
--->
+        <!--
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+        
+        
+                    android:background="#6CB8F6"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+        
+        
+                    tools:ignore="MissingConstraints">
+        
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Leave Management"
+                        android:textColor="#ffffff"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+        
+                    <ImageView
+                        android:id="@+id/img_leave_management"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@android:drawable/ic_input_add" />
+                </LinearLayout>
+        -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -347,7 +347,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/white_greyish"></View>
+                                android:background="#c8d4d7"></View>
 
                             <Spinner
 
@@ -419,7 +419,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/white_greyish"></View>
+                                android:background="#c8d4d7"></View>
 
                             <TextView
                                 android:id="@+id/tv_start_date"
@@ -562,7 +562,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/white_greyish"></View>
+                                android:background="#c8d4d7"></View>
 
                             <Spinner
 
@@ -635,7 +635,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/white_greyish"></View>
+                                android:background="#c8d4d7"></View>
 
                             <TextView
                                 android:id="@+id/tv_end_date"
@@ -707,7 +707,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/white_greyish"></View>
+                                android:background="#c8d4d7"></View>
 
                             <Spinner
 
@@ -779,7 +779,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/white_greyish"></View>
+                                android:background="#c8d4d7"></View>
 
                             <TextView
                                 android:id="@+id/tv_count"
@@ -822,8 +822,8 @@
                             android:id="@+id/imageView4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                             android:layout_marginTop="10dp"
                             android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
                             android:src="@drawable/icon_reason"
                             card_view:layout_editor_absoluteX="0dp"
                             card_view:layout_editor_absoluteY="0dp" />
@@ -852,18 +852,19 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/white_greyish"></View>
+                                android:background="#c8d4d7"></View>
 
                             <EditText
                                 android:id="@+id/ed_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
-                                android:background="@android:color/white"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/leavemanagementtextviewroundcorner"
                                 android:gravity="top|start"
                                 android:hint="Enter reason.."
                                 android:inputType="textMultiLine"
                                 android:lines="5"
+                                android:padding="5dp"
                                 android:scrollbars="vertical"
                                 card_view:layout_editor_absoluteX="71dp"
                                 card_view:layout_editor_absoluteY="32dp" />
@@ -892,13 +893,18 @@
                         android:id="@+id/bt_submit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
+                        android:background="#023D65"
+                        android:textColor="#ffffff"
+                        android:layout_marginRight="5dp"
                         android:text="Submit" />
 
                     <Button
                         android:id="@+id/bt_cancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="#E43A3E"
+                        android:textColor="#ffffff"
                         android:text="Cancel" />
 
                 </LinearLayout>

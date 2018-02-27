@@ -58,7 +58,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 
-public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,View.OnClickListener {
+public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
 
     private static final String TAG = "AttendanceEnterFragment-";
@@ -95,7 +95,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_attendance_enter, null, false);
-
+        loadMapView();
 
         return view;
     }
@@ -115,13 +115,14 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
 
 
     }
-    private void handleButtonClicked(){
-        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+
+    private void handleButtonClicked() {
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[]{
                 Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_EXTERNAL_STORAGE
         }, 123, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-               // Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -129,12 +130,12 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                 Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
             }
         });
-        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[]{
                 Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
         }, 124, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-              //  Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
                 loadMapView();
                 loadMap();
 
@@ -146,6 +147,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             }
         });
     }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
@@ -203,6 +205,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             e.printStackTrace();
         }
     }
+
     @SuppressLint("LongLogTag")
     private void loadMap() {
         if (HRMSNetworkCheck.checkInternetConnection(context)) {
@@ -213,7 +216,8 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                 if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
                     mMap.clear();
-                    //Creating a location object
+
+
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    ActivityCompat#requestPermissions

@@ -130,6 +130,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
         pdia = new ProgressDialog(this);
         if (pdia != null) {
             pdia.setMessage("Loading...");
+            pdia.setCancelable(false);
             pdia.show();
         }
         try {

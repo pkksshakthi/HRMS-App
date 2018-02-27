@@ -179,6 +179,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         pdia = new ProgressDialog(getActivity());
         if (pdia != null) {
             pdia.setMessage("Loading...");
+            pdia.setCancelable(false);
             pdia.show();
         }
         try {

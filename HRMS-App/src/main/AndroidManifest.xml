@@ -3,12 +3,13 @@
     package="com.sphinax.hrms">
 
     <uses-sdk android:minSdkVersion="19" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -33,21 +34,26 @@
             android:name=".common.activity.SelectCompanyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme">
-        </activity>
-        <activity android:name=".admin.activity.AdminMenuActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".employee.activity.UserMenuActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".common.activity.LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".common.activity.OTPActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".common.activity.PasswordChangeActivity"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/FullscreenTheme"></activity>
+        <activity
+            android:name=".admin.activity.AdminMenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".employee.activity.UserMenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".common.activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".common.activity.OTPActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".common.activity.PasswordChangeActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAbkqQ2t-ZzBVERt3huLEum9fs-Do3mHNw" />
+            android:value="AIzaSyCaLJzzd8h5NPayOM8ctxHCAW7uqANZFCw" />
     </application>
 
 </manifest>

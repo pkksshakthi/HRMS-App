@@ -42,10 +42,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:padding="3dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="8/12"
                     android:textColor="#5c4ea3"
                     android:ellipsize="marquee"
-                    android:textSize="28sp"
+
                     android:textStyle="bold" />
 
             </LinearLayout>

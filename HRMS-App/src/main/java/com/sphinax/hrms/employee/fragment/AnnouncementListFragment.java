@@ -1,5 +1,6 @@
 package com.sphinax.hrms.employee.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -161,6 +162,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
         pdia = new ProgressDialog(context);
         if (pdia != null) {
             pdia.setMessage("Loading...");
+            pdia.setCancelable(false);
             pdia.show();
         }
         try {
@@ -182,6 +184,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
                     }
                 }
 
+                @SuppressLint("LongLogTag")
                 @Override
                 public void onReturnObject(Object obj) {
                     if (pdia != null) {

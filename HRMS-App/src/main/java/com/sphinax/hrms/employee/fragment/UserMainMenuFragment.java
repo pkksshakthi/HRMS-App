@@ -77,7 +77,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
 
     private void handleButtonClicked(){
         mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
-                Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
         }, 123, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
@@ -89,19 +89,19 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
                 Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
             }
         });
-        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
-                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
-        }, 124, new RequestPermissionHandler.RequestPermissionListener() {
-            @Override
-            public void onSuccess() {
-               // Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailed() {
-                Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+//                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
+//        }, 124, new RequestPermissionHandler.RequestPermissionListener() {
+//            @Override
+//            public void onSuccess() {
+//               // Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailed() {
+//                Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
 
