@@ -16,6 +16,7 @@ public class Global {
     private static Ajax userInfoData;
     private static LoginData loginInfoData;
     private static boolean userDataTaken = false;
+    private static int TabPosition = 0;
 
     public static boolean isUserDataTaken() {
         return userDataTaken;
@@ -55,5 +56,13 @@ public class Global {
 
     public static void setLeaveList(ArrayList<Ajax> leaveList) {
         Global.leaveList = leaveList;
+    }
+
+    public static int getTabPosition() {
+        return TabPosition;
+    }
+
+    public static void setTabPosition(int tabPosition) {
+        TabPosition = tabPosition;
     }
 }

@@ -65,6 +65,7 @@ public class EmployeeLeaveManagementFragment extends Fragment {
        viewPager.setOffscreenPageLimit(-1);
 
 
+
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

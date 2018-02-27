@@ -67,6 +67,7 @@ public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickLi
         fragmentManager = getActivity().getSupportFragmentManager();
 
         loadComponent();
+        setListeners();
         ajax = (Ajax) getArguments().getSerializable("UserValidateObject");
         loadData();
 
@@ -83,11 +84,16 @@ public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickLi
         bt_cancl = mView.findViewById(R.id.bt_cancl);
     }
 
+    private void setListeners() {
+        bt_update.setOnClickListener(this);
+        bt_cancl.setOnClickListener(this);
+    }
+
     private void loadData() {
         if (ajax != null) {
 
             tv_status.setText(ajax.getStatus());
-            tv_qty_dec.setText(ajax.getReqDesc());
+            tv_qty_dec.setText(ajax.getReqTypeDesc());
             tv_refid.setText(String.valueOf(ajax.getReqId()));
 
 
@@ -133,6 +139,8 @@ public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickLi
                     }
                     if (flag == true) {
                         //  startMenuActivity("user");
+
+                        ed_upadteNot.setText("");
                     } else {
                         Utility.showCustomToast(getActivity(), mView, getResources().getString(R.string.invalidUser));
                     }

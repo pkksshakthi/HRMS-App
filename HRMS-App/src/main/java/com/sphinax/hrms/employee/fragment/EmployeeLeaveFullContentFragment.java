@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
@@ -110,6 +111,13 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
 
+                    if (ajax.getLeaveStatusDesc().equalsIgnoreCase("PENDING")){
+                        Global.setTabPosition(1);
+                    }else if (ajax.getLeaveStatusDesc().equalsIgnoreCase("APPROVED")){
+                        Global.setTabPosition(0);
+                    }else{
+                        Global.setTabPosition(2);
+                    }
                     Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeLeaveManagementFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
 
                     return true;
