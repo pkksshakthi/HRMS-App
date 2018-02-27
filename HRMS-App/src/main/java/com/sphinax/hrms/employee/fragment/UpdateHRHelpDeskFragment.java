@@ -139,6 +139,7 @@ public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickLi
                     }
                     if (flag == true) {
                         //  startMenuActivity("user");
+                        Utility.showCustomToast(getActivity(), mView, "Already submitted your request");
 
                         ed_upadteNot.setText("");
                     } else {

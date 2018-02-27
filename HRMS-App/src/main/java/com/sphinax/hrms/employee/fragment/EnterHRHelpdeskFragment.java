@@ -86,7 +86,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
                 Ajax ajaxApp = queryList.get(position);
                 Bundle b = new Bundle();
                 b.putSerializable("UserValidateObject",ajaxApp);
-                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UpdateHRHelpDeskFragment(), false, b, Constants.FRAMENT_HRHELP_UPDATE_CONTENT);
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UpdateHRHelpDeskFragment(), true, b, Constants.FRAMENT_HRHELP_UPDATE_CONTENT);
 
             }
         });

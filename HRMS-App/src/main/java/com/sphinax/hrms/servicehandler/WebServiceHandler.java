@@ -1430,7 +1430,9 @@ public class WebServiceHandler {
 //                                delegate.unAuthorized();
 //                            } else {
                             try {
-                                delegate.onSuccess(true);
+                                if (output.getInt("resCode") == 0) {
+                                    delegate.onSuccess(true);
+                                }
 //                                if (output.getInt("resCode") == 1) {
 //                                    LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
 //                                    delegate.onSuccess(true);
