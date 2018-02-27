@@ -12,6 +12,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
@@ -29,7 +32,7 @@ import java.util.HashMap;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UpdateHRHelpDeskFragment extends Fragment {
+public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "Login_Fragment-";
     private static View mView;
@@ -38,6 +41,9 @@ public class UpdateHRHelpDeskFragment extends Fragment {
     private ProgressDialog pdia;
     private FragmentManager fragmentManager;
     private Ajax ajax;
+    TextView tv_refid,tv_qty_dec,tv_status;
+    EditText ed_upadteNot;
+    Button bt_cancl,bt_update;
 
 
 
@@ -62,19 +68,39 @@ public class UpdateHRHelpDeskFragment extends Fragment {
 
         loadComponent();
         ajax = (Ajax) getArguments().getSerializable("UserValidateObject");
+        loadData();
+
 
     }
 
 
     private void loadComponent() {
-//        calendarView = mView.findViewById(R.id.calendarView);
-//        txt_present = mView.findViewById(R.id.txt_present);
-//        txt_absent = mView.findViewById(R.id.txt_absert);
-//        txt_applyLeave = mView.findViewById(R.id.txt_applyleave);
+        ed_upadteNot = mView.findViewById(R.id.ed_upadteNot);
+        tv_refid = mView.findViewById(R.id.tv_refid);
+        tv_qty_dec = mView.findViewById(R.id.tv_qty_dec);
+         tv_status = mView.findViewById(R.id.tv_status);
+        bt_update = mView.findViewById(R.id.bt_update);
+        bt_cancl = mView.findViewById(R.id.bt_cancl);
     }
 
+    private void loadData() {
+        if (ajax != null) {
 
-    private void updateHrDesk(String userNameValue, String password) {
+            tv_status.setText(ajax.getStatus());
+            tv_qty_dec.setText(ajax.getReqDesc());
+            tv_refid.setText(String.valueOf(ajax.getReqId()));
+
+
+        }
+    }
+
+    private void  getdatatCallservice(){
+
+        if(ed_upadteNot.getText().toString() != null && !ed_upadteNot.getText().toString().equalsIgnoreCase("") ){
+            updateHrDesk(ed_upadteNot.getText().toString());
+        }
+    }
+    private void updateHrDesk(String userNameValue) {
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
             Utility.showCustomToast(getActivity(), mView, getResources().getString(R.string.invalidInternetConnection));
             return;
@@ -91,9 +117,9 @@ public class UpdateHRHelpDeskFragment extends Fragment {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("companyId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
-            requestMap.put("requestStatus", "4");
-            requestMap.put("description", "4");
-            requestMap.put("reqId", "45");
+            requestMap.put("requestStatus", ajax.getStatus());
+            requestMap.put("description", userNameValue);
+            requestMap.put("reqId", String.valueOf(ajax.getReqId()));
 
 
            // requestMap.put("url", url);
@@ -185,4 +211,21 @@ public class UpdateHRHelpDeskFragment extends Fragment {
         });
 
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_update:
+                getdatatCallservice();
+                break;
+
+            case R.id.bt_cancl:
+
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EnterHRHelpdeskFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+
+                break;
+        }
+    }
+
+
 }

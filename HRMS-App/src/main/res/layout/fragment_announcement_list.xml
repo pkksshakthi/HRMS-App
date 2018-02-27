@@ -30,9 +30,9 @@
 
     <RelativeLayout
         android:id="@+id/comp"
-        android:layout_below="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout2"
         android:gravity="center">
 
         <Spinner
@@ -40,8 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp">
 
         </Spinner>
 
@@ -52,20 +52,21 @@
             android:layout_centerInParent="true"></Spinner>
 
         <Button
+            android:id="@+id/bt_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Display"
-            android:layout_centerInParent="true"
-            android:textColor="#ffffff"
-            android:background="#053c70"
             android:layout_alignParentEnd="true"
-            android:id="@+id/bt_display" />
+            android:layout_centerInParent="true"
+            android:background="#053c70"
+            android:text="Display"
+            android:textColor="#ffffff" />
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_below="@+id/comp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/comp"
         android:background="#9f7d7a"
         android:gravity="center"
         android:orientation="vertical"
@@ -82,9 +83,23 @@
             android:textColor="#ffffff"
             android:textSize="7pt"
 
-              />
+            />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginTop="50dp"
+        android:text="No Data"
+        android:gravity="center"
+
+        android:textColor="#000000"
+        android:textSize="10pt"
+
+        />
 
     <ListView
         android:id="@+id/lv_announcement_data"
@@ -92,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout3"
         android:padding="5dp"
-        tools:ignore="MissingConstraints"/>
+        tools:ignore="MissingConstraints" />
 
 
 </RelativeLayout>

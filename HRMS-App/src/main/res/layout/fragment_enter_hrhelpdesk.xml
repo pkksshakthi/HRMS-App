@@ -19,7 +19,7 @@
             android:background="#3282C9"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="5dp"
             app:layout_constraintBottom_toTopOf="@+id/lv_leave_data"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
@@ -33,7 +33,7 @@
                 android:gravity="center"
                 android:text="HR Help Disk"
                 android:textColor="#ffffff"
-                android:textSize="10pt"
+
                 android:textStyle="bold" />
 
 
@@ -44,7 +44,7 @@
             android:id="@+id/linearLayout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -68,9 +68,9 @@
                 android:id="@+id/sp_hr_query_type"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="3dp"
                 android:padding="10dp" />
 
             <View
@@ -88,22 +88,27 @@
             <EditText
                 android:id="@+id/ed_query"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/leavemanagementtextviewroundcorner"
                 android:ems="10"
                 android:gravity="start"
+                android:maxLines="3"
+                android:minLines="2"
+
                 android:hint="Enter Comments.."
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
                 android:padding="5dp"
-                android:layout_marginBottom="3dp"
                 android:text="" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
                 android:background="#efdddd" />
+
             <Button
                 android:id="@+id/bt_submit"
                 android:layout_width="match_parent"
@@ -121,12 +126,13 @@ android:layout_marginRight="10dp"
             android:background="#ebddff">
 
         </View>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:background="#0A4B73"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="match_parent"

@@ -153,6 +153,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Chennai"
+                                android:layout_gravity="center"
+                                android:gravity="center"
                                 android:textColor="#6B6B6B" />
                         </LinearLayout>
 

@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
@@ -53,6 +54,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
     private int month = 0;
     private boolean firstTime = true;
     private FragmentManager fragmentManager;
+    private TextView tv_noData;
 
     public AnnouncementListFragment() {
         // Required empty public constructor
@@ -88,6 +90,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
         bt_display = mView.findViewById(R.id.bt_display);
         sp_month = mView.findViewById(R.id.sp_month);
         sp_year = mView.findViewById(R.id.sp_year);
+        tv_noData=mView.findViewById(R.id.tv_nodata);
         lv_announcement = mView.findViewById(R.id.lv_announcement_data);
     }
 
@@ -196,7 +199,15 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
                     Log.d(TAG, "size --> " + announmentList.size());
 
                     announcementListAdapter = new AnnouncementListAdapter(getActivity(), announmentList);
-                    lv_announcement.setAdapter(announcementListAdapter);
+                    if (announmentList.size()==0){
+                        lv_announcement.setVisibility(View.GONE);
+                        tv_noData.setVisibility(View.VISIBLE);
+                    }else {
+                        lv_announcement.setVisibility(View.VISIBLE);
+                        tv_noData.setVisibility(View.GONE);
+                        lv_announcement.setAdapter(announcementListAdapter);
+                    }
+
 
                 }
 

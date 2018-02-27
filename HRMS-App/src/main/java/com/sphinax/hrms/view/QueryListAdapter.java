@@ -2,6 +2,7 @@ package com.sphinax.hrms.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,7 @@ public class QueryListAdapter extends BaseAdapter {
             holder.bt_message = row.findViewById(R.id.bt_message);
             holder.tv_date = row.findViewById(R.id.tv_date);
             holder.tv_query_type = row.findViewById(R.id.tv_query_type);
-           // holder.iv_user_image =  row.findViewById(R.id.iv_user_image);
+            holder.tv_query_type.setPaintFlags(holder.tv_query_type.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 
             row.setTag(holder);

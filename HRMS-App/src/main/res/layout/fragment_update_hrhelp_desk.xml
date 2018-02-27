@@ -73,7 +73,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_empid"
+                        android:id="@+id/tv_refid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="55"
@@ -104,7 +104,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_branch"
+                        android:id="@+id/tv_qty_dec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -139,7 +139,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_department"
+                        android:id="@+id/tv_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -171,7 +171,7 @@
                 android:text="TextView">
 
                 <EditText
-                    android:id="@+id/ed_query"
+                    android:id="@+id/ed_upadteNot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -193,6 +193,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/bt_update"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
@@ -202,6 +203,7 @@
                         android:textColor="#ffffff" />
 
                     <Button
+                        android:id="@+id/bt_cancl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
