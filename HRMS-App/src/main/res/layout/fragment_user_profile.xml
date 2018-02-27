@@ -30,7 +30,7 @@
                 android:layout_gravity="center"
                 android:background="#3282C9"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:text="MY INFO"
                 android:textColor="#ffffff" />
 
