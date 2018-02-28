@@ -44,12 +44,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_marginTop="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#ffffff"
                 android:gravity="center"
@@ -89,15 +89,16 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:gravity="center"
+
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Query Type"
                         android:textColor="#194E6E"
                         android:textSize="15sp"
@@ -106,12 +107,15 @@
                     <TextView
                         android:id="@+id/tv_qty_dec"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-
-                        android:text="Update documents"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="1dp"
+                        android:gravity="center|top"
+                        android:hint="No data"
                         android:maxLines="5"
-                        android:scrollbars = "vertical"
+                        android:minLines="2"
+                        android:padding="5dp"
+                        android:scrollbars="horizontal"
                         android:textColor="#6B6B6B"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -133,10 +137,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Status"
-                        android:textColor="#194E6E"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:text="Status"
+                        android:textColor="#194E6E"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -146,7 +150,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="8dp"
                         android:background="#DF8B3A"
                         android:gravity="center"
                         android:padding="3dp"
@@ -176,8 +180,8 @@
                     android:id="@+id/ed_upadteNot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/leavemanagementtextviewroundcorner"
                     android:gravity="top|left"
                     android:hint="Admin Message"
@@ -223,7 +227,7 @@
                 android:layout_above="@+id/textView2"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:padding="5dp"
                 tools:ignore="MissingConstraints" />
         </RelativeLayout>

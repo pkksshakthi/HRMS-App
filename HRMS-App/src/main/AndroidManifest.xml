@@ -45,9 +45,6 @@
             android:name=".common.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".common.activity.OTPActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".common.activity.PasswordChangeActivity"
             android:screenOrientation="portrait" />
 

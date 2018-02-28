@@ -22,7 +22,7 @@
     <string name="toast_bzzz">Sorry, but we cannot do this, because you did not give us permission!</string>
     <string name="toast_location">No matter where you go, there you are</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="email">UserID</string>
+    <string name="email">Enter your user ID</string>
     <string name="passowrd">Password</string>
 
     <string name="show_pwd">Show Password</string>
@@ -37,12 +37,12 @@
     <string name="terms_conditions">By clicking SignUp you agree all the Terms and Conditions.</string>
     <string name="signUp">SIGN UP</string>
     <string name="already_user">Already have Account? Login here.</string>
-    <string name="registered_emailid">Please enter your Registered UserID</string>
+    <string name="registered_emailid">Enter your employee ID</string>
     <string name="submit">SUBMIT</string>
     <string name="back">BACK</string>
     <string name="password">Password</string>
-    <string name="login">Account Login</string>
-    <string name="powered_by_sphinax_infosystem">Powered by Sphinax Infosystem</string>
+    <string name="login">Next</string>
+    <string name="powered_by_sphinax_infosystem">Powered by Sphinax Info systems</string>
     <string name="username">UserName</string>
     <string name="welcome_to">Welcome To</string>
 

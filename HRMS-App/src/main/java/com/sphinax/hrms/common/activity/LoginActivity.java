@@ -19,7 +19,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private static final String TAG = "LoginActivity";
     private static FragmentManager fragmentManager;
     private Context context;
-    private ImageView bt_close;
+    //private ImageView bt_close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +38,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     }
 
     private void loadComponent() {
-        bt_close = findViewById(R.id.close_activity);
+        //bt_close = findViewById(R.id.close_activity);
     }
 
     private void setListeners() {
-        bt_close.setOnClickListener(this);
+        //bt_close.setOnClickListener(this);
     }
 
     @Override

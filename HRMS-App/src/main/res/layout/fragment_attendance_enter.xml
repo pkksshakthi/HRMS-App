@@ -15,7 +15,16 @@
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintVertical_bias="0.0">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#3282C9"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:padding="5dp"
+            android:text="Mark your Attendance"
+            android:textColor="#ffffff" />
 
         <LinearLayout
 
@@ -24,7 +33,7 @@
 
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="5dp">
+             >
 
             <RelativeLayout
                 android:layout_width="match_parent"
