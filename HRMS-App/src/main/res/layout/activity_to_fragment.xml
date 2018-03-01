@@ -31,7 +31,7 @@
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="72dp"
-        android:layout_height="42dp"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
       android:src="@drawable/sphinax" />

@@ -12,10 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
@@ -29,6 +28,7 @@ import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.AnnouncementListAdapter;
+import com.twinkle94.monthyearpicker.picker.YearMonthPickerDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,8 +44,8 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     ArrayList<String> years = new ArrayList<String>();
     private View mView;
-    private Button bt_display;
-    private Spinner sp_year, sp_month;
+
+    private ImageView img_month;
     private ListView lv_announcement;
     private ProgressDialog pdia;
     private ArrayList<Ajax> announmentList;
@@ -55,6 +55,8 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
     private boolean firstTime = true;
     private FragmentManager fragmentManager;
     private TextView tv_noData;
+    private int selectedYear = 2017;
+    private int selectedMonth = 8;
 
     public AnnouncementListFragment() {
         // Required empty public constructor
@@ -87,17 +89,17 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
     }
 
     private void loadComponent() {
-        bt_display = mView.findViewById(R.id.bt_display);
-        sp_month = mView.findViewById(R.id.sp_month);
-        sp_year = mView.findViewById(R.id.sp_year);
-        tv_noData=mView.findViewById(R.id.tv_nodata);
+        //bt_display = mView.findViewById(R.id.bt_display);
+        img_month = mView.findViewById(R.id.img_date);
+        // sp_year = mView.findViewById(R.id.sp_year);
+        tv_noData = mView.findViewById(R.id.tv_nodata);
         lv_announcement = mView.findViewById(R.id.lv_announcement_data);
     }
 
     private void setListeners() {
-        sp_month.setOnItemSelectedListener(this);
-        sp_year.setOnItemSelectedListener(this);
-        bt_display.setOnClickListener(this);
+        img_month.setOnClickListener(this);
+        //sp_year.setOnItemSelectedListener(this);
+        //bt_display.setOnClickListener(this);
     }
 
     private void loadSpinnerCurrentDate() {
@@ -106,8 +108,8 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
         int monthTemp = c.get(Calendar.MONTH);
         year = years.indexOf(String.valueOf(yearTemp));
         month = monthTemp + 1;
-        sp_year.setSelection(year);
-        sp_month.setSelection(monthTemp);
+        //sp_year.setSelection(year);
+        //sp_month.setSelection(monthTemp);
 
     }
 
@@ -117,24 +119,39 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
         for (int i = 2000; i <= thisYear; i++) {
             years.add(Integer.toString(i));
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, years);
-        sp_year.setAdapter(adapter);
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, Months);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        sp_month.setAdapter(arrayAdapter);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, years);
+//        sp_year.setAdapter(adapter);
+//
+//        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, Months);
+//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        //Setting the ArrayAdapter data on the Spinner
+//        sp_month.setAdapter(arrayAdapter);
 
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt_display:
-                fetchAnnouncementList();
-                break;
 
+            case R.id.img_date:
+                getDateMonth();
+                break;
         }
+    }
+
+
+    private void getDateMonth() {
+        YearMonthPickerDialog yearMonthPickerDialog = new YearMonthPickerDialog(getActivity(), new YearMonthPickerDialog.OnDateSetListener() {
+            @Override
+            public void onYearMonthSet(int year, int month) {
+
+                selectedYear = year;
+                selectedMonth = month+1;
+                fetchAnnouncementList();
+            }
+        });
+        yearMonthPickerDialog.show();
+
     }
 
     @Override
@@ -171,8 +188,8 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
         try {
             HashMap<String, String> requestMap = new HashMap<String, String>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
-            requestMap.put("month", String.valueOf(month));
-            requestMap.put("year", years.get(year));
+            requestMap.put("month", String.valueOf(selectedMonth));
+            requestMap.put("year", String.valueOf(selectedYear));
             requestMap.put("branch", String.valueOf(Global.getUserInfoData().getEmpBranchId()));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
             requestMap.put("deptId", String.valueOf(Global.getLoginInfoData().getDeptId()));
@@ -199,10 +216,10 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
                     Log.d(TAG, "size --> " + announmentList.size());
 
                     announcementListAdapter = new AnnouncementListAdapter(getActivity(), announmentList);
-                    if (announmentList.size()==0){
+                    if (announmentList.size() == 0) {
                         lv_announcement.setVisibility(View.GONE);
                         tv_noData.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         lv_announcement.setVisibility(View.VISIBLE);
                         tv_noData.setVisibility(View.GONE);
                         lv_announcement.setAdapter(announcementListAdapter);
@@ -244,7 +261,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
     public void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-           // Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            // Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
             return;
         }
     }

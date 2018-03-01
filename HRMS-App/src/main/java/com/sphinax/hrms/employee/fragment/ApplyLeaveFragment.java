@@ -63,8 +63,10 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     private int endsession = 0;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private int aYear, aMonth;
-    private ImageView img_leave_application;
-    private ImageView img_leave_management;
+    //
+    //
+    // private ImageView img_leave_application;
+    //private ImageView img_leave_management;
     private ScrollView scroll_leaveapplication;
     private RecyclerView lv_leave_type;
     private String leaveReason;
@@ -119,8 +121,8 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         sp_session_end = mView.findViewById(R.id.sp_leave_session_end);
         sp_leave_type = mView.findViewById(R.id.sp_leave_type);
         lv_leave_type = mView.findViewById(R.id.lv_leave_data);
-        img_leave_application = mView.findViewById(R.id.img_leave_application);
-        img_leave_management = mView.findViewById(R.id.img_leave_management);
+        //img_leave_application = mView.findViewById(R.id.img_leave_application);
+        //img_leave_management = mView.findViewById(R.id.img_leave_management);
         scroll_leaveapplication = mView.findViewById(R.id.scroll_leave_Applicatoion);
         ed_reason = mView.findViewById(R.id.ed_reason);
     }
@@ -131,8 +133,10 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         sp_session_end.setOnItemSelectedListener(this);
         tv_start_date.setOnClickListener(this);
         tv_end_date.setOnClickListener(this);
-        img_leave_application.setOnClickListener(this);
-        img_leave_management.setOnClickListener(this);
+
+
+       // img_leave_application.setOnClickListener(this);
+        //img_leave_management.setOnClickListener(this);
         bt_submit.setOnClickListener(this);
         bt_cancel.setOnClickListener(this);
     }
@@ -147,21 +151,21 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
             case R.id.tv_end_date:
                 getDate("end");
                 break;
-            case R.id.img_leave_application:
-                if (scroll_leaveapplication.getVisibility() == View.VISIBLE) {
-                    scroll_leaveapplication.setVisibility(View.GONE);
-                } else {
-                    scroll_leaveapplication.setVisibility(View.VISIBLE);
-                }
-                break;
-            case R.id.img_leave_management:
-
-                if (lv_leave_type.getVisibility() == View.VISIBLE) {
-                    lv_leave_type.setVisibility(View.GONE);
-                } else {
-                    lv_leave_type.setVisibility(View.VISIBLE);
-                }
-                break;
+//            case R.id.img_leave_application:
+//                if (scroll_leaveapplication.getVisibility() == View.VISIBLE) {
+//                    scroll_leaveapplication.setVisibility(View.GONE);
+//                } else {
+//                    scroll_leaveapplication.setVisibility(View.VISIBLE);
+//                }
+//                break;
+//            case R.id.img_leave_management:
+//
+//                if (lv_leave_type.getVisibility() == View.VISIBLE) {
+//                    lv_leave_type.setVisibility(View.GONE);
+//                } else {
+//                    lv_leave_type.setVisibility(View.VISIBLE);
+//                }
+//                break;
 
             case R.id.bt_submit:
                 checkAllDataEnter();

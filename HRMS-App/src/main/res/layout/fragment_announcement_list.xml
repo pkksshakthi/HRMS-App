@@ -9,93 +9,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#2d5779"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="10dp"
 
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="4dp"
         tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Select Months and Year"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="left"
+
+            android:text="ANNOUNCEMENT"
             android:textColor="#ffffff"
-            android:textSize="7pt"
             android:textStyle="bold" />
 
-    </LinearLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/comp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout2"
-        android:gravity="center">
-
-        <Spinner
-            android:id="@+id/sp_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="10dp">
-
-        </Spinner>
-
-        <Spinner
-            android:id="@+id/sp_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"></Spinner>
-
-        <Button
-            android:id="@+id/bt_display"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:background="#053c70"
-            android:text="Display"
-            android:textColor="#ffffff" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/comp"
-        android:background="#9f7d7a"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="10dp"
-
-        tools:ignore="MissingConstraints">
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text=" Announcement Details"
-            android:textColor="#ffffff"
-            android:textSize="7pt"
+        <ImageView
+            android:id="@+id/img_date"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:src="@drawable/date_white_icon"
 
             />
-
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_nodata"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout3"
-        android:layout_marginTop="50dp"
-        android:text="No Data"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout2"
 
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="No Data"
         android:textColor="#000000"
         android:textSize="10pt"
 
@@ -105,8 +59,9 @@
         android:id="@+id/lv_announcement_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout3"
+        android:layout_below="@+id/linearLayout2"
         android:padding="5dp"
+
         tools:ignore="MissingConstraints" />
 
 
