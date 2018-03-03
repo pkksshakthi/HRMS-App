@@ -105,7 +105,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
 
     private void setData() {
         tv_username.setText(Global.getLoginInfoData().getEmpName());
-        tv_companyname.setText(Global.getLoginInfoData().getDesignationDesc());
+        tv_companyname.setText(Global.getLoginInfoData().getDeptName());
       //  tv_companyname.setText(Utility.getPreference(this).getString(Constants.PREFS_COMPANY_NAME, ""));
         loadBitmap(Global.getLoginInfoData().getEmpImage());
     }

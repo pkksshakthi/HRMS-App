@@ -340,7 +340,14 @@ public class AttendanceEnterFragment extends Fragment implements
         switch (v.getId()) {
             case R.id.bt_mark_in_att:
 
-                confirmAtendance();
+                confirmAtendance("CHECK-IN");
+                loadMap();
+                tv_att_details.setText("" + currentAddress);
+                break;
+
+            case R.id.bt_mark_out_att:
+
+                confirmAtendance("CHECK-OUT");
                 loadMap();
                 tv_att_details.setText("" + currentAddress);
                 break;
@@ -612,11 +619,11 @@ public class AttendanceEnterFragment extends Fragment implements
         }
     }
 
-    private void confirmAtendance() {
+    private void confirmAtendance(String a) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 
-        builder.setTitle("CHECK-IN");
+        builder.setTitle(a);
 
 
         builder.setMessage("Hello, please to conform that ready to check in");
