@@ -62,6 +62,8 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/spinner_margin"
+        android:background="@drawable/leavemanagementtextviewroundcorner"
+
         android:layout_marginTop="30dp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
