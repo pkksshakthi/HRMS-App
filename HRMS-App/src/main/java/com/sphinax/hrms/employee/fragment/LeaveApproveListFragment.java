@@ -56,7 +56,17 @@ public class LeaveApproveListFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
 
+            // load data here
+            fetchLeaveList();
+        }else{
+            // fragment is no longer visible
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
