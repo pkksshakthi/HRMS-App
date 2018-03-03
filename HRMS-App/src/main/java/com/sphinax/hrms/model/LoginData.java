@@ -57,6 +57,18 @@ public class LoginData {
     @Expose
     private String empImage;
 
+    @SerializedName("designationDesc")
+    @Expose
+    private String designationDesc;
+
+    public String getDesignationDesc() {
+        return designationDesc;
+    }
+
+    public void setDesignationDesc(String designationDesc) {
+        this.designationDesc = designationDesc;
+    }
+
     public Integer getResCode() {
         return resCode;
     }
