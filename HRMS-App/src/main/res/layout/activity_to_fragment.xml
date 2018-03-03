@@ -21,17 +21,17 @@
 
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="92dp"
-        android:layout_height="72dp"
+        android:layout_width="82dp"
+        android:layout_height="52dp"
 
         android:paddingRight="10dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/elite"/>
+        android:src="@drawable/logo_latest"/>
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="72dp"
-        android:layout_height="match_parent"
+        android:layout_height="52dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
       android:src="@drawable/sphinax" />

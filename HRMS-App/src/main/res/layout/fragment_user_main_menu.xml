@@ -59,12 +59,12 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
                                     android:layout_centerInParent="true"
                                     android:layout_weight="1"
                                     android:padding="5dp"
-                                    android:src="@drawable/mark_attendance" />
+                                    android:src="@drawable/slide_mark_attendance" />
 
 
                                 <TextView
@@ -74,6 +74,7 @@
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:padding="5dp"
+                                    android:textAllCaps="true"
                                     android:text="Mark Attendance"
                                     android:textColor="@android:color/black"
                                      />
@@ -105,12 +106,12 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
                                     android:layout_weight="1"
                                     android:padding="5dp"
-                                    android:src="@drawable/attendance_report" />
+                                    android:src="@drawable/slide_attendance_report" />
 
 
                                 <TextView
@@ -119,6 +120,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:gravity="center"
+                                    android:textAllCaps="true"
                                     android:padding="5dp"
                                     android:text="Attendance Report"
                                     android:textColor="@android:color/black"
@@ -161,12 +163,12 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
                                     android:layout_weight="1"
                                     android:padding="5dp"
-                                    android:src="@drawable/leave_application" />
+                                    android:src="@drawable/slide_leave_application" />
 
 
                                 <TextView
@@ -176,6 +178,7 @@
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:padding="5dp"
+                                    android:textAllCaps="true"
                                     android:text="Leave Application"
                                     android:textColor="@android:color/black"
                                      />
@@ -207,12 +210,12 @@
 
                                 <ImageView
 
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
-                                    android:src="@drawable/leave_management" />
+                                    android:src="@drawable/slide_leave_management" />
 
 
                                 <TextView
@@ -221,6 +224,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:gravity="center"
+                                    android:textAllCaps="true"
                                     android:padding="5dp"
                                     android:text="Leave Management"
                                     android:textColor="@android:color/black"
@@ -263,12 +267,12 @@
 
                                 <ImageView
 
-                                    android:layout_width="126dp"
-                                    android:layout_height="127dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
                                     android:layout_weight="1"
-                                    android:src="@drawable/my_info" />
+                                    android:src="@drawable/slide_my_info" />
 
 
                                 <TextView
@@ -278,6 +282,7 @@
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:padding="5dp"
+                                    android:textAllCaps="true"
                                     android:text="My Info"
                                     android:textColor="@android:color/black"
                                      />
@@ -309,12 +314,12 @@
 
                                 <ImageView
 
-                                    android:layout_width="126dp"
-                                    android:layout_height="127dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
                                     android:layout_weight="1"
                                     android:padding="5dp"
-                                    android:src="@drawable/announcement_icon" />
+                                    android:src="@drawable/slide_slide_announcement_icon" />
 
 
                                 <TextView
@@ -365,12 +370,12 @@
 
                                 <ImageView
 
-                                    android:layout_width="126dp"
-                                    android:layout_height="127dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
                                     android:layout_weight="1"
-                                    android:src="@drawable/payslip_last" />
+                                    android:src="@drawable/slide_payslip" />
 
 
                                 <TextView
@@ -380,6 +385,7 @@
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:padding="5dp"
+                                    android:textAllCaps="true"
                                     android:text="Payslip"
                                     android:textColor="@android:color/black"
                                      />
@@ -411,12 +417,12 @@
 
                                 <ImageView
 
-                                    android:layout_width="126dp"
-                                    android:layout_height="127dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
-                                    android:src="@drawable/help_desk" />
+                                    android:src="@drawable/slide_help_desk" />
 
 
                                 <TextView
@@ -426,6 +432,7 @@
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:padding="5dp"
+                                    android:textAllCaps="true"
                                     android:text="Help Disk"
                                     android:textColor="@android:color/black"
                                      />

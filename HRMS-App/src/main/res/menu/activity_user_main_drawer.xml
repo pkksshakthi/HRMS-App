@@ -6,41 +6,42 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_mark_attendance"
-            android:icon="@drawable/mark_attendance"
+            android:icon="@drawable/slide_mark_attendance"
             android:title="Mark Attendance" />
 
 
         <item
             android:id="@+id/nav_attendance_report"
-            android:icon="@drawable/attendance_report"
+            android:icon="@drawable/slide_attendance_report"
             android:title="Attendance Report" />
         <item
             android:id="@+id/nav_leave_application"
-            android:icon="@drawable/leave_application"
+            android:icon="@drawable/slide_leave_application"
             android:title="Leave Application" />
         <item
             android:id="@+id/nav_leave_management"
-            android:icon="@drawable/leave_management"
+            android:icon="@drawable/slide_leave_management"
             android:title="Leave Management" />
         <item
             android:id="@+id/nav_my_info"
-            android:icon="@drawable/my_info"
+            android:icon="@drawable/slide_my_info"
             android:title="MyInfo" />
         <item
             android:id="@+id/nav_announcement"
-            android:icon="@drawable/announcement_icon"
+            android:icon="@drawable/slide_slide_announcement_icon"
             android:title="Announcements" />
         <item
             android:id="@+id/nav_payslip"
-            android:icon="@drawable/payslip_last"
+            android:icon="@drawable/slide_payslip"
             android:title="PaySlip" />
         <item
             android:id="@+id/nav_help_desk"
-            android:icon="@drawable/help_desk"
+            android:icon="@drawable/slide_help_desk"
             android:title="Help desk" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/icon_logout"
+
             android:title="Logout" />
     </group>
 

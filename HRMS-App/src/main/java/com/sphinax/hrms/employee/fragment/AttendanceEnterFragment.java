@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -58,7 +60,11 @@ import java.util.Date;
 import java.util.HashMap;
 
 
-public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class AttendanceEnterFragment extends Fragment implements
+        OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        View.OnClickListener {
 
 
     private static final String TAG = "AttendanceEnterFragment-";
@@ -85,6 +91,9 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     private FragmentManager fragmentManager;
     //private  boolean allowRefresh = true;
     private RequestPermissionHandler mRequestPermissionHandler;
+    private LocationRequest mLocationRequest;
+    private Location location;
+    private LocationManager manager;
 
     public AttendanceEnterFragment() {
         // Required empty public constructor
@@ -95,6 +104,12 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_attendance_enter, null, false);
+        // Create the LocationRequest object
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+        manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         loadMapView();
 
         return view;
@@ -215,7 +230,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             try {
                 if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
-                    mMap.clear();
+                    // mMap.clear();
 
 
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -228,7 +243,8 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                         // for ActivityCompat#requestPermissions for more details.
                         return;
                     }
-                    Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
+                    location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
                     if (location != null) {
                         //Getting longitude and latitude
                         longitude = location.getLongitude();
@@ -246,6 +262,7 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             }
         }
     }
+
     //Function to move the map
     private void moveMap() {
         //String to display current latitude and longitude
@@ -279,11 +296,23 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
         //Displaying current coordinates in toast
         Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
     }
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
-
-        loadMap();
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        if (location != null)
+            loadMap();
 
 
     }
@@ -319,9 +348,6 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     }
 
 
-
-
-
     private void checkAttendanceMarked() {
 
         if (ajaxList != null) {
@@ -329,9 +355,9 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
             if (ajaxList.get(0).getCheckInTime() != null && !ajaxList.get(0).getCheckInTime().equalsIgnoreCase("")) {
                 bt_In_att.setText(covertDate(ajaxList.get(0).getCheckInTime()));
                 tv_att_details.setText(ajaxList.get(0).getLocation());
-                if(ajaxList.get(0).getCheckOutTime().equalsIgnoreCase("")){
+                if (ajaxList.get(0).getCheckOutTime().equalsIgnoreCase("")) {
                     bt_out_att.setText(" CHECK-OUT TIME ");
-                }else {
+                } else {
                     bt_In_att.setText(covertDate(ajaxList.get(0).getCheckOutTime()));
                 }
             }
@@ -370,6 +396,14 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
 
     private boolean canAccessLocation() {
         return (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (googleApiClient != null) {
+            googleApiClient.disconnect();
+        }
     }
 
     private boolean hasPermission(String perm) {
@@ -427,9 +461,9 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
                         bt_In_att.setEnabled(false);
                         bt_In_att.setClickable(false);
                     } else {
-                        if(Global.getLoginInfoData().getMarkAttendacne().equalsIgnoreCase("S")){
+                        if (Global.getLoginInfoData().getMarkAttendacne().equalsIgnoreCase("S")) {
                             Global.setMarkAttendance(false);
-                        }else{
+                        } else {
                             bt_In_att.setEnabled(false);
                             bt_In_att.setClickable(false);
                         }
@@ -567,13 +601,18 @@ public class AttendanceEnterFragment extends Fragment implements OnMapReadyCallb
     @Override
     public void onResume() {
         super.onResume();
+        if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER) ) {
+            if (googleApiClient != null) {
+                googleApiClient.connect();
+            }
+        }
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
             Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
             return;
         }
     }
 
-    private void confirmAtendance(){
+    private void confirmAtendance() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 

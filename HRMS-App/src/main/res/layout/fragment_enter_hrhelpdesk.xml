@@ -62,8 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
 
-                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
                 android:text="Select Query" />
 
             <Spinner
@@ -71,10 +71,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="3dp"
-                android:background="@drawable/spinner_backgroud"
-
                 android:layout_marginLeft="10dp"
+
                 android:layout_marginRight="10dp"
+                android:background="@drawable/spinner_backgroud"
                 android:padding="10dp" />
 
             <View
@@ -99,11 +99,11 @@
                 android:background="@drawable/leavemanagementtextviewroundcorner"
                 android:ems="10"
                 android:gravity="start"
-                android:maxLines="3"
-                android:minLines="2"
-
                 android:hint="Enter Comments.."
                 android:inputType="textMultiLine"
+
+                android:maxLines="3"
+                android:minLines="2"
                 android:padding="5dp"
                 android:text="" />
 
@@ -115,9 +115,9 @@
 
             <Button
                 android:id="@+id/bt_submit"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:background="#023D65"
                 android:text="Submit"
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:background="#0A4B73"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="5dp">
 
             <TextView
                 android:layout_width="match_parent"
