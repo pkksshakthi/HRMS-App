@@ -31,6 +31,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -107,7 +108,7 @@ public class AttendanceEnterFragment extends Fragment implements
         // Create the LocationRequest object
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+                .setInterval(1 * 1000)        // 10 seconds, in milliseconds
                 .setFastestInterval(1 * 1000); // 1 second, in milliseconds
         manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         loadMapView();
@@ -151,7 +152,7 @@ public class AttendanceEnterFragment extends Fragment implements
             @Override
             public void onSuccess() {
                 //  Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
-                loadMapView();
+                //loadMapView();
                 loadMap();
 
             }
@@ -197,6 +198,7 @@ public class AttendanceEnterFragment extends Fragment implements
 
     private void setListeners() {
         bt_In_att.setOnClickListener(this);
+        bt_out_att.setOnClickListener(this);
     }
 
     private void loadMapView() {
@@ -230,7 +232,7 @@ public class AttendanceEnterFragment extends Fragment implements
             try {
                 if (HRMSNetworkCheck.checkInternetConnection(context)) {
 
-                    // mMap.clear();
+                    mMap.clear();
 
 
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -294,7 +296,7 @@ public class AttendanceEnterFragment extends Fragment implements
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
         //Displaying current coordinates in toast
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -311,6 +313,7 @@ public class AttendanceEnterFragment extends Fragment implements
             return;
         }
         location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
         if (location != null)
             loadMap();
 
@@ -613,6 +616,9 @@ public class AttendanceEnterFragment extends Fragment implements
                 googleApiClient.connect();
             }
         }
+        if (mMap!=null){
+           moveMap();
+        }
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
             Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
             return;
@@ -626,7 +632,7 @@ public class AttendanceEnterFragment extends Fragment implements
         builder.setTitle(a);
 
 
-        builder.setMessage("Hello, please to conform that ready to check in");
+        builder.setMessage("Hello, please to conform that ready to "+a);
 
 
         //Yes Button

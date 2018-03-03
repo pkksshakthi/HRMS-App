@@ -156,7 +156,11 @@ public class LeaveApproveListFragment extends Fragment {
 
     private void fetchLeaveList() {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
-            Utility.showCustomToast(context, mView, getResources().getString(R.string.invalidInternetConnection));
+            if (mView!=null) {
+
+
+                Utility.showCustomToast(context, mView, getResources().getString(R.string.invalidInternetConnection));
+            }
             return;
         }
         pdia = new ProgressDialog(context);

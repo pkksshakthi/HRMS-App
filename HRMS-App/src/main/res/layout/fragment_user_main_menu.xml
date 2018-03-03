@@ -328,6 +328,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:gravity="center"
+                                    android:textAllCaps="true"
                                     android:padding="5dp"
                                     android:text="Announcement"
                                     android:textColor="@android:color/black"
