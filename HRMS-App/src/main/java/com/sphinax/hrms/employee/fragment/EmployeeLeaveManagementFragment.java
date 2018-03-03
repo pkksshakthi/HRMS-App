@@ -79,6 +79,7 @@ public class EmployeeLeaveManagementFragment extends Fragment {
             public void onPageSelected(int position) {
                 Log.d(TAG, "onPageSelected: " + position);
                 viewPager.setCurrentItem(position);
+                Global.setTabPosition(position);
 
             }
 
