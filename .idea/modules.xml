@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\software\android\HRMS-App\HRMS.iml" filepath="C:\software\android\HRMS-App\HRMS.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HRMS-App.iml" filepath="$PROJECT_DIR$/HRMS-App.iml" />
-      <module fileurl="file://C:\software\android\HRMS-App\HRMS-App\HRMS-App.iml" filepath="C:\software\android\HRMS-App\HRMS-App\HRMS-App.iml" />
-      <module fileurl="file://C:\Users\ganesaka\AndroidStudioProjects\HRMS\HRMS-App.iml" filepath="C:\Users\ganesaka\AndroidStudioProjects\HRMS\HRMS-App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HRMS-App/HRMS-App-HRMS-App.iml" filepath="$PROJECT_DIR$/HRMS-App/HRMS-App-HRMS-App.iml" />
-      <module fileurl="file://C:\Users\ganesaka\AndroidStudioProjects\HRMS\HRMS-App\HRMS-App-HRMS-App.iml" filepath="C:\Users\ganesaka\AndroidStudioProjects\HRMS\HRMS-App\HRMS-App-HRMS-App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HRMS.iml" filepath="$PROJECT_DIR$/HRMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HRMS-App/HRMS-App.iml" filepath="$PROJECT_DIR$/HRMS-App/HRMS-App.iml" />
       <module fileurl="file://$PROJECT_DIR$/librarynew/librarynew.iml" filepath="$PROJECT_DIR$/librarynew/librarynew.iml" />
     </modules>
   </component>

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.EmployeeLeaveViewPagerAdapter;
@@ -77,6 +79,7 @@ public class EmployeeLeaveManagementFragment extends Fragment {
             public void onPageSelected(int position) {
                 Log.d(TAG, "onPageSelected: " + position);
                 viewPager.setCurrentItem(position);
+
             }
 
             @Override
@@ -101,5 +104,57 @@ public class EmployeeLeaveManagementFragment extends Fragment {
             Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
             return;
         }
+
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+//                    if (ajax.getLeaveStatusDesc().equalsIgnoreCase("PENDING")){
+//                        Global.setTabPosition(1);
+//                        //getActivity().findViewById(R.id.ln_update).setVisibility(View.VISIBLE);
+//                    }else if (ajax.getLeaveStatusDesc().equalsIgnoreCase("APPROVED")){
+//                        Global.setTabPosition(0);
+//                    }else{
+//                        Global.setTabPosition(2);
+//                    }
+                    try {
+                        if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag() == null) {
+                            Global.setTabPosition(0);
+                            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+
+                        } else if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag().equalsIgnoreCase(Constants.FRAMENT_LEAVE_MANAGEMENT)) {
+                            Log.d(TAG, "onKey: " + getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag());
+
+                            Global.setTabPosition(0);
+                            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+
+                        } else if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag().equalsIgnoreCase(Constants.FRAMENT_LEAVE_LIST_CONTENT)) {
+                            Log.d(TAG, "onKey: " + getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag());
+
+                            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeLeaveManagementFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Global.setTabPosition(0);
+                        Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+
+                    }
+
+
+
+                    return true;
+
+                }
+
+                return false;
+            }
+        });
+
     }
 }

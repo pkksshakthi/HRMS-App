@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -375,5 +376,51 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
             Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
             return;
         }
+
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+                    Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EnterHRHelpdeskFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+
+                    try {
+                        if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag() == null) {
+                           // Global.setTabPosition(0);
+                            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+
+                        } else if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag().equalsIgnoreCase(Constants.FRAMENT_HR_HELPDESK_ENTER)) {
+                            Log.d(TAG, "onKey: " + getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag());
+
+                            //Global.setTabPosition(0);
+                            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_HR_HELPDESK_ENTER);
+
+                        } else if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag().equalsIgnoreCase(Constants.FRAMENT_HRHELP_UPDATE_CONTENT)) {
+                            Log.d(TAG, "onKey: " + getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag());
+
+                            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UpdateHRHelpDeskFragment(), false, null, Constants.FRAMENT_HRHELP_UPDATE_CONTENT);
+
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        //Global.setTabPosition(0);
+                        Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+
+                    }
+
+
+                    return true;
+
+                }
+
+                return false;
+            }
+        });
+
     }
 }

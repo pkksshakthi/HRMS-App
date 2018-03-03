@@ -9,6 +9,7 @@ import android.util.Log;
 import com.sphinax.hrms.employee.fragment.LeaveApproveListFragment;
 import com.sphinax.hrms.employee.fragment.LeavePendingListFragment;
 import com.sphinax.hrms.employee.fragment.LeaveRejectedListFragment;
+import com.sphinax.hrms.global.Global;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,19 +29,30 @@ public class EmployeeLeaveViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Log.d("sdsds", "getItem: " + position);
-
+        final Fragment tab;
         //return mFragmentList.get(position);
         switch (position) {
             case 0:
-                LeaveApproveListFragment tab1 = new LeaveApproveListFragment();
-                return tab1;
+                tab = new LeaveApproveListFragment();
+                return tab;
             case 1:
-                LeavePendingListFragment tab2 = new LeavePendingListFragment();
-                return tab2;
+                tab = new LeavePendingListFragment();
+                return tab;
             case 2:
-                LeaveRejectedListFragment tab3 = new LeaveRejectedListFragment();
-                return tab3;
+                tab = new LeaveRejectedListFragment();
+                return tab;
             default:
+                Log.d("s", "getItem: " + Global.getTabPosition());
+                if (Global.getTabPosition() == 0){
+                    tab = new LeaveApproveListFragment();
+                    return tab;
+                }else if(Global.getTabPosition() == 1){
+                    tab = new LeavePendingListFragment();
+                    return tab;
+                }else if(Global.getTabPosition() == 2){
+                    tab= new LeaveRejectedListFragment();
+                    return tab;
+                }
                 return null;
         }
 
