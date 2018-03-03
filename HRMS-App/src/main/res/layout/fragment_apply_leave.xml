@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -95,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -106,617 +105,195 @@
         <ScrollView
             android:id="@+id/scroll_leave_Applicatoion"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="match_parent">
 
-            >
 
-            <LinearLayout
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
-                <android.support.v7.widget.CardView
-
-
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    app:cardElevation="3dp"
-                    card_view:cardCornerRadius="2dp">
+                    android:padding="10dp">
 
-                    <RelativeLayout
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
+                        android:layout_marginBottom="5dp"
+                        android:text="Leave Type"
+                        android:textColor="#575757"
+                        android:textSize="15sp" />
+
+
+                    <Spinner
+
+                        android:id="@+id/sp_leave_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner" />
+                </TableRow>
 
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <ImageView
-                            android:id="@+id/imageleavetype"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_leave"
-                            card_view:layout_editor_absoluteX="0dp"
-                            card_view:layout_editor_absoluteY="0dp" />
-
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/imageleavetype"
-                            android:gravity="center|left"
-                            android:orientation="vertical"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginBottom="5dp"
-                                android:text="Leave Type"
-                                android:textColor="#575757"
-                                android:textSize="15sp" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#c8d4d7"></View>
-
-                            <Spinner
-
-                                android:id="@+id/sp_leave_type"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-
-                                android:layout_marginTop="5dp" />
-
-                        </LinearLayout>
-
-
-                    </RelativeLayout>
-
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-
-
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    app:cardElevation="3dp"
-                    card_view:cardCornerRadius="2dp">
+                    android:padding="10dp">
 
-                    <RelativeLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
+                        android:layout_marginBottom="5dp"
+                        android:text="Start Date"
+                        android:textColor="#575757"
+                        android:textSize="15dp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_start_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner"
+                        android:hint="--Start Date--" />
+                </TableRow>
 
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <ImageView
-                            android:id="@+id/imageleavetype1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_startdate"
-                            card_view:layout_editor_absoluteX="0dp"
-                            card_view:layout_editor_absoluteY="0dp" />
-
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/imageleavetype1"
-                            android:gravity="center|left"
-                            android:orientation="vertical"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginBottom="5dp"
-                                android:text="Start Date"
-                                android:textColor="#575757"
-                                android:textSize="15dp" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#c8d4d7"></View>
-
-                            <TextView
-                                android:id="@+id/tv_start_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginTop="5dp"
-                                android:hint="--Start Date--" />
-
-                        </LinearLayout>
-
-
-                    </RelativeLayout>
-
-
-                </android.support.v7.widget.CardView>
-
-                <!--
-                                <android.support.v7.widget.CardView
-
-
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="5dp"
-                                    android:layout_marginRight="5dp"
-                                    android:layout_marginTop="5dp"
-                                    card_view:cardCornerRadius="4dp">
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_weight="1"
-
-                                        android:gravity="center"
-                                        android:orientation="vertical"
-                                        android:padding="5dp">
-
-                                        <ImageView
-                                            android:id="@+id/imageViewstartdate"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignParentStart="true"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginStart="20dp"
-                                            android:src="@drawable/icon_leaveapplicationn_new"
-                                            card_view:layout_editor_absoluteX="0dp"
-                                            card_view:layout_editor_absoluteY="0dp" />
-
-                                        <LinearLayout
-
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginStart="20dp"
-                                            android:layout_toEndOf="@+id/imageViewstartdate"
-                                            android:gravity="center|left"
-                                            android:orientation="vertical"
-                                            android:padding="5dp">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_alignParentEnd="true"
-                                                android:layout_alignParentTop="true"
-                                                android:layout_marginBottom="5dp"
-                                                android:text="Start Date"
-                                                android:textColor="#575757"
-                                                android:textSize="15dp" />
-
-                                            <TextView
-                                                android:id="@+id/tv_start_date"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-
-                                                android:hint="&#45;&#45;Start Date&#45;&#45;"
-                                                card_view:layout_editor_absoluteX="71dp"
-                                                card_view:layout_editor_absoluteY="32dp" />
-
-                                        </LinearLayout>
-
-
-                                    </RelativeLayout>
-
-
-                                </android.support.v7.widget.CardView>
-                -->
-                <android.support.v7.widget.CardView
-
-
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    app:cardElevation="3dp"
-                    card_view:cardCornerRadius="2dp">
+                    android:padding="10dp">
 
-                    <RelativeLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
+                        android:layout_marginBottom="5dp"
+                        android:text="Start Session"
+                        android:textColor="#575757"
+                        android:textSize="15dp" />
+
+
+                    <Spinner
+
+                        android:id="@+id/sp_leave_session_start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner" />
+                </TableRow>
 
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <ImageView
-                            android:id="@+id/imageleavetype2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_session"
-                            card_view:layout_editor_absoluteX="0dp"
-                            card_view:layout_editor_absoluteY="0dp" />
-
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/imageleavetype2"
-                            android:gravity="center|left"
-                            android:orientation="vertical"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginBottom="5dp"
-                                android:text="Start Session"
-                                android:textColor="#575757"
-                                android:textSize="15dp" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#c8d4d7"></View>
-
-                            <Spinner
-
-                                android:id="@+id/sp_leave_session_start"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-
-                                android:layout_marginTop="5dp" />
-
-                        </LinearLayout>
-
-
-                    </RelativeLayout>
-
-
-                </android.support.v7.widget.CardView>
-
-
-                <android.support.v7.widget.CardView
-
-
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    app:cardElevation="3dp"
-                    card_view:cardCornerRadius="2dp">
+                    android:padding="10dp">
 
-                    <RelativeLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
+
+                        android:text="End Date"
+                        android:textColor="#575757" />
+
+
+                    <TextView
+                        android:id="@+id/tv_end_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner"
+                        android:hint="--End Date--" />
+                </TableRow>
 
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <ImageView
-                            android:id="@+id/imageleavetype131"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_enddate"
-                            card_view:layout_editor_absoluteX="0dp"
-                            card_view:layout_editor_absoluteY="0dp" />
-
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/imageleavetype131"
-                            android:gravity="center|left"
-                            android:orientation="vertical"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginBottom="5dp"
-                                android:text="End Date"
-                                android:textColor="#575757"
-                                android:textSize="15dp" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#c8d4d7"></View>
-
-                            <TextView
-                                android:id="@+id/tv_end_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginTop="5dp"
-                                android:hint="--End Date--" />
-
-                        </LinearLayout>
-
-
-                    </RelativeLayout>
-
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-
-
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    app:cardElevation="3dp"
-                    card_view:cardCornerRadius="2dp">
+                    android:padding="10dp">
 
-                    <RelativeLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
+                        android:text="End Session"
+                        android:textColor="#575757" />
+
+
+                    <Spinner
+
+                        android:id="@+id/sp_leave_session_end"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner" />
+                </TableRow>
 
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <ImageView
-                            android:id="@+id/imageleavetype4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_session"
-                            card_view:layout_editor_absoluteX="0dp"
-                            card_view:layout_editor_absoluteY="0dp" />
-
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/imageleavetype4"
-                            android:gravity="center|left"
-                            android:orientation="vertical"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginBottom="5dp"
-                                android:text="End Session"
-                                android:textColor="#575757"
-                                android:textSize="15dp" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#c8d4d7"></View>
-
-                            <Spinner
-
-                                android:id="@+id/sp_leave_session_end"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-
-                                android:layout_marginTop="5dp" />
-
-                        </LinearLayout>
-
-
-                    </RelativeLayout>
-
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-
-
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    app:cardElevation="3dp"
-                    card_view:cardCornerRadius="2dp">
+                    android:padding="10dp">
 
-                    <RelativeLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
+                        android:layout_marginBottom="5dp"
+                        android:text="No of Days"
+                        android:textColor="#575757"
+                        android:textSize="15dp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/leavemanagementtextviewroundcorner"
+                        android:text="5" />
+                </TableRow>
 
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <ImageView
-                            android:id="@+id/imageleavetype13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:src="@drawable/icon_startdate"
-                            card_view:layout_editor_absoluteX="0dp"
-                            card_view:layout_editor_absoluteY="0dp" />
-
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/imageleavetype13"
-                            android:gravity="center|left"
-                            android:orientation="vertical"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginBottom="5dp"
-                                android:text="No of Days"
-                                android:textColor="#575757"
-                                android:textSize="15dp" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#c8d4d7"></View>
-
-                            <TextView
-                                android:id="@+id/tv_count"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginTop="5dp"
-                                android:text="5" />
-
-                        </LinearLayout>
-
-
-                    </RelativeLayout>
-
-
-                </android.support.v7.widget.CardView>
-
-
-                <android.support.v7.widget.CardView
-
-
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    app:cardElevation="3dp"
-                    card_view:cardCornerRadius="2dp">
+                    android:padding="10dp">
 
-                    <RelativeLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
+                        android:text="Reason"
+                        android:textColor="#575757" />
+
+
+                    <EditText
+                        android:id="@+id/ed_reason"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <ImageView
-                            android:id="@+id/imageView4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            android:src="@drawable/icon_reason"
-                            card_view:layout_editor_absoluteX="0dp"
-                            card_view:layout_editor_absoluteY="0dp" />
-
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/imageView4"
-                            android:gravity="center|left"
-                            android:orientation="vertical"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginBottom="5dp"
-                                android:text="Reason"
-                                android:textColor="#575757"
-                                android:textSize="15dp" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#c8d4d7"></View>
-
-                            <EditText
-                                android:id="@+id/ed_reason"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:background="@drawable/leavemanagementtextviewroundcorner"
-                                android:gravity="top|start"
-                                android:hint="Enter reason.."
-                                android:inputType="textMultiLine"
-                                android:lines="5"
-                                android:padding="5dp"
-                                android:scrollbars="vertical"
-                                card_view:layout_editor_absoluteX="71dp"
-                                card_view:layout_editor_absoluteY="32dp" />
-
-                        </LinearLayout>
+                        android:background="@drawable/leavemanagementtextviewroundcorner"
+                        android:gravity="top|start"
+                        android:hint="Enter reason.."
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:padding="5dp"
+                        android:scrollbars="vertical" />
+                </TableRow>
 
 
-                    </RelativeLayout>
-
-
-                </android.support.v7.widget.CardView>
-
-
-                <LinearLayout
-
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:layout_height="wrap_content">
 
                     <Button
                         android:id="@+id/bt_submit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
                         android:background="#023D65"
                         android:text="Submit"
                         android:textColor="#ffffff" />
@@ -725,16 +302,13 @@
                         android:id="@+id/bt_cancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
                         android:background="#E43A3E"
                         android:text="Cancel"
                         android:textColor="#ffffff" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
+                </TableRow>
+            </TableLayout>
         </ScrollView>
 
 

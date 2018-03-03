@@ -26,8 +26,8 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
     private static final String TAG = "EmployeeLeaveFullContentFragment-";
     private static Context context;
     private View mView;
-    private EditText ed_AppliedOn, ed_AppliedFor, ed_leaveTye, ed_EmpMess, ed_AdminMess;
-    private TextView tv_fromDate, tv_toDate, tv_startSession, tv_endSession, tv_leaveStatus;
+    private EditText   ed_leaveTye, ed_EmpMess, ed_AdminMess;
+    private TextView tv_fromDate, tv_toDate, tv_startSession, tv_endSession, tv_leaveStatus,ed_AppliedOn,ed_AppliedFor;
     private Ajax ajax;
     private FragmentManager fragmentManager;
     public EmployeeLeaveFullContentFragment() {
@@ -113,6 +113,7 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
 
                     if (ajax.getLeaveStatusDesc().equalsIgnoreCase("PENDING")){
                         Global.setTabPosition(1);
+                        //getActivity().findViewById(R.id.ln_update).setVisibility(View.VISIBLE);
                     }else if (ajax.getLeaveStatusDesc().equalsIgnoreCase("APPROVED")){
                         Global.setTabPosition(0);
                     }else{

@@ -9,6 +9,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#3282C9"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="LEAVE MANAGEMENT"
+            android:textColor="#ffffff" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -17,26 +27,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/tv_leaetype"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#126c12"
+                    android:background="#33AD96"
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="Pending"
                     android:textColor="@color/white" />
 
-                <LinearLayout
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -63,6 +79,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
+                                android:drawableRight="@drawable/date_color_icon"
                                 android:layout_weight="1" />
                         </android.support.v7.widget.CardView>
                     </LinearLayout>
@@ -93,13 +110,14 @@
                                 android:id="@+id/tv_session_start"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+
                                 android:layout_margin="5dp"
                                 android:layout_weight="1" />
                         </android.support.v7.widget.CardView>
                     </LinearLayout>
-                </LinearLayout>
+                </TableRow>
 
-                <LinearLayout
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -128,9 +146,10 @@
 
 
                             <TextView
-                                 android:id="@+id/tv_toDate"
+                                android:id="@+id/tv_toDate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:drawableRight="@drawable/date_color_icon"
                                 android:layout_margin="5dp"
                                 android:layout_weight="1" />
                         </android.support.v7.widget.CardView>
@@ -166,35 +185,175 @@
                                 android:layout_weight="1" />
                         </android.support.v7.widget.CardView>
                     </LinearLayout>
-                </LinearLayout>
+                </TableRow>
 
-
-                <TextView
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Applied On" />
+                    android:orientation="horizontal">
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-
-                    card_view:contentPadding="5dp">
-
-                    <EditText
-                        android:id="@+id/ed_applied_on"
-                        android:inputType="none"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1" />
-                </android.support.v7.widget.CardView>
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:paddingBottom="5dp"
+                            android:text="Applied On" />
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:elevation="5dp"
+                            card_view:cardElevation="5dp"
+                            card_view:contentPadding="5dp">
+
+
+                            <TextView
+                                android:id="@+id/ed_applied_on"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:drawableRight="@drawable/date_color_icon"
+                                android:layout_weight="1" />
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="5dp"
+                            android:text="No.of.Days" />
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:elevation="5dp"
+                            card_view:cardElevation="5dp"
+
+                            card_view:contentPadding="5dp">
+
+                            <TextView
+                                android:id="@+id/ed_applied_for"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1" />
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+                </TableRow>
+
+                <!--
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:paddingBottom="5dp"
+                                            android:text="Applied On" />
+
+                                        <android.support.v7.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="5dp"
+                                            android:layout_weight="1"
+                                            android:elevation="5dp"
+                                            card_view:cardElevation="5dp"
+
+                                            card_view:contentPadding="5dp">
+
+                                            <TextView
+                                                android:id="@+id/ed_applied_on"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="5dp"
+                                                android:layout_weight="1"
+                                                android:inputType="none" />
+                                        </android.support.v7.widget.CardView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:paddingBottom="5dp"
+                                            android:text="No.of.Days" />
+
+                                        <android.support.v7.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="5dp"
+                                            android:layout_weight="1"
+                                            android:elevation="5dp"
+                                            card_view:cardElevation="5dp"
+
+                                            card_view:contentPadding="5dp">
+
+                                            <TextView
+                                                android:id="@+id/ed_applied_for"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="5dp"
+                                                android:layout_weight="1" />
+                                        </android.support.v7.widget.CardView>
+                                    </LinearLayout>
+                                </LinearLayout>
+                -->
+
+                <!--  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingBottom="5dp"
+                      android:text="Applied On" />
+
+                  <android.support.v7.widget.CardView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="5dp"
+                      android:layout_weight="1"
+                      android:elevation="5dp"
+                      card_view:cardElevation="5dp"
+
+                      card_view:contentPadding="5dp">
+
+                      <EditText
+                          android:id="@+id/ed_applied_on"
+                          android:inputType="none"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:layout_weight="1" />
+                  </android.support.v7.widget.CardView>-->
+
+                <!--<TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
@@ -217,8 +376,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1" />
-                </android.support.v7.widget.CardView>
-
+                </android.support.v7.widget.CardView>-->
+                </TableLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -237,11 +396,11 @@
 
                     <EditText
                         android:id="@+id/ed_leave_type"
-                        android:inputType="none"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:inputType="none" />
                 </android.support.v7.widget.CardView>
 
                 <TextView
@@ -262,11 +421,11 @@
 
                     <EditText
                         android:id="@+id/ed_emp_mess"
-                        android:inputType="none"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:inputType="none" />
                 </android.support.v7.widget.CardView>
 
                 <TextView
@@ -287,16 +446,45 @@
 
                     <EditText
                         android:id="@+id/ed_admin_mess"
-                        android:inputType="none"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:inputType="none" />
                 </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:id="@+id/ln_update"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/bt_update"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:background="#1052A0"
+                        android:text="Update"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/bt_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:background="#E33A3F"
+                        android:text="Cancel"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
 
 
             </LinearLayout>
+
         </ScrollView>
 
 
