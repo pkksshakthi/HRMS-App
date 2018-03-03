@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="HR Help Disk"
+                android:text="HR Help Desk"
                 android:textColor="#ffffff"
 
                 android:textStyle="bold" />
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:background="#023D65"
+                android:background="@drawable/possitive_button"
                 android:text="Submit"
                 android:textColor="#ffffff" />
         </LinearLayout>

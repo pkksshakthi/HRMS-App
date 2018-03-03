@@ -57,8 +57,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginRight="3sp"
-                            android:background="@drawable/spinner_backgroud"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:background="@drawable/spinner_backgroud" />
 
 
                         <Spinner
@@ -66,8 +66,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="3sp"
-                            android:background="@drawable/spinner_backgroud"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:background="@drawable/spinner_backgroud" />
 
                     </LinearLayout>
 
@@ -81,7 +81,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:background="#274979"
+                    android:background="@drawable/possitive_button"
                     android:text="Display"
                     android:textColor="#ffffff" />
 
@@ -136,8 +136,8 @@
                                 android:id="@+id/tv_payment_amt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:hint="No Value"
                                 android:padding="3dp"
-                                android:text="CAUSAL LEAVE"
                                 android:textColor="#ffffff"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -176,8 +176,9 @@
                                 android:id="@+id/tv_deduction_amt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:hint="No Value"
+
                                 android:padding="3dp"
-                                android:text="SICK LEAVE"
                                 android:textColor="#ffffff"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -215,8 +216,8 @@
                                 android:id="@+id/tv_netpay"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:hint="No Value"
                                 android:padding="3dp"
-                                android:text="SPECIAL LEAVE"
                                 android:textColor="#ffffff"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -301,7 +302,8 @@
                 android:layout_weight="1"
 
                 android:gravity="right|center"
-                android:text="2.25"
+
+                android:hint="0.0"
                 android:textColor="#5C9210"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -320,7 +322,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
 
-                android:background="#4c78b7"
+                android:background="@drawable/download_button"
                 android:text="DOWNLOAD"
                 android:textColor="#ffffff" />
 

@@ -405,12 +405,12 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     }
 
                     if (flag) {
-                        Utility.showCustomToast(getActivity(),mView, "Leave Applyed");
+                        Utility.showCustomToast(getActivity(),mView, "Leave Applied Successfully");
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
                         Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new ApplyLeaveFragment(), false, null, Constants.FRAMENT_LEAVE_APPLY);
                     } else {
-                        Utility.showCustomToast(getActivity(), mView,"Leave not applyed kindly try again");
+                        Utility.showCustomToast(getActivity(), mView,"Leave not applied kindly try again");
 
                     }
                 }

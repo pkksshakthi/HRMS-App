@@ -59,7 +59,7 @@ public class EmployeeLeaveManagementFragment extends Fragment {
 
         EmployeeLeaveViewPagerAdapter adapter = new EmployeeLeaveViewPagerAdapter(getActivity().getSupportFragmentManager());
         // Add Fragments to adapter one by one
-        adapter.addFragment( "Approve");
+        adapter.addFragment( "Approved");
         adapter.addFragment("Pending");
         adapter.addFragment("Rejected");
         viewPager.setAdapter(adapter);

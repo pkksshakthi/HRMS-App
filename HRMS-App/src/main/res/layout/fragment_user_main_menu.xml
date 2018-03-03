@@ -330,7 +330,7 @@
                                     android:gravity="center"
                                     android:textAllCaps="true"
                                     android:padding="5dp"
-                                    android:text="Announcement"
+                                    android:text="Announcements"
                                     android:textColor="@android:color/black"
                                      />
 
@@ -434,7 +434,7 @@
                                     android:gravity="center"
                                     android:padding="5dp"
                                     android:textAllCaps="true"
-                                    android:text="Help Disk"
+                                    android:text="Help Desk"
                                     android:textColor="@android:color/black"
                                      />
 

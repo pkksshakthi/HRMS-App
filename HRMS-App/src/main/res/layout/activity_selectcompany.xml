@@ -36,7 +36,7 @@
 
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:text="Select your organization"
+        android:text="Select Your Organization"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="normal"
@@ -76,7 +76,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/fab_margin"
-        android:background="@drawable/loginbutton_selector"
+        android:background="@drawable/possitive_button"
         android:text="Next"
         android:textColor="#ffffff" />
 

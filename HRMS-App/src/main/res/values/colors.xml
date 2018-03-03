@@ -19,7 +19,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="white_greyish">#023D65</color>
-    <color name="button_selectorcolor">#9E9E9E</color>
+    <color name="button_selectorcolor">#9e2e2e</color>
     <color name="colorNoteandcontent">#014b70</color>
     <color name="colorenterotp">#354a5f</color>
 </resources>

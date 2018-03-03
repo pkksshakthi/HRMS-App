@@ -56,6 +56,7 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
 
         loadComponent();
         ajax = (Ajax) getArguments().getSerializable("UserValidateObject");
+
         loadData();
     }
 
@@ -90,7 +91,9 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
             ed_leaveTye.setText(ajax.getLeaveTypeDesc());
             ed_EmpMess.setText(ajax.getEmployeeDescription());
             ed_AdminMess.setText(ajax.getRemarks());
-
+            if (ajax.getLeaveStatusDesc().equalsIgnoreCase("PENDING")) {
+                getActivity().findViewById(R.id.ln_admin_msg).setVisibility(View.GONE);
+            }
         }
     }
 
