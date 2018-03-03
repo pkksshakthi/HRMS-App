@@ -135,7 +135,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner" />
+                        android:background="@drawable/spinner_backgroud" />
                 </TableRow>
 
                 <TableRow
@@ -183,7 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner" />
+                        android:background="@drawable/spinner_backgroud" />
                 </TableRow>
 
                 <TableRow
@@ -228,7 +228,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner" />
+                        android:background="@drawable/spinner_backgroud" />
                 </TableRow>
 
                 <TableRow
@@ -286,11 +286,12 @@
 
                 <TableRow
                     android:layout_width="match_parent"
+                    android:orientation="horizontal"
                     android:layout_height="wrap_content">
 
                     <Button
                         android:id="@+id/bt_submit"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
@@ -300,7 +301,7 @@
 
                     <Button
                         android:id="@+id/bt_cancel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"

@@ -57,6 +57,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginRight="3sp"
+                            android:background="@drawable/spinner_backgroud"
                             android:layout_weight="1" />
 
 
@@ -65,6 +66,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="3sp"
+                            android:background="@drawable/spinner_backgroud"
                             android:layout_weight="1" />
 
                     </LinearLayout>

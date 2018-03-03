@@ -61,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:text="Select Query" />
@@ -70,6 +71,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="3dp"
+                android:background="@drawable/spinner_backgroud"
+
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:padding="10dp" />
