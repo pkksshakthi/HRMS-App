@@ -4,12 +4,18 @@ package com.sphinax.hrms.servicehandler;
  * Created by ganesaka on 2/10/2018.
  */
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.sphinax.hrms.global.Constants;
@@ -66,6 +72,8 @@ public class DownloadTask {
             try {
                 if (outputFile != null) {
                     progressDialog.dismiss();
+
+                    openFilePath(context,outputFile);
                     Toast.makeText(context, "Downloaded Successfully", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -76,8 +84,8 @@ public class DownloadTask {
                         }
                     }, 3000);
 
-                    Log.e(TAG, "Download Failed");
-
+                   // Log.e(TAG, "Download Failed");
+                    Toast.makeText(context, "Download Failed", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -174,6 +182,37 @@ public class DownloadTask {
 
             return null;
         }
+    }
+
+    private void openFilePath(Context context, File path) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        //Uncomment the below code to Set the message and title from the strings.xml file
+        //builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
+
+        //Setting message manually and performing action on button click
+        builder.setMessage("Do you want to open payslip ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(Uri.fromFile(path), "application/pdf");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        context.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Action for 'NO' Button
+                        dialog.cancel();
+                    }
+                });
+
+        //Creating dialog box
+        AlertDialog alert = builder.create();
+        //Setting the title manually
+        alert.setTitle("Payslip");
+        alert.show();
     }
 }
  class CheckForSDCard {

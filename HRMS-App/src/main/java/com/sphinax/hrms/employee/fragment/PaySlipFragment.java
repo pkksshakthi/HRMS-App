@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -68,13 +69,14 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
         super.onCreate(savedInstanceState);
 
     }
-    private void handleButtonClicked(){
-        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+
+    private void handleButtonClicked() {
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[]{
                 Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_EXTERNAL_STORAGE
         }, 123, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-              //  Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -82,12 +84,12 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                 Toast.makeText(getActivity(), "request permission failed", Toast.LENGTH_SHORT).show();
             }
         });
-        mRequestPermissionHandler.requestPermission(getActivity(), new String[] {
+        mRequestPermissionHandler.requestPermission(getActivity(), new String[]{
                 Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
         }, 124, new RequestPermissionHandler.RequestPermissionListener() {
             @Override
             public void onSuccess() {
-             //   Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(getActivity(), "request permission success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -96,10 +98,12 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
             }
         });
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         return inflater.inflate(R.layout.fragment_pay_slip, container, false);
     }
 
@@ -471,7 +475,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
             requestMap.put("year", payslipYear);
             requestMap.put("month", payslipMonth);
-            new DownloadTask(getActivity(), Constants.PAYSLIP_DOWNLOAD_REQUEST_URL,requestMap,String.valueOf(payslipYear +"-" +payslipMonth + ".pdf" ));
+            new DownloadTask(getActivity(), Constants.PAYSLIP_DOWNLOAD_REQUEST_URL, requestMap, String.valueOf(payslipYear + "-" + payslipMonth + ".pdf"));
 
 //            webServiceHandler.getPaySlipDownload(getActivity(), context, requestMap, new ServiceCallback() {
 //
