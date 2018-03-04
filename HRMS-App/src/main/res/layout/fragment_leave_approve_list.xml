@@ -8,72 +8,69 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
-            <TableRow
-                android:id="@+id/tb_index_1"
+
+        </TableLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="#0A4B73"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/bt_refid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="#0A4B73"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                android:layout_weight="1"
+                android:textColor="#ffffff"
+                
+                android:gravity="center"
+                android:text="Leave Type" />
 
-                <!-- <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="S.No" />-->
+            <TextView
+                android:id="@+id/bt_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:textColor="#ffffff"
+                android:layout_weight="1"
+                
+                android:gravity="center|left"
+                android:text="No.of.Days" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Date"
 
-                    android:text="Leave Type"
-                    android:textColor="#ffffff" />
+                />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="No.of.Days"
-                    android:textColor="#ffffff" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Date"
-                    android:textColor="#ffffff" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Status"
-                        android:textColor="#ffffff"
-
-                        />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/tv_query_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Status"
+                android:textColor="#ffffff" />
 
 
-            </TableRow>
-
-         </TableLayout>
+        </LinearLayout>
 
 
         <android.support.v4.widget.SwipeRefreshLayout
@@ -85,6 +82,9 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/itemsRecyclerView"
                 android:layout_width="match_parent"
+                android:focusable="true"
+                android:clickable="true"
+                android:background="?android:selectableItemBackground"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical" />
         </android.support.v4.widget.SwipeRefreshLayout>

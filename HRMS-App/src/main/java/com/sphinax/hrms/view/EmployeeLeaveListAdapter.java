@@ -24,7 +24,7 @@ public class EmployeeLeaveListAdapter extends RecyclerView.Adapter<EmployeeLeave
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_status, tv_date, tv_leave_type, tv_days;
         public ImageView img_status;
-        public TableRow tb_first;
+       // public TableRow tb_first;
 
         public MyViewHolder(View view) {
             super(view);
@@ -33,7 +33,7 @@ public class EmployeeLeaveListAdapter extends RecyclerView.Adapter<EmployeeLeave
             tv_date = view.findViewById(R.id.tv_date);
             tv_leave_type = view.findViewById(R.id.tv_leave_type);
             tv_days = view.findViewById(R.id.tv_days);
-            tb_first = view.findViewById(R.id.tb_index_1);
+            //tb_first = view.findViewById(R.id.tb_index_1);
             img_status = view.findViewById(R.id.iv_user_photo);
         }
     }
