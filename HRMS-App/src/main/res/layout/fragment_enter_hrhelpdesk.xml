@@ -142,7 +142,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
+android:layout_gravity="center"
+                android:gravity="center"
                 android:text="Ref.ID"
                 android:textColor="#ffffff" />
 
@@ -150,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Message"
+                android:text="Query Type"
                 android:textColor="#ffffff" />
 
             <TextView
@@ -158,6 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Date"
+                android:gravity="center"
                 android:textColor="#ffffff" />
 
             <TextView
@@ -165,6 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Status"
+                android:gravity="center"
                 android:textColor="#ffffff" />
 
 
