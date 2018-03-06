@@ -320,199 +320,261 @@ public class Ajax implements Serializable {
         return fromsessionDesc;
     }
 
-    public void setFromsessionDesc(String fromsessionDesc) {
-        this.fromsessionDesc = fromsessionDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setFromsessionDesc(String fromsessionDesc) {
+//        this.fromsessionDesc = fromsessionDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getToSessionDesc() {
         return toSessionDesc;
     }
 
-    public void setToSessionDesc(String toSessionDesc) {
-        this.toSessionDesc = toSessionDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setToSessionDesc(String toSessionDesc) {
+//        this.toSessionDesc = toSessionDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getAppliedOn() {
         return appliedOn;
     }
 
-    public void setAppliedOn(String appliedOn) {
-        this.appliedOn = appliedOn;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setAppliedOn(String appliedOn) {
+//        this.appliedOn = appliedOn;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getRemarks() {
         return remarks;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setRemarks(String remarks) {
+//        this.remarks = remarks;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmployeeDescription() {
         return employeeDescription;
     }
 
-    public void setEmployeeDescription(String employeeDescription) {
-        this.employeeDescription = employeeDescription;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmployeeDescription(String employeeDescription) {
+//        this.employeeDescription = employeeDescription;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(String fromDate) {
-        this.fromDate = fromDate;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setFromDate(String fromDate) {
+//        this.fromDate = fromDate;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getToDate() {
         return toDate;
     }
 
-    public void setToDate(String toDate) {
-        this.toDate = toDate;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setToDate(String toDate) {
+//        this.toDate = toDate;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Double getNoofdays() {
         return noofdays;
     }
 
-    public void setNoofdays(Double noofdays) {
-        this.noofdays = noofdays;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setNoofdays(Double noofdays) {
+//        this.noofdays = noofdays;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Integer getLeaveTypeIds() {
         return leaveTypeIds;
     }
 
-    public void setLeaveTypeIds(Integer leaveTypeIds) {
-        this.leaveTypeIds = leaveTypeIds;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveTypeIds(Integer leaveTypeIds) {
+//        this.leaveTypeIds = leaveTypeIds;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getLeaveTypeDescs() {
         return leaveTypeDescs;
     }
 
-    public void setLeaveTypeDescs(String leaveTypeDescs) {
-        this.leaveTypeDescs = leaveTypeDescs;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveTypeDescs(String leaveTypeDescs) {
+//        this.leaveTypeDescs = leaveTypeDescs;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
     public List<Earning> getEarnings() {
         return earnings;
     }
 
-    public void setEarnings(List<Earning> earnings) {
-        this.earnings = earnings;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEarnings(List<Earning> earnings) {
+//        this.earnings = earnings;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public List<Deduction> getDeductions() {
         return deductions;
     }
 
-    public void setDeductions(List<Deduction> deductions) {
-        this.deductions = deductions;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setDeductions(List<Deduction> deductions) {
+//        this.deductions = deductions;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public List<Total> getTotal() {
         return total;
     }
 
-    public void setTotal(List<Total> total) {
-        this.total = total;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setTotal(List<Total> total) {
+//        this.total = total;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getUser() {
-        return user;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getUser() {
+//        return user;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setUser(String user) {
+//        this.user = user;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getDate() {
-        return date;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getDate() {
+//        return date;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setDate(String date) {
+//        this.date = date;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getMorning() {
         return morning;
     }
 
-    public void setMorning(String morning) {
-        this.morning = morning;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setMorning(String morning) {
+//        this.morning = morning;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEvening() {
         return evening;
     }
 
-    public void setEvening(String evening) {
-        this.evening = evening;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEvening(String evening) {
+//        this.evening = evening;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Integer getEmpBranchId() {
         return empBranchId;
     }
 
-    public void setEmpBranchId(Integer empBranchId) {
-        this.empBranchId = empBranchId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpBranchId(Integer empBranchId) {
+//        this.empBranchId = empBranchId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public String getLeaveType() {
-        return leaveType;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setAddress(String address) {
+//        this.address = address;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getLeaveType() {
+//        return leaveType;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveType(String leaveType) {
+//        this.leaveType = leaveType;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Double getLeaveApply() {
-        return leaveApply;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Double getLeaveApply() {
+//        return leaveApply;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setLeaveApply(Double leaveApply) {
-        this.leaveApply = leaveApply;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveApply(Double leaveApply) {
+//        this.leaveApply = leaveApply;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Double getLeaveBalance() {
         return leaveBalance;
     }
 
-    public void setLeaveBalance(Double leaveBalance) {
-        this.leaveBalance = leaveBalance;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveBalance(Double leaveBalance) {
+//        this.leaveBalance = leaveBalance;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Double getLeaveTotal() {
         return leaveTotal;
     }
 
-    public void setLeaveTotal(Double leaveTotal) {
-        this.leaveTotal = leaveTotal;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveTotal(Double leaveTotal) {
+//        this.leaveTotal = leaveTotal;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 
-    public String getEarningDesc() {
-        return earningDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getEarningDesc() {
+//        return earningDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setEarningDesc(String earningDesc) {
-        this.earningDesc = earningDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEarningDesc(String earningDesc) {
+//        this.earningDesc = earningDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Long getEarningAmt() {
-        return earningAmt;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Long getEarningAmt() {
+//        return earningAmt;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setEarningAmt(Long earningAmt) {
-        this.earningAmt = earningAmt;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEarningAmt(Long earningAmt) {
+//        this.earningAmt = earningAmt;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 //    public Long getEarnings() {
 //        return earnings;
 //    }
@@ -534,21 +596,29 @@ public class Ajax implements Serializable {
 //    }
 
 
-    public String getDeductionDesc() {
-        return deductionDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getDeductionDesc() {
+//        return deductionDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setDeductionDesc(String deductionDesc) {
-        this.deductionDesc = deductionDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setDeductionDesc(String deductionDesc) {
+//        this.deductionDesc = deductionDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Long getDeductionAmt() {
-        return deductionAmt;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Long getDeductionAmt() {
+//        return deductionAmt;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setDeductionAmt(Long deductionAmt) {
-        this.deductionAmt = deductionAmt;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setDeductionAmt(Long deductionAmt) {
+//        this.deductionAmt = deductionAmt;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 //    public void setDeductions(Long deductions) {
 //        this.deductions = deductions;
 //    }
@@ -556,174 +626,236 @@ public class Ajax implements Serializable {
         return month;
     }
 
-    public void setMonth(String month) {
-        this.month = month;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setMonth(String month) {
+//        this.month = month;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Integer getMonthValue() {
         return monthValue;
     }
 
-    public void setMonthValue(Integer monthValue) {
-        this.monthValue = monthValue;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setMonthValue(Integer monthValue) {
+//        this.monthValue = monthValue;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Long getYear() {
         return year;
     }
 
-    public void setYear(Long year) {
-        this.year = year;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setYear(Long year) {
+//        this.year = year;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
     public String getActivityDate() {
         return activityDate;
     }
 
-    public void setActivityDate(String activityDate) {
-        this.activityDate = activityDate;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setActivityDate(String activityDate) {
+//        this.activityDate = activityDate;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getActivityDesc() {
         return activityDesc;
     }
 
-    public void setActivityDesc(String activityDesc) {
-        this.activityDesc = activityDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setActivityDesc(String activityDesc) {
+//        this.activityDesc = activityDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getAnnouncementList() {
-        return announcementList;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getAnnouncementList() {
+//        return announcementList;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setAnnouncementList(String announcementList) {
-        this.announcementList = announcementList;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setAnnouncementList(String announcementList) {
+//        this.announcementList = announcementList;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getEmpCompId() {
-        return empCompId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getEmpCompId() {
+//        return empCompId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setEmpCompId(Integer empCompId) {
-        this.empCompId = empCompId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpCompId(Integer empCompId) {
+//        this.empCompId = empCompId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpcompName() {
         return empcompName;
     }
 
-    public void setEmpcompName(String empcompName) {
-        this.empcompName = empcompName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpcompName(String empcompName) {
+//        this.empcompName = empcompName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpBranchName() {
         return empBranchName;
     }
 
-    public void setEmpBranchName(String empBranchName) {
-        this.empBranchName = empBranchName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpBranchName(String empBranchName) {
+//        this.empBranchName = empBranchName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpImg() {
         return empImg;
     }
 
-    public void setEmpImg(String empImg) {
-        this.empImg = empImg;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpImg(String empImg) {
+//        this.empImg = empImg;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getEmpDeptId() {
-        return empDeptId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getEmpDeptId() {
+//        return empDeptId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setEmpDeptId(Integer empDeptId) {
-        this.empDeptId = empDeptId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpDeptId(Integer empDeptId) {
+//        this.empDeptId = empDeptId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 
-    public Integer getEmpDesignId() {
-        return empDesignId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getEmpDesignId() {
+//        return empDesignId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setEmpDesignId(Integer empDesignId) {
-        this.empDesignId = empDesignId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpDesignId(Integer empDesignId) {
+//        this.empDesignId = empDesignId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpDesign() {
         return empDesign;
     }
 
-    public void setEmpDesign(String empDesign) {
-        this.empDesign = empDesign;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpDesign(String empDesign) {
+//        this.empDesign = empDesign;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Long getEmpMobile() {
         return empMobile;
     }
 
-    public void setEmpMobile(Long empMobile) {
-        this.empMobile = empMobile;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpMobile(Long empMobile) {
+//        this.empMobile = empMobile;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpDept() {
         return empDept;
     }
 
-    public void setEmpDept(String empDept) {
-        this.empDept = empDept;
-    }
-    public String getTime() {
-        return time;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpDept(String empDept) {
+//        this.empDept = empDept;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getTime() {
+//        return time;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setTime(String time) {
-        this.time = time;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setTime(String time) {
+//        this.time = time;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getBioId() {
-        return bioId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getBioId() {
+//        return bioId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setBioId(String bioId) {
-        this.bioId = bioId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setBioId(String bioId) {
+//        this.bioId = bioId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLocation(String location) {
+//        this.location = location;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getFirstName() {
-        return firstName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getFirstName() {
+//        return firstName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setFirstName(String firstName) {
+//        this.firstName = firstName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getDesignationDesc() {
-        return designationDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getDesignationDesc() {
+//        return designationDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setDesignationDesc(String designationDesc) {
-        this.designationDesc = designationDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setDesignationDesc(String designationDesc) {
+//        this.designationDesc = designationDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
     public String getCompImg() {
         return compImg;
     }
 
-    public void setCompImg(String compImg) {
-        this.compImg = compImg;
-    }
-    public String getDeptDesc() {
-        return deptDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setCompImg(String compImg) {
+//        this.compImg = compImg;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getDeptDesc() {
+//        return deptDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setDeptDesc(String deptDesc) {
-        this.deptDesc = deptDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setDeptDesc(String deptDesc) {
+//        this.deptDesc = deptDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 
 
@@ -731,227 +863,325 @@ public class Ajax implements Serializable {
         return leaveTypeDesc;
     }
 
-    public void setLeaveTypeDesc(String leaveTypeDesc) {
-        this.leaveTypeDesc = leaveTypeDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveTypeDesc(String leaveTypeDesc) {
+//        this.leaveTypeDesc = leaveTypeDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getDescription() {
-        return description;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getDescription() {
+//        return description;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getLeaveStatusDesc() {
         return leaveStatusDesc;
     }
 
-    public void setLeaveStatusDesc(String leaveStatusDesc) {
-        this.leaveStatusDesc = leaveStatusDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveStatusDesc(String leaveStatusDesc) {
+//        this.leaveStatusDesc = leaveStatusDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getLeaveId() {
-        return leaveId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getLeaveId() {
+//        return leaveId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setLeaveId(Integer leaveId) {
-        this.leaveId = leaveId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveId(Integer leaveId) {
+//        this.leaveId = leaveId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getLeaveTypeId() {
-        return leaveTypeId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getLeaveTypeId() {
+//        return leaveTypeId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setLeaveTypeId(Integer leaveTypeId) {
-        this.leaveTypeId = leaveTypeId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveTypeId(Integer leaveTypeId) {
+//        this.leaveTypeId = leaveTypeId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getLeaveStatusId() {
-        return leaveStatusId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getLeaveStatusId() {
+//        return leaveStatusId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setLeaveStatusId(Integer leaveStatusId) {
-        this.leaveStatusId = leaveStatusId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLeaveStatusId(Integer leaveStatusId) {
+//        this.leaveStatusId = leaveStatusId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getSessionId() {
-        return sessionId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getSessionId() {
+//        return sessionId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setSessionId(Integer sessionId) {
-        this.sessionId = sessionId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setSessionId(Integer sessionId) {
+//        this.sessionId = sessionId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getLastName() {
-        return lastName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getLastName() {
+//        return lastName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getSessionDesc() {
-        return sessionDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getSessionDesc() {
+//        return sessionDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setSessionDesc(String sessionDesc) {
-        this.sessionDesc = sessionDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setSessionDesc(String sessionDesc) {
+//        this.sessionDesc = sessionDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getCompanyName() {
-        return companyName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getCompanyName() {
+//        return companyName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setCompanyName(String companyName) {
+//        this.companyName = companyName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 
 
-    public String getEmpMsg() {
-        return empMsg;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getEmpMsg() {
+//        return empMsg;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setEmpMsg(String empMsg) {
-        this.empMsg = empMsg;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpMsg(String empMsg) {
+//        this.empMsg = empMsg;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Integer getReqTypeId() {
         return reqTypeId;
     }
 
-    public void setReqTypeId(Integer reqTypeId) {
-        this.reqTypeId = reqTypeId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReqTypeId(Integer reqTypeId) {
+//        this.reqTypeId = reqTypeId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getReqtypedesc() {
-        return reqtypedesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getReqtypedesc() {
+//        return reqtypedesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setReqtypedesc(String reqtypedesc) {
-        this.reqtypedesc = reqtypedesc;
-    }
-    public Integer getReqStatusId() {
-        return reqStatusId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReqtypedesc(String reqtypedesc) {
+//        this.reqtypedesc = reqtypedesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getReqStatusId() {
+//        return reqStatusId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setReqStatusId(Integer reqStatusId) {
-        this.reqStatusId = reqStatusId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReqStatusId(Integer reqStatusId) {
+//        this.reqStatusId = reqStatusId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getReqStatusDesc() {
-        return reqStatusDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getReqStatusDesc() {
+//        return reqStatusDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setReqStatusDesc(String reqStatusDesc) {
-        this.reqStatusDesc = reqStatusDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReqStatusDesc(String reqStatusDesc) {
+//        this.reqStatusDesc = reqStatusDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpName() {
         return empName;
     }
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpName(String empName) {
+//        this.empName = empName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Integer getReqId() {
         return reqId;
     }
 
-    public void setReqId(Integer reqId) {
-        this.reqId = reqId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReqId(Integer reqId) {
+//        this.reqId = reqId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getReqDesc() {
-        return reqDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getReqDesc() {
+//        return reqDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setReqDesc(String reqDesc) {
-        this.reqDesc = reqDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReqDesc(String reqDesc) {
+//        this.reqDesc = reqDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getReqDate() {
         return reqDate;
     }
 
-    public void setReqDate(String reqDate) {
-        this.reqDate = reqDate;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReqDate(String reqDate) {
+//        this.reqDate = reqDate;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getResponseDate() {
-        return responseDate;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getResponseDate() {
+//        return responseDate;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setResponseDate(String responseDate) {
-        this.responseDate = responseDate;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setResponseDate(String responseDate) {
+//        this.responseDate = responseDate;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getReqtypeId() {
-        return reqtypeId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getReqtypeId() {
+//        return reqtypeId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setReqtypeId(Integer reqtypeId) {
-        this.reqtypeId = reqtypeId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReqtypeId(Integer reqtypeId) {
+//        this.reqtypeId = reqtypeId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getReqTypeDesc() {
         return reqTypeDesc;
     }
 
-    public void setReqTypeDesc(String reqTypeDesc) {
-        this.reqTypeDesc = reqTypeDesc;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReqTypeDesc(String reqTypeDesc) {
+//        this.reqTypeDesc = reqTypeDesc;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getSize() {
-        return size;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getSize() {
+//        return size;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setSize(Integer size) {
-        this.size = size;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setSize(Integer size) {
+//        this.size = size;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 
-    public Integer getNew() {
-        return _new;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getNew() {
+//        return _new;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setNew(Integer _new) {
-        this._new = _new;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setNew(Integer _new) {
+//        this._new = _new;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getOnHold() {
-        return onHold;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getOnHold() {
+//        return onHold;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setOnHold(Integer onHold) {
-        this.onHold = onHold;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setOnHold(Integer onHold) {
+//        this.onHold = onHold;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getNeedInfo() {
-        return needInfo;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getNeedInfo() {
+//        return needInfo;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setNeedInfo(Integer needInfo) {
-        this.needInfo = needInfo;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setNeedInfo(Integer needInfo) {
+//        this.needInfo = needInfo;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getInProgress() {
-        return inProgress;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getInProgress() {
+//        return inProgress;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setInProgress(Integer inProgress) {
-        this.inProgress = inProgress;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setInProgress(Integer inProgress) {
+//        this.inProgress = inProgress;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getCompleted() {
-        return completed;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public Integer getCompleted() {
+//        return completed;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setCompleted(Integer completed) {
-        this.completed = completed;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setCompleted(Integer completed) {
+//        this.completed = completed;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpId() {
         return empId;
@@ -989,25 +1219,31 @@ public class Ajax implements Serializable {
         return compId;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setCompId(Integer compId) {
+//        this.compId = compId;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getShortName() {
         return shortName;
     }
 
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setShortName(String shortName) {
+//        this.shortName = shortName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getCompName() {
         return compName;
     }
 
-    public void setCompName(String compName) {
-        this.compName = compName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setCompName(String compName) {
+//        this.compName = compName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Integer getBranchId() {
         return branchId;
@@ -1025,67 +1261,91 @@ public class Ajax implements Serializable {
         this.branchName = branchName;
     }
 
-    public String getCompShortName() {
-        return compShortName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getCompShortName() {
+//        return compShortName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setCompShortName(String compShortName) {
-        this.compShortName = compShortName;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setCompShortName(String compShortName) {
+//        this.compShortName = compShortName;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getAdminOremp() {
-        return adminOremp;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getAdminOremp() {
+//        return adminOremp;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setAdminOremp(String adminOremp) {
-        this.adminOremp = adminOremp;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setAdminOremp(String adminOremp) {
+//        this.adminOremp = adminOremp;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getEmpImage() {
-        return empImage;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getEmpImage() {
+//        return empImage;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setEmpImage(String empImage) {
-        this.empImage = empImage;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpImage(String empImage) {
+//        this.empImage = empImage;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getCheckInTime() {
         return checkInTime;
     }
 
-    public void setCheckInTime(String checkInTime) {
-        this.checkInTime = checkInTime;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setCheckInTime(String checkInTime) {
+//        this.checkInTime = checkInTime;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getCheckOutTime() {
         return checkOutTime;
     }
 
-    public void setCheckOutTime(String checkOutTime) {
-        this.checkOutTime = checkOutTime;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setCheckOutTime(String checkOutTime) {
+//        this.checkOutTime = checkOutTime;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public String getReportsTo() {
-        return reportsTo;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public String getReportsTo() {
+//        return reportsTo;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public void setReportsTo(String reportsTo) {
-        this.reportsTo = reportsTo;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setReportsTo(String reportsTo) {
+//        this.reportsTo = reportsTo;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpMail() {
         return empMail;
     }
 
-    public void setEmpMail(String empMail) {
-        this.empMail = empMail;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setEmpMail(String empMail) {
+//        this.empMail = empMail;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 }

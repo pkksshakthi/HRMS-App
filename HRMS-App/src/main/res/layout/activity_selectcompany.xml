@@ -22,6 +22,7 @@
         android:layout_alignParentRight="true"
         android:layout_gravity="top|end"
         android:layout_margin="4dp"
+        android:visibility="invisible"
         android:contentDescription="@string/closebutton"
         android:padding="5dp"
         android:src="@android:drawable/ic_menu_close_clear_cancel" />
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
 
         android:layout_alignParentStart="true"
-
+android:layout_marginBottom="5dp"
         android:layout_centerVertical="true"
         android:gravity="center"
         android:text="Select Your Organization"
@@ -63,7 +64,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/spinner_margin"
         android:background="@drawable/spinner_backgroud"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -108,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/close_activity"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="155dp"
         android:text="HRMS"
         android:textColor="@color/white"
         android:textSize="50dp"

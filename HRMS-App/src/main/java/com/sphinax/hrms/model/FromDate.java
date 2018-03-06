@@ -48,25 +48,31 @@ public class FromDate {
         this.date = date;
     }
 
-    public Integer getDay() {
-        return day;
-    }
+// --Commented out by Inspection START (3/5/2018 1:10 AM):
+//    public Integer getDay() {
+//        return day;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:10 AM)
 
     public void setDay(Integer day) {
         this.day = day;
     }
 
-    public Integer getHours() {
-        return hours;
-    }
+// --Commented out by Inspection START (3/5/2018 1:11 AM):
+//    public Integer getHours() {
+//        return hours;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:11 AM)
 
     public void setHours(Integer hours) {
         this.hours = hours;
     }
 
-    public Integer getMinutes() {
-        return minutes;
-    }
+// --Commented out by Inspection START (3/5/2018 1:11 AM):
+//    public Integer getMinutes() {
+//        return minutes;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:11 AM)
 
     public void setMinutes(Integer minutes) {
         this.minutes = minutes;

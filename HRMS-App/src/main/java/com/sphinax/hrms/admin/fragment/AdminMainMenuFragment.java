@@ -18,7 +18,7 @@ import com.sphinax.hrms.utils.Utility;
 
 public class AdminMainMenuFragment extends Fragment implements View.OnClickListener {
 
-    private static final String TAG = "AdminMainMenuFragment-";
+    // --Commented out by Inspection (3/5/2018 1:07 AM):private static final String TAG = "AdminMainMenuFragment-";
     private static Context context;
     private static AdminMainMenuFragment instance;
     private View mView;
@@ -30,11 +30,13 @@ public class AdminMainMenuFragment extends Fragment implements View.OnClickListe
         // Required empty public constructor
     }
 
-    public static AdminMainMenuFragment getInstance() {
-        if (instance == null)
-            instance = new AdminMainMenuFragment();
-        return instance;
-    }
+// --Commented out by Inspection START (3/5/2018 1:07 AM):
+//    public static AdminMainMenuFragment getInstance() {
+//        if (instance == null)
+//            instance = new AdminMainMenuFragment();
+//        return instance;
+//    }
+// --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 
     @Override

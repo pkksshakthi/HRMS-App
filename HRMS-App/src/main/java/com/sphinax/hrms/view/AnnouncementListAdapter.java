@@ -29,7 +29,7 @@ import java.util.List;
 
 public class AnnouncementListAdapter extends BaseAdapter {
 
-    private static final String TAG = "AnnouncementListAdapter-";
+    // --Commented out by Inspection (3/5/2018 1:07 AM):private static final String TAG = "AnnouncementListAdapter-";
     private final List<Ajax> detailsArrayList;
     private final Context context;
 

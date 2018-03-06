@@ -6,6 +6,8 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
+        android:gravity="center"
+
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.CardView
@@ -32,21 +34,23 @@
                     android:id="@+id/bt_leave_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:padding="3dp"
                     android:text="CAUSAL LEAVE"
                     android:textColor="#ef5e0909"
                     android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/tv_bal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
                     android:layout_marginBottom="5dp"
-                    android:padding="3dp"
-                    android:layout_gravity="center"
+                    android:ellipsize="marquee"
                     android:gravity="center"
+                    android:padding="3dp"
                     android:text="8/12"
                     android:textColor="#5c4ea3"
-                    android:ellipsize="marquee"
 
                     android:textStyle="bold" />
 
