@@ -243,8 +243,13 @@ public class ForgotPassword_Fragment extends Fragment implements OnClickListener
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    layoutPassword();
-                    change_Password();
+                    if(flag){
+                        Utility.showCustomToast(getActivity(), mView, "Password Have Been Changed");
+                        layoutPassword();
+                        change_Password();
+                    }else {
+                        Utility.showCustomToast(getActivity(), mView, "Given OTP is incorrect");
+                    }
                 }
 
                 @Override
