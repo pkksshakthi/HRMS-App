@@ -279,7 +279,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
 
     private void checkAllDataEnter() {
 
-        if (Double.valueOf(tv_count.getText().toString()) > 0) {
+        if (tv_count.getText().toString().length() > 0) {
             if (ed_reason.getText().toString() != null && !ed_reason.getText().toString().equalsIgnoreCase("")) {
                 leaveReason = ed_reason.getText().toString();
                 applyLeave();
@@ -287,8 +287,9 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                 Utility.showCustomToast(context, mView, "Kindly Enter the Leave Reason");
             }
         } else {
-            Utility.showCustomToast(context, mView, "Kindly Select the Date");
+            Utility.showCustomToast(context, mView, "Kindly Select the Start Date and End Date");
         }
+
 
 
     }
