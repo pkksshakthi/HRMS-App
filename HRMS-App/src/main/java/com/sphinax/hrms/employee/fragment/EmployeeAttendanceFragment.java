@@ -85,7 +85,7 @@ public class EmployeeAttendanceFragment extends Fragment {
 
         loadComponent();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         Calendar c = Calendar.getInstance();
         dateValue = sdf.format(c.getTime()).toString();
         Year = c.get(Calendar.YEAR);
