@@ -131,9 +131,9 @@ public class EmployeeAttendanceFragment extends Fragment {
 
     private void loaddatainview() {
 
-        txt_present.setText(String.valueOf(attendanceData.getPresentCount()));
-        txt_applyLeave.setText(String.valueOf(attendanceData.getLeaveApplied()));
-        txt_absent.setText(String.valueOf(attendanceData.getAbsentCount()));
+        txt_present.setText(Global.nullChecking("" + attendanceData.getPresentCount()));
+        txt_applyLeave.setText(Global.nullChecking("" + attendanceData.getLeaveApplied()));
+        txt_absent.setText(Global.nullChecking("" + attendanceData.getAbsentCount()));
 
         attendanceList = (ArrayList<Ajax>) attendanceData.getAjax();
         loadCalendarData(Year, Month);
@@ -247,6 +247,7 @@ public class EmployeeAttendanceFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
