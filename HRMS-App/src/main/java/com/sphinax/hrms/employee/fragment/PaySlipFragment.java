@@ -37,6 +37,7 @@ import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.PaySlipListAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 
@@ -158,8 +159,14 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                 break;
 
             case R.id.bt_download_payslip:
-                handleButtonClicked();
-                fetchPaySlipDownload();
+                if(!tv_toatal.getText().toString().equalsIgnoreCase("")){
+                    handleButtonClicked();
+                    fetchPaySlipDownload();
+                }else{
+                    Utility.showCustomToast(context, mView, "Unable to download");
+
+                }
+
                 break;
 
             case R.id.ll_payment:
@@ -206,6 +213,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
 
 
     private void loadyearSpinner(ArrayList<Ajax> yearList) {
+        Collections.reverse(yearList);
 
         String[] spinnerArray = new String[yearList.size()];
         HashMap<Integer, String> spinnerMap = new HashMap<Integer, String>();
@@ -223,7 +231,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     private void loadmonthSpinner(ArrayList<Ajax> monthList) {
-
+        Collections.reverse(monthList);
         String[] spinnerArray = new String[monthList.size()];
         spinnerMonthMap = new HashMap<Integer, String>();
         for (int i = 0; i < monthList.size(); i++) {
@@ -422,6 +430,13 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                     if (pdia != null) {
                         pdia.dismiss();
                     }
+
+                    if (!flag){
+                        tv_payment.setText("");
+                        tv_deduction.setText("");
+                        tv_netpay.setText("");
+                        tv_toatal.setText("");
+                    }
                 }
 
                 @Override
@@ -429,9 +444,22 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    PaymentData companyData = (PaymentData) obj;
-                    paySlipData = companyData;
-                    loadDatainView();
+                    if(obj !=null){
+                        PaymentData companyData = (PaymentData) obj;
+
+                        paySlipData = companyData;
+                        loadDatainView();
+                    }else {
+                        paySlipData = new PaymentData();
+                        paySlipListAdapter = new PaySlipListAdapter(getActivity(), paySlipData, 0);
+                        lv_amt.setAdapter(paySlipListAdapter);
+                        tv_payment.setText("");
+                        tv_deduction.setText("");
+                        tv_netpay.setText("");
+                        tv_toatal.setText("");
+
+                    }
+
                 }
 
                 @Override

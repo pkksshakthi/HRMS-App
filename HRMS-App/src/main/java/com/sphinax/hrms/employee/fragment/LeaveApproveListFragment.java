@@ -108,10 +108,14 @@ public class LeaveApproveListFragment extends Fragment {
                 DividerItemDecoration(getActivity(),
                 DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(mAdapter);
-
         ViewPager host = (ViewPager) getActivity().findViewById(R.id.pager);
-        host.setCurrentItem(Global.getTabPosition());
+        try {
 
+            host.setCurrentItem(Global.getTabPosition());
+        }catch (Exception e){
+            e.printStackTrace();
+           // host.setCurrentItem(2);
+        }
         if(Global.getTabPosition() == 0){
             fetchLeaveList();
 

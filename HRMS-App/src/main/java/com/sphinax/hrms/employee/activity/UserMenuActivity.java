@@ -1,8 +1,11 @@
 package com.sphinax.hrms.employee.activity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
@@ -105,7 +108,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
 
     private void setData() {
         tv_username.setText(Global.getLoginInfoData().getEmpName());
-        tv_companyname.setText(Global.getLoginInfoData().getDeptName());
+        tv_companyname.setText(Global.getLoginInfoData().getDesignationTitle());
       //  tv_companyname.setText(Utility.getPreference(this).getString(Constants.PREFS_COMPANY_NAME, ""));
         loadBitmap(Global.getLoginInfoData().getEmpImage());
     }
@@ -164,7 +167,7 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
         int id = item.getItemId();
 
         if (id == R.id.nav_mark_attendance) {
-
+            if (locationService())
             Utility.addFragment(this, R.id.content_frame, fragmentManager, new AttendanceEnterFragment(), true, null, Constants.FRAMENT_ANTTENDANCE_ENTER);
         } else if (id == R.id.nav_attendance_report) {
             Utility.addFragment(this, R.id.content_frame, fragmentManager, new EmployeeAttendanceFragment(), true, null, Constants.FRAMENT_ANNOUNCEMENT_LIST);
@@ -204,6 +207,28 @@ public class UserMenuActivity extends FragmentActivity implements NavigationView
 //            return;
 //        }
     }
+    private boolean locationService() {
+        LocationManager lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            // Build the alert dialog
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+            builder.setTitle("Location Services Not Active");
+            builder.setMessage("Please enable Location Services and GPS");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Show location settings when the user acknowledges the alert dialog
+                    startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
+                }
+            });
+            Dialog alertDialog = builder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
+            return false;
+        }else{
+            return true;
+        }
 
+    }
 
 }

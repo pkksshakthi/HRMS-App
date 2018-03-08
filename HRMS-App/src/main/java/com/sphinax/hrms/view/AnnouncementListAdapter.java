@@ -94,7 +94,7 @@ public class AnnouncementListAdapter extends BaseAdapter {
             String[] date1 = bookingTaskDetails.getActivityDate().split("/");
             holder.date.setText(date1[0]);
 
-            holder.month.setText(Month.of(Integer.parseInt(date1[1])).name());
+            holder.month.setText(String.valueOf(Month.of(Integer.parseInt(date1[1])).name()));
             holder.year.setText(date1[2]);
         }
 

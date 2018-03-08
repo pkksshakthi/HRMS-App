@@ -977,17 +977,22 @@ public class WebServiceHandler {
 //                                delegate.unAuthorized();
 //                            } else {
                             try {
-                                if (output.getJSONObject("ajax") != null) {
-                                    Log.d("ajaxList", "earning --> " + output.getJSONObject("ajax"));
-                                    PaymentData companyDataObject = gson.fromJson(output.toString(), PaymentData.class);
-                                    Log.d("ajaxList", "earning --> " + companyDataObject.getAjax());
+                                  if (output.getInt("resCode") == 1) {
+                                    if (output.getJSONObject("ajax") != null) {
+                                        Log.d("ajaxList", "earning --> " + output.getJSONObject("ajax"));
+                                        PaymentData companyDataObject = gson.fromJson(output.toString(), PaymentData.class);
+                                        Log.d("ajaxList", "earning --> " + companyDataObject.getAjax());
 
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
+                                        delegate.onSuccess(true);
+                                        delegate.onReturnObject(companyDataObject);
+                                    } else {
+                                        delegate.onSuccess(false);
+
+                                    }
                                 }else {
-                                    delegate.onSuccess(false);
-
-                                }
+                                      delegate.onSuccess(false);
+                                      delegate.onReturnObject(null);
+                                  }
                             } catch (Exception e) {
                                 delegate.onParseError();
                             }

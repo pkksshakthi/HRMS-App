@@ -61,6 +61,19 @@ public class LoginData {
     @Expose
     private String designationDesc;
 
+    @SerializedName("designation")
+    @Expose
+    private String designationTitle;
+
+
+    public String getDesignationTitle() {
+        return designationTitle;
+    }
+
+    public void setDesignationTitle(String designationTitle) {
+        this.designationTitle = designationTitle;
+    }
+
     public String getDesignationDesc() {
         return designationDesc;
     }
