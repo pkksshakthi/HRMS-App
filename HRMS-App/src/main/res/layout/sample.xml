@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,305 +8,162 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <!--
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-
-                    android:background="#6CB8F6"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-
-
-                    tools:ignore="MissingConstraints">
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Leave Management"
-                        android:textColor="#ffffff"
-                        android:textSize="7pt"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:id="@+id/img_leave_management"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@android:drawable/ic_input_add" />
-                </LinearLayout>
-        -->
-        <LinearLayout
+        a
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.v7.widget.CardView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-
-                android:elevation="2dp"
-                app:cardCornerRadius="1dp">
-
-                <LinearLayout
-
-
-                    android:layout_width="match_parent"
-
-
-                    android:layout_height="wrap_content"
-
-                    android:background="#3282C9"
-
-
-                    android:orientation="horizontal"
-
-
-                    tools:ignore="MissingConstraints">
-
-                    <TextView
-
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="Leave Application"
-                        android:textColor="#ffffff"
-                        android:textSize="7pt"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/lv_leave_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            tools:ignore="MissingConstraints" />
-
-
-        <ScrollView
-            android:id="@+id/scroll_leave_Applicatoion"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <TableLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <TableRow
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:background="#135E86"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="HR Leave Management"
+                    android:textColor="@color/white" />
 
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Company" />
 
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
 
-                        android:text="Leave Type"
-                        android:textColor="#575757" />
-
+                    card_view:contentPadding="5dp">
 
                     <Spinner
 
-                        android:id="@+id/sp_leave_type"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-
-                        android:text="Start Date"
-                        android:textColor="#575757"
-                        android:textSize="15dp" />
-
-
-                    <TextView
-                        android:id="@+id/tv_start_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner"
-                        android:hint="--Start Date--" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-
-                        android:text="Start Session"
-                        android:textColor="#575757"
-                        android:textSize="15dp" />
-
-
-                    <Spinner
-
-                        android:id="@+id/sp_leave_session_start"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-
-                        android:text="End Date"
-                        android:textColor="#575757" />
-
-
-                    <TextView
-                        android:id="@+id/tv_end_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner"
-                        android:hint="--End Date--" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="End Session"
-                        android:textColor="#575757" />
-
-
-                    <Spinner
-
-                        android:id="@+id/sp_leave_session_end"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-
-                        android:text="No of Days"
-                        android:textColor="#575757"
-                        android:textSize="15dp" />
-
-
-                    <TextView
-                        android:id="@+id/tv_count"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner"
-                        android:text="5" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="Reason"
-                        android:textColor="#575757" />
-
-
-                    <EditText
-                        android:id="@+id/ed_reason"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner"
-                        android:gravity="top|start"
-                        android:hint="Enter reason.."
-                        android:inputType="textMultiLine"
-                        android:lines="5"
-                        android:padding="5dp"
-                        android:scrollbars="vertical" />
-                </TableRow>
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <Button
-                        android:id="@+id/bt_submit"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Branch" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
+
+                    card_view:contentPadding="5dp">
+
+                    <Spinner
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Department" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
+
+                    card_view:contentPadding="5dp">
+
+                    <Spinner
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Employee Name" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
+
+                    card_view:contentPadding="5dp">
+
+                    <Spinner
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="15dp"
                         android:layout_weight="1"
-                        android:background="#023D65"
-                        android:text="Submit"
+                        android:background="#1C9B72"
+                        android:text="Approved(5)"
                         android:textColor="#ffffff" />
 
                     <Button
-                        android:id="@+id/bt_cancel"
-                        android:layout_width="wrap_content"
+
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="15dp"
                         android:layout_weight="1"
-                        android:background="#E43A3E"
-                        android:text="Cancel"
+                        android:background="#DE8C3A"
+                        android:text="Pending(5)"
                         android:textColor="#ffffff" />
-                </TableRow>
-            </TableLayout>
+                </LinearLayout>
+
+
+                <Button
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:background="#F34336"
+                    android:text="Rejected(15)"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
         </ScrollView>
 
 
@@ -315,3 +171,4 @@
 
 
 </android.support.constraint.ConstraintLayout>
+

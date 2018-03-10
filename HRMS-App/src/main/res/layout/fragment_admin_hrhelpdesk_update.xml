@@ -5,9 +5,36 @@
     tools:context="com.sphinax.hrms.admin.fragment.HRHelpdeskUpdateFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="#3282C9"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="HR HELPDESK"
+            android:textColor="#ffffff" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="#DE8C3A"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:text="PENDING(15)"
+            android:textColor="#ffffff" />
+        <ListView
+            android:id="@+id/lv_detail_amt"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
 </FrameLayout>
