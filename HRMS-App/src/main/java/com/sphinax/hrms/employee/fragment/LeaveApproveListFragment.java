@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -108,26 +109,62 @@ public class LeaveApproveListFragment extends Fragment {
                 DividerItemDecoration(getActivity(),
                 DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(mAdapter);
-        ViewPager host = getActivity().findViewById(R.id.pager);
-        try {
-
-            host.setCurrentItem(Global.getTabPosition());
-        }catch (Exception e){
-            e.printStackTrace();
-           // host.setCurrentItem(2);
-        }
-        if(Global.getTabPosition() == 0){
+//        ViewPager host = getActivity().findViewById(R.id.pager);
+//        try {
+//
+//            host.setCurrentItem(Global.getTabPosition());
+//        }catch (Exception e){
+//            e.printStackTrace();
+//           // host.setCurrentItem(2);
+//        }
+        //if(Global.getTabPosition() == 0){
             fetchLeaveList();
 
-        }
+       // }
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Ajax ajaxApp = approveList.get(position);
                 //Toast.makeText(getApplicationContext(), movie.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
+//                Bundle b = new Bundle();
+//                b.putSerializable("UserValidateObject",ajaxApp);
+//                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeLeaveFullContentFragment(), true, b, Constants.FRAMENT_LEAVE_LIST_CONTENT);
+
+                FragmentManager fragmentManager = getFragmentManager();
+
+                /** Getting the fragmenttransaction object, which can be used to add, remove or replace a fragment */
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                /** Getting the existing detailed fragment object, if it already exists.
+                 *  The fragment object is retrieved by its tag name
+                 * */
+                Fragment prevFrag = fragmentManager.findFragmentByTag(Constants.FRAMENT_LEAVE_LIST_CONTENT);
+
+                /** Remove the existing detailed fragment object if it exists */
+                if(prevFrag!=null)
+                    fragmentTransaction.remove(prevFrag);
+
+                /** Instantiating the fragment CountryDetailsFragment */
+                EmployeeLeaveFullContentFragment fragment = new EmployeeLeaveFullContentFragment();
+
+                /** Creating a bundle object to pass the data(the clicked item's position) from the activity to the fragment */
                 Bundle b = new Bundle();
+
+                /** Setting the data to the bundle object */
+              //  b.putInt("position", position);
                 b.putSerializable("UserValidateObject",ajaxApp);
-                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeLeaveFullContentFragment(), true, b, Constants.FRAMENT_LEAVE_LIST_CONTENT);
+                /** Setting the bundle object to the fragment */
+                fragment.setArguments(b);
+
+                /** Adding the fragment to the fragment transaction */
+                fragmentTransaction.add(R.id.content_frame, fragment,Constants.FRAMENT_LEAVE_LIST_CONTENT);
+
+                /** Adding this transaction to backstack */
+                fragmentTransaction.addToBackStack(null);
+
+                /** Making this transaction in effect */
+                fragmentTransaction.commit();
+
 
             }
 

@@ -97,40 +97,5 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
-        }
 
-
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-
-                    if (ajax.getLeaveStatusDesc().equalsIgnoreCase("PENDING")){
-                        Global.setTabPosition(1);
-                        //getActivity().findViewById(R.id.ln_update).setVisibility(View.VISIBLE);
-                    }else if (ajax.getLeaveStatusDesc().equalsIgnoreCase("APPROVED")){
-                        Global.setTabPosition(0);
-                    }else{
-                        Global.setTabPosition(2);
-                    }
-                    Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeLeaveManagementFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
-
-                    return true;
-
-                }
-
-                return false;
-            }
-        });
-
-    }
 }
