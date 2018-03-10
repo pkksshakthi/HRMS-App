@@ -65,4 +65,8 @@ public class Global {
     public static void setTabPosition(int tabPosition) {
         TabPosition = tabPosition;
     }
+
+    public static String nullChecking(String val) {
+        return ((String.valueOf(val).equals("null")) ? "N/A" : String.valueOf(val));
+    }
 }

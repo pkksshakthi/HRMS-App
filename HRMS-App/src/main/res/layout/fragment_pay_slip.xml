@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -20,7 +20,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
 
             android:orientation="vertical">
 
@@ -126,9 +126,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
+                                android:gravity="center"
                                 android:padding="3dp"
                                 android:text="Payments"
-                                android:gravity="center"
                                 android:textColor="#ffffff"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -137,9 +137,9 @@
                                 android:id="@+id/tv_payment_amt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:hint="No Value"
                                 android:padding="3dp"
-                                android:gravity="center"
                                 android:textColor="#ffffff"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -168,8 +168,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
-                                android:padding="3dp"
                                 android:gravity="center"
+                                android:padding="3dp"
                                 android:text="Deducations"
                                 android:textColor="#ffffff"
                                 android:textSize="18sp"
@@ -209,8 +209,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
-                                android:padding="3dp"
                                 android:gravity="center"
+                                android:padding="3dp"
                                 android:text="NetPay"
                                 android:textColor="#ffffff"
                                 android:textSize="18sp"
@@ -220,9 +220,9 @@
                                 android:id="@+id/tv_netpay"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:hint="No Value"
                                 android:padding="3dp"
-                                android:gravity="center"
                                 android:textColor="#ffffff"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -264,10 +264,20 @@
             <ListView
                 android:id="@+id/lv_detail_amt"
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent">
 
             </ListView>
 
+            <TextView
+                android:id="@+id/tv_noData"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="N/A"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textColor="@android:color/holo_red_dark" />
 
             <View
                 android:id="@+id/view"
@@ -308,7 +318,7 @@
 
                 android:gravity="right|center"
 
-                android:hint="0.0"
+                android:hint="N/A"
                 android:textColor="#5C9210"
                 android:textStyle="bold" />
         </LinearLayout>
