@@ -455,8 +455,9 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                         loadDatainView();
                     }else {
                         paySlipData = new PaymentData();
-                        paySlipListAdapter = new PaySlipListAdapter(getActivity(), paySlipData, 0);
-                        lv_amt.setAdapter(paySlipListAdapter);
+//                        paySlipListAdapter = new PaySlipListAdapter(getActivity(), paySlipData, 0);
+//                        lv_amt.setAdapter(paySlipListAdapter);
+                        lv_amt.setAdapter(null);
                         tv_payment.setText("");
                         tv_deduction.setText("");
                         tv_netpay.setText("");
