@@ -199,7 +199,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                 Log.d(TAG, monthValue);
                 payslipMonth = spinnerMonthMap.get(position);
                 Log.d(TAG, " " + payslipMonth);
-                fetchPaymentDeatail();
+               // fetchPaymentDeatail();
                 break;
 
 
