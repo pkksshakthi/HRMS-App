@@ -33,25 +33,186 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:paddingBottom="5dp"
-                    android:text="Select Company" />
+                    android:paddingBottom="2dp"
+                    android:text="Reference ID" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-                    card_view:contentPadding="5dp">
+
+                    >
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Ref.ID"
+
+
+                        android:padding="5dp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+
+                    >
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/leavemanagementtextviewroundcorner">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp">
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="Company"></TextView>
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="No Value"></TextView>
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp">
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="Branch"></TextView>
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="No Value"></TextView>
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp">
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="Department"></TextView>
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="No Value"></TextView>
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp">
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingRight="5dp"
+                                android:text="Employee Name"></TextView>
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="No Value"></TextView>
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp">
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="Employee ID"></TextView>
+
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="No Value"></TextView>
+
+                        </TableRow>
+
+                    </TableLayout>
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:paddingBottom="2dp"
+                    android:text="Query Type" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+
+                    card_view:cardElevation="2dp"
+                    card_view:contentPadding="2dp">
 
 
                     <Spinner
                         android:id="@+id/sp_company"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+
                         android:layout_weight="1"
                         android:background="@drawable/spinner_backgroud" />
                 </android.support.v7.widget.CardView>
@@ -59,43 +220,47 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Select Branch" />
+
+                    android:paddingBottom="2dp"
+                    android:text="Employee Message" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
 
-                    card_view:contentPadding="5dp">
+                    card_view:cardElevation="2dp"
+                    card_view:contentPadding="2dp">
 
-                    <Spinner
-                        android:id="@+id/sp_branch"
+
+                    <EditText
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/spinner_backgroud" />
+                        android:background="@drawable/leavemanagementtextviewroundcorner"
+                        android:gravity="left|top"
+                        android:hint="Message.."
+                        android:lines="2"
+                        android:minLines="2" />
                 </android.support.v7.widget.CardView>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
-                    android:text="Select Department" />
+                    android:text="Status" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
 
-                    card_view:contentPadding="5dp">
+                    card_view:cardElevation="2dp"
+
+                    card_view:contentPadding="2dp">
 
                     <Spinner
                         android:id="@+id/sp_department"
@@ -109,92 +274,32 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Select Date" />
+
+                    android:paddingBottom="2dp"
+                    android:text="Message" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
 
-                    card_view:contentPadding="5dp">
+                    card_view:cardElevation="2dp"
+                    card_view:contentPadding="2dp">
 
-                    <EditText
-                        android:id="@+id/bt_date_picker"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner"
-
-                        android:drawableRight="@drawable/date_color_icon"
-                        android:ems="10"
-                        android:hint="DD/MM/YYYY" />
-                </android.support.v7.widget.CardView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Title" />
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-
-                    card_view:contentPadding="5dp">
 
                     <EditText
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/leavemanagementtextviewroundcorner"
-
-                        android:ems="10"
-                        android:hint="Title" />
-                </android.support.v7.widget.CardView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Enter Message" />
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-
-                    card_view:contentPadding="5dp">
-
-                    <EditText
-                        android:id="@+id/ed_message_box"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/leavemanagementtextviewroundcorner"
-                        android:ems="10"
-                        android:gravity="start"
+                        android:gravity="left|top"
                         android:hint="Message.."
-                        android:inputType="textMultiLine"
-                        android:lines="3"
-                        android:padding="5dp"
-                        android:text="" />
-
+                        android:lines="2"
+                        android:minLines="2" />
                 </android.support.v7.widget.CardView>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
