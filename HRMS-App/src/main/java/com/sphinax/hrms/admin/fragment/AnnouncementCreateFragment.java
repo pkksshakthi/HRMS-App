@@ -3,8 +3,6 @@ package com.sphinax.hrms.admin.fragment;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,9 +18,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.sphinax.hrms.R;
-import com.sphinax.hrms.common.activity.LoginActivity;
-import com.sphinax.hrms.common.activity.SelectCompanyActivity;
-import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
@@ -113,7 +108,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_announcement_create, container, false);
+        return inflater.inflate(R.layout.fragment_admin_announcement_create, container, false);
     }
 
     @Override

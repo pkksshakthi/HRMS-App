@@ -1,6 +1,5 @@
 package com.sphinax.hrms.admin.fragment;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
@@ -13,9 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -30,7 +27,6 @@ import com.sphinax.hrms.view.CompanySpinnerAdapter;
 import com.sphinax.hrms.view.DataSpinnerAdapter;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 /**
@@ -113,7 +109,7 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_leave_management, container, false);
+        return inflater.inflate(R.layout.fragment_admin_leave_management, container, false);
     }
 
     @Override
