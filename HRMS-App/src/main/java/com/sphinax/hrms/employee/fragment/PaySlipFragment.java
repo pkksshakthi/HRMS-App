@@ -258,14 +258,18 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
 
         if (i == 0) {
             tv_heading.setText("Payments");
-            tv_toatal.setText(String.valueOf(paySlipData.getAjax().getTotal().get(0).getEarnings()));
-            paySlipListAdapter = new PaySlipListAdapter(getActivity(), paySlipData, 0);
-            lv_amt.setAdapter(paySlipListAdapter);
+            if( paySlipData.getAjax() != null &&  paySlipData.getAjax().getTotal() != null && paySlipData.getAjax().getTotal().get(0).getEarnings() != null) {
+                tv_toatal.setText(String.valueOf(paySlipData.getAjax().getTotal().get(0).getEarnings()));
+                paySlipListAdapter = new PaySlipListAdapter(getActivity(), paySlipData, 0);
+                lv_amt.setAdapter(paySlipListAdapter);
+            }
         } else if (i == 1) {
             tv_heading.setText("Deductions");
-            tv_toatal.setText(String.valueOf(paySlipData.getAjax().getTotal().get(0).getDeductions()));
-            paySlipListAdapter = new PaySlipListAdapter(getActivity(), paySlipData, 1);
-            lv_amt.setAdapter(paySlipListAdapter);
+            if( paySlipData.getAjax() != null &&  paySlipData.getAjax().getTotal() != null && paySlipData.getAjax().getTotal().get(0).getDeductions() != null) {
+                tv_toatal.setText(String.valueOf(paySlipData.getAjax().getTotal().get(0).getDeductions()));
+                paySlipListAdapter = new PaySlipListAdapter(getActivity(), paySlipData, 1);
+                lv_amt.setAdapter(paySlipListAdapter);
+            }
         }
 
     }

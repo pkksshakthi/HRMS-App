@@ -183,7 +183,6 @@ public class AttendanceEnterFragment extends Fragment implements
         if (Global.isMarkAttendance()) {
             bt_In_att.setEnabled(false);
             bt_In_att.setClickable(false);
-
         }
         loadBitmap(Global.getLoginInfoData().getEmpImage());
 
@@ -363,19 +362,19 @@ public class AttendanceEnterFragment extends Fragment implements
         if (ajaxList != null) {
 
             if (ajaxList.get(0).getCheckInTime() != null && !ajaxList.get(0).getCheckInTime().equalsIgnoreCase("")) {
-                bt_In_att.setText(covertDate(ajaxList.get(0).getCheckInTime()));
+                bt_In_att.setText(covertDate(ajaxList.get(0).getCheckInTime(),"CHECK-In TIME"));
                 tv_att_details.setText(ajaxList.get(0).getLocation());
                 if (ajaxList.get(0).getCheckOutTime().equalsIgnoreCase("")) {
-                    bt_out_att.setText(" CHECK-OUT TIME ");
+                    bt_out_att.setText("CHECK-OUT TIME");
                 } else {
-                    bt_In_att.setText(covertDate(ajaxList.get(0).getCheckOutTime()));
+                    bt_In_att.setText(covertDate(ajaxList.get(0).getCheckOutTime(),"CHECK-Out TIME" ));
                 }
             }
         }
     }
 
     @SuppressLint("LongLogTag")
-    private String covertDate(String dtStart) {
+    private String covertDate(String dtStart, String type) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
         try {
 
@@ -383,7 +382,7 @@ public class AttendanceEnterFragment extends Fragment implements
 
             DateFormat anthorformat = new SimpleDateFormat("hh:mm:ss aa");
             String timeValue = anthorformat.format(date);
-            return "Check-In Time \n " + timeValue;
+            return  type + " \n " + timeValue;
         } catch (ParseException e) {
             e.printStackTrace();
         }
