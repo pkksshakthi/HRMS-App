@@ -71,11 +71,11 @@ public class AnnouncementListAdapter extends BaseAdapter {
             row = inflater.inflate(R.layout.fragment_announcement_list_item, parent, false);
             holder = new AnnouncementListAdapter.OrderDetailHolder();
 
-            holder.tv_Announcement_1 = (TextView) row.findViewById(R.id.tv_Announ_1);
-            holder.date = (TextView) row.findViewById(R.id.tv_date);
-            holder.month = (TextView) row.findViewById(R.id.tv_month);
-            holder.year = (TextView) row.findViewById(R.id.tv_year);
-            holder.tv_Announcement_3 = (TextView) row.findViewById(R.id.tv_Announ_3);
+            holder.tv_Announcement_1 = row.findViewById(R.id.tv_Announ_1);
+            holder.date = row.findViewById(R.id.tv_date);
+            holder.month = row.findViewById(R.id.tv_month);
+            holder.year = row.findViewById(R.id.tv_year);
+            holder.tv_Announcement_3 = row.findViewById(R.id.tv_Announ_3);
 
             row.setTag(holder);
         } else {

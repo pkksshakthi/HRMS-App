@@ -65,15 +65,8 @@ public class SomeProblemFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                return event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK;
 
-                    ///Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeLeaveManagementFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
-
-                    return true;
-
-                }
-
-                return false;
             }
         });
 

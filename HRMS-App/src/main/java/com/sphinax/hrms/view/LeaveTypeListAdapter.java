@@ -28,8 +28,8 @@ public class LeaveTypeListAdapter extends RecyclerView.Adapter<LeaveTypeListAdap
     private  Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView  bt_leavetype;;
-        public TextView  tv_bal;;
+        public TextView  bt_leavetype;
+        public TextView  tv_bal;
 
         public MyViewHolder(View view) {
             super(view);

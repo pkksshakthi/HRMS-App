@@ -160,7 +160,7 @@ public class EmployeeAttendanceFragment extends Fragment {
 
                 Calendar mCal = (Calendar) calendar.clone();
 
-                mCal.add(calendar.DAY_OF_MONTH, counter);
+                mCal.add(Calendar.DAY_OF_MONTH, counter);
 
                 if (ajax.getMorning().equalsIgnoreCase("H") && ajax.getEvening().equalsIgnoreCase("H")) {
                     events.add(new EventDay(mCal, R.drawable.icon_red_box, Color.WHITE));

@@ -14,8 +14,8 @@ android {
         applicationId "com.sphinax.hrms"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 3
-        versionName "3.0"
+        versionCode 4
+        versionName "4.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         testApplicationId 'com.sphinax.hrms'
         signingConfig signingConfigs.HRMS
@@ -26,13 +26,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            debuggable false
-            jniDebuggable false
+            debuggable true
+            jniDebuggable true
             signingConfig signingConfigs.HRMS
             minifyEnabled false
             pseudoLocalesEnabled true
-            applicationIdSuffix '2000'
-            versionNameSuffix '2.0'
+            applicationIdSuffix 'com.sphinax.hrms'
+            versionNameSuffix '3.0'
             zipAlignEnabled true
         }
     }

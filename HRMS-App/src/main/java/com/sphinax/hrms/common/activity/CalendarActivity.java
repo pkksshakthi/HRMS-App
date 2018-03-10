@@ -40,7 +40,7 @@ public class CalendarActivity extends AppCompatActivity {
         calendar2.add(Calendar.DAY_OF_MONTH, -5);
         events.add(new EventDay(calendar2, R.drawable.icon_red_box, Color.WHITE));
 
-        CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
+        CalendarView calendarView = findViewById(R.id.calendarView);
 
         Calendar min = Calendar.getInstance();
         min.add(Calendar.MONTH, -4);
@@ -58,7 +58,7 @@ public class CalendarActivity extends AppCompatActivity {
                         eventDay.getCalendar().getTime().toString(),
                         Toast.LENGTH_SHORT).show());
 
-        Button setDateButton = (Button) findViewById(R.id.setDateButton);
+        Button setDateButton = findViewById(R.id.setDateButton);
         setDateButton.setOnClickListener(v -> {
             try {
                 calendarView.setDate(getRandomCalendar());

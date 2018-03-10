@@ -176,7 +176,7 @@ public class LeavePendingListFragment extends Fragment {
                     }
                     CompanyData companyData = (CompanyData) obj;
                     approveList = new ArrayList<>();
-                    approveList = (ArrayList<Ajax>) companyData.getAjax();
+                    approveList = companyData.getAjax();
                     Log.d("ajaxList", "size --> " + approveList.size());
                     mAdapter = new EmployeeLeaveListAdapter(approveList);
                     recyclerView.setAdapter(mAdapter);

@@ -41,21 +41,21 @@ public class AdminMenuActivity extends AppCompatActivity
             finish();
             return;
         }
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         //this.setSupportActionBar(toolbar);
 
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
 
-        ImageView iv_drawer_open = (ImageView)findViewById(R.id.iv_drawer_open);
+        ImageView iv_drawer_open = findViewById(R.id.iv_drawer_open);
         iv_drawer_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +63,8 @@ public class AdminMenuActivity extends AppCompatActivity
             }
         });
 
-        TextView tv_username = (TextView) headerView.findViewById(R.id.tv_username);
-        TextView tv_companyname = (TextView) headerView.findViewById(R.id.tv_company_name);
+        TextView tv_username = headerView.findViewById(R.id.tv_username);
+        TextView tv_companyname = headerView.findViewById(R.id.tv_company_name);
 
         tv_username.setText(Global.getLoginInfoData().getEmpName());
         tv_companyname.setText(Utility.getPreference(this).getString(Constants.PREFS_COMPANY_NAME, ""));

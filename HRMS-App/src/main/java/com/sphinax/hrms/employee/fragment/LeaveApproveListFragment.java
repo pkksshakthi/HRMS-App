@@ -108,7 +108,7 @@ public class LeaveApproveListFragment extends Fragment {
                 DividerItemDecoration(getActivity(),
                 DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(mAdapter);
-        ViewPager host = (ViewPager) getActivity().findViewById(R.id.pager);
+        ViewPager host = getActivity().findViewById(R.id.pager);
         try {
 
             host.setCurrentItem(Global.getTabPosition());
@@ -201,7 +201,7 @@ public class LeaveApproveListFragment extends Fragment {
                     }
                     CompanyData companyData = (CompanyData) obj;
                     approveList = new ArrayList<>();
-                    approveList = (ArrayList<Ajax>) companyData.getAjax();
+                    approveList = companyData.getAjax();
                     Log.d(TAG, "size --> " + approveList.size());
                     mAdapter = new EmployeeLeaveListAdapter(approveList);
                     recyclerView.setAdapter(mAdapter);

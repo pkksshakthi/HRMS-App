@@ -134,7 +134,7 @@ public static void callErrorScreen(Activity activity, int containerId, FragmentM
         // Layout Inflater for inflating custom view
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         // inflate the layout over view
-        View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) view.findViewById(R.id.toast_root));
+        View layout = inflater.inflate(R.layout.custom_toast, view.findViewById(R.id.toast_root));
         // Get TextView id and set error
         TextView text =  layout.findViewById(R.id.toast_error);
         text.setText(error);
