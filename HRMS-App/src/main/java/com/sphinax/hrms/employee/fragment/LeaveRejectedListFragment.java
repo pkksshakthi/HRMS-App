@@ -1,6 +1,7 @@
 package com.sphinax.hrms.employee.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -75,12 +76,9 @@ public class LeaveRejectedListFragment extends Fragment {
 
         loadComponent();
 
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Refresh items
-                refreshItems();
-            }
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            // Refresh items
+            refreshItems();
         });
 
 
@@ -98,37 +96,25 @@ public class LeaveRejectedListFragment extends Fragment {
                 //Toast.makeText(getApplicationContext(), movie.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = getFragmentManager();
 
-                /** Getting the fragmenttransaction object, which can be used to add, remove or replace a fragment */
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                /** Getting the existing detailed fragment object, if it already exists.
-                 *  The fragment object is retrieved by its tag name
-                 * */
                 Fragment prevFrag = fragmentManager.findFragmentByTag(Constants.FRAMENT_LEAVE_LIST_CONTENT);
 
-                /** Remove the existing detailed fragment object if it exists */
                 if(prevFrag!=null)
                     fragmentTransaction.remove(prevFrag);
 
-                /** Instantiating the fragment CountryDetailsFragment */
                 EmployeeLeaveFullContentFragment fragment = new EmployeeLeaveFullContentFragment();
 
-                /** Creating a bundle object to pass the data(the clicked item's position) from the activity to the fragment */
                 Bundle b = new Bundle();
 
-                /** Setting the data to the bundle object */
                 //  b.putInt("position", position);
                 b.putSerializable("UserValidateObject",ajaxApp);
-                /** Setting the bundle object to the fragment */
                 fragment.setArguments(b);
 
-                /** Adding the fragment to the fragment transaction */
                 fragmentTransaction.add(R.id.content_frame, fragment,Constants.FRAMENT_LEAVE_LIST_CONTENT);
 
-                /** Adding this transaction to backstack */
                 fragmentTransaction.addToBackStack(null);
 
-                /** Making this transaction in effect */
                 fragmentTransaction.commit();
             }
 
@@ -146,14 +132,14 @@ public class LeaveRejectedListFragment extends Fragment {
 
     }
 
-    void refreshItems() {
+    private void refreshItems() {
         // Load items
         fetchLeaveList();
         // Load complete
 
     }
 
-    void onItemsLoadComplete() {
+    private void onItemsLoadComplete() {
         // Update the adapter and notify data set changed
         // Stop refresh animation
         mSwipeRefreshLayout.setRefreshing(false);
@@ -173,7 +159,7 @@ public class LeaveRejectedListFragment extends Fragment {
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("leavestatus", "2");
             //requestMap.put("leavestatus", "All");
@@ -189,6 +175,7 @@ public class LeaveRejectedListFragment extends Fragment {
                     }
                 }
 
+                @SuppressLint("LongLogTag")
                 @Override
                 public void onReturnObject(Object obj) {
                     if (pdia != null) {
@@ -218,7 +205,7 @@ public class LeaveRejectedListFragment extends Fragment {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -238,8 +225,7 @@ public class LeaveRejectedListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
         }
     }
 

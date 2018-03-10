@@ -28,10 +28,10 @@ import java.util.List;
  */
 
 public class DayRowClickListener implements AdapterView.OnItemClickListener {
-    private CalendarPageAdapter mCalendarPageAdapter;
-    private Context mContext;
+    private final CalendarPageAdapter mCalendarPageAdapter;
+    private final Context mContext;
 
-    private CalendarProperties mCalendarProperties;
+    private final CalendarProperties mCalendarProperties;
 
     public DayRowClickListener(CalendarPageAdapter calendarPageAdapter, Context context,
                                CalendarProperties calendarProperties) {

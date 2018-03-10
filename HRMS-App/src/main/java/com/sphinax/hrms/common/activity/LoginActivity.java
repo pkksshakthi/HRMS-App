@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.Login_Fragment;
@@ -69,8 +68,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
-            Utility.callErrorScreen(this, R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(this, R.id.frameContainer, fragmentManager, new SomeProblemFragment());
         }
     }
 }

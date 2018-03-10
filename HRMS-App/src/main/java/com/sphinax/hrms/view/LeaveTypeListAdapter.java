@@ -1,14 +1,10 @@
 package com.sphinax.hrms.view;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
@@ -24,12 +20,12 @@ import java.util.List;
 public class LeaveTypeListAdapter extends RecyclerView.Adapter<LeaveTypeListAdapter.MyViewHolder> {
 
     private static final String TAG = "LeaveTypeListAdapter-";
-    private  List<Ajax> detailsArrayList;
+    private final List<Ajax> detailsArrayList;
     private  Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView  bt_leavetype;
-        public TextView  tv_bal;
+        public final TextView  bt_leavetype;
+        public final TextView  tv_bal;
 
         public MyViewHolder(View view) {
             super(view);

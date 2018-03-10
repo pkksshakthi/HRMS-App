@@ -392,7 +392,7 @@ public class CalendarView extends LinearLayout {
     /**
      * @return Calendar object representing a selected date
      */
-    public Calendar getFirstSelectedDate() {
+    private Calendar getFirstSelectedDate() {
         return Stream.of(mCalendarPageAdapter.getSelectedDays())
                 .map(SelectedDay::getCalendar).findFirst().get();
     }

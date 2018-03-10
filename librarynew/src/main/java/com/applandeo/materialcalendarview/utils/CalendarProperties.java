@@ -20,8 +20,8 @@ public class CalendarProperties {
     private int mCalendarType, mHeaderColor, mHeaderLabelColor, mPreviousButtonSrc, mForwardButtonSrc,
             mSelectionColor, mTodayLabelColor, mDialogButtonsColor, mItemLayoutResource;
 
-    private Calendar mCurrentDate = DateUtils.getCalendar();
-    private Calendar mSelectedDate = DateUtils.getCalendar();
+    private final Calendar mCurrentDate = DateUtils.getCalendar();
+    private final Calendar mSelectedDate = DateUtils.getCalendar();
     private Calendar mCalendar, mMinimumDate, mMaximumDate;
 
     private OnDayClickListener mOnDayClickListener;

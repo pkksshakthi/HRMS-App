@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
@@ -31,7 +30,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -86,7 +84,6 @@ public class AttendanceEnterFragment extends Fragment implements
     private ProgressDialog pdia;
     private ArrayList<Ajax> ajaxList;
     private String currentAddress;
-    private SupportMapFragment mapFragment;
     private double longitude;
     private double latitude;
     private FragmentManager fragmentManager;
@@ -102,14 +99,14 @@ public class AttendanceEnterFragment extends Fragment implements
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_attendance_enter, null, false);
         // Create the LocationRequest object
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(1 * 1000)        // 10 seconds, in milliseconds
-                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+                .setInterval(1000)        // 10 seconds, in milliseconds
+                .setFastestInterval(1000); // 1 second, in milliseconds
         manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         loadMapView();
 
@@ -165,7 +162,7 @@ public class AttendanceEnterFragment extends Fragment implements
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
@@ -201,7 +198,7 @@ public class AttendanceEnterFragment extends Fragment implements
     }
 
     private void loadMapView() {
-        mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         googleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API)
@@ -390,7 +387,7 @@ public class AttendanceEnterFragment extends Fragment implements
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
         switch (requestCode) {
             case LOCATION_REQUEST:
@@ -404,7 +401,7 @@ public class AttendanceEnterFragment extends Fragment implements
     }
 
     private boolean canAccessLocation() {
-        return (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+        return (hasPermission());
     }
 
     @Override
@@ -415,11 +412,8 @@ public class AttendanceEnterFragment extends Fragment implements
         }
     }
 
-    private boolean hasPermission(String perm) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return (PackageManager.PERMISSION_GRANTED == getActivity().checkSelfPermission(perm));
-        }
-        return false;
+    private boolean hasPermission() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && (PackageManager.PERMISSION_GRANTED == getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION));
     }
 
     private void doLocationThing() {
@@ -450,7 +444,7 @@ public class AttendanceEnterFragment extends Fragment implements
             SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
             String datetime = dateformat.format(c.getTime());
             Log.d(TAG, "onViewCreated: " + datetime);
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("refId", Global.getLoginInfoData().getBiometricId().toString());
             requestMap.put("InDate", datetime);
@@ -508,7 +502,7 @@ public class AttendanceEnterFragment extends Fragment implements
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -542,7 +536,7 @@ public class AttendanceEnterFragment extends Fragment implements
             //SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
             SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             datetime = dateformat.format(c.getTime());
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
             requestMap.put("refId", Global.getLoginInfoData().getBiometricId().toString());
@@ -590,7 +584,7 @@ public class AttendanceEnterFragment extends Fragment implements
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -619,8 +613,7 @@ public class AttendanceEnterFragment extends Fragment implements
            moveMap();
         }
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
         }
     }
 
@@ -635,30 +628,14 @@ public class AttendanceEnterFragment extends Fragment implements
 
 
         //Yes Button
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                enterUserAttendance();
-            }
-        });
+        builder.setPositiveButton("Yes", (dialog, which) -> enterUserAttendance());
 
         //No Button
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-
-            }
-        });
+        builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
 
 
         //Cancel Button
-        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setNeutralButton("Cancel", (dialog, which) -> dialog.dismiss());
 
 
         AlertDialog alertDialog = builder.create();

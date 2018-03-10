@@ -4,13 +4,11 @@ package com.sphinax.hrms.employee.fragment;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,7 +18,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
@@ -92,12 +89,9 @@ public class LeaveApproveListFragment extends Fragment {
         loadComponent();
 
 
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Refresh items
-                refreshItems();
-            }
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            // Refresh items
+            refreshItems();
         });
 
 
@@ -132,37 +126,25 @@ public class LeaveApproveListFragment extends Fragment {
 
                 FragmentManager fragmentManager = getFragmentManager();
 
-                /** Getting the fragmenttransaction object, which can be used to add, remove or replace a fragment */
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                /** Getting the existing detailed fragment object, if it already exists.
-                 *  The fragment object is retrieved by its tag name
-                 * */
                 Fragment prevFrag = fragmentManager.findFragmentByTag(Constants.FRAMENT_LEAVE_LIST_CONTENT);
 
-                /** Remove the existing detailed fragment object if it exists */
                 if(prevFrag!=null)
                     fragmentTransaction.remove(prevFrag);
 
-                /** Instantiating the fragment CountryDetailsFragment */
                 EmployeeLeaveFullContentFragment fragment = new EmployeeLeaveFullContentFragment();
 
-                /** Creating a bundle object to pass the data(the clicked item's position) from the activity to the fragment */
                 Bundle b = new Bundle();
 
-                /** Setting the data to the bundle object */
-              //  b.putInt("position", position);
+                //  b.putInt("position", position);
                 b.putSerializable("UserValidateObject",ajaxApp);
-                /** Setting the bundle object to the fragment */
                 fragment.setArguments(b);
 
-                /** Adding the fragment to the fragment transaction */
                 fragmentTransaction.add(R.id.content_frame, fragment,Constants.FRAMENT_LEAVE_LIST_CONTENT);
 
-                /** Adding this transaction to backstack */
                 fragmentTransaction.addToBackStack(null);
 
-                /** Making this transaction in effect */
                 fragmentTransaction.commit();
 
 
@@ -182,7 +164,7 @@ public class LeaveApproveListFragment extends Fragment {
 
     }
 
-    void refreshItems() {
+    private void refreshItems() {
         // Load items
         // ...
         fetchLeaveList();
@@ -190,7 +172,7 @@ public class LeaveApproveListFragment extends Fragment {
 
     }
 
-    void onItemsLoadComplete() {
+    private void onItemsLoadComplete() {
         // Update the adapter and notify data set changed
         // Stop refresh animation
         mSwipeRefreshLayout.setRefreshing(false);
@@ -214,7 +196,7 @@ public class LeaveApproveListFragment extends Fragment {
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("leavestatus", "1");
             //requestMap.put("leavestatus", "All");
@@ -259,7 +241,7 @@ public class LeaveApproveListFragment extends Fragment {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -279,8 +261,7 @@ public class LeaveApproveListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
         }
 
     }

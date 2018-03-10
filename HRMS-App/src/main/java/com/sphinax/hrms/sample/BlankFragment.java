@@ -23,9 +23,6 @@ import android.widget.Toast;
 
 import com.sphinax.hrms.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 //public class BlankFragment extends Fragment {
 //
 //
@@ -59,6 +56,7 @@ import com.sphinax.hrms.R;
 /**
  * A placeholder fragment containing a simple view.
  */
+@SuppressWarnings("AccessStaticViaInstance")
 public class BlankFragment extends Fragment {
 
 
@@ -81,7 +79,7 @@ public class BlankFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return view = inflater.inflate(R.layout.fragment_blank, container, false);
     }
@@ -100,68 +98,49 @@ public class BlankFragment extends Fragment {
 //            btnCheckPermissions = (Button) view.findViewById(R.id.btnCheckPermissions);
 
 
-            btnCheckPermissions.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
-                        if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.READ_PHONE_STATE)){
-                            //Show Information about why you need the permission
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setTitle("Need Permission");
-                            builder.setMessage("This app needs phone permission.");
-                            builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                    requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},PERMISSION_CALLBACK_CONSTANT);
-                                }
-                            });
-                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                            builder.show();
-                        } else if (permissionStatus.getBoolean(Manifest.permission.READ_PHONE_STATE,false)) {
-                            //Previously Permission Request was cancelled with 'Dont Ask Again',
-                            // Redirect to Settings after showing Information about why you need the permission
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setTitle("Need Permission");
-                            builder.setMessage("This app needs storage permission.");
-                            builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                    sentToSettings = true;
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
-                                    Toast.makeText(getActivity(), "Go to Permissions to Grant Phone", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                            builder.show();
-                        }  else {
-                            //just request the permission
+            btnCheckPermissions.setOnClickListener(v -> {
+                if(ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+                    if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.READ_PHONE_STATE)){
+                        //Show Information about why you need the permission
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle("Need Permission");
+                        builder.setMessage("This app needs phone permission.");
+                        builder.setPositiveButton("Grant", (dialog, which) -> {
+                            dialog.cancel();
                             requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},PERMISSION_CALLBACK_CONSTANT);
-                        }
-                        txtPermissions.setText("Permissions Required");
-
-
-                        SharedPreferences.Editor editor = permissionStatus.edit();
-                        editor.putBoolean(Manifest.permission.READ_PHONE_STATE,true);
-                        editor.commit();
-                    } else {
-                        //You already have the permission, just go ahead.
-                        proceedAfterPermission();
+                        });
+                        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+                        builder.show();
+                    } else if (permissionStatus.getBoolean(Manifest.permission.READ_PHONE_STATE,false)) {
+                        //Previously Permission Request was cancelled with 'Dont Ask Again',
+                        // Redirect to Settings after showing Information about why you need the permission
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle("Need Permission");
+                        builder.setMessage("This app needs storage permission.");
+                        builder.setPositiveButton("Grant", (dialog, which) -> {
+                            dialog.cancel();
+                            sentToSettings = true;
+                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
+                            intent.setData(uri);
+                            startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
+                            Toast.makeText(getActivity(), "Go to Permissions to Grant Phone", Toast.LENGTH_LONG).show();
+                        });
+                        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+                        builder.show();
+                    }  else {
+                        //just request the permission
+                        requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},PERMISSION_CALLBACK_CONSTANT);
                     }
+                    txtPermissions.setText("Permissions Required");
+
+
+                    SharedPreferences.Editor editor = permissionStatus.edit();
+                    editor.putBoolean(Manifest.permission.READ_PHONE_STATE,true);
+                    editor.commit();
+                } else {
+                    //You already have the permission, just go ahead.
+                    proceedAfterPermission();
                 }
             });
         }
@@ -180,8 +159,8 @@ public class BlankFragment extends Fragment {
         if(requestCode == PERMISSION_CALLBACK_CONSTANT){
             //check if all permissions are granted
             boolean allgranted = false;
-            for(int i=0;i<grantResults.length;i++){
-                if(grantResults[i]==PackageManager.PERMISSION_GRANTED){
+            for (int grantResult : grantResults) {
+                if (grantResult == PackageManager.PERMISSION_GRANTED) {
                     allgranted = true;
                 } else {
                     allgranted = false;
@@ -197,19 +176,11 @@ public class BlankFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Need Storage Permission");
                 builder.setMessage("This app needs phone permission.");
-                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},PERMISSION_CALLBACK_CONSTANT);
-                    }
+                builder.setPositiveButton("Grant", (dialog, which) -> {
+                    dialog.cancel();
+                    requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},PERMISSION_CALLBACK_CONSTANT);
                 });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+                builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
                 builder.show();
             } else {
                 Toast.makeText(getActivity(),"Unable to get Permission",Toast.LENGTH_LONG).show();

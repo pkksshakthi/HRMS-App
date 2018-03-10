@@ -145,7 +145,7 @@ public class UserProfileFragment extends Fragment {
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
 
@@ -185,7 +185,7 @@ public class UserProfileFragment extends Fragment {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -206,8 +206,7 @@ public class UserProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
         }
     }
 }

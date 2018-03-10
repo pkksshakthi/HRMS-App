@@ -9,8 +9,8 @@ import org.json.JSONObject;
  * Created by ganesaka on 12/24/2017.
  */
 
-public interface AsyncResponse {
+interface AsyncResponse {
 
-    void processFinish(Context context, JSONObject output) throws JSONException;
+    void processFinish(Context context, JSONObject output);
 
 }

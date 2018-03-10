@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
@@ -19,11 +18,14 @@ import java.util.List;
 
 public class EmployeeLeaveListAdapter extends RecyclerView.Adapter<EmployeeLeaveListAdapter.MyViewHolder> {
 
-    private List<Ajax> ajaxList;
+    private final List<Ajax> ajaxList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_status, tv_date, tv_leave_type, tv_days;
-        public ImageView img_status;
+        public TextView tv_status;
+        public final TextView tv_date;
+        public final TextView tv_leave_type;
+        public final TextView tv_days;
+        public final ImageView img_status;
        // public TableRow tb_first;
 
         public MyViewHolder(View view) {

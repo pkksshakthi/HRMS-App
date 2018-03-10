@@ -4,12 +4,9 @@ import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -17,7 +14,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,8 +107,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
         super.onResume();
 
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
         }
 
     }
@@ -136,14 +131,14 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_main_menu, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
@@ -233,11 +228,9 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
             builder.setTitle("Location Services Not Active");
             builder.setMessage("Please enable Location Services and GPS");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // Show location settings when the user acknowledges the alert dialog
-                    startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
-                }
+            builder.setPositiveButton("OK", (dialogInterface, i) -> {
+                // Show location settings when the user acknowledges the alert dialog
+                startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
             });
             Dialog alertDialog = builder.create();
             alertDialog.setCanceledOnTouchOutside(false);
@@ -271,7 +264,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId",Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, "") );
             requestMap.put("empId",Global.getLoginInfoData().getUserId());
 
@@ -315,7 +308,7 @@ public class UserMainMenuFragment extends Fragment implements View.OnClickListen
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 

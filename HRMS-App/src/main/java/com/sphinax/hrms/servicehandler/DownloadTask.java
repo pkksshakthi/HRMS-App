@@ -1,21 +1,14 @@
 package com.sphinax.hrms.servicehandler;
 
-/**
- * Created by ganesaka on 2/10/2018.
- */
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
-import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.sphinax.hrms.global.Constants;
@@ -32,18 +25,18 @@ import java.util.Map;
 public class DownloadTask {
 
     private static final String TAG = "Download Task";
-    private Context context;
+    private final Context context;
 
     //private String downloadUrl = Constants.PAYSLIP_DOWNLOAD_REQUEST_URL, downloadFileName = "2017";
     private String downloadUrl = Constants.PAYSLIP_DOWNLOAD_REQUEST_URL;
     private String downloadFileName = "";
     private ProgressDialog progressDialog;
     //private requestMap
-    private HashMap<String, String> requestMap = new HashMap<String, String>();
-    public DownloadTask(Context context, String downloadUrl,HashMap<String, String> requestMap,String downloadFileName) {
+    private HashMap<String, String> requestMap = new HashMap<>();
+    public DownloadTask(Context context, HashMap<String, String> requestMap, String downloadFileName) {
         this.context = context;
 
-        this.downloadUrl = downloadUrl;
+        this.downloadUrl = Constants.PAYSLIP_DOWNLOAD_REQUEST_URL;
         this.requestMap = requestMap;
         this.downloadFileName = downloadFileName;
 
@@ -77,11 +70,8 @@ public class DownloadTask {
                     Toast.makeText(context, "Downloaded Successfully", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+                    new Handler().postDelayed(() -> {
 
-                        }
                     }, 3000);
 
                    // Log.e(TAG, "Download Failed");
@@ -92,11 +82,8 @@ public class DownloadTask {
 
                 //Change button text if exception occurs
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                new Handler().postDelayed(() -> {
 
-                    }
                 }, 3000);
                 Log.e(TAG, "Download Failed with Exception - " + e.getLocalizedMessage());
 
@@ -192,20 +179,16 @@ public class DownloadTask {
         //Setting message manually and performing action on button click
         builder.setMessage("Do you want to open payslip ?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                .setPositiveButton("Yes", (dialog, id) -> {
 
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(Uri.fromFile(path), "application/pdf");
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        context.startActivity(intent);
-                    }
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.fromFile(path), "application/pdf");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    context.startActivity(intent);
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //  Action for 'NO' Button
-                        dialog.cancel();
-                    }
+                .setNegativeButton("No", (dialog, id) -> {
+                    //  Action for 'NO' Button
+                    dialog.cancel();
                 });
 
         //Creating dialog box

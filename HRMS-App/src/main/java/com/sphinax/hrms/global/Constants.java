@@ -1,9 +1,5 @@
 package com.sphinax.hrms.global;
 
-/**
- * Created by ganesaka on 12/24/2017.
- */
-
 /**It is Constants class where we declare all static variables**/
 public class Constants {
 
@@ -15,7 +11,7 @@ public class Constants {
     //private static final String marketing = "ezhrRest/marketing/";
 
 
-    public static final String COMPANY_NAME_URL_PARAMETER = "{COMPANYID}";
+    private static final String COMPANY_NAME_URL_PARAMETER = "{COMPANYID}";
     //ADMIN
 
     public static final String COMPANY_LIST_REQUEST_URL = domain + client +"Comp";

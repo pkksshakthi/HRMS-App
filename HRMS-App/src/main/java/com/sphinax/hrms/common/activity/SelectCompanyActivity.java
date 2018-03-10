@@ -134,7 +134,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
 
             webServiceHandler.getCompanyList(this, context, requestMap, new ServiceCallback() {
 
@@ -157,7 +157,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
                     Log.d(TAG, "size --> " + companyajaxList.size());
 
                     companyDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, companyajaxList, 1);
+                            companyajaxList, 1);
                     companyDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spCompany.setAdapter(companyDataAdapter);
@@ -176,7 +176,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(SelectCompanyActivity.this, R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(SelectCompanyActivity.this, R.id.frameContainer, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -197,8 +197,7 @@ public class SelectCompanyActivity extends AppCompatActivity implements AdapterV
     protected void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
-            Utility.callErrorScreen(this, R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(this, R.id.frameContainer, fragmentManager, new SomeProblemFragment());
         }
     }
 }

@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.sphinax.hrms.R;
@@ -40,7 +39,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
-    private Handler handler;
     private static FragmentManager fragmentManager;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
@@ -60,24 +58,16 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
     };
     //private View mControlsView;
-    private final Runnable mShowPart2Runnable = new Runnable() {
-        @Override
-        public void run() {
-            // Delayed display of UI elements
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.show();
-            }
-            //  mControlsView.setVisibility(View.VISIBLE);
+    private final Runnable mShowPart2Runnable = () -> {
+        // Delayed display of UI elements
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.show();
         }
+        //  mControlsView.setVisibility(View.VISIBLE);
     };
     private boolean mVisible;
-    private final Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            hide();
-        }
-    };
+    private final Runnable mHideRunnable = () -> hide();
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
      * system UI. This is to prevent the jarring behavior of controls going away
@@ -99,35 +89,27 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
         // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });
+        mContentView.setOnClickListener(view -> toggle());
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
 
 
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
 
-                String compyNameVal = Utility.getPreference(SplashScreenActivity.this).getString(Constants.PREFS_COMPANY_NAME, "");
-                if (!compyNameVal.equalsIgnoreCase("")) {
-                    Intent intent = new Intent(SplashScreenActivity.this, SelectCompanyActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Intent intent = new Intent(SplashScreenActivity.this, SelectCompanyActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-
+            String compyNameVal = Utility.getPreference(SplashScreenActivity.this).getString(Constants.PREFS_COMPANY_NAME, "");
+            if (!compyNameVal.equalsIgnoreCase("")) {
+                Intent intent = new Intent(SplashScreenActivity.this, SelectCompanyActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(SplashScreenActivity.this, SelectCompanyActivity.class);
+                startActivity(intent);
+                finish();
             }
+
         }, 100);
 
 
@@ -140,7 +122,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100);
+        delayedHide();
     }
 
     private void toggle() {
@@ -181,16 +163,15 @@ public class SplashScreenActivity extends AppCompatActivity {
      * Schedules a call to hide() in delay milliseconds, canceling any
      * previously scheduled calls.
      */
-    private void delayedHide(int delayMillis) {
+    private void delayedHide() {
         mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
+        mHideHandler.postDelayed(mHideRunnable, 100);
     }
     @Override
     protected void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getApplicationContext())) {
-            Utility.callErrorScreen(this, R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(this, R.id.frameContainer, fragmentManager, new SomeProblemFragment());
         }
     }
 }

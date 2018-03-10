@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 public class EventDay {
     private  int clr;
-    private Calendar mDay;
+    private final Calendar mDay;
     private int mImageResource;
 
     /**
@@ -28,11 +28,11 @@ public class EventDay {
      * @param day           Calendar object which represents a date of the event
      * @param imageResource Resource of an image which will be displayed in a day cell
      */
-    public EventDay(Calendar day, int imageResource,int color) {
+    public EventDay(Calendar day, int imageResource) {
         DateUtils.setMidnight(day);
         mDay = day;
         mImageResource = imageResource;
-        clr = color;
+        clr = android.graphics.Color.WHITE;
     }
 
 

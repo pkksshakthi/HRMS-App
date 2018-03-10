@@ -1,6 +1,5 @@
 package com.sphinax.hrms.common.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -38,7 +37,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         Calendar calendar2 = Calendar.getInstance();
         calendar2.add(Calendar.DAY_OF_MONTH, -5);
-        events.add(new EventDay(calendar2, R.drawable.icon_red_box, Color.WHITE));
+        events.add(new EventDay(calendar2, R.drawable.icon_red_box));
 
         CalendarView calendarView = findViewById(R.id.calendarView);
 

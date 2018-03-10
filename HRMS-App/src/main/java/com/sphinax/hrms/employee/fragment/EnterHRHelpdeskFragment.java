@@ -80,16 +80,13 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
         setListeners();
         fetchQueryTypeList();
 
-        lv_query.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        lv_query.setOnItemClickListener((parent, view1, position, id) -> {
 
-                Ajax ajaxApp = queryList.get(position);
-                if(ajaxApp.getStatus().equalsIgnoreCase("Need Info")) {
-                    Bundle b = new Bundle();
-                    b.putSerializable("UserValidateObject", ajaxApp);
-                    Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UpdateHRHelpDeskFragment(), true, b, Constants.FRAMENT_HRHELP_UPDATE_CONTENT);
-                }
+            Ajax ajaxApp = queryList.get(position);
+            if(ajaxApp.getStatus().equalsIgnoreCase("Need Info")) {
+                Bundle b = new Bundle();
+                b.putSerializable("UserValidateObject", ajaxApp);
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UpdateHRHelpDeskFragment(), true, b, Constants.FRAMENT_HRHELP_UPDATE_CONTENT);
             }
         });
 
@@ -140,7 +137,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
      * Its works on Query Spinner Click Action
      **/
     private void actionTypeSelector(int position) {
-        Ajax ajax = new Ajax();
+        @SuppressWarnings("UnusedAssignment") Ajax ajax = new Ajax();
         if (queryTypeList != null) {
             ajax = queryTypeList.get(position);
             queryTypePosition = ajax.getReqTypeId();
@@ -160,7 +157,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("companyId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
 
             webServiceHandler.getQueryTypeList(getActivity(), context, requestMap, new ServiceCallback() {
@@ -186,7 +183,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
                         Log.d(TAG, "size --> " + queryTypeList.size());
 
                         querySpinnerAdapter = new QuerySpinnerAdapter(context,
-                                android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, queryTypeList);
+                                queryTypeList);
                         querySpinnerAdapter
                                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         sp_query_type.setAdapter(querySpinnerAdapter);
@@ -207,7 +204,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -234,7 +231,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("companyId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
             requestMap.put("requestTo", Global.getLoginInfoData().getReportsTo());
@@ -253,7 +250,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
                         Utility.showCustomToast(context, mView, "Query successfully saved");
                         fetchQueryList();
                         querySpinnerAdapter = new QuerySpinnerAdapter(context,
-                                android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, queryTypeList);
+                                queryTypeList);
                         querySpinnerAdapter
                                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         sp_query_type.setAdapter(querySpinnerAdapter);
@@ -283,7 +280,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -312,7 +309,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empId",Global.getLoginInfoData().getUserId() );
 
@@ -354,7 +351,7 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -370,57 +367,54 @@ public class    EnterHRHelpdeskFragment extends Fragment implements AdapterView.
             e.printStackTrace();
         }
     }
+    @SuppressLint("LongLogTag")
     @Override
     public void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
             return;
         }
 
 
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @SuppressLint("LongLogTag")
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+        getView().setOnKeyListener((v, keyCode, event) -> {
 
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+            if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
 
-                    Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EnterHRHelpdeskFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EnterHRHelpdeskFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
 
-                    try {
-                        if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag() == null) {
-                           // Global.setTabPosition(0);
-                            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
-
-                        } else if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag().equalsIgnoreCase(Constants.FRAMENT_HR_HELPDESK_ENTER)) {
-                            Log.d(TAG, "onKey: " + getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag());
-
-                            //Global.setTabPosition(0);
-                            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_HR_HELPDESK_ENTER);
-
-                        } else if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag().equalsIgnoreCase(Constants.FRAMENT_HRHELP_UPDATE_CONTENT)) {
-                            Log.d(TAG, "onKey: " + getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag());
-
-                            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UpdateHRHelpDeskFragment(), false, null, Constants.FRAMENT_HRHELP_UPDATE_CONTENT);
-
-                        }
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        //Global.setTabPosition(0);
+                try {
+                    if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag() == null) {
+                       // Global.setTabPosition(0);
                         Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
 
+                    } else if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag().equalsIgnoreCase(Constants.FRAMENT_HR_HELPDESK_ENTER)) {
+                        Log.d(TAG, "onKey: " + getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag());
+
+                        //Global.setTabPosition(0);
+                        Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_HR_HELPDESK_ENTER);
+
+                    } else if (getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag().equalsIgnoreCase(Constants.FRAMENT_HRHELP_UPDATE_CONTENT)) {
+                        Log.d(TAG, "onKey: " + getActivity().getFragmentManager().findFragmentById(R.id.content_frame).getTag());
+
+                        Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UpdateHRHelpDeskFragment(), false, null, Constants.FRAMENT_HRHELP_UPDATE_CONTENT);
+
                     }
-
-
-                    return true;
+                }catch (Exception e){
+                    e.printStackTrace();
+                    //Global.setTabPosition(0);
+                    Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new UserMainMenuFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
 
                 }
 
-                return false;
+
+                return true;
+
             }
+
+            return false;
         });
 
     }

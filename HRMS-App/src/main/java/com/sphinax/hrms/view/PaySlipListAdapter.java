@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
-import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.model.Deduction;
 import com.sphinax.hrms.model.Earning;
 import com.sphinax.hrms.model.PaymentData;
@@ -21,9 +20,9 @@ import com.sphinax.hrms.model.PaymentData;
 public class PaySlipListAdapter extends BaseAdapter {
 
     private static final String TAG = "PaySlipListAdapter-";
-    private PaymentData detailsList;
-    private Context context;
-    private int listType;
+    private final PaymentData detailsList;
+    private final Context context;
+    private final int listType;
 
     public PaySlipListAdapter(Context context, PaymentData list, int listType) {
         this.context = context;

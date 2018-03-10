@@ -1,17 +1,15 @@
 package com.sphinax.hrms.utils;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -106,16 +104,16 @@ public class Utility {
         }
     }
 
-public static void callErrorScreen(Activity activity, int containerId, FragmentManager fragmentManager, android.support.v4.app.Fragment fragment, boolean needBackstack, Bundle bundle,String fragmentName) {
+public static void callErrorScreen(Activity activity, int containerId, FragmentManager fragmentManager, Fragment fragment) {
         try {
         android.support.v4.app.FragmentTransaction ftNavigation = fragmentManager.beginTransaction();
         ftNavigation.setCustomAnimations(R.anim.left_enter, R.anim.right_out);
-        ftNavigation.add(fragment,fragmentName);
-        if (bundle != null) {
-            fragment.setArguments(bundle);
+        ftNavigation.add(fragment, Constants.FRAMENT_ERROR);
+        if (null != null) {
+            fragment.setArguments(null);
         }
         ftNavigation.replace(containerId, fragment);
-        if (needBackstack) {
+        if (false) {
             ftNavigation.addToBackStack(null);
         }
         ftNavigation.commit();

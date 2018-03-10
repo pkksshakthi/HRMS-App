@@ -1,15 +1,10 @@
 package com.sphinax.hrms.utils;
 
-/**
- * Created by psak on 1/7/2018.
- */
-
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -24,26 +19,26 @@ public class GPSTracker extends Service implements LocationListener {
     private final Context mContext;
 
     // flag for GPS status
-    boolean isGPSEnabled = false;
+    private boolean isGPSEnabled = false;
 
     // flag for network status
-    boolean isNetworkEnabled = false;
+    private boolean isNetworkEnabled = false;
 
     // flag for GPS status
-    boolean canGetLocation = false;
+    private boolean canGetLocation = false;
 
-    Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
+    private Location location; // location
+    private double latitude; // latitude
+    private double longitude; // longitude
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
 
     // Declaring a Location Manager
-    protected LocationManager locationManager;
+    private LocationManager locationManager;
 
     public GPSTracker(Context context) {
         this.mContext = context;
@@ -51,7 +46,7 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     @SuppressLint("MissingPermission")
-    public Location getLocation() {
+    private void getLocation() {
         try {
             locationManager = (LocationManager) mContext
                     .getSystemService(LOCATION_SERVICE);
@@ -108,7 +103,6 @@ public class GPSTracker extends Service implements LocationListener {
             e.printStackTrace();
         }
 
-        return location;
     }
 
     /**
@@ -167,19 +161,13 @@ public class GPSTracker extends Service implements LocationListener {
         alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
         // On pressing Settings button
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                mContext.startActivity(intent);
-            }
+        alertDialog.setPositiveButton("Settings", (dialog, which) -> {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            mContext.startActivity(intent);
         });
 
         // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertDialog.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
 
         // Showing Alert Message
         alertDialog.show();

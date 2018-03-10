@@ -10,14 +10,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.sphinax.hrms.R;
-import com.sphinax.hrms.employee.fragment.EmployeeLeaveManagementFragment;
-import com.sphinax.hrms.global.Constants;
-import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
-import com.sphinax.hrms.utils.Utility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,14 +56,7 @@ public class SomeProblemFragment extends Fragment {
 
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                return event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK;
-
-            }
-        });
+        getView().setOnKeyListener((v, keyCode, event) -> event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK);
 
     }
 }

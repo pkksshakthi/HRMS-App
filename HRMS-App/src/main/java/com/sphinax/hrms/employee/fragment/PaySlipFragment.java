@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -53,10 +54,9 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     private ListView lv_amt;
     private ProgressDialog pdia;
     private PaymentData paySlipData = new PaymentData();
-    private HashMap<Integer, String> spinnerMonthMap = new HashMap<Integer, String>();
+    private HashMap<Integer, String> spinnerMonthMap = new HashMap<>();
     private String payslipYear;
     private String payslipMonth;
-    private PaySlipListAdapter paySlipListAdapter;
     private LinearLayout ll_payment, ll_deduction;
     private FragmentManager fragmentManager;
     private RequestPermissionHandler mRequestPermissionHandler;
@@ -101,7 +101,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -109,7 +109,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
@@ -216,14 +216,14 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
         Collections.reverse(yearList);
 
         String[] spinnerArray = new String[yearList.size()];
-        HashMap<Integer, String> spinnerMap = new HashMap<Integer, String>();
+        HashMap<Integer, String> spinnerMap = new HashMap<>();
         for (int i = 0; i < yearList.size(); i++) {
             spinnerMap.put(i, String.valueOf(yearList.get(i).getYear()));
             spinnerArray[i] = String.valueOf(yearList.get(i).getYear());
         }
 
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
+        @SuppressWarnings("unchecked") ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         sp_year.setAdapter(arrayAdapter);
@@ -233,14 +233,14 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     private void loadmonthSpinner(ArrayList<Ajax> monthList) {
         Collections.reverse(monthList);
         String[] spinnerArray = new String[monthList.size()];
-        spinnerMonthMap = new HashMap<Integer, String>();
+        spinnerMonthMap = new HashMap<>();
         for (int i = 0; i < monthList.size(); i++) {
             spinnerMonthMap.put(i, monthList.get(i).getMonthValue().toString());
             spinnerArray[i] = monthList.get(i).getMonth();
         }
 
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
+        @SuppressWarnings("unchecked") ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         sp_month.setAdapter(arrayAdapter);
@@ -256,6 +256,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
 
     private void loadListPaySlip(int i) {
 
+        PaySlipListAdapter paySlipListAdapter;
         if (i == 0) {
             tv_heading.setText("Payments");
             if( paySlipData.getAjax() != null &&  paySlipData.getAjax().getTotal() != null && paySlipData.getAjax().getTotal().get(0).getEarnings() != null) {
@@ -285,7 +286,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
 
             webServiceHandler.getYearList(getActivity(), context, requestMap, new ServiceCallback() {
@@ -304,7 +305,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                         pdia.dismiss();
                     }
                     CompanyData companyData = (CompanyData) obj;
-                    ArrayList<Ajax> yearList = new ArrayList<>();
+                    ArrayList<Ajax> yearList;
                     yearList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d(TAG, "size --> " + yearList.size());
 
@@ -323,7 +324,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -351,7 +352,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("year", payslipYear);
 
@@ -371,7 +372,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                         pdia.dismiss();
                     }
                     CompanyData companyData = (CompanyData) obj;
-                    ArrayList<Ajax> yearList = new ArrayList<>();
+                    ArrayList<Ajax> yearList;
                     yearList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d(TAG, "size --> " + yearList.size());
 
@@ -391,7 +392,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -420,7 +421,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
             requestMap.put("year", payslipYear);
@@ -479,7 +480,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -503,12 +504,12 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
         }
 
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
             requestMap.put("year", payslipYear);
             requestMap.put("month", payslipMonth);
-            new DownloadTask(getActivity(), Constants.PAYSLIP_DOWNLOAD_REQUEST_URL, requestMap, String.valueOf(payslipYear + "-" + payslipMonth + ".pdf"));
+            new DownloadTask(getActivity(), requestMap, String.valueOf(payslipYear + "-" + payslipMonth + ".pdf"));
 
 //            webServiceHandler.getPaySlipDownload(getActivity(), context, requestMap, new ServiceCallback() {
 //
@@ -542,8 +543,7 @@ public class PaySlipFragment extends Fragment implements AdapterView.OnItemSelec
     public void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
         }
     }
 }

@@ -34,12 +34,12 @@ public class CalendarPageAdapter extends PagerAdapter {
      */
     public static final int CALENDAR_SIZE = 2401;
 
-    private Context mContext;
+    private final Context mContext;
     private CalendarGridView mCalendarGridView;
 
-    private List<SelectedDay> mSelectedDays = new ArrayList<>();
+    private final List<SelectedDay> mSelectedDays = new ArrayList<>();
 
-    private CalendarProperties mCalendarProperties;
+    private final CalendarProperties mCalendarProperties;
 
     public CalendarPageAdapter(Context context, CalendarProperties calendarProperties) {
         mContext = context;

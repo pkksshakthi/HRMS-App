@@ -10,7 +10,6 @@ import com.sphinax.hrms.utils.HRMSNetworkCheck;
 
 import org.json.JSONObject;
 
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,7 +24,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by ganesaka on 12/24/2017.
  */
 
-public class PostMethodHandler extends AsyncTask<Void, Void, JSONObject> {
+class PostMethodHandler extends AsyncTask<Void, Void, JSONObject> {
 
     private static final String TAG = "PostMethodHandler-";
 
@@ -46,7 +45,6 @@ public class PostMethodHandler extends AsyncTask<Void, Void, JSONObject> {
         this.url = new URL(url);
         this.activity = activity;
         this.delegate = response;
-        this.jsonString = jsonString;
         this.requestMap = requestMap;
     }
 
@@ -94,7 +92,7 @@ public class PostMethodHandler extends AsyncTask<Void, Void, JSONObject> {
             }
             conn.connect();
             //os.flush();
-            String response = "";
+            StringBuilder response = new StringBuilder();
             int status = conn.getResponseCode();
             Log.d(TAG + "Response Code-", status + "");
             Scanner inStream = null;
@@ -111,10 +109,10 @@ public class PostMethodHandler extends AsyncTask<Void, Void, JSONObject> {
             if (inStream != null) {
                 //process the stream and store it in StringBuilder
                 while (inStream.hasNextLine())
-                    response += (inStream.nextLine());
+                    response.append(inStream.nextLine());
             }
             conn.disconnect();
-            Log.d(TAG + "Response-", response);
+            Log.d(TAG + "Response-", response.toString());
 //            if (status == HttpsURLConnection.HTTP_UNAUTHORIZED) {
 //                if (!response.isEmpty()) {
 //                    JSONObject json = new JSONObject(response);
@@ -129,14 +127,14 @@ public class PostMethodHandler extends AsyncTask<Void, Void, JSONObject> {
 //            }
 
             if (status == HttpsURLConnection.HTTP_UNAUTHORIZED) {
-                if (!response.isEmpty()) {
-                    Log.d(TAG + "SC_UNAUTHORIZED-", response);
-                    JSONObject json = new JSONObject(response);
+                if (response.length() > 0) {
+                    Log.d(TAG + "SC_UNAUTHORIZED-", response.toString());
+                    JSONObject json = new JSONObject(response.toString());
                     jsonObject = json.getJSONObject("meta");
                 }
             } else {
-                if (!response.isEmpty()) {
-                    jsonObject = new JSONObject(response);
+                if (response.length() > 0) {
+                    jsonObject = new JSONObject(response.toString());
                 }
             }
 

@@ -2,7 +2,6 @@ package com.sphinax.hrms.servicehandler;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -13,10 +12,6 @@ import com.sphinax.hrms.model.PaymentData;
 import com.sphinax.hrms.model.ServiceRequest;
 import com.sphinax.hrms.utils.Utility;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
@@ -32,7 +27,7 @@ public class WebServiceHandler {
     private Activity serviceActivity = null;
     private ServiceRequest serviceRequestValue = null;
 
-    public void genrateOTP (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+    public void genrateOTP (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -41,17 +36,15 @@ public class WebServiceHandler {
             String url = Constants.GENRATE_OTP_URL;
             url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
 
-            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                delegate.onSuccess(true);
+                        try {
+                            delegate.onSuccess(true);
 //                                if (output.getInt("resCode") == 1) {
 //                                    LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
 //                                    delegate.onSuccess(true);
@@ -59,21 +52,20 @@ public class WebServiceHandler {
 //                                }else {
 //                                    delegate.onSuccess(false);
 //                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
-                            }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             validateUserHandler.execute();
@@ -84,7 +76,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void checkOTP (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+    public void checkOTP (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -93,38 +85,35 @@ public class WebServiceHandler {
             String url = Constants.CHECK_OTP_URL;
             url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
 
-            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
+                        try {
 
-                                if (output.getInt("resCode") == 1) {
+                            if (output.getInt("resCode") == 1) {
 
-                                    delegate.onSuccess(true);
-                                }else {
-                                    delegate.onSuccess(false);
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
+                                delegate.onSuccess(true);
+                            }else {
+                                delegate.onSuccess(false);
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             validateUserHandler.execute();
@@ -135,7 +124,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void changePassword (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+    public void changePassword (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -144,38 +133,35 @@ public class WebServiceHandler {
             String url = Constants.PASSWORD_CHANGE_URL;
             url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
 
-            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
+                        try {
 
-                                if (output.getInt("resCode") == 1) {
+                            if (output.getInt("resCode") == 1) {
 
-                                    delegate.onSuccess(true);
-                                }else {
-                                    delegate.onSuccess(false);
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
+                                delegate.onSuccess(true);
+                            }else {
+                                delegate.onSuccess(false);
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             validateUserHandler.execute();
@@ -186,7 +172,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void getCompanyList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getCompanyList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -194,39 +180,36 @@ public class WebServiceHandler {
 
             String url = Constants.COMPANY_LIST_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                                try {
-                                    if (output.getJSONArray("ajax") != null) {
-                                        CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                        delegate.onSuccess(true);
-                                        delegate.onReturnObject(companyDataObject);
-                                    }else {
-                                        delegate.onSuccess(false);
+                            try {
+                                if (output.getJSONArray("ajax") != null) {
+                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                }else {
+                                    delegate.onSuccess(false);
 
-                                    }
-                                } catch (Exception e) {
-                                    delegate.onParseError();
                                 }
-                            }else {
-                            delegate.onNetworkError();
-                        }
+                            } catch (Exception e) {
+                                delegate.onParseError();
+                            }
+                        }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -238,7 +221,7 @@ public class WebServiceHandler {
     }
 
 
-    public void getBranchList(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) throws MalformedURLException {
+    public void getBranchList(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -246,39 +229,36 @@ public class WebServiceHandler {
 
             String url = Constants.BRANCH_LIST_REQUEST_URL;
 
-            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             branchListHandler.execute();
@@ -289,7 +269,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void getDepartmentList(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) throws MalformedURLException {
+    public void getDepartmentList(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -297,39 +277,36 @@ public class WebServiceHandler {
 
             String url = Constants.DEPARTMENT_LIST_REQUEST_URL;
 
-            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             branchListHandler.execute();
@@ -340,7 +317,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void getEmpList(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) throws MalformedURLException {
+    public void getEmpList(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -348,39 +325,36 @@ public class WebServiceHandler {
 
             String url = Constants.EMPLOYEE_LIST_REQUEST_URL;
 
-            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             branchListHandler.execute();
@@ -392,7 +366,7 @@ public class WebServiceHandler {
     }
 
 
-    public void validateUser (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+    public void validateUser (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -401,39 +375,36 @@ public class WebServiceHandler {
             String url = Constants.LOGIN_REQUEST_URL;
             url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
 
-            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
+                        try {
 
-                                if (output.getInt("resCode") == 1) {
-                                    LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(loginDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
+                            if (output.getInt("resCode") == 1) {
+                                LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(loginDataObject);
+                            }else {
+                                delegate.onSuccess(false);
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             validateUserHandler.execute();
@@ -444,7 +415,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void getDailyUserAttendance(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) throws MalformedURLException {
+    public void getDailyUserAttendance(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -452,39 +423,36 @@ public class WebServiceHandler {
 
             String url = Constants.ATTENDANCE_ALREADY_ENTER_URL;
 
-            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if(output.getInt("resCode") == 1){
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }}else {
-                                    delegate.onSuccess(false);
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
+                        try {
+                            if(output.getInt("resCode") == 1){
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }}else {
+                                delegate.onSuccess(false);
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             branchListHandler.execute();
@@ -495,7 +463,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void markDailyUserAttendance(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) throws MalformedURLException {
+    public void markDailyUserAttendance(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -503,36 +471,33 @@ public class WebServiceHandler {
 
             String url = Constants.ATTENDANCE_ENTER_URL;
 
-            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if(output.getInt("resCode") == 1){
-                                    delegate.onSuccess(true);
-                                   }else {
-                                    delegate.onSuccess(false);
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
+                        try {
+                            if(output.getInt("resCode") == 1){
+                                delegate.onSuccess(true);
+                               }else {
+                                delegate.onSuccess(false);
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             branchListHandler.execute();
@@ -543,7 +508,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void getLeaveTypeList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getLeaveTypeList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -551,39 +516,36 @@ public class WebServiceHandler {
 
             String url = Constants.LEAVE_COUNT_AND_TYPE_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -595,7 +557,7 @@ public class WebServiceHandler {
     }
 
 
-    public void getUserInfo(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getUserInfo(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -603,39 +565,36 @@ public class WebServiceHandler {
 
             String url = Constants.PROFILE_INFO_REQUEST_URL;
 
-            GetMethodHandler userListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler userListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             userListHandler.execute();
@@ -647,7 +606,7 @@ public class WebServiceHandler {
     }
 
 
-    public void getQueryTypeList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getQueryTypeList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -655,41 +614,38 @@ public class WebServiceHandler {
 
             String url = Constants.HR_HELPDESK_QUERY_LIST_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
-                            delegate.onSuccess(false);
-
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                        delegate.onSuccess(false);
+
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -700,7 +656,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void getEMPQueryList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getEMPQueryList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -708,39 +664,36 @@ public class WebServiceHandler {
 
             String url = Constants.HR_HELPDESK_EMPLOYEE_LIST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -752,7 +705,7 @@ public class WebServiceHandler {
     }
 
 
-    public void saveUserQuery(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) throws MalformedURLException {
+    public void saveUserQuery(Activity activity, final Context context,  HashMap<String, String> requestMap ,ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -760,36 +713,33 @@ public class WebServiceHandler {
 
             String url = Constants.HR_HELPDESK_EMPLOYEE_SAVE_URL;
 
-            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler branchListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if(output.getInt("resCode") == 1){
-                                    delegate.onSuccess(true);
-                                }else {
-                                    delegate.onSuccess(false);
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
+                        try {
+                            if(output.getInt("resCode") == 1){
+                                delegate.onSuccess(true);
+                            }else {
+                                delegate.onSuccess(false);
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             branchListHandler.execute();
@@ -802,7 +752,7 @@ public class WebServiceHandler {
 
 
 
-    public void getAnnouncementList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getAnnouncementList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -810,39 +760,36 @@ public class WebServiceHandler {
 
             String url = Constants.ANNOUNCEMENT_LIST_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -855,7 +802,7 @@ public class WebServiceHandler {
 
 
 
-    public void getYearList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getYearList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -863,39 +810,36 @@ public class WebServiceHandler {
 
             String url = Constants.PAYSLIP_YEAR_LIST_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -907,7 +851,7 @@ public class WebServiceHandler {
     }
 
 
-    public void getMonthList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getMonthList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -915,39 +859,36 @@ public class WebServiceHandler {
 
             String url = Constants.PAYSLIP_MONTH_LIST_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -959,7 +900,7 @@ public class WebServiceHandler {
     }
 
 
-    public void getDisplayPaySlip(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getDisplayPaySlip(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -967,47 +908,44 @@ public class WebServiceHandler {
 
             String url = Constants.PAYSLIP_DETAIL_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                  if (output.getInt("resCode") == 1) {
-                                    if (output.getJSONObject("ajax") != null) {
-                                        Log.d("ajaxList", "earning --> " + output.getJSONObject("ajax"));
-                                        PaymentData companyDataObject = gson.fromJson(output.toString(), PaymentData.class);
-                                        Log.d("ajaxList", "earning --> " + companyDataObject.getAjax());
+                        try {
+                              if (output.getInt("resCode") == 1) {
+                                if (output.getJSONObject("ajax") != null) {
+                                    Log.d("ajaxList", "earning --> " + output.getJSONObject("ajax"));
+                                    PaymentData companyDataObject = gson.fromJson(output.toString(), PaymentData.class);
+                                    Log.d("ajaxList", "earning --> " + companyDataObject.getAjax());
 
-                                        delegate.onSuccess(true);
-                                        delegate.onReturnObject(companyDataObject);
-                                    } else {
-                                        delegate.onSuccess(false);
+                                    delegate.onSuccess(true);
+                                    delegate.onReturnObject(companyDataObject);
+                                } else {
+                                    delegate.onSuccess(false);
 
-                                    }
-                                }else {
-                                      delegate.onSuccess(false);
-                                      delegate.onReturnObject(null);
-                                  }
-                            } catch (Exception e) {
-                                delegate.onParseError();
-                            }
-                        }else {
-                            delegate.onNetworkError();
+                                }
+                            }else {
+                                  delegate.onSuccess(false);
+                                  delegate.onReturnObject(null);
+                              }
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -1018,7 +956,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void getAttendanceReport(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getAttendanceReport(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -1026,41 +964,38 @@ public class WebServiceHandler {
 
             String url = Constants.ATTENDANCE_REPORT_EMPLOYEE_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    Log.d("ajaxList 1", "earning --> " + output.getJSONArray("ajax"));
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                Log.d("ajaxList 1", "earning --> " + output.getJSONArray("ajax"));
 
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -1081,39 +1016,36 @@ public class WebServiceHandler {
 
             String url = Constants.PAYSLIP_EARNING_DETAIL_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -1132,39 +1064,36 @@ public class WebServiceHandler {
 
             String url = Constants.PAYSLIP_DEDUCTION_DETAIL_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -1210,7 +1139,7 @@ public class WebServiceHandler {
 //        }
 //    }
 
-    public void getEmpLeaveList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) throws MalformedURLException {
+    public void getEmpLeaveList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -1218,39 +1147,36 @@ public class WebServiceHandler {
 
             String url = Constants.EMP_LEAVE_LIST_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -1269,39 +1195,36 @@ public class WebServiceHandler {
 
             String url = Constants.LEAVE_LIST_REQUEST_URL;
 
-            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getJSONArray("ajax") != null) {
-                                    CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(companyDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
 
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             companyListHandler.execute();
@@ -1312,7 +1235,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void saveAnnouncement (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+    public void saveAnnouncement (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -1321,39 +1244,36 @@ public class WebServiceHandler {
             String url = Constants.ANNOUNCEMENT_SAVE_URL;
            // url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
 
-            PostMethodHandler validateUserHandler = new PostMethodHandler(activity, serviceContext, url,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            PostMethodHandler validateUserHandler = new PostMethodHandler(activity, serviceContext, url,requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
+                        try {
 
-                                if (output.getInt("resCode") == 1) {
-                                    LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(loginDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
+                            if (output.getInt("resCode") == 1) {
+                                LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(loginDataObject);
+                            }else {
+                                delegate.onSuccess(false);
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             validateUserHandler.execute();
@@ -1365,7 +1285,7 @@ public class WebServiceHandler {
     }
 
 
-    public void applyLeaveRequest (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+    public void applyLeaveRequest (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -1373,39 +1293,36 @@ public class WebServiceHandler {
 
             String url = Constants.LEAVE_APPLY_REQUEST;
 
-            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
+                        try {
 
-                                if (output.getInt("resCode") == 1) {
-                                    LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
-                                    delegate.onSuccess(true);
-                                    delegate.onReturnObject(loginDataObject);
-                                }else {
-                                    delegate.onSuccess(false);
-                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
+                            if (output.getInt("resCode") == 1) {
+                                LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(loginDataObject);
+                            }else {
+                                delegate.onSuccess(false);
                             }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             validateUserHandler.execute();
@@ -1416,7 +1333,7 @@ public class WebServiceHandler {
         }
     }
 
-    public void upodateHrHelp (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) throws MalformedURLException {
+    public void upodateHrHelp (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
         try {
             delegate = callback;
             serviceContext = context;
@@ -1425,19 +1342,17 @@ public class WebServiceHandler {
             String url = Constants.HR_HELPDESK_EMPLOYEE_UPDATE_URL;
             url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
 
-            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, true,requestMap , new AsyncResponse() {
-                @Override
-                public void processFinish(Context responseContext, JSONObject output) throws JSONException {
-                    Gson gson = new Gson();
-                    try {
-                        if (output != null) {
+            GetMethodHandler validateUserHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
 //                            if (CheckUnAuthorised(output)) {
 //                                delegate.unAuthorized();
 //                            } else {
-                            try {
-                                if (output.getInt("resCode") == 0) {
-                                    delegate.onSuccess(true);
-                                }
+                        try {
+                            if (output.getInt("resCode") == 0) {
+                                delegate.onSuccess(true);
+                            }
 //                                if (output.getInt("resCode") == 1) {
 //                                    LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
 //                                    delegate.onSuccess(true);
@@ -1445,21 +1360,20 @@ public class WebServiceHandler {
 //                                }else {
 //                                    delegate.onSuccess(false);
 //                                }
-                            } catch (Exception e) {
-                                delegate.onParseError();
-                            }
-                        }else {
-                            delegate.onNetworkError();
+                        } catch (Exception e) {
+                            delegate.onParseError();
                         }
+                    }else {
+                        delegate.onNetworkError();
+                    }
 //                        } else {
 //
 //                            delegate.onNetworkError();
 //                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                        delegate.onNetworkError();
-                    }
+                    delegate.onNetworkError();
                 }
             });
             validateUserHandler.execute();

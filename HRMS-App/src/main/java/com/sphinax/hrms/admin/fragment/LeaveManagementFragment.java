@@ -70,7 +70,7 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
     private int departmentPosition = 0;
     private int statusPosition = 0;
     private String empPosition ;
-    String[] leaveTypes = {"Select Status","Approved", "Rejected","Pending"};
+    private final String[] leaveTypes = {"Select Status","Approved", "Rejected","Pending"};
 
 
 
@@ -121,7 +121,8 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
         setListeners();
         fetchCompanyList();
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, leaveTypes);
+        //noinspection unchecked
+        @SuppressWarnings("unchecked") ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, leaveTypes);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spStatus.setAdapter(arrayAdapter);
@@ -298,7 +299,7 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
 
             webServiceHandler.getCompanyList(getActivity(), context, requestMap, new ServiceCallback() {
 
@@ -321,7 +322,7 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
                     Log.d("ajaxList", "size --> " + companyList.size());
 
                     companyDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, companyList,1);
+                            companyList,1);
                     companyDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spCompany.setAdapter(companyDataAdapter);
@@ -369,7 +370,7 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId",String.valueOf(companyId) );
 
             webServiceHandler.getBranchList(getActivity(), context, requestMap, new ServiceCallback() {
@@ -393,14 +394,14 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
                     Log.d("ajaxList", "size --> " + branchList.size());
 
                     Ajax tempObj = new Ajax();
-                    tempObj.setBranchId(0);
-                    tempObj.setBranchName("Select Branch");
+                    tempObj.setBranchId();
+                    tempObj.setBranchName();
                     branchList.add(0,tempObj);
 
 
 
                     branchDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, branchList,2);
+                            branchList,2);
                     branchDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spBranch.setAdapter(branchDataAdapter);
@@ -447,7 +448,7 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("companyId",String.valueOf(companyPosition) );
 
             webServiceHandler.getDepartmentList(getActivity(), context, requestMap, new ServiceCallback() {
@@ -470,12 +471,12 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
                     departmentList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d("ajaxList", "size --> " + departmentList.size());
                     Ajax tempObj = new Ajax();
-                    tempObj.setDeptId(0);
-                    tempObj.setDeptName("Select Department");
+                    tempObj.setDeptId();
+                    tempObj.setDeptName();
                     departmentList.add(0,tempObj);
 
                     departmentDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, departmentList,3);
+                            departmentList,3);
                     departmentDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spDepartment.setAdapter(departmentDataAdapter);
@@ -522,7 +523,7 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("companyId",String.valueOf(companyPosition) );
             Log.d("xdd","" + branchPosition + " " + departmentPosition);
             requestMap.put("branch",String.valueOf(branchPosition) );
@@ -548,12 +549,12 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
                     empList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d("ajaxList", "size --> " + empList.size());
                     Ajax tempObj = new Ajax();
-                    tempObj.setEmpId("");
-                    tempObj.setEmpDesc("Select Employee");
+                    tempObj.setEmpId();
+                    tempObj.setEmpDesc();
                     empList.add(0,tempObj);
 
                     empSpinnerAdapter = new DataSpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, empList);
+                            empList);
                     empSpinnerAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spEmp.setAdapter(empSpinnerAdapter);

@@ -2,6 +2,7 @@ package com.sphinax.hrms.admin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +30,7 @@ public class AdminMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "AdminMenuActivity";
-    DrawerLayout drawer;
+    private DrawerLayout drawer;
     private FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +57,7 @@ public class AdminMenuActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
 
         ImageView iv_drawer_open = findViewById(R.id.iv_drawer_open);
-        iv_drawer_open.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawer.openDrawer(GravityCompat.START);
-            }
-        });
+        iv_drawer_open.setOnClickListener(v -> drawer.openDrawer(GravityCompat.START));
 
         TextView tv_username = headerView.findViewById(R.id.tv_username);
         TextView tv_companyname = headerView.findViewById(R.id.tv_company_name);
@@ -119,7 +115,7 @@ public class AdminMenuActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 

@@ -32,13 +32,13 @@ import java.util.GregorianCalendar;
  */
 
 class CalendarDayAdapter extends ArrayAdapter<Date> {
-    private CalendarPageAdapter mCalendarPageAdapter;
-    private Context mContext;
-    private LayoutInflater mLayoutInflater;
-    private int mMonth;
-    private Calendar mToday = DateUtils.getCalendar();
+    private final CalendarPageAdapter mCalendarPageAdapter;
+    private final Context mContext;
+    private final LayoutInflater mLayoutInflater;
+    private final int mMonth;
+    private final Calendar mToday = DateUtils.getCalendar();
 
-    private CalendarProperties mCalendarProperties;
+    private final CalendarProperties mCalendarProperties;
 
     CalendarDayAdapter(CalendarPageAdapter calendarPageAdapter, Context context, CalendarProperties calendarProperties,
                        ArrayList<Date> dates, int month) {

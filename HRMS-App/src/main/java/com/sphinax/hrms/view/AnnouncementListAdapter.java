@@ -8,19 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.model.Ajax;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Month;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**

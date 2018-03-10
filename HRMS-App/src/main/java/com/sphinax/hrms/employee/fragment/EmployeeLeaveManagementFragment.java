@@ -8,24 +8,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.sphinax.hrms.R;
-import com.sphinax.hrms.common.fragment.SomeProblemFragment;
-import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
-import com.sphinax.hrms.utils.HRMSNetworkCheck;
-import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.EmployeeLeaveViewPagerAdapter;
 
 
 public class EmployeeLeaveManagementFragment extends Fragment {
 
     private static final String TAG = "ApplyLeaveFragment-";
-    private static Context context;
+    //private static Context context;
     private View mView;
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -52,7 +47,7 @@ public class EmployeeLeaveManagementFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
-        context = view.getContext();
+        //context = view.getContext();
         fragmentManager = getActivity().getSupportFragmentManager();
 
         loadComponent();

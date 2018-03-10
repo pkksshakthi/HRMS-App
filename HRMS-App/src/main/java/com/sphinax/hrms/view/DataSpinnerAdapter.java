@@ -3,6 +3,7 @@ package com.sphinax.hrms.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,19 +24,20 @@ public class DataSpinnerAdapter extends ArrayAdapter<Ajax> {
     private final int viewResourceId;
     private final int listViewResourceId;
 
-    public DataSpinnerAdapter(Context context, int textViewResourceId, int listTextViewResourceId, ArrayList<Ajax> objects) {
-        super(context, listTextViewResourceId, objects);
+    public DataSpinnerAdapter(Context context, ArrayList<Ajax> objects) {
+        super(context, android.R.layout.simple_spinner_dropdown_item, objects);
         // TODO Auto-generated constructor stub
         this.data = objects;
         //  LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
-        this.viewResourceId = textViewResourceId;
-        this.listViewResourceId = listTextViewResourceId;
+        this.viewResourceId = android.R.layout.simple_spinner_dropdown_item;
+        this.listViewResourceId = android.R.layout.simple_spinner_dropdown_item;
     }
 
 
+    @NonNull
     @SuppressLint("ViewHolder")
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         TextView textView = null;
         if (viewResourceId == 0) {
             View.inflate(context, android.R.layout.simple_spinner_item, null);
@@ -53,7 +55,7 @@ public class DataSpinnerAdapter extends ArrayAdapter<Ajax> {
     }
 
     @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+    public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if (listViewResourceId == 0) {

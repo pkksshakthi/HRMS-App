@@ -17,7 +17,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/hrmslogofinal"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:fullBackupContent="@xml/backup_descriptor">
         <activity
             android:name=".common.activity.SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

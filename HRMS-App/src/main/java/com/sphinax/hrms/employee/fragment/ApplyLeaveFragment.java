@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,9 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,7 +47,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     private static final String TAG = "ApplyLeaveFragment-";
     private static Context context;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
-    String[] leaveSession = {"First Half", "Second Half"};
+    private final String[] leaveSession = {"First Half", "Second Half"};
     private View mView;
     private Button bt_submit, bt_cancel;
     private TextView tv_start_date, tv_end_date, tv_count;
@@ -61,7 +60,8 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     private int leaveTypePosition = 0;
     private int startsession = 0;
     private int endsession = 0;
-    private int mYear, mMonth, mDay, mHour, mMinute;
+    private int mHour;
+    private int mMinute;
     private int aYear, aMonth;
     //
     //
@@ -83,14 +83,14 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_apply_leave, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
@@ -103,7 +103,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mView.getContext(), LinearLayoutManager.HORIZONTAL, false);
         lv_leave_type.setLayoutManager(layoutManager);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, leaveSession);
+        @SuppressWarnings("unchecked") ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, leaveSession);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_session_start.setAdapter(arrayAdapter);
         sp_session_end.setAdapter(arrayAdapter);
@@ -202,27 +202,22 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
     private void getDate(final String txtValue) {
 
         final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
-                new DatePickerDialog.OnDateSetListener() {
+                (view, year, monthOfYear, dayOfMonth) -> {
 
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-
-                        if (txtValue.equalsIgnoreCase("start")) {
-                            tv_start_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            aYear = year;
-                            aMonth = monthOfYear + 1;
-                            datediffernet();
-                        } else if (txtValue.equalsIgnoreCase("end")) {
-                            tv_end_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            datediffernet();
-                        }
+                    if (txtValue.equalsIgnoreCase("start")) {
+                        tv_start_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        aYear = year;
+                        aMonth = monthOfYear + 1;
+                        datediffernet();
+                    } else if (txtValue.equalsIgnoreCase("end")) {
+                        tv_end_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        datediffernet();
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -306,9 +301,9 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
-            requestMap.put("empId", Global.getLoginInfoData().getUserId().toString());
+            requestMap.put("empId", Global.getLoginInfoData().getUserId());
 
             webServiceHandler.getLeaveTypeList(getActivity(), context, requestMap, new ServiceCallback() {
 
@@ -331,7 +326,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     Log.d(TAG, "size --> " + leaveTypeList.size());
 
                     leaveTypeSpinnerAdapter = new LeaveTypeSpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, leaveTypeList);
+                            leaveTypeList);
                     leaveTypeSpinnerAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     sp_leave_type.setAdapter(leaveTypeSpinnerAdapter);
@@ -353,7 +348,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -382,7 +377,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empID", Global.getLoginInfoData().getUserId());
             requestMap.put("toWhom", Global.getLoginInfoData().getReportsTo());
@@ -436,7 +431,7 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -457,7 +452,6 @@ public class ApplyLeaveFragment extends Fragment implements AdapterView.OnItemSe
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
             //Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
         }
     }
 

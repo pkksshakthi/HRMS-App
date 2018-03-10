@@ -167,7 +167,7 @@ public class ForgotPassword_Fragment extends Fragment implements OnClickListener
         }
         try {
 
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("userId", userId);
 
@@ -202,7 +202,7 @@ public class ForgotPassword_Fragment extends Fragment implements OnClickListener
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -231,7 +231,7 @@ public class ForgotPassword_Fragment extends Fragment implements OnClickListener
         }
         try {
 
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("userId", userId);
             requestMap.put("otp", ed_otp.getText().toString());
@@ -271,7 +271,7 @@ public class ForgotPassword_Fragment extends Fragment implements OnClickListener
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -300,7 +300,7 @@ public class ForgotPassword_Fragment extends Fragment implements OnClickListener
         }
         try {
 
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("userId", userId);
             requestMap.put("newPass", password);
@@ -335,7 +335,7 @@ public class ForgotPassword_Fragment extends Fragment implements OnClickListener
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -356,8 +356,7 @@ public class ForgotPassword_Fragment extends Fragment implements OnClickListener
     public void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment());
         }
     }
 }

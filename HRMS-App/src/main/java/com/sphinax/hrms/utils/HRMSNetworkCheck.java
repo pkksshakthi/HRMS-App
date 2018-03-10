@@ -18,9 +18,7 @@ public class HRMSNetworkCheck {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo ni = cm.getActiveNetworkInfo();
             return ni != null && ni.isAvailable() && ni.isConnected();
-        }catch (SecurityException e) {
-            e.printStackTrace();
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
         return false;

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,8 +20,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -59,7 +58,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
@@ -67,7 +66,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
@@ -77,36 +76,31 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
         // Set check listener over checkbox for showing and hiding password
         show_hide_password
-                .setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                .setOnCheckedChangeListener((button, isChecked) -> {
 
-                    @Override
-                    public void onCheckedChanged(CompoundButton button,
-                                                 boolean isChecked) {
+                    // If it is checkec then show password else hide
+                    // password
+                    if (isChecked) {
 
-                        // If it is checkec then show password else hide
-                        // password
-                        if (isChecked) {
+                        show_hide_password.setText(R.string.hide_pwd);// change
+                        // checkbox
+                        // text
 
-                            show_hide_password.setText(R.string.hide_pwd);// change
-                            // checkbox
-                            // text
+                        password.setInputType(InputType.TYPE_CLASS_TEXT);
+                        password.setTransformationMethod(HideReturnsTransformationMethod
+                                .getInstance());// show password
+                    } else {
+                        show_hide_password.setText(R.string.show_pwd);// change
+                        // checkbox
+                        // text
 
-                            password.setInputType(InputType.TYPE_CLASS_TEXT);
-                            password.setTransformationMethod(HideReturnsTransformationMethod
-                                    .getInstance());// show password
-                        } else {
-                            show_hide_password.setText(R.string.show_pwd);// change
-                            // checkbox
-                            // text
-
-                            password.setInputType(InputType.TYPE_CLASS_TEXT
-                                    | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                            password.setTransformationMethod(PasswordTransformationMethod
-                                    .getInstance());// hide password
-
-                        }
+                        password.setInputType(InputType.TYPE_CLASS_TEXT
+                                | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        password.setTransformationMethod(PasswordTransformationMethod
+                                .getInstance());// hide password
 
                     }
+
                 });
     }
 
@@ -186,9 +180,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
             String url = Constants.LOGIN_REQUEST_URL;
             url = url.replace("{COMPANYID}", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
-            HashMap<String, String> requestMap = new HashMap<String, String>();
-            requestMap.put("userId", userNameValue.toString());
-            requestMap.put("userpwd", password.toString());
+            HashMap<String, String> requestMap = new HashMap<>();
+            requestMap.put("userId", userNameValue);
+            requestMap.put("userpwd", password);
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("url", url);
 
@@ -199,7 +193,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    if (flag == true) {
+                    if (flag) {
                         //  startMenuActivity("user");
                     } else {
                         Utility.showCustomToast(getActivity(), mView, getResources().getString(R.string.invalidUser));
@@ -233,7 +227,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -254,8 +248,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
+            Utility.callErrorScreen(getActivity(), R.id.frameContainer, fragmentManager, new SomeProblemFragment());
         }
     }
 }

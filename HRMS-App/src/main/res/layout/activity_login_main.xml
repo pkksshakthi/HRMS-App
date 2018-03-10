@@ -36,7 +36,8 @@
         android:layout_below="@+id/close_activity"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/sphinax" />
+        android:background="@drawable/sphinax"
+        android:contentDescription="TODO" />
 
     <View
         android:id="@+id/view"
@@ -55,7 +56,8 @@
         android:layout_below="@+id/textView9"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:background="@drawable/logo_latest" />
+        android:background="@drawable/logo_latest"
+        android:contentDescription="TODO" />
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,7 +42,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
     private static final String TAG = "AnnouncementListFragment-";
     private static Context context;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
-    ArrayList<String> years = new ArrayList<String>();
+    private ArrayList<String> years = new ArrayList<>();
     private View mView;
 
     private ImageView img_month;
@@ -68,14 +68,14 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_announcement_list, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
@@ -114,7 +114,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
     }
 
     private void loadSpinnerData() {
-        years = new ArrayList<String>();
+        years = new ArrayList<>();
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
         for (int i = 2000; i <= thisYear; i++) {
             years.add(Integer.toString(i));
@@ -141,14 +141,11 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
 
 
     private void getDateMonth() {
-        YearMonthPickerDialog yearMonthPickerDialog = new YearMonthPickerDialog(getActivity(), new YearMonthPickerDialog.OnDateSetListener() {
-            @Override
-            public void onYearMonthSet(int year, int month) {
+        YearMonthPickerDialog yearMonthPickerDialog = new YearMonthPickerDialog(getActivity(), (year, month) -> {
 
-                selectedYear = year;
-                selectedMonth = month+1;
-                fetchAnnouncementList();
-            }
+            selectedYear = year;
+            selectedMonth = month+1;
+            fetchAnnouncementList();
         });
         yearMonthPickerDialog.show();
 
@@ -186,7 +183,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("month", String.valueOf(selectedMonth));
             requestMap.put("year", String.valueOf(selectedYear));
@@ -240,7 +237,7 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -262,7 +259,6 @@ public class AnnouncementListFragment extends Fragment implements AdapterView.On
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
             // Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
-            return;
         }
     }
 }

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
-import com.sphinax.hrms.model.LoginData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
 import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
@@ -41,9 +39,12 @@ public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickLi
     private ProgressDialog pdia;
     private FragmentManager fragmentManager;
     private Ajax ajax;
-    TextView tv_refid,tv_qty_dec,tv_status;
-    EditText ed_upadteNot;
-    Button bt_cancl,bt_update;
+    private TextView tv_refid;
+    private TextView tv_qty_dec;
+    private TextView tv_status;
+    private EditText ed_upadteNot;
+    private Button bt_cancl;
+    private Button bt_update;
 
 
 
@@ -120,7 +121,7 @@ public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickLi
 
            // String url = Constants.LOGIN_REQUEST_URL;
            // url = url.replace("{COMPANYID}", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("companyId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
             requestMap.put("requestStatus", ajax.getStatus());
@@ -137,7 +138,7 @@ public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickLi
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    if (flag == true) {
+                    if (flag) {
                         //  startMenuActivity("user");
                         Utility.showCustomToast(getActivity(), mView, "Already submitted your request");
 
@@ -174,7 +175,7 @@ public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickLi
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
 
                 }
 
@@ -196,27 +197,24 @@ public class UpdateHRHelpDeskFragment extends Fragment implements View.OnClickLi
     public void onResume() {
         super.onResume();
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment(), false, null, Constants.FRAMENT_ERROR);
+            Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
             return;
         }
 
 
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+        getView().setOnKeyListener((v, keyCode, event) -> {
 
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+            if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
 
-                    Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EnterHRHelpdeskFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EnterHRHelpdeskFragment(), false, null, Constants.FRAMENT_LEAVE_MANAGEMENT);
 
-                    return true;
+                return true;
 
-                }
-
-                return false;
             }
+
+            return false;
         });
 
     }

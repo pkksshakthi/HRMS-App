@@ -3,18 +3,16 @@ package com.sphinax.hrms.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.view.Gravity;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.sphinax.hrms.R;
 import com.sphinax.hrms.model.Ajax;
 
 import java.util.ArrayList;
-import java.util.zip.CheckedOutputStream;
 
 /**
  * Created by ganesaka on 12/25/2017.
@@ -27,20 +25,21 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
     private final int listViewResourceId;
     private final int spinnerType;
 
-    public CompanySpinnerAdapter(Context context, int textViewResourceId, int listTextViewResourceId, ArrayList<Ajax> objects,int spinnerType) {
-        super(context, listTextViewResourceId, objects);
+    public CompanySpinnerAdapter(Context context, ArrayList<Ajax> objects, int spinnerType) {
+        super(context, android.R.layout.simple_spinner_dropdown_item, objects);
         // TODO Auto-generated constructor stub
         this.data = objects;
         //  LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
-        this.viewResourceId = textViewResourceId;
-        this.listViewResourceId = listTextViewResourceId;
+        this.viewResourceId = android.R.layout.simple_spinner_dropdown_item;
+        this.listViewResourceId = android.R.layout.simple_spinner_dropdown_item;
         this.spinnerType = spinnerType;
     }
 
 
+    @NonNull
     @SuppressLint("ViewHolder")
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         TextView textView = null;
         if (viewResourceId == 0) {
             View.inflate(context, android.R.layout.simple_spinner_item, null);
@@ -65,7 +64,7 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
     }
 
     @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+    public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if (listViewResourceId == 0) {

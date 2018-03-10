@@ -22,11 +22,7 @@ public interface ServiceCallback {
 
     void onNetworkError();
 
-    /**It Internet connection not available **/
-
-   // void onDataNotAvailable();
-
-    /**It is error send by OPS service **/
+    // void onDataNotAvailable();
 
     //void onError(String errorMessage);
 

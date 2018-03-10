@@ -281,13 +281,13 @@ public class Ajax implements Serializable {
 
     @SerializedName("Earnings")
     @Expose
-    private List<Earning> earnings = null;
+    private final List<Earning> earnings = null;
     @SerializedName("deductions")
     @Expose
-    private List<Deduction> deductions = null;
+    private final List<Deduction> deductions = null;
     @SerializedName("total")
     @Expose
-    private List<Total> total = null;
+    private final List<Total> total = null;
     @SerializedName("Leave Type Id")
     @Expose
     private Integer leaveTypeIds;
@@ -1187,32 +1187,32 @@ public class Ajax implements Serializable {
         return empId;
     }
 
-    public void setEmpId(String empId) {
-        this.empId = empId;
+    public void setEmpId() {
+        this.empId = "";
     }
 
     public String getEmpDesc() {
         return empDesc;
     }
 
-    public void setEmpDesc(String empDesc) {
-        this.empDesc = empDesc;
+    public void setEmpDesc() {
+        this.empDesc = "Select Employee";
     }
 
     public Integer getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Integer deptId) {
-        this.deptId = deptId;
+    public void setDeptId() {
+        this.deptId = 0;
     }
 
     public String getDeptName() {
         return deptName;
     }
 
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
+    public void setDeptName() {
+        this.deptName = "Select Department";
     }
 
     public Integer getCompId() {
@@ -1249,16 +1249,16 @@ public class Ajax implements Serializable {
         return branchId;
     }
 
-    public void setBranchId(Integer branchId) {
-        this.branchId = branchId;
+    public void setBranchId() {
+        this.branchId = 0;
     }
 
     public String getBranchName() {
         return branchName;
     }
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public void setBranchName() {
+        this.branchName = "Select Branch";
     }
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):

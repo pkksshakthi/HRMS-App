@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -105,14 +105,14 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_admin_announcement_create, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
@@ -120,18 +120,12 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
         setListeners();
         fetchCompanyList();
          myCalendar = Calendar.getInstance();
-        dater = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updatedateLabel();
-            }
-
+        dater = (view1, year, monthOfYear, dayOfMonth) -> {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updatedateLabel();
         };
 
 
@@ -295,7 +289,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
 
             webServiceHandler.getCompanyList(getActivity(), context, requestMap, new ServiceCallback() {
 
@@ -318,7 +312,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
                     Log.d("ajaxList", "size --> " + companyList.size());
 
                     companyDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, companyList,1);
+                            companyList,1);
                     companyDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spCompany.setAdapter(companyDataAdapter);
@@ -366,7 +360,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("compId",String.valueOf(companyId) );
 
             webServiceHandler.getBranchList(getActivity(), context, requestMap, new ServiceCallback() {
@@ -389,11 +383,11 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
                     branchList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d("ajaxList", "size --> " + branchList.size());
                     Ajax tempObj = new Ajax();
-                    tempObj.setBranchId(0);
-                    tempObj.setBranchName("Select Branch");
+                    tempObj.setBranchId();
+                    tempObj.setBranchName();
                     branchList.add(0,tempObj);
                     branchDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, branchList,2);
+                            branchList,2);
                     branchDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spBranch.setAdapter(branchDataAdapter);
@@ -440,7 +434,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("companyId",String.valueOf(companyPosition) );
 
             webServiceHandler.getDepartmentList(getActivity(), context, requestMap, new ServiceCallback() {
@@ -463,11 +457,11 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
                     departmentList = (ArrayList<Ajax>) companyData.getAjax();
                     Log.d("ajaxList", "size --> " + departmentList.size());
                     Ajax tempObj = new Ajax();
-                    tempObj.setDeptId(0);
-                    tempObj.setDeptName("Select Department");
+                    tempObj.setDeptId();
+                    tempObj.setDeptName();
                     departmentList.add(0,tempObj);
                     departmentDataAdapter = new CompanySpinnerAdapter(context,
-                            android.R.layout.simple_spinner_dropdown_item, android.R.layout.simple_spinner_dropdown_item, departmentList,3);
+                            departmentList,3);
                     departmentDataAdapter
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spDepartment.setAdapter(departmentDataAdapter);
@@ -515,7 +509,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             pdia.show();
         }
         try {
-            HashMap<String, String> requestMap = new HashMap<String, String>();
+            HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put("companyId",String.valueOf(companyPosition) );
             requestMap.put("empID", Global.getLoginInfoData().getUserId());
             requestMap.put("activityDate",dateValue );

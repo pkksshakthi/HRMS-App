@@ -2,10 +2,10 @@ package com.sphinax.hrms.employee.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
-import com.sphinax.hrms.common.fragment.SomeProblemFragment;
-import com.sphinax.hrms.global.Constants;
-import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
-import com.sphinax.hrms.utils.HRMSNetworkCheck;
-import com.sphinax.hrms.utils.Utility;
 
 
 public class EmployeeLeaveFullContentFragment extends Fragment {
@@ -36,19 +31,14 @@ public class EmployeeLeaveFullContentFragment extends Fragment {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_employee_leave_full_content, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
