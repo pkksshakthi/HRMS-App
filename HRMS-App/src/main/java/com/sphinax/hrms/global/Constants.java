@@ -3,8 +3,10 @@ package com.sphinax.hrms.global;
 /**It is Constants class where we declare all static variables**/
 public class Constants {
 
-    //Live
-    private static final String httpPath = "http://e-lite.in:8080/";
+    //DEMO
+  //  private static final String httpPath = "http://e-lite.in:8080/";
+    // Live
+    private static final String httpPath = "http://e-lite-in:9090/";
     private static final String restPath = "ezhrRest/";
     private static final String domain = httpPath + restPath;
     private static final String client = "user/";
