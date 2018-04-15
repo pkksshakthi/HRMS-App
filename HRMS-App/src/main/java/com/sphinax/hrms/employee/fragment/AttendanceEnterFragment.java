@@ -177,10 +177,10 @@ public class AttendanceEnterFragment extends Fragment implements
         setListeners();
 
 
-        if (Global.isMarkAttendance()) {
-            bt_In_att.setEnabled(false);
-            bt_In_att.setClickable(false);
-        }
+//        if (Global.isMarkAttendance()) {
+//            bt_In_att.setEnabled(false);
+//            bt_In_att.setClickable(false);
+//        }
         loadBitmap(Global.getLoginInfoData().getEmpImage());
 
     }
@@ -361,11 +361,39 @@ public class AttendanceEnterFragment extends Fragment implements
             if (ajaxList.get(0).getCheckInTime() != null && !ajaxList.get(0).getCheckInTime().equalsIgnoreCase("")) {
                 bt_In_att.setText(covertDate(ajaxList.get(0).getCheckInTime(),"CHECK-In TIME"));
                 tv_att_details.setText(ajaxList.get(0).getLocation());
-                if (ajaxList.get(0).getCheckOutTime().equalsIgnoreCase("")) {
-                    bt_out_att.setText("CHECK-OUT TIME");
-                } else {
+                bt_In_att.setEnabled(false);
+                bt_In_att.setClickable(false);
+
+                if (!ajaxList.get(0).getCheckOutTime().equalsIgnoreCase("")) {
                     bt_In_att.setText(covertDate(ajaxList.get(0).getCheckOutTime(),"CHECK-Out TIME" ));
+                    bt_out_att.setEnabled(false);
+                    bt_out_att.setClickable(false);
+                } else {
+
+                    if (Global.getLoginInfoData().getMarkAttendacne().equalsIgnoreCase("S")) {
+                        bt_out_att.setEnabled(true);
+                        bt_out_att.setClickable(true);
+                    }else{
+                        bt_out_att.setEnabled(false);
+                        bt_out_att.setClickable(false);
+                    }
+                    bt_out_att.setText("CHECK-OUT TIME");
                 }
+
+            }else{
+                if (Global.getLoginInfoData().getMarkAttendacne().equalsIgnoreCase("S")) {
+                    bt_In_att.setEnabled(true);
+                    bt_In_att.setClickable(true);
+                    bt_out_att.setEnabled(false);
+                    bt_out_att.setClickable(false);
+                }else{
+                    bt_In_att.setEnabled(false);
+                    bt_In_att.setClickable(false);
+                    bt_out_att.setEnabled(false);
+                    bt_out_att.setClickable(false);
+                }
+                bt_In_att.setText("CHECK-In TIME");
+                bt_out_att.setText("CHECK-OUT TIME");
             }
         }
     }
@@ -457,21 +485,27 @@ public class AttendanceEnterFragment extends Fragment implements
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-
-                    if (flag) {
-                        //enterUserAttendance();
-                        Global.setMarkAttendance(flag);
+                    if (!flag) {
                         bt_In_att.setEnabled(false);
                         bt_In_att.setClickable(false);
-                    } else {
-                        if (Global.getLoginInfoData().getMarkAttendacne().equalsIgnoreCase("S")) {
-                            Global.setMarkAttendance(false);
-                        } else {
-                            bt_In_att.setEnabled(false);
-                            bt_In_att.setClickable(false);
-                        }
-                        bt_In_att.setText("Check-In Time");
+                        bt_out_att.setEnabled(false);
+                        bt_out_att.setClickable(false);
                     }
+
+//                    if (flag) {
+//                        //enterUserAttendance();
+//                        Global.setMarkAttendance(flag);
+//                        bt_In_att.setEnabled(false);
+//                        bt_In_att.setClickable(false);
+//                    } else {
+//                        if (Global.getLoginInfoData().getMarkAttendacne().equalsIgnoreCase("S")) {
+//                            Global.setMarkAttendance(false);
+//                        } else {
+//                            bt_In_att.setEnabled(false);
+//                            bt_In_att.setClickable(false);
+//                        }
+//                        bt_In_att.setText("Check-In Time");
+//                    }
                 }
 
                 @Override
@@ -555,13 +589,11 @@ public class AttendanceEnterFragment extends Fragment implements
 
                     if (!flag) {
                         bt_In_att.setText("Check-In Time");
+                        bt_out_att.setText("Check-Out Time");
                         tv_att_details.setText("");
+                        fetchDailyUserAttendance();
                     } else if (flag) {
                         fetchDailyUserAttendance();
-                        //bt_In_att.setText("Check-In Time \n "+datetime);
-                        bt_In_att.setEnabled(false);
-                        bt_In_att.setClickable(false);
-                        Global.setMarkAttendance(flag);
                     }
                 }
 
