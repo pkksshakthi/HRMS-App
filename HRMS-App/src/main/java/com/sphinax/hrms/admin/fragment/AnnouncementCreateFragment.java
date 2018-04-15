@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
@@ -61,8 +64,8 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private Spinner spCompany,spBranch,spDepartment;
     private Button btSubmit;
-    private EditText btDate;
-    private EditText ed_mess;
+    private TextView btDate;
+    private EditText ed_mess,ed_title;
     private CompanySpinnerAdapter companyDataAdapter;
     private CompanySpinnerAdapter branchDataAdapter;
     private CompanySpinnerAdapter departmentDataAdapter;
@@ -71,7 +74,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
     private int departmentPosition = 0;
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener dater;
-
+    private FragmentManager fragmentManager;
 
     public AnnouncementCreateFragment() {
         // Required empty public constructor
@@ -119,6 +122,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
         loadComponent();
         setListeners();
         fetchCompanyList();
+        fragmentManager = getActivity().getSupportFragmentManager();
          myCalendar = Calendar.getInstance();
         dater = (view1, year, monthOfYear, dayOfMonth) -> {
             // TODO Auto-generated method stub
@@ -137,6 +141,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
         spDepartment = mView.findViewById(R.id.sp_department);
         btDate = mView.findViewById(R.id.bt_date_picker);
         ed_mess = mView.findViewById(R.id.ed_message_box);
+        ed_title = mView.findViewById(R.id.ed_title);
         btSubmit = mView.findViewById(R.id.bt_submit);
 
     }
@@ -234,15 +239,18 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
 //            if (ajaxList != null) {
 //               // ajax = ajaxList.get(spinnerPosition);
 //            }
-            if(btDate.getText()!=null && !btDate.getText().toString().equalsIgnoreCase("") && ed_mess.getText()!=null && !ed_mess.getText().toString().equalsIgnoreCase("")){
-                saveAnnouncement(ed_mess.getText().toString(),btDate.getText().toString());
+            if(btDate.getText()!=null && !btDate.getText().toString().equalsIgnoreCase("") && ed_mess.getText()!=null && !ed_mess.getText().toString().equalsIgnoreCase("") && ed_title.getText()!=null && !ed_title.getText().toString().equalsIgnoreCase("")){
+                saveAnnouncement(ed_mess.getText().toString(),btDate.getText().toString(),ed_title.getText().toString());
             }else {
-                if(btDate.getText()!=null && !btDate.getText().toString().equalsIgnoreCase("")){
-                    Utility.showToastMessage(getActivity(),"Please Enter the Date");
+                if(btDate.getText() ==null && btDate.getText().toString().equalsIgnoreCase("")){
+                    Utility.showCustomToast(context, mView, "Please Enter the Date");
 
                 }
-                if(ed_mess.getText()!=null && !ed_mess.getText().toString().equalsIgnoreCase("")){
-                    Utility.showToastMessage(getActivity(),"Please Enter the Message");
+                if(ed_mess.getText()==null && ed_mess.getText().toString().equalsIgnoreCase("")){
+                    Utility.showCustomToast(context, mView, "Please Enter the Message");
+
+                } if(ed_title.getText()==null && ed_title.getText().toString().equalsIgnoreCase("")){
+                    Utility.showCustomToast(context, mView, "Please Enter the Title");
 
                 }
 
@@ -280,7 +288,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
 
     private void fetchCompanyList() {
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(context, mView,  getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         pdia = new ProgressDialog(getActivity());
@@ -351,7 +359,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
 
     private void fetchBranchList(int companyId) {
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(context, mView,  getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         pdia = new ProgressDialog(getActivity());
@@ -425,7 +433,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
 
     private void fetchDepartmentList(int branchId) {
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(context, mView, getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         pdia = new ProgressDialog(getActivity());
@@ -498,9 +506,9 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
     }
 
 
-    private void saveAnnouncement(String valueText,String dateValue) {
+    private void saveAnnouncement(String valueText,String dateValue,String title) {
         if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
-            Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
+            Utility.showCustomToast(context, mView,  getResources().getString(R.string.invalidInternetConnection));
             return;
         }
         pdia = new ProgressDialog(getActivity());
@@ -517,7 +525,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             requestMap.put("activityTypeId",String.valueOf(1) );
             requestMap.put("deptId",String.valueOf(departmentPosition) );
             requestMap.put("branch",String.valueOf(branchPosition) );
-            requestMap.put("annTitle","Announcement" );
+            requestMap.put("annTitle",title );
 
 
 
@@ -531,9 +539,13 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
                     }
 
                     if (flag){
+
+                       Utility.showCustomToast(context, mView, "Announcement successfully saved");
                         ed_mess.setText("");
+                        btDate.setText("");
+                        ed_title.setText("");
                     }else {
-                        Utility.showToastMessage(getActivity(), "Announcement not send kindly try again");
+                        Utility.showCustomToast(context, mView,  "Announcement not send kindly try again");
 
                     }
                 }
@@ -559,6 +571,8 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
                         pdia.dismiss();
                     }
                     //  Utility.callServerNotResponding(context);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
+
                 }
 
                 @Override

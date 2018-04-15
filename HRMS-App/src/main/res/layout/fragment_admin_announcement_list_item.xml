@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:elevation="5dp"
+
+        card_view:cardElevation="5dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/comp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="#094A73"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:id="@+id/tv_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#298CB3"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_Announ_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" Announcement List"
+                    android:textColor="#407694"
+                    android:textSize="7pt"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#407694"></View>
+
+                <TextView
+                    android:id="@+id/tv_Announ_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" Announcement List"
+                    android:textColor="#3C2FE7"
+                    android:textSize="7pt" />
+
+                <TextView
+                    android:id="@+id/tv_Announ_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" Announcement List"
+                    android:textSize="7pt"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

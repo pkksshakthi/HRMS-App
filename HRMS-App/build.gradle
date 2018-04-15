@@ -5,7 +5,7 @@ android {
         HRMS {
             keyAlias 'HRMS'
             keyPassword 'android'
-            storeFile file('C:/Users/psak/.android/debug.keystore')
+            storeFile file('C:/Users/ganesaka/.android/debug.keystore')
             storePassword 'android'
         }
     }
@@ -29,7 +29,7 @@ android {
             debuggable true
             jniDebuggable true
             signingConfig signingConfigs.HRMS
-            minifyEnabled true
+            minifyEnabled false
             pseudoLocalesEnabled true
             applicationIdSuffix 'com.sphinax.hrms'
             versionNameSuffix '3.0'
