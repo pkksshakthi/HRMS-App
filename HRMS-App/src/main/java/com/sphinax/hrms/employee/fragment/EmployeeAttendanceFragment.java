@@ -155,13 +155,31 @@ public class EmployeeAttendanceFragment extends Fragment {
 
                 mCal.add(Calendar.DAY_OF_MONTH, counter);
 
-                if (ajax.getMorning().equalsIgnoreCase("H") && ajax.getEvening().equalsIgnoreCase("H")) {
-                    events.add(new EventDay(mCal, R.drawable.icon_red_box));
-                } else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("A")) {
+                if (ajax.getMorning().equalsIgnoreCase("P") && ajax.getEvening().equalsIgnoreCase("P")) {
+                   // events.add(new EventDay(mCal, R.drawable.icon_red_box));
+                }
+                else if (ajax.getMorning().equalsIgnoreCase("P") && ajax.getEvening().equalsIgnoreCase("A")) {
 
-                    events.add(new EventDay(mCal, R.drawable.icon_absent));
-                } else {
-                    events.add(new EventDay(mCal, R.drawable.icon_holiday));
+                   // events.add(new EventDay(mCal, R.drawable.icon_absent));
+                }
+                else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("P")) {
+
+                    //events.add(new EventDay(mCal, R.drawable.icon_absent));
+                }
+                else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("A")) {
+
+                    //events.add(new EventDay(mCal, R.drawable.icon_absent));
+                }
+                else if (ajax.getMorning().equalsIgnoreCase("H") && ajax.getEvening().equalsIgnoreCase("H")) {
+
+                    //events.add(new EventDay(mCal, R.drawable.icon_absent));
+                }
+                else if (ajax.getMorning().equalsIgnoreCase("S") && ajax.getEvening().equalsIgnoreCase("S")) {
+
+                    //events.add(new EventDay(mCal, R.drawable.icon_absent));
+                }
+                else {
+                   // events.add(new EventDay(mCal, R.drawable.icon_holiday));
                 }
 
             }
