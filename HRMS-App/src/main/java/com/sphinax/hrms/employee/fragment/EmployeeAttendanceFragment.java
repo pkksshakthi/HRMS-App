@@ -156,30 +156,38 @@ public class EmployeeAttendanceFragment extends Fragment {
                 mCal.add(Calendar.DAY_OF_MONTH, counter);
 
                 if (ajax.getMorning().equalsIgnoreCase("P") && ajax.getEvening().equalsIgnoreCase("P")) {
-                   // events.add(new EventDay(mCal, R.drawable.icon_red_box));
+                   events.add(new EventDay(mCal, R.drawable.icon_present));
                 }
                 else if (ajax.getMorning().equalsIgnoreCase("P") && ajax.getEvening().equalsIgnoreCase("A")) {
 
-                   // events.add(new EventDay(mCal, R.drawable.icon_absent));
+                    events.add(new EventDay(mCal, R.drawable.icon_pa));
                 }
                 else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("P")) {
 
-                    //events.add(new EventDay(mCal, R.drawable.icon_absent));
+                    events.add(new EventDay(mCal, R.drawable.icon_ap));
                 }
                 else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("A")) {
 
-                    //events.add(new EventDay(mCal, R.drawable.icon_absent));
+                    events.add(new EventDay(mCal, R.drawable.icon_absent));
                 }
                 else if (ajax.getMorning().equalsIgnoreCase("H") && ajax.getEvening().equalsIgnoreCase("H")) {
 
-                    //events.add(new EventDay(mCal, R.drawable.icon_absent));
+                    events.add(new EventDay(mCal, R.drawable.icon_holiday));
                 }
                 else if (ajax.getMorning().equalsIgnoreCase("S") && ajax.getEvening().equalsIgnoreCase("S")) {
 
-                    //events.add(new EventDay(mCal, R.drawable.icon_absent));
+                    events.add(new EventDay(mCal, R.drawable.icon_ss));
+                }
+                else if (ajax.getMorning().equalsIgnoreCase("LI") && ajax.getEvening().equalsIgnoreCase("A")) {
+
+                    events.add(new EventDay(mCal, R.drawable.icon_lia));
+                }
+                else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("LI")) {
+
+                    events.add(new EventDay(mCal, R.drawable.icon_ali));
                 }
                 else {
-                   // events.add(new EventDay(mCal, R.drawable.icon_holiday));
+                    events.add(new EventDay(mCal, R.drawable.icon_red_box));
                 }
 
             }
