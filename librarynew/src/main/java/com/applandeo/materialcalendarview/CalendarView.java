@@ -123,7 +123,7 @@ public class CalendarView extends LinearLayout {
             int headerColor = typedArray.getColor(R.styleable.CalendarView_headerColor, 0);
 
             if (headerColor != 0) {
-                ConstraintLayout mCalendarHeader = (ConstraintLayout) findViewById(R.id.calendarHeader);
+                ConstraintLayout mCalendarHeader = findViewById(R.id.calendarHeader);
                 mCalendarHeader.setBackgroundColor(headerColor);
             }
 
@@ -184,7 +184,7 @@ public class CalendarView extends LinearLayout {
         setCalendarRowLayout();
 
         if (mCalendarProperties.getHeaderColor() != 0) {
-            ConstraintLayout mCalendarHeader = (ConstraintLayout) findViewById(R.id.calendarHeader);
+            ConstraintLayout mCalendarHeader = findViewById(R.id.calendarHeader);
             mCalendarHeader.setBackgroundColor(ContextCompat.getColor(mContext, mCalendarProperties.getHeaderColor()));
         }
 
@@ -218,15 +218,15 @@ public class CalendarView extends LinearLayout {
         // in the correct position (in the middle)
         mCalendarProperties.getCurrentDate().add(Calendar.MONTH, -FIRST_VISIBLE_PAGE);
 
-        mForwardButton = (ImageButton) findViewById(R.id.forwardButton);
+        mForwardButton = findViewById(R.id.forwardButton);
         mForwardButton.setOnClickListener(onNextClickListener);
 
-        mPreviousButton = (ImageButton) findViewById(R.id.previousButton);
+        mPreviousButton = findViewById(R.id.previousButton);
         mPreviousButton.setOnClickListener(onPreviousClickListener);
 
-        mCurrentMonthLabel = (TextView) findViewById(R.id.currentDateLabel);
+        mCurrentMonthLabel = findViewById(R.id.currentDateLabel);
 
-        mViewPager = (CalendarViewPager) findViewById(R.id.calendarViewPager);
+        mViewPager = findViewById(R.id.calendarViewPager);
     }
 
     private void initCalendar() {

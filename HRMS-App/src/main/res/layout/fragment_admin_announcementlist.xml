@@ -1,80 +1,121 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sphinax.hrms.employee.fragment.AnnouncementListFragment">
+    tools:context="com.sphinax.hrms.admin.fragment.HRHelpdeskUpdateFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2d5779"
-
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="4dp"
-        tools:ignore="MissingConstraints">
-
-        <Button
-            android:id="@+id/bt_new"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:text="NEW"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/img_date"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:src="@drawable/date_white_icon"
-
-            />
-    </LinearLayout>
-
-
-    <!--<TextView-->
-        <!--android:id="@+id/tv_nodata"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_below="@+id/linearLayout2"-->
-
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:gravity="center"-->
-        <!--android:text="No Data"-->
-        <!--android:textColor="#000000"-->
-        <!--android:textSize="10pt"-->
-
-        <!--/>-->
-
-    <!--<ListView-->
-        <!--android:id="@+id/lv_announcement_data"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/linearLayout2"-->
-        <!--android:padding="5dp"-->
-
-        <!--tools:ignore="MissingConstraints" />-->
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/lv_announcement_data"
-        android:layout_width="match_parent"
-        android:focusable="true"
-        android:clickable="true"
-        android:layout_below="@+id/linearLayout2"
-        android:padding="5dp"
-
-        tools:ignore="MissingConstraints"
-        android:background="?android:selectableItemBackground"
         android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="#3282C9"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="ANNOUNCEMENT"
+            android:textColor="#ffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="#ec1111"
+                android:gravity="center"
+                android:text="NEW"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="right">
+
+                <ImageView
+                    android:id="@+id/img_date"
+                    android:layout_width="32dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+
+                    android:gravity="right"
+
+                    android:src="@drawable/date_color_icon"
+
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
-</RelativeLayout>
+    </LinearLayout>
+</FrameLayout>
+
+
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.sphinax.hrms.employee.fragment.AnnouncementListFragment">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            tools:ignore="MissingConstraints">
+
+            <Button
+                android:id="@+id/bt_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+
+                android:gravity="left"
+                android:text="NEW"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_date"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:src="@drawable/date_color_icon"
+
+                />
+        </LinearLayout>-->
+
+
+    <!--<TextView--><!--android:id="@+id/tv_nodata"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_below="@+id/linearLayout2"-->
+
+    <!--android:layout_centerHorizontal="true"--><!--android:layout_centerVertical="true"--><!--android:gravity="center"--><!--android:text="No Data"--><!--android:textColor="#000000"--><!--android:textSize="10pt"-->
+
+    <!--/>-->
+
+    <!--<ListView--><!--android:id="@+id/lv_announcement_data"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_below="@+id/linearLayout2"--><!--android:padding="5dp"-->
+
+    <!--tools:ignore="MissingConstraints" />-->
+
+
+
+

@@ -69,7 +69,7 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
     private void selectOneDay(View view, Calendar day) {
         SelectedDay previousSelectedDay = mCalendarPageAdapter.getSelectedDay();
 
-        TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
+        TextView dayLabel = view.findViewById(R.id.dayLabel);
 
         if (isAnotherDaySelected(previousSelectedDay, dayLabel, day)) {
             selectDay(dayLabel, day);
@@ -78,7 +78,7 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
     }
 
     private void selectManyDays(View view, Calendar day) {
-        TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
+        TextView dayLabel = view.findViewById(R.id.dayLabel);
 
         if (isCurrentMonthLabel(dayLabel)) {
             SelectedDay selectedDay = new SelectedDay(dayLabel, day);
@@ -94,7 +94,7 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
     }
 
     private void selectRange(View view, Calendar day) {
-        TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
+        TextView dayLabel = view.findViewById(R.id.dayLabel);
 
         if (!isCurrentMonthLabel(dayLabel)) {
             return;

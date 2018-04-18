@@ -37,9 +37,9 @@ public class DatePicker {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         final View view = layoutInflater.inflate(R.layout.date_picker_dialog, null);
 
-        mCancelButton = (AppCompatButton) view.findViewById(R.id.negative_button);
-        mOkButton = (AppCompatButton) view.findViewById(R.id.positive_button);
-        mTodayButton = (AppCompatButton) view.findViewById(R.id.today_button);
+        mCancelButton = view.findViewById(R.id.negative_button);
+        mOkButton = view.findViewById(R.id.positive_button);
+        mTodayButton = view.findViewById(R.id.today_button);
 
         setTodayButtonVisibility();
 
@@ -59,7 +59,7 @@ public class DatePicker {
                 .selectionAbilityListener(this::setOkButtonState)
                 .create();
 
-        FrameLayout calendarContainer = (FrameLayout) view.findViewById(R.id.calendarContainer);
+        FrameLayout calendarContainer = view.findViewById(R.id.calendarContainer);
         calendarContainer.addView(calendarView);
 
         Optional.ofNullable(mCalendarProperties.getCalendar()).ifPresent(calendar -> {

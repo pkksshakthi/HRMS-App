@@ -57,8 +57,8 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
             view = mLayoutInflater.inflate(mCalendarProperties.getItemLayoutResource(), parent, false);
         }
 
-        TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
-        ImageView dayIcon = (ImageView) view.findViewById(R.id.dayIcon);
+        TextView dayLabel = view.findViewById(R.id.dayLabel);
+        ImageView dayIcon = view.findViewById(R.id.dayIcon);
 
         Calendar day = new GregorianCalendar();
         day.setTime(getItem(position));
