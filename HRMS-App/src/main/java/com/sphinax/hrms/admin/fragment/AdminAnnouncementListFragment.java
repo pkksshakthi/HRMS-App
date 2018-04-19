@@ -156,7 +156,7 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
 
     @SuppressLint("WrongViewCast")
     private void loadComponent() {
-        recyclerView = mView.findViewById(R.id.lv_announcement_data);
+        recyclerView = mView.findViewById(R.id.re_announcement_data);
         img_month = mView.findViewById(R.id.img_date);
         bt_new = mView.findViewById(R.id.bt_new);
 

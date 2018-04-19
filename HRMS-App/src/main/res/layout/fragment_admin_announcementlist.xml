@@ -58,7 +58,13 @@
             </LinearLayout>
 
         </LinearLayout>
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/re_announcement_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout2"
+            android:padding="5dp"
+            tools:ignore="MissingConstraints" />
 
     </LinearLayout>
 </FrameLayout>
