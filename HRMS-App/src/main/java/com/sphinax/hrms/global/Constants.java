@@ -4,9 +4,9 @@ package com.sphinax.hrms.global;
 public class Constants {
 
     //DEMO
-//   private static final String httpPath = "http://e-lite.in:8080/";
+   private static final String httpPath = "http://e-lite.in:8080/";
     // Live
-   private static final String httpPath = "http://e-lite.in:9090/";
+//   private static final String httpPath = "http://e-lite.in:9090/";
     private static final String restPath = "ezhrRest/";
     private static final String domain = httpPath + restPath;
     private static final String client = "user/";
@@ -30,7 +30,8 @@ public class Constants {
     public static final String LEAVE_COUNT_REQUEST_URL = domain + client + "leavecount";
     public static final String LEAVE_LIST_REQUEST_URL = domain + client + "leaveList";
     public static final String LEAVE_APPROVE_PERMISSION_URL = domain + client + "saveHrPermission";
-    public static final String ADMIN_ANNOUNCEMENT_LIST_URL = domain + client + "AnnouncementList";
+    public static final String ADMIN_ANNOUNCEMENT_LIST_URL = domain + client + "AnnouncementAdminList";
+ public static final String ANNOUNCEMENT_UPDATE_URL = domain + client + "UpdateAnnouncement";
 
 
     // EMPLOYEE

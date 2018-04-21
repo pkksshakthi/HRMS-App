@@ -35,7 +35,28 @@ public class CompanySpinnerAdapter extends ArrayAdapter<Ajax> {
         this.listViewResourceId = android.R.layout.simple_spinner_dropdown_item;
         this.spinnerType = spinnerType;
     }
+    public int getItemIndexById(Integer id,String type) {
+        for (Ajax item : this.data) {
 
+           if(type.equalsIgnoreCase("C")){
+               if(item.getCompId() == id ){
+                   return this.data.indexOf(item);
+               }
+           }
+            if(type.equalsIgnoreCase("B")){
+                if(item.getBranchId() == id ){
+                    return this.data.indexOf(item);
+                }
+            }
+            if(type.equalsIgnoreCase("D")){
+                if(item.getDeptId() == id ){
+                    return this.data.indexOf(item);
+                }
+            }
+
+        }
+        return 0;
+    }
 
     @NonNull
     @SuppressLint("ViewHolder")

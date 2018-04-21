@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.model.AdminCompanyData;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.model.LoginData;
 import com.sphinax.hrms.model.PaymentData;
@@ -1104,6 +1105,54 @@ public class WebServiceHandler {
         }
     }
 
+    public void getAdminAnnouncementList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.ADMIN_ANNOUNCEMENT_LIST_URL;
+
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                Log.d("AKKK" ,output.toString() );
+                                AdminCompanyData companyDataObject = gson.fromJson(output.toString(), AdminCompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
+
+                            }
+                        } catch (Exception e) {
+                            delegate.onParseError();
+                        }
+                    }else {
+                        delegate.onNetworkError();
+                    }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    delegate.onNetworkError();
+                }
+            });
+            companyListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
 //    public void getPaySlipDownload(Activity activity, final Context context, HashMap<String, String> requestMap,File directory, ServiceCallback callback) throws MalformedURLException {
 //        try {
 //            delegate = callback;
@@ -1384,6 +1433,55 @@ public class WebServiceHandler {
         }
     }
 
+
+    public void updateAnnouncement (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.ANNOUNCEMENT_UPDATE_URL;
+            // url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
+
+            PostMethodHandler validateUserHandler = new PostMethodHandler(activity, serviceContext, url,requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                        try {
+
+                            if (output.getInt("resCode") == 1) {
+                                LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(loginDataObject);
+                            }else {
+                                delegate.onSuccess(false);
+                            }
+                        } catch (Exception e) {
+                            delegate.onParseError();
+                        }
+                    }else {
+                        delegate.onNetworkError();
+                    }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    delegate.onNetworkError();
+                }
+            });
+            validateUserHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
 
 /*
     public void getDepartmentList(Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {

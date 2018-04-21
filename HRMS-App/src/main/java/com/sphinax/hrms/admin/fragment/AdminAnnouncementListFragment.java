@@ -28,6 +28,8 @@ import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.employee.fragment.EmployeeLeaveFullContentFragment;
 import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
+import com.sphinax.hrms.model.AdminAjax;
+import com.sphinax.hrms.model.AdminCompanyData;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
@@ -54,7 +56,7 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
     private static Context context;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private View mView;
-   private List<Ajax> announcmentList = new ArrayList<>();
+   private List<AdminAjax> announcmentList = new ArrayList<>();
     private RecyclerView recyclerView;
    private AdminAnnouncementListAdapter mAdapter;
     private ProgressDialog pdia;
@@ -118,7 +120,7 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Ajax ajaxApp = announcmentList.get(position);
+                AdminAjax ajaxApp = announcmentList.get(position);
 
                 FragmentManager fragmentManager = getFragmentManager();
 
@@ -129,12 +131,13 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
                 if(prevFrag!=null)
                     fragmentTransaction.remove(prevFrag);
 
-                EmployeeLeaveFullContentFragment fragment = new EmployeeLeaveFullContentFragment();
+                AnnouncementCreateFragment fragment = new AnnouncementCreateFragment();
 
                 Bundle b = new Bundle();
 
                 //  b.putInt("position", position);
                 b.putSerializable("UserValidateObject",ajaxApp);
+                b.putSerializable("whatToDO","Update");
                 fragment.setArguments(b);
 
                 fragmentTransaction.add(R.id.content_frame, fragment,Constants.FRAMENT_LEAVE_LIST_CONTENT);
@@ -185,6 +188,7 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
 
     }
 
+
     private void fetchAnnouncementList() {
         if (!HRMSNetworkCheck.checkInternetConnection(context)) {
             Utility.showCustomToast(context, mView, getResources().getString(R.string.invalidInternetConnection));
@@ -201,11 +205,11 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
             requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
             requestMap.put("month", String.valueOf(selectedMonth));
             requestMap.put("year", String.valueOf(selectedYear));
-            requestMap.put("branch", String.valueOf(Global.getUserInfoData().getEmpBranchId()));
+//            requestMap.put("branch", String.valueOf(Global.getUserInfoData().getEmpBranchId()));
             requestMap.put("empId", Global.getLoginInfoData().getUserId());
-            requestMap.put("deptId", String.valueOf(Global.getLoginInfoData().getDeptId()));
+//            requestMap.put("deptId", String.valueOf(Global.getLoginInfoData().getDeptId()));
 
-            webServiceHandler.getAnnouncementList(getActivity(), context, requestMap, new ServiceCallback() {
+            webServiceHandler.getAdminAnnouncementList(getActivity(), context, requestMap, new ServiceCallback() {
 
                 @Override
                 public void onSuccess(boolean flag) {
@@ -221,7 +225,7 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
                     if (pdia != null) {
                         pdia.dismiss();
                     }
-                    CompanyData companyData = (CompanyData) obj;
+                    AdminCompanyData companyData = (AdminCompanyData) obj;
                     announcmentList = new ArrayList<>();
                     announcmentList = companyData.getAjax();
                     Log.d(TAG, "size --> " + announcmentList.size());

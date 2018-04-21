@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
 import com.sphinax.hrms.global.Global;
+import com.sphinax.hrms.model.AdminAjax;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
@@ -75,6 +76,11 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener dater;
     private FragmentManager fragmentManager;
+    private String whatToDO = "";
+    private AdminAjax adminAjax;
+    private boolean loadOncecomp = false;
+    private boolean loadOncebran = false;
+    private boolean loadOncedep = false;
 
     public AnnouncementCreateFragment() {
         // Required empty public constructor
@@ -131,6 +137,25 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updatedateLabel();
         };
+
+
+     if(getArguments() != null) {
+         if (getArguments().getSerializable("whatToDO") != null) {
+             whatToDO = (String) getArguments().getSerializable("whatToDO");
+             btSubmit.setText(whatToDO);
+             loadOncecomp = true;
+             loadOncebran = true;
+             loadOncedep = true;
+             if (whatToDO.equalsIgnoreCase("Update")) {
+                 adminAjax = (AdminAjax) getArguments().getSerializable("UserValidateObject");
+                 ed_mess.setText(adminAjax.getActivityDesc());
+                 btDate.setText(adminAjax.getActivityDate());
+                 ed_title.setText(adminAjax.getAnnouncementList());
+             }
+         }
+
+     }
+
 
 
     }
@@ -210,7 +235,17 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             ajax = companyList.get(position);
         }
         companyPosition = ajax.getCompId();
-        fetchBranchList(ajax.getCompId());
+
+        if(whatToDO.equalsIgnoreCase("Update") && loadOncecomp){
+          //  spCompany.setSelection(companyDataAdapter.getItemIndexById(adminAjax.getCompId(),"C"));
+           // fetchBranchList(adminAjax.getCompId());
+            loadOncecomp = false;
+            fetchBranchList(ajax.getCompId());
+
+        }else{
+            fetchBranchList(ajax.getCompId());
+        }
+
     }
 
     private void actionBranchSelector(int position) {
@@ -220,7 +255,13 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             ajax = branchList.get(position);
         }
         branchPosition = ajax.getBranchId();
-        fetchDepartmentList(ajax.getBranchId());
+        if(whatToDO.equalsIgnoreCase("Update") && loadOncebran){
+            loadOncebran = false;
+           // spBranch.setSelection(branchDataAdapter.getItemIndexById(adminAjax.getBranchId(),"B"));
+            //fetchDepartmentList(adminAjax.getBranchId());
+        }else{
+            fetchDepartmentList(ajax.getBranchId());
+        }
     }
 
     private void actionDepartmentSelector(int position) {
@@ -230,6 +271,10 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             ajax = departmentList.get(position);
         }
         departmentPosition = ajax.getDeptId();
+        if(whatToDO.equalsIgnoreCase("Update") && loadOncedep){
+            loadOncedep = false;
+          //  spDepartment.setSelection(departmentDataAdapter.getItemIndexById(adminAjax.getDeptId(),"D"));
+        }
         //fetchDepartmentList(ajax.getCompId());
     }
     @Override
@@ -240,7 +285,13 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
 //               // ajax = ajaxList.get(spinnerPosition);
 //            }
             if(btDate.getText()!=null && !btDate.getText().toString().equalsIgnoreCase("") && ed_mess.getText()!=null && !ed_mess.getText().toString().equalsIgnoreCase("") && ed_title.getText()!=null && !ed_title.getText().toString().equalsIgnoreCase("")){
-                saveAnnouncement(ed_mess.getText().toString(),btDate.getText().toString(),ed_title.getText().toString());
+                if(whatToDO.equalsIgnoreCase("Update")) {
+
+                    updateAnnouncement(ed_mess.getText().toString(), btDate.getText().toString(), ed_title.getText().toString());
+                }else{
+
+                    saveAnnouncement(ed_mess.getText().toString(), btDate.getText().toString(), ed_title.getText().toString());
+                }
             }else {
                 if(btDate.getText() ==null && btDate.getText().toString().equalsIgnoreCase("")){
                     Utility.showCustomToast(context, mView, "Please Enter the Date");
@@ -588,4 +639,103 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             e.printStackTrace();
         }
     }
+
+  // Update Announc
+
+
+
+    private void updateAnnouncement(String valueText,String dateValue,String title) {
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.showCustomToast(context, mView,  getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(getActivity());
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<>();
+            requestMap.put("companyId",String.valueOf(companyPosition) );
+            requestMap.put("empID", Global.getLoginInfoData().getUserId());
+            requestMap.put("activityDate",dateValue );
+            requestMap.put("activityDesc",valueText );
+            requestMap.put("activityTypeId",String.valueOf(1) );
+            requestMap.put("deptId",String.valueOf(departmentPosition) );
+            requestMap.put("branch",String.valueOf(branchPosition) );
+            requestMap.put("annTitle",title );
+            requestMap.put("activityId",String.valueOf(adminAjax.getActivityId()) );
+
+
+
+            webServiceHandler.updateAnnouncement(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                    if (flag){
+
+                        Utility.showCustomToast(context, mView, "Announcement successfully saved");
+                        ed_mess.setText("");
+                        btDate.setText("");
+                        ed_title.setText("");
+                    }else {
+                        Utility.showCustomToast(context, mView,  "Announcement not send kindly try again");
+
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
+
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

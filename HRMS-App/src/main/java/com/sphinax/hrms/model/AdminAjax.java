@@ -10,7 +10,7 @@ import java.util.List;
  * Created by ganesaka on 12/24/2017.
  */
 
-public class Ajax implements Serializable {
+public class AdminAjax implements Serializable {
 
     @SerializedName("Status")
     @Expose
@@ -84,15 +84,15 @@ public class Ajax implements Serializable {
     @SerializedName("compImg")
     @Expose
     private String compImg;
-    @SerializedName("branchId")
-    @Expose
-    private Integer branchId;
+//    @SerializedName("branchId")
+//    @Expose
+//    private Integer branchId;
     @SerializedName("branchName")
     @Expose
     private String branchName;
-    @SerializedName("deptId")
-    @Expose
-    private Integer deptId;
+//    @SerializedName("deptId")
+//    @Expose
+//    private Integer deptId;
     @SerializedName("deptName")
     @Expose
     private String deptName;
@@ -117,9 +117,6 @@ public class Ajax implements Serializable {
     @SerializedName("empName")
     @Expose
     private String empName;
-    @SerializedName("activityId")
-    @Expose
-    private Integer activityId;
     @SerializedName("reqId")
     @Expose
     private Integer reqId;
@@ -317,6 +314,9 @@ public class Ajax implements Serializable {
     @SerializedName("Remarks")
     @Expose
     private String remarks;
+    @SerializedName("activityId")
+    @Expose
+    private Integer activityId;
 
     public Integer getActivityId() {
         return activityId;
@@ -1209,13 +1209,13 @@ public class Ajax implements Serializable {
         this.empDesc = "Select Employee";
     }
 
-    public Integer getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId() {
-        this.deptId = 0;
-    }
+//    public Integer getDeptId() {
+//        return deptId;
+//    }
+//
+//    public void setDeptId() {
+//        this.deptId = 0;
+//    }
 
     public String getDeptName() {
         return deptName;
@@ -1255,13 +1255,13 @@ public class Ajax implements Serializable {
 //    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
-    public Integer getBranchId() {
-        return branchId;
-    }
-
-    public void setBranchId() {
-        this.branchId = 0;
-    }
+//    public Integer getBranchId() {
+//        return branchId;
+//    }
+//
+//    public void setBranchId() {
+//        this.branchId = 0;
+//    }
 
     public String getBranchName() {
         return branchName;
