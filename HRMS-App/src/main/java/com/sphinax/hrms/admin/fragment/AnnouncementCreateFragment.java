@@ -1,5 +1,6 @@
 package com.sphinax.hrms.admin.fragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
+import com.sphinax.hrms.global.Constants;
 import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.AdminAjax;
 import com.sphinax.hrms.model.Ajax;
@@ -146,12 +148,26 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
              loadOncecomp = true;
              loadOncebran = true;
              loadOncedep = true;
-             if (whatToDO.equalsIgnoreCase("Update")) {
+             if (whatToDO.equalsIgnoreCase("Update") || whatToDO.equalsIgnoreCase("Delete") ) {
                  adminAjax = (AdminAjax) getArguments().getSerializable("UserValidateObject");
                  ed_mess.setText(adminAjax.getActivityDesc());
                  btDate.setText(adminAjax.getActivityDate());
                  ed_title.setText(adminAjax.getAnnouncementList());
              }
+
+             if ( whatToDO.equalsIgnoreCase("Delete") ) {
+
+                 ed_mess.setEnabled(false);
+                 ed_title.setEnabled(false);
+                 btDate.setEnabled(false);
+                 spCompany.setEnabled(false);
+                 spBranch.setEnabled(false);
+                 spDepartment.setEnabled(false);
+
+
+             }
+
+
          }
 
      }
@@ -236,7 +252,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
         }
         companyPosition = ajax.getCompId();
 
-        if(whatToDO.equalsIgnoreCase("Update") && loadOncecomp){
+        if((whatToDO.equalsIgnoreCase("Update") || whatToDO.equalsIgnoreCase("Delete") ) && loadOncecomp){
           //  spCompany.setSelection(companyDataAdapter.getItemIndexById(adminAjax.getCompId(),"C"));
            // fetchBranchList(adminAjax.getCompId());
             loadOncecomp = false;
@@ -255,7 +271,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             ajax = branchList.get(position);
         }
         branchPosition = ajax.getBranchId();
-        if(whatToDO.equalsIgnoreCase("Update") && loadOncebran){
+        if((whatToDO.equalsIgnoreCase("Update") || whatToDO.equalsIgnoreCase("Delete") ) && loadOncebran){
             loadOncebran = false;
            // spBranch.setSelection(branchDataAdapter.getItemIndexById(adminAjax.getBranchId(),"B"));
             //fetchDepartmentList(adminAjax.getBranchId());
@@ -271,7 +287,7 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             ajax = departmentList.get(position);
         }
         departmentPosition = ajax.getDeptId();
-        if(whatToDO.equalsIgnoreCase("Update") && loadOncedep){
+        if((whatToDO.equalsIgnoreCase("Update") || whatToDO.equalsIgnoreCase("Delete") )&& loadOncedep){
             loadOncedep = false;
           //  spDepartment.setSelection(departmentDataAdapter.getItemIndexById(adminAjax.getDeptId(),"D"));
         }
@@ -283,7 +299,12 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
             Ajax ajax = new Ajax();
 //            if (ajaxList != null) {
 //               // ajax = ajaxList.get(spinnerPosition);
+
 //            }
+
+            if(whatToDO.equalsIgnoreCase("Delete")) {
+                deleteAnnouncement(ed_mess.getText().toString(), btDate.getText().toString(), ed_title.getText().toString());
+            }
             if(btDate.getText()!=null && !btDate.getText().toString().equalsIgnoreCase("") && ed_mess.getText()!=null && !ed_mess.getText().toString().equalsIgnoreCase("") && ed_title.getText()!=null && !ed_title.getText().toString().equalsIgnoreCase("")){
                 if(whatToDO.equalsIgnoreCase("Update")) {
 
@@ -729,6 +750,94 @@ public class AnnouncementCreateFragment extends Fragment implements AdapterView.
     }
 
 
+// Delete
+
+
+    private void deleteAnnouncement(String valueText,String dateValue,String title) {
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.showCustomToast(context, mView,  getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(getActivity());
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<>();
+            requestMap.put("companyId",String.valueOf(companyPosition) );
+            requestMap.put("empID", Global.getLoginInfoData().getUserId());
+            requestMap.put("activityDate",dateValue );
+            requestMap.put("activityDesc",valueText );
+            requestMap.put("activityTypeId",String.valueOf(1) );
+            requestMap.put("deptId",String.valueOf(departmentPosition) );
+            requestMap.put("branch",String.valueOf(branchPosition) );
+            requestMap.put("annTitle",title );
+            requestMap.put("activityId",String.valueOf(adminAjax.getActivityId()) );
+
+
+
+            webServiceHandler.deleteAnnouncement(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                    if (flag){
+
+                        Utility.showCustomToast(context, mView, "Announcement SUCCESSFULLY DELETED");
+                        ed_mess.setText("");
+                        btDate.setText("");
+                        ed_title.setText("");
+                        Utility.addFragment((Activity) context, R.id.content_frame, fragmentManager, new AdminAnnouncementListFragment(), false, null, Constants.FRAMENT_ADMIN_ANNOUNCEMENT_LIST);
+
+                    }else {
+                        Utility.showCustomToast(context, mView,  "Announcement not send kindly try again");
+
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
+
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

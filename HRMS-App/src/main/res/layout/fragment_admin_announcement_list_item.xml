@@ -74,7 +74,7 @@
                     android:id="@+id/bt_delete"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:text="DELETE"
+                    android:text="Edit"
                     android:layout_marginTop="1dp"
                     android:gravity="center"
                     android:textColor="#ffffff" />

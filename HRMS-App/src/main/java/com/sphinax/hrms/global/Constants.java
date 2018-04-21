@@ -31,7 +31,8 @@ public class Constants {
     public static final String LEAVE_LIST_REQUEST_URL = domain + client + "leaveList";
     public static final String LEAVE_APPROVE_PERMISSION_URL = domain + client + "saveHrPermission";
     public static final String ADMIN_ANNOUNCEMENT_LIST_URL = domain + client + "AnnouncementAdminList";
- public static final String ANNOUNCEMENT_UPDATE_URL = domain + client + "UpdateAnnouncement";
+    public static final String ANNOUNCEMENT_UPDATE_URL = domain + client + "UpdateAnnouncement";
+    public static final String ANNOUNCEMENT_DELETE_URL = domain + client + "DeleteAnnouncement";
 
 
     // EMPLOYEE
@@ -90,6 +91,8 @@ public class Constants {
     public static final String FRAMENT_ADMIN_ANNOUNCEMENT_LIST = "ADMIN ANNOUNCEMENT LIST SCREEN";
     public static final String FRAMENT_PAYSLIP = "PAYSLIP DETAIL SCREEN";
     public static final String FRAMENT_HR_HELPDESK_ENTER = "HR HELPDESK ENTER SCREEN";
+   public static final String FRAMENT_ANNOUNCEMENT_DELETE = "ANNOUNCEMENT DELETE";
+   public static final String FRAMENT_ANNOUNCEMENT_UPDATE = "ANNOUNCEMENT UPDATE";
    public static final String FRAMENT_LEAVE_LIST_CONTENT = "LEAVE LIST ITEM SCREEN";
    public static final String FRAMENT_HRHELP_UPDATE_CONTENT = "UPDATE HR HELP LIST ITEM SCREEN";
     public static final String FRAMENT_ERROR = "ERROR SCREEN";

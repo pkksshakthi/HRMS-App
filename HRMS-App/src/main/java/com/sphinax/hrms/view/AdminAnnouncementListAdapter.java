@@ -1,5 +1,6 @@
 package com.sphinax.hrms.view;
 
+import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
@@ -78,6 +79,14 @@ public class AdminAnnouncementListAdapter extends RecyclerView.Adapter<AdminAnno
 //            holder.month.setText(String.valueOf(Month.of(Integer.parseInt(date1[1])).name()));
             holder.year.setText(date1[2]);
         }
+
+        holder.bt_delete.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+               // ((RecyclerView) Activity).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
+            }
+        });
 
 
     }

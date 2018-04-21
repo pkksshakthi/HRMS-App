@@ -126,7 +126,7 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
 
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                Fragment prevFrag = fragmentManager.findFragmentByTag(Constants.FRAMENT_LEAVE_LIST_CONTENT);
+                Fragment prevFrag = fragmentManager.findFragmentByTag(Constants.FRAMENT_ADMIN_ANNOUNCEMENT_LIST);
 
                 if(prevFrag!=null)
                     fragmentTransaction.remove(prevFrag);
@@ -140,7 +140,7 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
                 b.putSerializable("whatToDO","Update");
                 fragment.setArguments(b);
 
-                fragmentTransaction.add(R.id.content_frame, fragment,Constants.FRAMENT_LEAVE_LIST_CONTENT);
+                fragmentTransaction.add(R.id.content_frame, fragment,Constants.FRAMENT_ANNOUNCEMENT_UPDATE);
 
                 fragmentTransaction.addToBackStack(null);
 
@@ -151,6 +151,31 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
 
             @Override
             public void onLongClick(View view, int position) {
+                AdminAjax ajaxApp = announcmentList.get(position);
+
+                FragmentManager fragmentManager = getFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                Fragment prevFrag = fragmentManager.findFragmentByTag(Constants.FRAMENT_ADMIN_ANNOUNCEMENT_LIST);
+
+                if(prevFrag!=null)
+                    fragmentTransaction.remove(prevFrag);
+
+                AnnouncementCreateFragment fragment = new AnnouncementCreateFragment();
+
+                Bundle b = new Bundle();
+
+                //  b.putInt("position", position);
+                b.putSerializable("UserValidateObject",ajaxApp);
+                b.putSerializable("whatToDO","Delete");
+                fragment.setArguments(b);
+
+                fragmentTransaction.add(R.id.content_frame, fragment,Constants.FRAMENT_ANNOUNCEMENT_DELETE);
+
+                fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.commit();
 
             }
         }));
