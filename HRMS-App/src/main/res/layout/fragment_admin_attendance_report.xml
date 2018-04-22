@@ -106,8 +106,8 @@
                     card_view:contentPadding="5dp">
 
 
-                    <EditText
-                        android:id="@+id/ed_emp_id"
+                    <Spinner
+                        android:id="@+id/sp_empname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"

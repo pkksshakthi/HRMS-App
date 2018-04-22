@@ -37,6 +37,7 @@ import com.sphinax.hrms.servicehandler.WebServiceHandler;
 import com.sphinax.hrms.utils.HRMSNetworkCheck;
 import com.sphinax.hrms.utils.Utility;
 import com.sphinax.hrms.view.CompanySpinnerAdapter;
+import com.sphinax.hrms.view.DataSpinnerAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,10 +58,11 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
     private ArrayList<Ajax> companyList;
     private ArrayList<Ajax> branchList;
     private ArrayList<Ajax> departmentList;
+    private ArrayList<Ajax> empList;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
-    private Spinner spCompany,spBranch,spDepartment;
+    private Spinner spCompany,spBranch,spDepartment,spEmp;
     private Button btSubmit;
-    private EditText emp_id;
+    //private EditText emp_id;
     private CompanySpinnerAdapter companyDataAdapter;
     private CompanySpinnerAdapter branchDataAdapter;
     private CompanySpinnerAdapter departmentDataAdapter;
@@ -76,7 +78,8 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
     private ArrayList<Ajax> attendanceList;
     private String dateValue;
     private int Year, Month;
-
+    private String empPosition ;
+    private DataSpinnerAdapter empSpinnerAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -131,7 +134,7 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
         spCompany = mView.findViewById(R.id.sp_company);
         spBranch = mView.findViewById(R.id.sp_branch);
         spDepartment = mView.findViewById(R.id.sp_department);
-        emp_id = mView.findViewById(R.id.ed_emp_id);
+        spEmp = mView.findViewById(R.id.sp_empname);
         btSubmit = mView.findViewById(R.id.bt_submit);
         calendarView = mView.findViewById(R.id.calendarView);
         txt_present = mView.findViewById(R.id.txt_present);
@@ -157,6 +160,8 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
         spBranch.setOnItemSelectedListener(this);
         spDepartment.setOnItemSelectedListener(this);
         btSubmit.setOnClickListener(this);
+        spEmp.setOnItemSelectedListener(this);
+
     }
 
 
@@ -172,7 +177,9 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
             case R.id.sp_department:
                 actionDepartmentSelector(position);
                 break;
-
+            case R.id.sp_empname:
+                actionEmpSelector(position);
+                break;
 
 
         }
@@ -217,13 +224,27 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
             ajax = departmentList.get(position);
         }
         departmentPosition = ajax.getDeptId();
+        fetchEmpList();
+    }
+
+    private void actionEmpSelector(int position) {
+        // spinnerPosition = position;
+        Ajax ajax = new Ajax();
+        if (empList != null) {
+            ajax = empList.get(position);
+        }
+        empPosition = ajax.getEmpId();
+        Log.d("leaveStatus"," " +empPosition);
+
+
+        //fetchDepartmentList(ajax.getCompId());
     }
     @Override
     public void onClick(View v) {
         if (v.getId() == btSubmit.getId()) {
            // Ajax ajax = new Ajax();
 
-            if(companyPosition !=  0 && branchPosition != 0 && departmentPosition != 0 && !emp_id.getText().toString().equalsIgnoreCase("")){
+            if(companyPosition !=  0 && branchPosition != 0 && departmentPosition != 0 && !empPosition.equalsIgnoreCase("")){
                 fetchAttendanceReport(dateValue);
             }else{
                 Utility.showCustomToast(context, mView,  "Please Select the all feilds");
@@ -539,7 +560,7 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
             requestMap.put("compId", String.valueOf(companyPosition) );
             requestMap.put("branchId", String.valueOf(branchPosition) );
             requestMap.put("deptId", String.valueOf(departmentPosition));
-            requestMap.put("empId", emp_id.getText().toString());
+            requestMap.put("empId", String.valueOf(empPosition));
             requestMap.put("datChs", dateValue);
 
             webServiceHandler.getAttendanceReport(getActivity(), context, requestMap, new ServiceCallback() {
@@ -603,5 +624,82 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
         }
     }
 
+    private void fetchEmpList() {
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(getActivity());
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<>();
+            requestMap.put("companyId",String.valueOf(companyPosition) );
+            Log.d("xdd","" + branchPosition + " " + departmentPosition);
+            requestMap.put("branch",String.valueOf(branchPosition) );
+            requestMap.put("DeptId",String.valueOf(departmentPosition) );
+
+            webServiceHandler.getEmpList(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    CompanyData companyData = (CompanyData) obj;
+                    empList = new ArrayList<>();
+                    empList = (ArrayList<Ajax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> " + empList.size());
+                    Ajax tempObj = new Ajax();
+                    tempObj.setEmpId();
+                    tempObj.setEmpDesc();
+                    empList.add(0,tempObj);
+
+                    empSpinnerAdapter = new DataSpinnerAdapter(context,
+                            empList);
+                    empSpinnerAdapter
+                            .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spEmp.setAdapter(empSpinnerAdapter);
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
   }
 
