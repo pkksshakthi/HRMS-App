@@ -100,7 +100,7 @@ public class AdminMainMenuFragment extends Fragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_attendance_report:
-                //    Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EmployeeAttendanceFragment(), true, null, Constants.FRAMENT_ANNOUNCEMENT_LIST);
+                Utility.addFragment( (Activity) context, R.id.content_frame,fragmentManager, new AttendanceReportFragment(), true, null,"");
                 break;
             case R.id.ll_leave_mana:
                 Utility.addFragment((Activity) context, R.id.content_frame, fragmentManager, new LeaveManagementFragment(), true, null, "");

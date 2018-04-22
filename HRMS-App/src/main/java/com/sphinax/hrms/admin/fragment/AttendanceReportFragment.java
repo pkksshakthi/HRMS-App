@@ -108,7 +108,7 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
             Year = calendarView.getCurrentPageDate().get(Calendar.YEAR);
             Month = calendarView.getCurrentPageDate().get(Calendar.MONTH);
             dateValue = "01" + "/" + (Month + 1) + "/" + Year;
-         //   fetchAttendanceReport(dateValue);
+            fetchAttendanceReport(dateValue);
 
         });
 
@@ -118,7 +118,7 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
             Year = calendarView.getCurrentPageDate().get(Calendar.YEAR);
             Month = calendarView.getCurrentPageDate().get(Calendar.MONTH);
             dateValue = "01" + "/" + (Month + 1) + "/" + Year;
-          //  fetchAttendanceReport(dateValue);
+            fetchAttendanceReport(dateValue);
 
         });
 
@@ -223,7 +223,13 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
         if (v.getId() == btSubmit.getId()) {
            // Ajax ajax = new Ajax();
 
-          //  if
+            if(companyPosition !=  0 && branchPosition != 0 && departmentPosition != 0 && !emp_id.getText().toString().equalsIgnoreCase("")){
+                fetchAttendanceReport(dateValue);
+            }else{
+                Utility.showCustomToast(context, mView,  "Please Select the all feilds");
+
+            }
+
 
         }
 
@@ -530,10 +536,10 @@ public class AttendanceReportFragment extends Fragment implements AdapterView.On
         }
         try {
             HashMap<String, String> requestMap = new HashMap<>();
-            requestMap.put("compId", Utility.getPreference(getActivity()).getString(Constants.PREFS_COMPANY_ID, ""));
-            requestMap.put("branchId", String.valueOf(Global.getUserInfoData().getEmpBranchId()));
-            requestMap.put("deptId", String.valueOf(Global.getLoginInfoData().getDeptId()));
-            requestMap.put("empId", Global.getLoginInfoData().getUserId());
+            requestMap.put("compId", String.valueOf(companyPosition) );
+            requestMap.put("branchId", String.valueOf(branchPosition) );
+            requestMap.put("deptId", String.valueOf(departmentPosition));
+            requestMap.put("empId", emp_id.getText().toString());
             requestMap.put("datChs", dateValue);
 
             webServiceHandler.getAttendanceReport(getActivity(), context, requestMap, new ServiceCallback() {
