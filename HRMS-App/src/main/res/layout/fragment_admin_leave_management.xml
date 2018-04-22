@@ -8,18 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#3282C9"
-            android:gravity="center"
-            android:padding="4dp"
-            android:text="ANNOUNCEMENT"
-            android:textColor="#ffffff"
-            android:textSize="7pt"
-            android:textStyle="bold" />
-
+        a
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -27,15 +16,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:background="#135E86"
+                    android:gravity="center"
                     android:paddingBottom="5dp"
-                    android:text="Select Company" />
+                    android:paddingTop="5dp"
+                    android:text="HR Leave Management"
+                    android:textColor="@color/white" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Company" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -44,23 +43,44 @@
                     android:layout_weight="1"
                     android:elevation="5dp"
                     card_view:cardElevation="5dp"
-                    card_view:contentPadding="5dp">
 
+                    card_view:contentPadding="5dp">
 
                     <Spinner
                         android:id="@+id/sp_company"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/spinner_backgroud" />
+                        android:layout_weight="1" />
                 </android.support.v7.widget.CardView>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
-                    android:text="Select Branch" />
+                    android:text="Branch" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:elevation="5dp"
+                    card_view:cardElevation="5dp"
+
+                    card_view:contentPadding="5dp">
+
+                    <Spinner
+                        android:id="@+id/sp_branch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1" />
+                </android.support.v7.widget.CardView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Department" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -76,63 +96,9 @@
                         android:id="@+id/sp_department"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/spinner_backgroud"
                         android:layout_margin="5dp"
                         android:layout_weight="1" />
                 </android.support.v7.widget.CardView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-
-                    android:text="Select Department" />
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-
-                    card_view:contentPadding="5dp">
-
-
-                    <Spinner
-                        android:id="@+id/sp_branch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/spinner_backgroud" />
-                </android.support.v7.widget.CardView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Select Status" />
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-
-                    card_view:contentPadding="5dp">
-
-                    <Spinner
-                        android:id="@+id/sp_status"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/spinner_backgroud" />
-                </android.support.v7.widget.CardView>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -154,9 +120,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/spinner_backgroud" />
+                        android:layout_weight="1" />
                 </android.support.v7.widget.CardView>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -164,28 +130,50 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/bt_submit"
+                        android:id="@+id/bt_approval"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="15dp"
                         android:layout_weight="1"
-                        android:background="#1052A0"
-                        android:text="Submit"
+                        android:background="#1C9B72"
+                        android:text="Approved(5)"
                         android:textColor="#ffffff" />
 
                     <Button
-                        android:id="@+id/bt_cancel"
+                        android:id="@+id/bt_pending"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="15dp"
                         android:layout_weight="1"
-                        android:background="#E33A3F"
-                        android:text="Cancel"
+                        android:background="#DE8C3A"
+                        android:text="Pending(5)"
                         android:textColor="#ffffff" />
                 </LinearLayout>
 
+
+                <Button
+                    android:id="@+id/bt_Reject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:background="#F34336"
+                    android:text="Rejected(15)"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/bt_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:background="#F34336"
+                    android:text="Submit"
+                    android:textColor="#ffffff" />
             </LinearLayout>
         </ScrollView>
 
