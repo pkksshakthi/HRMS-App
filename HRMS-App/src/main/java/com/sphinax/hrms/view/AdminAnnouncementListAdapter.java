@@ -34,7 +34,7 @@ public class AdminAnnouncementListAdapter extends RecyclerView.Adapter<AdminAnno
         public TextView date;
         public TextView month;
         public TextView year;
-        public Button bt_delete;
+        public TextView bt_delete;
 
        // public TableRow tb_first;
 

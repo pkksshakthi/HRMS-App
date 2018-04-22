@@ -62,7 +62,7 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
     private ProgressDialog pdia;
     private FragmentManager fragmentManager;
     private ImageView img_month;
-    private Button bt_new;
+    private TextView bt_new;
     private int selectedYear = 2017;
     private int selectedMonth = 8;
     private int year = 0;

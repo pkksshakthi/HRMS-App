@@ -186,6 +186,14 @@ public class EmployeeAttendanceFragment extends Fragment {
 
                     events.add(new EventDay(mCal, R.drawable.icon_ali));
                 }
+                else if (ajax.getMorning().equalsIgnoreCase("F-H In - EO") && ajax.getEvening().equalsIgnoreCase("A")) {
+
+                    events.add(new EventDay(mCal, R.drawable.fhineoa));
+                }
+                else if (ajax.getMorning().equalsIgnoreCase("A") && ajax.getEvening().equalsIgnoreCase("F-H In - EO")) {
+
+                    events.add(new EventDay(mCal, R.drawable.afhineo));
+                }
                 else {
                     events.add(new EventDay(mCal, R.drawable.icon_red_box));
                 }
