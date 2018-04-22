@@ -393,10 +393,12 @@ android:id="@+id/sp_company"
 
             <Button
                 android:id="@+id/setDateButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Set date"
-                android:visibility="gone"
+                android:text="Sumbit"
+                android:background="#1052A0"
+                android:textColor="#ffffff"
+                android:visibility="visible"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/calendarView" />
