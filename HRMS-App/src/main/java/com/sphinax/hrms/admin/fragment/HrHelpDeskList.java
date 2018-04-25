@@ -126,6 +126,11 @@ public class HrHelpDeskList extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Ajax ajaxApp = approveList.get(position);
+                Bundle b = new Bundle();
+                b.putSerializable("UserValidateObject",ajaxApp);
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AdminHrHelpDeskFull(), true, b, Constants.FRAMENT_USER_MENU);
+
+
             }
 
             @Override
