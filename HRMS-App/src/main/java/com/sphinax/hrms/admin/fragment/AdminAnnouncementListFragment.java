@@ -122,30 +122,31 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
             public void onClick(View view, int position) {
                 AdminAjax ajaxApp = announcmentList.get(position);
 
-                FragmentManager fragmentManager = getFragmentManager();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                Fragment prevFrag = fragmentManager.findFragmentByTag(Constants.FRAMENT_ADMIN_ANNOUNCEMENT_LIST);
-
-                if(prevFrag!=null)
-                    fragmentTransaction.remove(prevFrag);
-
-                AnnouncementCreateFragment fragment = new AnnouncementCreateFragment();
+//                FragmentManager fragmentManager = getFragmentManager();
+//
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//                Fragment prevFrag = fragmentManager.findFragmentByTag(Constants.FRAMENT_ADMIN_ANNOUNCEMENT_LIST);
+//
+//                if(prevFrag!=null)
+//                    fragmentTransaction.remove(prevFrag);
+//
+//                AnnouncementCreateFragment fragment = new AnnouncementCreateFragment();
 
                 Bundle b = new Bundle();
 
                 //  b.putInt("position", position);
                 b.putSerializable("UserValidateObject",ajaxApp);
                 b.putSerializable("whatToDO","Update");
-                fragment.setArguments(b);
+//                fragment.setArguments(b);
+//
+//                fragmentTransaction.add(R.id.content_frame, fragment,Constants.FRAMENT_ANNOUNCEMENT_UPDATE);
+//
+//                fragmentTransaction.addToBackStack(null);
+//
+//                fragmentTransaction.commit();
 
-                fragmentTransaction.add(R.id.content_frame, fragment,Constants.FRAMENT_ANNOUNCEMENT_UPDATE);
-
-                fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.commit();
-
+                Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AnnouncementCreateFragment(), true, b, Constants.FRAMENT_ANNOUNCEMENT_UPDATE);
 
             }
 
@@ -176,6 +177,7 @@ public class AdminAnnouncementListFragment extends Fragment implements AdapterVi
                 fragmentTransaction.addToBackStack(null);
 
                 fragmentTransaction.commit();
+               // Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AnnouncementCreateFragment(), true, b, Constants.FRAMENT_ANNOUNCEMENT_DELETE);
 
             }
         }));
