@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
@@ -47,7 +48,7 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
     private ArrayList<Ajax> empList;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private Spinner spCompany,spBranch,spDepartment,sp_query_type,spEmp;
-    private Button btSubmit;
+    private TextView btSubmit;
     private EditText btDate;
     private EditText ed_mess;
     private CompanySpinnerAdapter companyDataAdapter;

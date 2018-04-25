@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
-                        
+
                         card_view:cardElevation="2dp"
                         card_view:contentPadding="2dp">
 
@@ -141,7 +141,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
-                        android:text="Select Employee NAme" />
+                        android:text="Select Employee Name" />
 
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
@@ -321,7 +321,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
@@ -347,14 +347,6 @@
                                     android:textColor="#ffffff" />
                             </android.support.v7.widget.CardView>
                         </LinearLayout>
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -382,12 +374,51 @@
                                     android:text="ON HOLD"
                                     android:textColor="#ffffff" />
 
-                               
+
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:orientation="vertical">
+
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+
+
+                                card_view:cardElevation="2dp"
+                                card_view:contentPadding="2dp">
+
+
+                                <TextView
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="#7986CC"
+                                    android:gravity="center"
+                                    android:padding="10dp"
+                                    android:text="IN PROCESS"
+                                    android:textColor="#ffffff" />
                             </android.support.v7.widget.CardView>
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
@@ -406,54 +437,56 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:background="#7986CC"
+                                    android:background="#00BCD5"
                                     android:gravity="center"
                                     android:padding="10dp"
-                                    android:text="IN PROCESS"
+                                    android:text="COMPLETED"
                                     android:textColor="#ffffff" />
                             </android.support.v7.widget.CardView>
                         </LinearLayout>
 
                     </TableRow>
 
-
-                    <LinearLayout
+ 
+                    <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_margin="5dp"
+                        android:orientation="horizontal">
 
-                        android:orientation="vertical">
 
-                        <android.support.v7.widget.CardView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            card_view:cardElevation="2dp"
-                            card_view:contentPadding="2dp">
-                            <TextView
 
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
                                 android:layout_weight="1"
-                                android:background="#00BCD5"
-                                android:gravity="center"
-                                android:padding="10dp"
-                                android:text="COMPLETED"
-                                android:textColor="#ffffff" />
+                                card_view:cardElevation="2dp"
+                                card_view:contentPadding="2dp">
 
-                        </android.support.v7.widget.CardView>
-                    </LinearLayout>
+                                <TextView
+                                    android:id="@+id/bt_submit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
 
-
+                                    android:gravity="center"
+                                    android:padding="10dp"
+                                    android:background="#1052A0"
+                                    android:text="SUBMIT"
+                                    android:textColor="#ffffff" />
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+                    </TableRow>
 
                 </TableLayout>
-<Button
-    android:id="@+id/bt_submit"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Submit"/>
 
             </LinearLayout>
 
