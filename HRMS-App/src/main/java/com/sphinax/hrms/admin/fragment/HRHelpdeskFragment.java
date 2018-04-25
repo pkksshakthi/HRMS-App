@@ -52,7 +52,7 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
     private ArrayList<AdminAjax> queryCount;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private Spinner spCompany,spBranch,spDepartment,sp_query_type,spEmp;
-    private Button btSubmit;
+    private TextView btSubmit;
     private EditText btDate;
     private EditText ed_mess;
     private CompanySpinnerAdapter companyDataAdapter;
