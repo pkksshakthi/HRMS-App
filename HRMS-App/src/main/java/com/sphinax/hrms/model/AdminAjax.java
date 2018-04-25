@@ -102,16 +102,16 @@ public class AdminAjax implements Serializable {
     @SerializedName("New")
     @Expose
     private Integer _new;
-    @SerializedName("OnHold")
+    @SerializedName("On Hold")
     @Expose
     private Integer onHold;
-    @SerializedName("NeedInfo")
+    @SerializedName("Need Info")
     @Expose
     private Integer needInfo;
-    @SerializedName("InProgress")
+    @SerializedName("In progress")
     @Expose
     private Integer inProgress;
-    @SerializedName("completed")
+    @SerializedName("Completed")
     @Expose
     private Integer completed;
     @SerializedName("empName")
@@ -1134,63 +1134,63 @@ public class AdminAjax implements Serializable {
 
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public Integer getNew() {
-//        return _new;
-//    }
+    public Integer getNew() {
+        return _new;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setNew(Integer _new) {
-//        this._new = _new;
-//    }
+    public void setNew(Integer _new) {
+        this._new = _new;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public Integer getOnHold() {
-//        return onHold;
-//    }
+    public Integer getOnHold() {
+        return onHold;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setOnHold(Integer onHold) {
-//        this.onHold = onHold;
-//    }
+    public void setOnHold(Integer onHold) {
+        this.onHold = onHold;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public Integer getNeedInfo() {
-//        return needInfo;
-//    }
+    public Integer getNeedInfo() {
+        return needInfo;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setNeedInfo(Integer needInfo) {
-//        this.needInfo = needInfo;
-//    }
+    public void setNeedInfo(Integer needInfo) {
+        this.needInfo = needInfo;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public Integer getInProgress() {
-//        return inProgress;
-//    }
+    public Integer getInProgress() {
+        return inProgress;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setInProgress(Integer inProgress) {
-//        this.inProgress = inProgress;
-//    }
+    public void setInProgress(Integer inProgress) {
+        this.inProgress = inProgress;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public Integer getCompleted() {
-//        return completed;
-//    }
+    public Integer getCompleted() {
+        return completed;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setCompleted(Integer completed) {
-//        this.completed = completed;
-//    }
+    public void setCompleted(Integer completed) {
+        this.completed = completed;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpId() {

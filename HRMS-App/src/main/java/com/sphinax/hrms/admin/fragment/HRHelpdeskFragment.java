@@ -16,10 +16,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.common.fragment.SomeProblemFragment;
+import com.sphinax.hrms.employee.fragment.UserMainMenuFragment;
 import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.model.AdminAjax;
+import com.sphinax.hrms.model.AdminCompanyData;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
@@ -45,6 +49,7 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
     private ArrayList<Ajax> branchList;
     private ArrayList<Ajax> departmentList;
     private ArrayList<Ajax> empList;
+    private ArrayList<AdminAjax> queryCount;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
     private Spinner spCompany,spBranch,spDepartment,sp_query_type,spEmp;
     private Button btSubmit;
@@ -62,6 +67,7 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
     private ArrayList<Ajax> queryTypeList;
     private QuerySpinnerAdapter querySpinnerAdapter;
     private FragmentManager fragmentManager;
+    private TextView tv_complete,tv_process,tv_hold,tv_info,tv_new;
 
 
     public HRHelpdeskFragment() {
@@ -101,6 +107,11 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
 //        ed_mess = mView.findViewById(R.id.ed_message_box);
         btSubmit = mView.findViewById(R.id.bt_submit);
         sp_query_type = mView.findViewById(R.id.sp_hr_query_type);
+        tv_complete = mView.findViewById(R.id.tv_complete);
+        tv_process = mView.findViewById(R.id.tv_process);
+        tv_hold = mView.findViewById(R.id.tv_hold);
+        tv_new = mView.findViewById(R.id.tv_new);
+        tv_info = mView.findViewById(R.id.tv_info);
 
     }
     private void setListeners() {
@@ -112,6 +123,12 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
         sp_query_type.setOnItemSelectedListener(this);
 
         btSubmit.setOnClickListener(this);
+        tv_process.setOnClickListener(this);
+        tv_hold.setOnClickListener(this);
+        tv_complete.setOnClickListener(this);
+        tv_info.setOnClickListener(this);
+        tv_new.setOnClickListener(this);
+
 //        btDate.setOnClickListener(this);
     }
 
@@ -192,6 +209,7 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
         fetchQueryTypeList();
 
         //fetchDepartmentList(ajax.getCompId());
+
     }
 
     /**
@@ -203,7 +221,7 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
             ajax = queryTypeList.get(position);
             queryTypePosition = ajax.getReqTypeId();
         }
-
+        fetchrCount();
     }
 
     @Override
@@ -218,7 +236,31 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
 //            }
 
         }
-
+        else if(v.getId() == tv_new.getId()){
+            Bundle b = new Bundle();
+            b.putSerializable("Usertype","new");
+            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new HrHelpDeskList(), true, b, Constants.FRAMENT_USER_MENU);
+        }
+        else if(v.getId() == tv_info.getId()){
+            Bundle b = new Bundle();
+            b.putSerializable("Usertype","info");
+            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new HrHelpDeskList(), true, b, Constants.FRAMENT_USER_MENU);
+        }
+        else if(v.getId() == tv_complete.getId()){
+            Bundle b = new Bundle();
+            b.putSerializable("Usertype","complete");
+            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new HrHelpDeskList(), true, b, Constants.FRAMENT_USER_MENU);
+        }
+        else if(v.getId() == tv_hold.getId()){
+            Bundle b = new Bundle();
+            b.putSerializable("Usertype","hold");
+            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new HrHelpDeskList(), true, b, Constants.FRAMENT_USER_MENU);
+        }
+        else if(v.getId() == tv_process.getId()){
+            Bundle b = new Bundle();
+            b.putSerializable("Usertype","process");
+            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new HrHelpDeskList(), true, b, Constants.FRAMENT_USER_MENU);
+        }
     }
 
 
@@ -601,4 +643,111 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
             e.printStackTrace();
         }
     }
+
+    private void fetchrCount() {
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(getActivity());
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<>();
+            requestMap.put("compId",String.valueOf(companyPosition) );
+            if (branchPosition == 0) {
+                requestMap.put("branchId", String.valueOf("all"));
+            }else{
+                requestMap.put("branchId", String.valueOf(branchPosition));
+            }
+
+            if (departmentPosition == 0) {
+                requestMap.put("deptId", String.valueOf("all"));
+            }else{
+                requestMap.put("deptId", String.valueOf(departmentPosition));
+            }
+
+            if (empPosition.equalsIgnoreCase("")) {
+                requestMap.put("empId", String.valueOf("all"));
+            }else{
+                requestMap.put("empId", String.valueOf(empPosition));
+            }
+
+            if (queryTypePosition == 0) {
+                requestMap.put("hrhelpStatus", String.valueOf("all"));
+            }else{
+                requestMap.put("hrhelpStatus", String.valueOf(queryTypePosition));
+            }
+
+
+            webServiceHandler.getHrHelpdeskCountList(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    Log.d("ajaxList", "size --> " );
+                    AdminCompanyData companyData = (AdminCompanyData) obj;
+                    queryCount = new ArrayList<>();
+                    queryCount = (ArrayList<AdminAjax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> " + queryCount.size());
+
+                    setTextforHr();
+
+
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+private void setTextforHr(){
+
+        if(queryCount != null){
+
+            tv_new.setText(String.valueOf(queryCount.get(0).getNew()) + " " + "New");
+            tv_info.setText(String.valueOf(queryCount.get(1).getNeedInfo())+ " " + "Need Info");
+            tv_complete.setText(String.valueOf(queryCount.get(3).getCompleted())+ " " + "Completed");
+            tv_hold.setText(String.valueOf(queryCount.get(4).getOnHold())+ " " + "On Hold");
+            tv_process.setText(String.valueOf(queryCount.get(5).getInProgress())+ " " + "Process");
+
+        }
+}
 }

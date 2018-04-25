@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.sphinax.hrms.R;
 import com.sphinax.hrms.model.Ajax;
 
+import java.text.DateFormatSymbols;
 import java.time.Month;
 import java.util.List;
 
@@ -87,7 +88,8 @@ public class AnnouncementListAdapter extends BaseAdapter {
             String[] date1 = bookingTaskDetails.getActivityDate().split("/");
             holder.date.setText(date1[0]);
 
-            holder.month.setText(String.valueOf(Month.of(Integer.parseInt(date1[1])).name()));
+            holder.month.setText(getMonthForInt(Integer.parseInt(date1[1]) - 1));
+          //  holder.month.setText(String.valueOf(Month.of(Integer.parseInt(date1[1])).name()));
             holder.year.setText(date1[2]);
         }
 
@@ -103,6 +105,16 @@ public class AnnouncementListAdapter extends BaseAdapter {
         public TextView date;
         public TextView month;
         public TextView year;
+    }
+
+    String getMonthForInt(int m) {
+        String month = "invalid";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (m >= 0 && m <= 11 ) {
+            month = months[m];
+        }
+        return month;
     }
 }
 

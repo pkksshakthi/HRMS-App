@@ -24,17 +24,27 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="#DE8C3A"
+            android:id="@+id/tv_usertype"
             android:gravity="center"
             android:padding="5dp"
             android:layout_margin="5dp"
             android:text="PENDING(15)"
             android:textColor="#ffffff" />
-        <ListView
-            android:id="@+id/lv_detail_amt"
+        <!--<ListView-->
+            <!--android:id="@+id/lv_detail_amt"-->
+            <!--android:layout_width="match_parent"-->
+
+            <!--android:layout_height="match_parent">-->
+
+        <!--</ListView>-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/itemsRecyclerView"
             android:layout_width="match_parent"
-
-            android:layout_height="match_parent">
-
-        </ListView>
+            android:focusable="true"
+            android:clickable="true"
+            android:background="?android:selectableItemBackground"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
     </LinearLayout>
 </FrameLayout>

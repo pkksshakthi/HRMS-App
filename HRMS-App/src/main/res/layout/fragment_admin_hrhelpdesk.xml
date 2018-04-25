@@ -308,6 +308,7 @@
 
 
                                 <TextView
+                                    android:id="@+id/tv_new"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -336,7 +337,7 @@
 
 
                                 <TextView
-
+                                    android:id="@+id/tv_info"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -372,7 +373,7 @@
 
 
                                 <TextView
-
+                                    android:id="@+id/tv_hold"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -402,7 +403,7 @@
 
 
                                 <TextView
-
+                                    android:id="@+id/tv_process"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -433,7 +434,7 @@
                             card_view:cardElevation="2dp"
                             card_view:contentPadding="2dp">
                             <TextView
-
+                                android:id="@+id/tv_complete"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
