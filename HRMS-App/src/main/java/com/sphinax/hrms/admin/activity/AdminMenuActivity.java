@@ -22,6 +22,7 @@ import com.sphinax.hrms.admin.fragment.AdminMainMenuFragment;
 import com.sphinax.hrms.admin.fragment.AnnouncementCreateFragment;
 import com.sphinax.hrms.admin.fragment.AdminAnnouncementListFragment;
 import com.sphinax.hrms.admin.fragment.AttendanceReportFragment;
+import com.sphinax.hrms.admin.fragment.HRHelpdeskFragment;
 import com.sphinax.hrms.admin.fragment.LeaveManagementFragment;
 import com.sphinax.hrms.common.activity.LoginActivity;
 import com.sphinax.hrms.global.Constants;
@@ -133,7 +134,7 @@ public class AdminMenuActivity extends AppCompatActivity
           Utility.addFragment(  this, R.id.content_frame,fragmentManager, new AdminAnnouncementListFragment(), true, null,Constants.FRAMENT_ADMIN_ANNOUNCEMENT_LIST);
 
         } else if (id == R.id.nav_help_desk) {
-           // Utility.addFragment( this, R.id.content_frame, fragmentManager,new EnterHRHelpdeskFragment(), true, null);
+            Utility.addFragment( this, R.id.content_frame, fragmentManager,new HRHelpdeskFragment(), true, null,"");
 
         } else if (id == R.id.nav_logout) {
             Intent intent=new Intent(AdminMenuActivity.this,LoginActivity.class);

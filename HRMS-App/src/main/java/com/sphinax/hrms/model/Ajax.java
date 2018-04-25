@@ -1004,9 +1004,9 @@ public class Ajax implements Serializable {
     }
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setReqTypeId(Integer reqTypeId) {
-//        this.reqTypeId = reqTypeId;
-//    }
+    public void setReqTypeId() {
+        this.reqTypeId = 0;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
@@ -1115,9 +1115,9 @@ public class Ajax implements Serializable {
     }
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setReqTypeDesc(String reqTypeDesc) {
-//        this.reqTypeDesc = reqTypeDesc;
-//    }
+    public void setReqTypeDesc() {
+        this.reqTypeDesc = "Select QueryType";
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):

@@ -47,7 +47,7 @@
                     card_view:contentPadding="5dp">
 
                     <Spinner
-
+                        android:id="@+id/sp_company"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -70,7 +70,7 @@
                     card_view:contentPadding="5dp">
 
                     <Spinner
-
+                        android:id="@+id/sp_branch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -93,7 +93,7 @@
                     card_view:contentPadding="5dp">
 
                     <Spinner
-
+                        android:id="@+id/sp_department"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -116,7 +116,7 @@
                     card_view:contentPadding="5dp">
 
                     <Spinner
-
+                        android:id="@+id/sp_empname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -130,7 +130,7 @@
                     android:orientation="horizontal">
 
                     <Button
-
+                        android:id="@+id/bt_approval"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -141,7 +141,7 @@
                         android:textColor="#ffffff" />
 
                     <Button
-
+                        android:id="@+id/bt_pending"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -154,14 +154,25 @@
 
 
                 <Button
+                android:id="@+id/bt_Reject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_weight="1"
+                android:background="#F34336"
+                android:text="Rejected(15)"
+                android:textColor="#ffffff" />
 
+                <Button
+                    android:id="@+id/bt_submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="15dp"
                     android:layout_weight="1"
                     android:background="#F34336"
-                    android:text="Rejected(15)"
+                    android:text="Submit"
                     android:textColor="#ffffff" />
             </LinearLayout>
         </ScrollView>

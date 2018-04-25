@@ -109,7 +109,7 @@ public class AdminMainMenuFragment extends Fragment implements View.OnClickListe
                 Utility.addFragment((Activity) context, R.id.content_frame, fragmentManager, new AdminAnnouncementListFragment(), true, null, Constants.FRAMENT_ADMIN_ANNOUNCEMENT_LIST);
                 break;
             case R.id.ll_helpdesk:
-                //   Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new EnterHRHelpdeskFragment(), true, null, Constants.FRAMENT_HR_HELPDESK_ENTER);
+                   Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new HRHelpdeskFragment(), true, null, Constants.FRAMENT_HR_HELPDESK_ENTER);
                 break;
         }
     }
