@@ -5,7 +5,7 @@ android {
         HRMS {
             keyAlias 'HRMS'
             keyPassword 'android'
-            storeFile file('C:/Users/psak/.android/debug.keystore')
+            storeFile file('C:/Users/ganesaka/.android/debug.keystore')
             storePassword 'android'
         }
     }

@@ -91,7 +91,7 @@
                                 android:paddingRight="5dp"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="Query Type"
+                                android:text="No of Leave"
                                 android:textStyle="bold"></TextView>
 
 
@@ -118,7 +118,7 @@
 
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Ref ID"
+                                android:text="Reason"
                                 android:textStyle="bold"></TextView>
 
 
