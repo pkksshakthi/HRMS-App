@@ -5,7 +5,7 @@ android {
         HRMS {
             keyAlias 'HRMS'
             keyPassword 'android'
-            storeFile file('C:/Users/ganesaka/.android/debug.keystore')
+            storeFile file('C:/Users/psak/.android/debug.keystore')
             storePassword 'android'
         }
     }
@@ -14,8 +14,13 @@ android {
         applicationId "com.sphinax.hrms"
         minSdkVersion 19
         targetSdkVersion 27
+
         versionCode 10
         versionName "10.0"
+
+        versionCode 13
+        versionName "13.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         testApplicationId 'com.sphinax.hrms'
         signingConfig signingConfigs.HRMS

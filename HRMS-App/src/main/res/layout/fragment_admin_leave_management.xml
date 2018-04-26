@@ -8,7 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        a
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#135E86"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="HR Leave Management"
+            android:textColor="@color/white" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -19,15 +27,7 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#135E86"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:text="HR Leave Management"
-                    android:textColor="@color/white" />
+
 
 
                 <TextView
@@ -171,7 +171,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="15dp"
                     android:layout_weight="1"
-                    android:background="#F34336"
+                    android:background="#023D65"
                     android:text="Submit"
                     android:textColor="#ffffff" />
             </LinearLayout>
