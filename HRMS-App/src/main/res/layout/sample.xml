@@ -8,7 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        a
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#3282C9"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="HR HELPDESK"
+            android:textColor="#ffffff" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -17,164 +27,469 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp">
 
-                <TextView
+
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#135E86"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:text="HR Leave Management"
-                    android:textColor="@color/white" />
+                    android:layout_height="wrap_content">
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Company" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Select Company" />
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-
-                    card_view:contentPadding="5dp">
-
-                    <Spinner
-                        android:id="@+id/sp_company"
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1" />
-                </android.support.v7.widget.CardView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Branch" />
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-
-                    card_view:contentPadding="5dp">
-
-                    <Spinner
-                        android:id="@+id/sp_branch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1" />
-                </android.support.v7.widget.CardView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Department" />
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-
-                    card_view:contentPadding="5dp">
-
-                    <Spinner
-                        android:id="@+id/sp_department"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1" />
-                </android.support.v7.widget.CardView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="Employee Name" />
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:elevation="5dp"
-                    card_view:cardElevation="5dp"
-
-                    card_view:contentPadding="5dp">
-
-                    <Spinner
-                        android:id="@+id/sp_empname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1" />
-                </android.support.v7.widget.CardView>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/bt_approval"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="15dp"
                         android:layout_weight="1"
-                        android:background="#1C9B72"
-                        android:text="Approved(5)"
-                        android:textColor="#ffffff" />
 
-                    <Button
-                        android:id="@+id/bt_pending"
+                        card_view:cardElevation="2dp"
+                        card_view:contentPadding="2dp">
+
+
+                        <Spinner
+                            android:id="@+id/sp_company"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/spinner_backgroud" />
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="15dp"
+                        android:paddingBottom="5dp"
+                        android:text="Select Branch" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:background="#DE8C3A"
-                        android:text="Pending(5)"
-                        android:textColor="#ffffff" />
-                </LinearLayout>
+                        android:elevation="5dp"
+                        card_view:cardElevation="2dp"
+
+                        card_view:contentPadding="2dp">
+
+                        <Spinner
+                            android:id="@+id/sp_branch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/spinner_backgroud" />
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Select Department" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="5dp"
+                        card_view:cardElevation="2dp"
+
+                        card_view:contentPadding="2dp">
+
+                        <Spinner
+                            android:id="@+id/sp_department"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/spinner_backgroud" />
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Select Status" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="5dp"
+                        card_view:cardElevation="2dp"
+
+                        card_view:contentPadding="2dp">
+
+                        <Spinner
+
+                            android:id="@+id/sp_hr_query_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/spinner_backgroud" />
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Select Employee Name" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="5dp"
+                        card_view:cardElevation="2dp"
+
+                        card_view:contentPadding="2dp">
+
+                        <Spinner
+                            android:id="@+id/sp_empname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/spinner_backgroud" />
+                    </android.support.v7.widget.CardView>
+
+                    <!--
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:paddingBottom="5dp"
+                                                android:text="Applied On" />
+
+                                            <android.support.v7.widget.CardView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="5dp"
+                                                android:layout_weight="1"
+                                                android:elevation="5dp"
+                                                card_view:cardElevation="2dp"
+
+                                                card_view:contentPadding="2dp">
+
+                                                <TextView
+                                                    android:id="@+id/ed_applied_on"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="5dp"
+                                                    android:layout_weight="1"
+                                                    android:inputType="none" />
+                                            </android.support.v7.widget.CardView>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:paddingBottom="5dp"
+                                                android:text="No.of.Days" />
+
+                                            <android.support.v7.widget.CardView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="5dp"
+                                                android:layout_weight="1"
+                                                android:elevation="5dp"
+                                                card_view:cardElevation="2dp"
+
+                                                card_view:contentPadding="2dp">
+
+                                                <TextView
+                                                    android:id="@+id/ed_applied_for"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="5dp"
+                                                    android:layout_weight="1" />
+                                            </android.support.v7.widget.CardView>
+                                        </LinearLayout>
+                                    </LinearLayout>
+                    -->
+
+                    <!--  <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:paddingBottom="5dp"
+                          android:text="Applied On" />
+
+                      <android.support.v7.widget.CardView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:layout_weight="1"
+                          android:elevation="5dp"
+                          card_view:cardElevation="2dp"
+
+                          card_view:contentPadding="2dp">
+
+                          <EditText
+                              android:id="@+id/ed_applied_on"
+                              android:inputType="none"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_margin="5dp"
+                              android:layout_weight="1" />
+                      </android.support.v7.widget.CardView>-->
+
+                    <!--<TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Applied for" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="5dp"
+                        card_view:cardElevation="2dp"
+
+                        card_view:contentPadding="2dp">
+
+                        <EditText
+                            android:id="@+id/ed_applied_for"
+                            android:inputType="none"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1" />
+                    </android.support.v7.widget.CardView>-->
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:orientation="vertical">
 
 
-                <Button
-                android:id="@+id/bt_Reject"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_weight="1"
-                android:background="#F34336"
-                android:text="Rejected(15)"
-                android:textColor="#ffffff" />
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
 
-                <Button
-                    android:id="@+id/bt_submit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="15dp"
-                    android:layout_weight="1"
-                    android:background="#F34336"
-                    android:text="Submit"
-                    android:textColor="#ffffff" />
+
+                                card_view:cardElevation="2dp"
+                                card_view:contentPadding="2dp">
+
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:background="#1C9B72"
+                                    android:gravity="center"
+                                    android:padding="10dp"
+                                    android:text="NEW"
+                                    android:textColor="#ffffff" />
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                card_view:cardElevation="2dp"
+                                card_view:contentPadding="2dp">
+
+
+                                <TextView
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="#3B8EDE"
+                                    android:gravity="center"
+                                    android:padding="10dp"
+                                    android:text="NEED INFO"
+                                    android:textColor="#ffffff" />
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                card_view:cardElevation="2dp"
+                                card_view:contentPadding="2dp">
+
+
+                                <TextView
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="#EC594F"
+                                    android:gravity="center"
+                                    android:padding="10dp"
+                                    android:text="ON HOLD"
+                                    android:textColor="#ffffff" />
+
+
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:orientation="vertical">
+
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+
+
+                                card_view:cardElevation="2dp"
+                                card_view:contentPadding="2dp">
+
+
+                                <TextView
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="#7986CC"
+                                    android:gravity="center"
+                                    android:padding="10dp"
+                                    android:text="IN PROCESS"
+                                    android:textColor="#ffffff" />
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                card_view:cardElevation="2dp"
+                                card_view:contentPadding="2dp">
+
+
+                                <TextView
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="#00BCD5"
+                                    android:gravity="center"
+                                    android:padding="10dp"
+                                    android:text="COMPLETED"
+                                    android:textColor="#ffffff" />
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+
+                    </TableRow>
+
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="1"
+
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                card_view:cardElevation="2dp"
+                                card_view:contentPadding="2dp">
+
+                                <TextView
+                                    android:id="@+id/bt_submit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+
+                                    android:gravity="center"
+                                    android:padding="10dp"
+                                    android:background="#1052A0"
+                                    android:text="SUBMIT"
+                                    android:textColor="#ffffff" />
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+                    </TableRow>
+
+                </TableLayout>
+
             </LinearLayout>
+
         </ScrollView>
 
 
