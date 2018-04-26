@@ -636,9 +636,9 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
 
         if(queryCount != null){
 
-            bt_approval.setText(String.valueOf(queryCount.get(0).getNew()) + " " + "Approval");
-            bt_Reject.setText(String.valueOf(queryCount.get(1).getNeedInfo())+ " " + "Reject");
-            bt_pending.setText(String.valueOf(queryCount.get(3).getCompleted())+ " " + "Pending");
+            bt_approval.setText(String.valueOf(queryCount.get(1).getApproved()) + " " + "Approval");
+            bt_Reject.setText(String.valueOf(queryCount.get(0).getRejected())+ " " + "Reject");
+            bt_pending.setText(String.valueOf(queryCount.get(3).getPending())+ " " + "Pending");
 
         }
     }

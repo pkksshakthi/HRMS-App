@@ -321,6 +321,44 @@ public class AdminAjax implements Serializable {
     @Expose
     private Integer activityId;
 
+    @SerializedName("Rejected")
+    @Expose
+    private Integer Rejected;
+    @SerializedName("Approved")
+    @Expose
+    private Integer Approved;
+    @SerializedName("Pending")
+    @Expose
+    private Integer Pending;
+
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Integer getRejected() {
+        return Rejected;
+    }
+
+    public void setRejected(Integer rejected) {
+        Rejected = rejected;
+    }
+
+    public Integer getApproved() {
+        return Approved;
+    }
+
+    public void setApproved(Integer approved) {
+        Approved = approved;
+    }
+
+    public Integer getPending() {
+        return Pending;
+    }
+
+    public void setPending(Integer pending) {
+        Pending = pending;
+    }
 
     public String getLeaveReason() {
         return leaveReason;
