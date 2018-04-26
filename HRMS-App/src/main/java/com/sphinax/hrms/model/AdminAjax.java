@@ -451,9 +451,9 @@ public class AdminAjax implements Serializable {
     }
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setNoofdays(Double noofdays) {
-//        this.noofdays = noofdays;
-//    }
+    public void setNoofdays(Double noofdays) {
+        this.noofdays = noofdays;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Integer getLeaveTypeIds() {

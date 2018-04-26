@@ -1,5 +1,6 @@
 package com.sphinax.hrms.admin.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,11 +10,20 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.common.fragment.SomeProblemFragment;
+import com.sphinax.hrms.global.Global;
 import com.sphinax.hrms.model.Ajax;
+import com.sphinax.hrms.servicehandler.ServiceCallback;
+import com.sphinax.hrms.servicehandler.WebServiceHandler;
+import com.sphinax.hrms.utils.HRMSNetworkCheck;
+import com.sphinax.hrms.utils.Utility;
+
+import java.util.HashMap;
 
 /**
  * Created by ganesaka on 4/26/2018.
@@ -25,9 +35,14 @@ public class AdminLeaveFullContent extends Fragment {
     private static Context context;
     private View mView;
     private EditText ed_leaveTye, ed_EmpMess, ed_AdminMess;
-    private TextView tv_fromDate, tv_toDate, tv_startSession, tv_endSession, tv_leaveStatus,ed_AppliedOn,ed_AppliedFor;
+    private TextView tv_fromdate, tv_todate,tv_nooddays,tv_comp,tv_branch,tv_department,tv_emp,ed_emp_mess,tv_username,tv_designation;
+    private EditText ed_admin_mess;
+    private Button bt_update,bt_cancel;
     private Ajax ajax;
     private FragmentManager fragmentManager;
+    private ProgressDialog pdia;
+    private final WebServiceHandler webServiceHandler = new WebServiceHandler();
+
     public AdminLeaveFullContent() {
         // Required empty public constructor
     }
@@ -46,24 +61,33 @@ public class AdminLeaveFullContent extends Fragment {
         mView = view;
         context = view.getContext();
         fragmentManager = getActivity().getSupportFragmentManager();
-
-        loadComponent();
         ajax = (Ajax) getArguments().getSerializable("UserValidateObject");
 
-        // loadData();
+        loadComponent();
+
+         loadData();
     }
 
     private void loadComponent() {
-//        tv_fromDate = mView.findViewById(R.id.tv_fromdate);
-//        tv_startSession = mView.findViewById(R.id.tv_session_start);
-//        tv_toDate = mView.findViewById(R.id.tv_toDate);
-//        tv_endSession = mView.findViewById(R.id.tv_session_end);
-//        ed_AppliedOn = mView.findViewById(R.id.ed_applied_on);
-//        ed_AppliedFor = mView.findViewById(R.id.ed_applied_for);
-//        ed_leaveTye = mView.findViewById(R.id.ed_leave_type);
-//        ed_EmpMess = mView.findViewById(R.id.ed_emp_mess);
-//        ed_AdminMess = mView.findViewById(R.id.ed_admin_mess);
-//        tv_leaveStatus = mView.findViewById(R.id.tv_leaetype);
+        tv_fromdate = mView.findViewById(R.id.tv_fromdate);
+        tv_username = mView.findViewById(R.id.tv_username);
+        tv_designation = mView.findViewById(R.id.tv_designation);
+        tv_todate = mView.findViewById(R.id.tv_todate);
+        tv_nooddays = mView.findViewById(R.id.tv_nooddays);
+        tv_comp = mView.findViewById(R.id.tv_comp);
+        tv_branch = mView.findViewById(R.id.tv_branch);
+        tv_department = mView.findViewById(R.id.tv_department);
+        tv_emp = mView.findViewById(R.id.tv_emp);
+        ed_emp_mess = mView.findViewById(R.id.ed_emp_mess);
+        ed_AdminMess = mView.findViewById(R.id.ed_admin_mess);
+        bt_update = mView.findViewById(R.id.bt_update);
+        bt_cancel = mView.findViewById(R.id.bt_cancel);
+        if (!ajax.getLeaveStatus().equalsIgnoreCase("PENDING")) {
+            getActivity().findViewById(R.id.ln_admin_msg).setVisibility(View.GONE);
+            getActivity().findViewById(R.id.bt_update).setVisibility(View.GONE);
+            getActivity().findViewById(R.id.bt_cancel).setVisibility(View.GONE);
+        }
+
 //        ed_AppliedOn.setEnabled(false);
 //        ed_AppliedFor.setEnabled(false);
 //        ed_leaveTye.setEnabled(false);
@@ -71,25 +95,104 @@ public class AdminLeaveFullContent extends Fragment {
 //        ed_AdminMess.setEnabled(false);
     }
 
-//    private void loadData() {
-//        if (ajax != null) {
-//
-//            tv_leaveStatus.setText(ajax.getLeaveStatusDesc());
-//            tv_fromDate.setText(ajax.getFromDate());
-//            tv_startSession.setText(ajax.getFromsessionDesc());
-//            tv_toDate.setText(ajax.getToDate());
-//            tv_endSession.setText(ajax.getToSessionDesc());
-//            ed_AppliedOn.setText(ajax.getAppliedOn());
-//            ed_AppliedFor.setText(String.valueOf(ajax.getNoofdays()));
-//            ed_leaveTye.setText(ajax.getLeaveTypeDesc());
-//            ed_EmpMess.setText(ajax.getEmployeeDescription());
-//            ed_AdminMess.setText(ajax.getRemarks());
-//            if (ajax.getLeaveStatusDesc().equalsIgnoreCase("PENDING")) {
-//                getActivity().findViewById(R.id.ln_admin_msg).setVisibility(View.GONE);
-//            }
-//        }
-//    }
+    private void loadData() {
+        if (ajax != null) {
 
+            tv_fromdate.setText(ajax.getFromDate());
+            tv_todate.setText(ajax.getToDate());
+            tv_nooddays.setText(String.valueOf(ajax.getNoofdays()));
+            tv_username.setText(ajax.getEmpName());
+            tv_designation.setText(ajax.getEmpDesign());
+//            tv_comp.setText(ajax.);
+//            tv_branch.setText(ajax.);
+//            tv_department.setText(ajax.);
+            tv_emp.setText(String.valueOf(ajax.getEmpId()));
+            ed_emp_mess.setText(ajax.getLeaveReason());
+           // tv_branch.setText(String.valueOf(ajax.getNoofdays()));
+
+        }
+    }
+
+    private void saveleave() {
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.showCustomToast(context, mView,  getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(getActivity());
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<>();
+//            requestMap.put("compId", );
+//            requestMap.put("globEmpId", Global.getLoginInfoData().getUserId());
+//            requestMap.put("empid", );
+//            requestMap.put("leaveTypeId", );
+//            requestMap.put("leaveId",);
+//            requestMap.put("leaveStatusNew", );
+//            requestMap.put("branch",String.valueOf(branchPosition) );
+//            requestMap.put("annTitle",title );
+
+
+
+            webServiceHandler.saveAnnouncement(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                    if (flag){
+
+                        Utility.showCustomToast(context, mView, "successfully saved");
+
+                    }else {
+                        Utility.showCustomToast(context, mView,  "not send kindly try again");
+
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                    Utility.callErrorScreen(getActivity(), R.id.content_frame, fragmentManager, new SomeProblemFragment());
+
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

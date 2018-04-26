@@ -18,6 +18,16 @@ public class Global {
     private static boolean userDataTaken = false;
     private static int TabPosition = 0;
     private static String hrTye;
+    private static String leaveSatus;
+
+
+    public static String getLeaveSatus() {
+        return leaveSatus;
+    }
+
+    public static void setLeaveSatus(String leaveSatus) {
+        Global.leaveSatus = leaveSatus;
+    }
 
     public static String getHrTye() {
         return hrTye;

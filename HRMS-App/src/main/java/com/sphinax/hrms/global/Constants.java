@@ -20,6 +20,7 @@ public class Constants {
     public static final String BRANCH_LIST_REQUEST_URL = domain + client +"Branch";
     public static final String DEPARTMENT_LIST_REQUEST_URL = domain + client +"Dept";
     public static final String ANNOUNCEMENT_SAVE_URL = domain + client + "SaveAnnouncement";
+    public static final String APPROVE_SAVE_URL = domain + client + "saveHrPermission";
     public static final String EMPLOYEE_LIST_REQUEST_URL = domain + client + "Employee";
     public static final String ATTENDANCE_REPORT_EMPLOYEE_URL = domain + client + "AttReport";
     public static final String HR_HELPDESK_COUNT_URL = domain + client + "InitialHrHelpDeskReport";

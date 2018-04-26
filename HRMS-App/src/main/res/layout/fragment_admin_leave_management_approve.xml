@@ -118,7 +118,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/tv_empid"
+                                android:id="@+id/tv_fromdate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="1338036"
@@ -148,7 +148,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/tv_branch"
+                                android:id="@+id/tv_todate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -180,7 +180,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/tv_department"
+                                android:id="@+id/tv_nooddays"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -237,6 +237,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/tv_comp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="COMPANY" />
@@ -255,6 +256,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/tv_branch"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="COMPANY" />
@@ -273,6 +275,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/tv_department"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="COMPANY" />
@@ -291,6 +294,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/tv_emp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="COMPANY" />
@@ -318,7 +322,7 @@
 
                         card_view:contentPadding="5dp">
 
-                        <EditText
+                        <TextView
                             android:id="@+id/ed_emp_mess"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

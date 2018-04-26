@@ -1785,6 +1785,56 @@ public class WebServiceHandler {
         }
     }
 
+    public void approveLeave (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.APPROVE_SAVE_URL;
+            // url = url.replace("{COMPANYID}", Utility.getPreference(activity).getString(Constants.PREFS_COMPANY_SHORT_NAME, ""));
+
+            PostMethodHandler validateUserHandler = new PostMethodHandler(activity, serviceContext, url,requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                        try {
+
+                            if (output.getInt("resCode") == 1) {
+                                LoginData loginDataObject = gson.fromJson(output.toString(), LoginData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(loginDataObject);
+                            }else {
+                                delegate.onSuccess(false);
+                            }
+                        } catch (Exception e) {
+                            delegate.onParseError();
+                        }
+                    }else {
+                        delegate.onNetworkError();
+                    }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    delegate.onNetworkError();
+                }
+            });
+            validateUserHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+
 /*
     public void getDepartmentList(Activity activity, final Context context, ServiceRequest serviceRequest ,ServiceCallback callback) throws MalformedURLException {
         try {

@@ -186,6 +186,9 @@ public class Ajax implements Serializable {
     @SerializedName("leaveStatusDesc")
     @Expose
     private String leaveStatusDesc;
+    @SerializedName("leaveStatus")
+    @Expose
+    private String leaveStatus;
     @SerializedName("leaveId")
     @Expose
     private Integer leaveId;
@@ -331,6 +334,13 @@ public class Ajax implements Serializable {
     @Expose
     private Integer Pending;
 
+    public String getLeaveStatus() {
+        return leaveStatus;
+    }
+
+    public void setLeaveStatus(String leaveStatus) {
+        this.leaveStatus = leaveStatus;
+    }
 
     public void setStatus(String status) {
         this.status = status;
@@ -452,9 +462,9 @@ public class Ajax implements Serializable {
     }
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setNoofdays(Double noofdays) {
-//        this.noofdays = noofdays;
-//    }
+    public void setNoofdays(Double noofdays) {
+        this.noofdays = noofdays;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public Integer getLeaveTypeIds() {

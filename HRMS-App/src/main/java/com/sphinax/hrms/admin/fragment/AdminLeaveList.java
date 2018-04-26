@@ -111,6 +111,8 @@ public class AdminLeaveList extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Ajax ajaxApp = approveList.get(position);
+
+                Global.setLeaveSatus(typeUser);
                 Bundle b = new Bundle();
                 b.putSerializable("UserValidateObject",ajaxApp);
                 Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AdminLeaveFullContent(), true, b, Constants.FRAMENT_USER_MENU);
