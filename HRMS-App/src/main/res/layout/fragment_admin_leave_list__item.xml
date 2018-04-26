@@ -156,7 +156,6 @@
                         android:textSize="12pt"
                         android:textStyle="bold"></TextView>
 
-
                     <TextView
                         android:id="@+id/tv_month"
                         android:layout_width="match_parent"
