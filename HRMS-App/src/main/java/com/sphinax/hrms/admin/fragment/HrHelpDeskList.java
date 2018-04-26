@@ -85,19 +85,19 @@ public class HrHelpDeskList extends Fragment {
          typeUser = (String)getArguments().getSerializable("Usertype");
         loadComponent();
         if(typeUser.equalsIgnoreCase("new")){
-            reqId = 1;
+            reqId = 3;
             tv_type.setText("New");
         }else if(typeUser.equalsIgnoreCase("info")){
-            reqId = 2;
+            reqId = 4;
             tv_type.setText("Need Info");
         }else if(typeUser.equalsIgnoreCase("complete")){
-            reqId = 4;
+            reqId = 1;
             tv_type.setText("Complete");
         }else if(typeUser.equalsIgnoreCase("hold")){
-            reqId = 5;
+            reqId = 2;
             tv_type.setText("On Hold");
         }else if(typeUser.equalsIgnoreCase("process")){
-            reqId = 6;
+            reqId = 5;
             tv_type.setText("In Process");
         }
 
@@ -128,6 +128,8 @@ public class HrHelpDeskList extends Fragment {
                 Ajax ajaxApp = approveList.get(position);
                 Bundle b = new Bundle();
                 b.putSerializable("UserValidateObject",ajaxApp);
+                b.putString("typeUser",typeUser);
+               Global.setHrTye(typeUser);
                 Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AdminHrHelpDeskFull(), true, b, Constants.FRAMENT_USER_MENU);
 
 

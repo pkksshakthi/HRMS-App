@@ -1034,27 +1034,27 @@ public class Ajax implements Serializable {
 //    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public Integer getReqStatusId() {
-//        return reqStatusId;
-//    }
+    public Integer getReqStatusId() {
+        return reqStatusId;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setReqStatusId(Integer reqStatusId) {
-//        this.reqStatusId = reqStatusId;
-//    }
+    public void setReqStatusId() {
+        this.reqStatusId = 0;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public String getReqStatusDesc() {
-//        return reqStatusDesc;
-//    }
+    public String getReqStatusDesc() {
+        return reqStatusDesc;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setReqStatusDesc(String reqStatusDesc) {
-//        this.reqStatusDesc = reqStatusDesc;
-//    }
+    public void setReqStatusDesc( ) {
+        this.reqStatusDesc = "Select Status";
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getEmpName() {
@@ -1078,15 +1078,15 @@ public class Ajax implements Serializable {
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public String getReqDesc() {
-//        return reqDesc;
-//    }
+    public String getReqDesc() {
+        return reqDesc;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
-//    public void setReqDesc(String reqDesc) {
-//        this.reqDesc = reqDesc;
-//    }
+    public void setReqDesc(String reqDesc) {
+        this.reqDesc = reqDesc;
+    }
 // --Commented out by Inspection STOP (3/5/2018 1:07 AM)
 
     public String getReqDate() {

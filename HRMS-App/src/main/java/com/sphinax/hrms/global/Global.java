@@ -17,6 +17,15 @@ public class Global {
     private static LoginData loginInfoData;
     private static boolean userDataTaken = false;
     private static int TabPosition = 0;
+    private static String hrTye;
+
+    public static String getHrTye() {
+        return hrTye;
+    }
+
+    public static void setHrTye(String hrTye) {
+        Global.hrTye = hrTye;
+    }
 
     public static boolean isUserDataTaken() {
         return userDataTaken;
