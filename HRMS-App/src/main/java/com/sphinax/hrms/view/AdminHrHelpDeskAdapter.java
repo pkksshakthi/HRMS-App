@@ -64,7 +64,7 @@ public class AdminHrHelpDeskAdapter extends RecyclerView.Adapter<AdminHrHelpDesk
     public void onBindViewHolder(AdminHrHelpDeskAdapter.MyViewHolder holder, int position) {
         Ajax ajax = ajaxList.get(position);
 
-        holder.tv_name.setText(" :"+ajax.getEmpName());
+        holder.tv_name.setText(ajax.getEmpName());
 
         if (ajax.getReqDate().contains("/")){
 
@@ -76,8 +76,8 @@ public class AdminHrHelpDeskAdapter extends RecyclerView.Adapter<AdminHrHelpDesk
         }
 
 
-        holder.tv_querytype.setText(" :"+ajax.getReqTypeDesc());
-        holder.tv_ref.setText(" :"+String.valueOf(ajax.getReqId()));
+        holder.tv_querytype.setText(ajax.getReqTypeDesc());
+        holder.tv_ref.setText(String.valueOf(ajax.getReqId()));
 
     }
 
