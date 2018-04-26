@@ -111,31 +111,31 @@
                             android:background="@drawable/spinner_backgroud" />
                     </android.support.v7.widget.CardView>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="5dp"
-                        android:text="Select Status" />
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:paddingBottom="5dp"-->
+                        <!--android:text="Select Status" />-->
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:elevation="5dp"
-                        card_view:cardElevation="2dp"
+                    <!--<android.support.v7.widget.CardView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="5dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:elevation="5dp"-->
+                        <!--card_view:cardElevation="2dp"-->
 
-                        card_view:contentPadding="2dp">
+                        <!--card_view:contentPadding="2dp">-->
 
-                        <Spinner
+                        <!--<Spinner-->
 
-                            android:id="@+id/sp_hr_query_type"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/spinner_backgroud" />
-                    </android.support.v7.widget.CardView>
+                            <!--android:id="@+id/sp_hr_query_type"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_margin="5dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:background="@drawable/spinner_backgroud" />-->
+                    <!--</android.support.v7.widget.CardView>-->
 
                     <TextView
                         android:layout_width="match_parent"

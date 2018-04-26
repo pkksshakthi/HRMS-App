@@ -51,7 +51,8 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
     private ArrayList<Ajax> empList;
     private ArrayList<AdminAjax> queryCount;
     private final WebServiceHandler webServiceHandler = new WebServiceHandler();
-    private Spinner spCompany,spBranch,spDepartment,sp_query_type,spEmp;
+    private Spinner spCompany,spBranch,spDepartment,spEmp;
+   // private Spinner sp_query_type;
     private TextView btSubmit;
     private EditText btDate;
     private EditText ed_mess;
@@ -106,7 +107,7 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
 //        btDate = mView.findViewById(R.id.bt_date_picker);
 //        ed_mess = mView.findViewById(R.id.ed_message_box);
         btSubmit = mView.findViewById(R.id.bt_submit);
-        sp_query_type = mView.findViewById(R.id.sp_hr_query_type);
+       // sp_query_type = mView.findViewById(R.id.sp_hr_query_type);
         tv_complete = mView.findViewById(R.id.tv_complete);
         tv_process = mView.findViewById(R.id.tv_process);
         tv_hold = mView.findViewById(R.id.tv_hold);
@@ -120,7 +121,7 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
         spDepartment.setOnItemSelectedListener(this);
         // spStatus.setOnItemSelectedListener(this);
         spEmp.setOnItemSelectedListener(this);
-        sp_query_type.setOnItemSelectedListener(this);
+      //  sp_query_type.setOnItemSelectedListener(this);
 
         btSubmit.setOnClickListener(this);
         tv_process.setOnClickListener(this);
@@ -145,9 +146,9 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
             case R.id.sp_department:
                 actionDepartmentSelector(position);
                 break;
-            case R.id.sp_hr_query_type:
-                actionTypeSelector(position);
-                break;
+//            case R.id.sp_hr_query_type:
+//                actionTypeSelector(position);
+//                break;
 
             case R.id.sp_empname:
                 actionEmpSelector(position);
@@ -206,10 +207,10 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
         }
         empPosition = ajax.getEmpId();
         Log.d("leaveStatus"," " +empPosition);
-        fetchQueryTypeList();
+       // fetchQueryTypeList();
 
         //fetchDepartmentList(ajax.getCompId());
-
+        fetchrCount();
     }
 
     /**
@@ -308,7 +309,7 @@ public class HRHelpdeskFragment extends Fragment implements AdapterView.OnItemSe
                                 queryTypeList);
                         querySpinnerAdapter
                                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        sp_query_type.setAdapter(querySpinnerAdapter);
+                      //  sp_query_type.setAdapter(querySpinnerAdapter);
 
                     }
                 }
