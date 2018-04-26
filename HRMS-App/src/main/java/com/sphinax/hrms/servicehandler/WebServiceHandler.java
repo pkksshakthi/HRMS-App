@@ -1204,6 +1204,59 @@ public class WebServiceHandler {
             delegate.onNetworkError();
         }
     }
+
+
+    public void getLeaveCountList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.LEAVE_COUNT_REQUEST_URL;
+
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                Log.d("AKKK" ,output.toString() );
+                                AdminCompanyData companyDataObject = gson.fromJson(output.toString(), AdminCompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
+
+                            }
+                        } catch (Exception e) {
+                            delegate.onParseError();
+                        }
+                    }else {
+                        delegate.onNetworkError();
+                    }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    delegate.onNetworkError();
+                }
+            });
+            companyListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+
+
 //    public void getPaySlipDownload(Activity activity, final Context context, HashMap<String, String> requestMap,File directory, ServiceCallback callback) throws MalformedURLException {
 //        try {
 //            delegate = callback;
@@ -1381,6 +1434,57 @@ public class WebServiceHandler {
             delegate.onNetworkError();
         }
     }
+
+
+    public void getAdminLeaveList(Activity activity, final Context context, HashMap<String, String> requestMap, ServiceCallback callback) {
+        try {
+            delegate = callback;
+            serviceContext = context;
+            serviceActivity = activity;
+
+            String url = Constants.LEAVE_LIST_STATUS_URL;
+
+            GetMethodHandler companyListHandler = new GetMethodHandler(activity, serviceContext, url, requestMap , (responseContext, output) -> {
+                Gson gson = new Gson();
+                try {
+                    if (output != null) {
+//                            if (CheckUnAuthorised(output)) {
+//                                delegate.unAuthorized();
+//                            } else {
+                        try {
+                            if (output.getJSONArray("ajax") != null) {
+                                CompanyData companyDataObject = gson.fromJson(output.toString(), CompanyData.class);
+                                delegate.onSuccess(true);
+                                delegate.onReturnObject(companyDataObject);
+                            }else {
+                                delegate.onSuccess(false);
+
+                            }
+                        } catch (Exception e) {
+                            delegate.onParseError();
+                        }
+                    }else {
+                        delegate.onNetworkError();
+                    }
+//                        } else {
+//
+//                            delegate.onNetworkError();
+//                        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    delegate.onNetworkError();
+                }
+            });
+            companyListHandler.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            delegate.onNetworkError();
+        }
+    }
+
+
     public void saveAnnouncement (final Activity activity, final Context context, HashMap<String, String> requestMap , ServiceCallback callback) {
         try {
             delegate = callback;

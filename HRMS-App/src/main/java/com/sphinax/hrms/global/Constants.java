@@ -28,6 +28,7 @@ public class Constants {
     public static final String HR_HELPDESK_OPEN_QUERY_URL = domain + client + "HrHelpDeskOpenQuery";
     public static final String HR_HELPDESK_SAVE_URL = domain + client + "HrHelpDeskSave";
     public static final String LEAVE_COUNT_REQUEST_URL = domain + client + "leavecount";
+    public static final String LEAVE_LIST_STATUS_URL = domain + client + "Leavestatus";
     public static final String LEAVE_LIST_REQUEST_URL = domain + client + "leaveList";
     public static final String LEAVE_APPROVE_PERMISSION_URL = domain + client + "saveHrPermission";
     public static final String ADMIN_ANNOUNCEMENT_LIST_URL = domain + client + "AnnouncementAdminList";

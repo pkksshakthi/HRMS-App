@@ -114,6 +114,9 @@ public class AdminAjax implements Serializable {
     @SerializedName("Completed")
     @Expose
     private Integer completed;
+    @SerializedName("leaveReason")
+    @Expose
+    private String leaveReason;
     @SerializedName("empName")
     @Expose
     private String empName;
@@ -317,6 +320,15 @@ public class AdminAjax implements Serializable {
     @SerializedName("activityId")
     @Expose
     private Integer activityId;
+
+
+    public String getLeaveReason() {
+        return leaveReason;
+    }
+
+    public void setLeaveReason(String remarks) {
+        this.remarks = leaveReason;
+    }
 
     public Integer getActivityId() {
         return activityId;

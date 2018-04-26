@@ -18,6 +18,9 @@ public class Ajax implements Serializable {
     @SerializedName("checkInTime")
     @Expose
     private String checkInTime;
+    @SerializedName("leaveReason")
+    @Expose
+    private String leaveReason;
     @SerializedName("checkOutTime")
     @Expose
     private String checkOutTime;
@@ -318,6 +321,8 @@ public class Ajax implements Serializable {
     @Expose
     private String remarks;
 
+
+
     public Integer getActivityId() {
         return activityId;
     }
@@ -329,6 +334,14 @@ public class Ajax implements Serializable {
     public String getFromsessionDesc() {
         return fromsessionDesc;
     }
+    public String getLeaveReason() {
+        return leaveReason;
+    }
+
+    public void setLeaveReason(String remarks) {
+        this.remarks = leaveReason;
+    }
+
 
 // --Commented out by Inspection START (3/5/2018 1:07 AM):
 //    public void setFromsessionDesc(String fromsessionDesc) {

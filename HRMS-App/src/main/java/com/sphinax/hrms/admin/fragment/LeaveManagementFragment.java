@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.sphinax.hrms.R;
+import com.sphinax.hrms.global.Constants;
+import com.sphinax.hrms.model.AdminAjax;
+import com.sphinax.hrms.model.AdminCompanyData;
 import com.sphinax.hrms.model.Ajax;
 import com.sphinax.hrms.model.CompanyData;
 import com.sphinax.hrms.servicehandler.ServiceCallback;
@@ -55,7 +59,10 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
     private int statusPosition = 0;
     private String empPosition ;
     private final String[] leaveTypes = {"Select Status","Approved", "Rejected","Pending"};
+    private Button bt_approval,bt_pending,bt_Reject;
+    private FragmentManager fragmentManager;
 
+    private ArrayList<AdminAjax> queryCount;
 
 
     public LeaveManagementFragment() {
@@ -76,6 +83,8 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
         // super.onViewCreated(view, savedInstanceState);
         mView = view;
         context = view.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
+
         loadComponent();
         setListeners();
         fetchCompanyList();
@@ -98,6 +107,9 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
 //        btDate = mView.findViewById(R.id.bt_date_picker);
 //        ed_mess = mView.findViewById(R.id.ed_message_box);
         btSubmit = mView.findViewById(R.id.bt_submit);
+        bt_pending = mView.findViewById(R.id.bt_pending);
+        bt_Reject = mView.findViewById(R.id.bt_Reject);
+        bt_approval = mView.findViewById(R.id.bt_approval);
 
     }
     private void setListeners() {
@@ -108,6 +120,9 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
         spEmp.setOnItemSelectedListener(this);
 
         btSubmit.setOnClickListener(this);
+        bt_approval.setOnClickListener(this);
+        bt_pending.setOnClickListener(this);
+        bt_Reject.setOnClickListener(this);
 //        btDate.setOnClickListener(this);
     }
 
@@ -189,7 +204,7 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
         }
         empPosition = ajax.getEmpId();
         Log.d("leaveStatus"," " +empPosition);
-
+        fetchrCount();
 
         //fetchDepartmentList(ajax.getCompId());
     }
@@ -205,7 +220,24 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
 //            }
 
         }
+        else  if (v.getId() == bt_approval.getId()) {
+            Bundle b = new Bundle();
+            b.putSerializable("Usertype","approval");
+            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AdminLeaveList(), true, b, Constants.FRAMENT_USER_MENU);
 
+        }
+        else  if (v.getId() == bt_Reject.getId()) {
+            Bundle b = new Bundle();
+            b.putSerializable("Usertype","reject");
+            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AdminLeaveList(), true, b, Constants.FRAMENT_USER_MENU);
+
+        }
+        else  if (v.getId() == bt_pending.getId()) {
+            Bundle b = new Bundle();
+            b.putSerializable("Usertype","pending");
+            Utility.addFragment(getActivity(), R.id.content_frame, fragmentManager, new AdminLeaveList(), true, b, Constants.FRAMENT_USER_MENU);
+
+        }
     }
 
     private void fetchCompanyList() {
@@ -509,4 +541,108 @@ public class LeaveManagementFragment extends Fragment implements AdapterView.OnI
             e.printStackTrace();
         }
     }
+
+
+    private void fetchrCount() {
+        if (!HRMSNetworkCheck.checkInternetConnection(getActivity())) {
+            Utility.showToastMessage(getActivity(), getResources().getString(R.string.invalidInternetConnection));
+            return;
+        }
+        pdia = new ProgressDialog(getActivity());
+        if (pdia != null) {
+            pdia.setMessage("Loading...");
+            pdia.show();
+        }
+        try {
+            HashMap<String, String> requestMap = new HashMap<>();
+            requestMap.put("compId",String.valueOf(companyPosition) );
+            if (branchPosition == 0) {
+                requestMap.put("branch", String.valueOf("all"));
+            }else{
+                requestMap.put("branch", String.valueOf(branchPosition));
+            }
+
+            if (departmentPosition == 0) {
+                requestMap.put("department", String.valueOf("all"));
+            }else{
+                requestMap.put("department", String.valueOf(departmentPosition));
+            }
+
+            if (empPosition.equalsIgnoreCase("")) {
+                requestMap.put("empId", String.valueOf("all"));
+            }else{
+                requestMap.put("empId", String.valueOf(empPosition));
+            }
+            requestMap.put("leavestatus", "all");
+
+
+            webServiceHandler.getLeaveCountList(getActivity(), context, requestMap, new ServiceCallback() {
+
+                @Override
+                public void onSuccess(boolean flag) {
+
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onReturnObject(Object obj) {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    Log.d("ajaxList", "size --> " );
+                    AdminCompanyData companyData = (AdminCompanyData) obj;
+                    queryCount = new ArrayList<>();
+                    queryCount = (ArrayList<AdminAjax>) companyData.getAjax();
+                    Log.d("ajaxList", "size --> " + queryCount.size());
+
+                    setTextforHr();
+
+
+
+                }
+
+                @Override
+                public void onParseError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                }
+
+                @Override
+                public void onNetworkError() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callServerNotResponding(context);
+                }
+
+                @Override
+                public void unAuthorized() {
+                    if (pdia != null) {
+                        pdia.dismiss();
+                    }
+                    //  Utility.callMobileVerification(activity, context);
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setTextforHr(){
+
+        if(queryCount != null){
+
+            bt_approval.setText(String.valueOf(queryCount.get(0).getNew()) + " " + "Approval");
+            bt_Reject.setText(String.valueOf(queryCount.get(1).getNeedInfo())+ " " + "Reject");
+            bt_pending.setText(String.valueOf(queryCount.get(3).getCompleted())+ " " + "Pending");
+
+        }
+    }
+
+
+
 }
